@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2023 at 02:05 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Nov 03, 2023 at 04:14 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `contactus` (
   `email` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,6 @@ CREATE TABLE `umkm` (
   `kecamatan` varchar(255) NOT NULL,
   `alamat_umkm` text NOT NULL,
   `kategori_umkm` varchar(255) NOT NULL,
-  `kategori_umkm_2` varchar(255) NOT NULL,
   `notelp_umkm` varchar(20) NOT NULL,
   `foto_umkm` text NOT NULL,
   `formulir` text NOT NULL,
@@ -59,7 +58,47 @@ CREATE TABLE `umkm` (
   `verification_status` int(11) NOT NULL,
   `owner_user_id` int(11) NOT NULL,
   `verified_by_user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `umkmm`
+--
+
+CREATE TABLE `umkmm` (
+  `id` int(11) NOT NULL,
+  `username` varchar(300) NOT NULL,
+  `email` varchar(300) NOT NULL,
+  `password` varchar(300) NOT NULL,
+  `nama_umkm` varchar(300) NOT NULL,
+  `notelp_umkm` varchar(12) NOT NULL,
+  `alamat_umkm` varchar(300) NOT NULL,
+  `kecamatan` varchar(300) NOT NULL,
+  `foto_umkm` varchar(300) NOT NULL,
+  `kategori_umkm` varchar(300) NOT NULL,
+  `deskripsi_umkm` varchar(500) NOT NULL,
+  `formulir` varchar(300) NOT NULL,
+  `surat_pengantar` varchar(300) NOT NULL,
+  `ktp` varchar(300) NOT NULL,
+  `npwp` varchar(300) NOT NULL,
+  `verification_status` varchar(300) NOT NULL,
+  `verification_by_admin` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `umkmm`
+--
+
+INSERT INTO `umkmm` (`id`, `username`, `email`, `password`, `nama_umkm`, `notelp_umkm`, `alamat_umkm`, `kecamatan`, `foto_umkm`, `kategori_umkm`, `deskripsi_umkm`, `formulir`, `surat_pengantar`, `ktp`, `npwp`, `verification_status`, `verification_by_admin`) VALUES
+(1, 'root', '', '', '', '', '', '', '', '', '', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', '', 0),
+(2, '', '', '', '', '', '', '', '', '', '', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', '', 0),
+(3, 'admin', '', '', 'manjalita', '0812345678', 'Jl. Siwalankerto 120', '', 'C:fakepathpasar.jpg', 'fashion dan pakaian', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', '', 0),
+(4, '', '', '', '', '', '', '', '', '', '', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', '', 0),
+(5, 'c14210039', '', '', 'manjalita', '0812345678', 'Jl. Siwalankerto 120', '', 'C:fakepathpasar.jpg', 'fashion dan pakaian', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', '', 0),
+(6, 'c14210039a', '', '', 'aa', '0812345678', 'Jl. Siwalankerto 120', '', 'C:fakepathsection-title-bg.png', 'fashion dan pakaian', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar.jpg', '', 0),
+(7, 'c14210039assss', '', '', 'manjalita', '0812345678', 'aa', '', 'C:fakepathsection-title-bg.png', 'fashion dan pakaian', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', '', 0),
+(8, 'c14210039ass', '', '', 'manjalita', '000000000', 'Jl. Siwalankerto 120', '', 'C:fakepathpasar2.jpg', 'jasa', 'dddddddddddddd', 'C:fakepathpasar.jpg', 'C:fakepathpasar2.jpg', 'C:fakepathpasar.jpg', 'C:fakepathsection-title-bg.png', '', 0);
 
 -- --------------------------------------------------------
 
@@ -72,7 +111,7 @@ CREATE TABLE `umkm_monthly_income` (
   `income` bigint(20) NOT NULL,
   `date` date NOT NULL,
   `umkm_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -87,7 +126,7 @@ CREATE TABLE `umkm_products` (
   `price` bigint(20) NOT NULL,
   `photo_url` text NOT NULL,
   `umkm_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -102,7 +141,7 @@ CREATE TABLE `umkm_ratings` (
   `timestamp` datetime NOT NULL,
   `umkm_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -117,7 +156,7 @@ CREATE TABLE `users` (
   `password` varchar(50) NOT NULL,
   `photo_url` text NOT NULL,
   `role` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -129,7 +168,7 @@ CREATE TABLE `user_umkm_favorites` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `umkm_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -148,6 +187,12 @@ ALTER TABLE `umkm`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_UMKM_OWNER_USER_ID` (`owner_user_id`),
   ADD KEY `FK_UMKM_VERIFIED_BY_USER_ID` (`verified_by_user_id`);
+
+--
+-- Indexes for table `umkmm`
+--
+ALTER TABLE `umkmm`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `umkm_monthly_income`
@@ -198,7 +243,13 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `umkm`
 --
 ALTER TABLE `umkm`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `umkmm`
+--
+ALTER TABLE `umkmm`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `umkm_monthly_income`
