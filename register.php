@@ -183,7 +183,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                 <h3 class="text-center">Register Your UMKM</h3>
                             </div>
 
-                            <form class="row d-flex justify-content-center php-email-form" method="POST" action="upload_berkas.php" id="form-register">
+                            <form class="row d-flex justify-content-center php-email-form" method="POST" action="#" id="form-register">
                                 <div class="col-md-5">
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Username</label>
@@ -191,22 +191,30 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                                 echo "<input class='form-control' type='text' id='username' name='username' required value='$username'>";
                                                 } else {
                                                     echo "<input class='form-control' type='text' id='username' name='username' required value=''>";;
-                                                }?>
                                         <!-- <input class='form-control' type='text' id='username' name='username' required value=''> -->
+                                                    echo "<input class='form-control' type='text' id='username' name='username' required value=''>";
+                                                }
+                                        ?>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Nama UMKM</label>
-                                        <!-- <label for="" style="font-size: 25px; color: red;" class="form-label mt-0">*</label> -->
-
-                                        <!-- <input class="form-control" type="text" id="nama_umkm" name="nama_umkm" required value=""> -->
-                                        <input class='form-control' type='text' id='nama_umkm' name='nama_umkm' required value=''>
+                                        <?php if (isset($_SESSION['nama_umkm'])) {
+                                                echo "<input class='form-control' type='text' id='nama_umkm' name='nama_umkm' required value='$nama_umkm'>";
+                                                } else {
+                                                    echo "<input class='form-control' type='text' id='nama_umkm' name='nama_umkm' required value=''>";
+                                                }
+                                        ?>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Nomor Telp / WA</label>
-                                        <!-- <label for="" style="font-size: 25px; color: red;" class="form-label">*</label> -->
-                                        <input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value=''>
+                                        <?php if (isset($_SESSION['notelp_umkm'])) {
+                                                echo "<input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value='$notelp_umkm'>";
+                                                } else {
+                                                    echo "<input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value=''>";
+                                                }
+                                        ?>
                                     </div>
 
                                     <div class="mb-4">
@@ -225,7 +233,8 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                                 echo "<option value='Asemrowo' selected>Asemrowo</option>";
                                                 } else {
                                                     echo "<option value='Asemrowo'>Asemrowo</option>";;
-                                                }?>
+                                                }
+                                            ?>
                                             <option value='Benowo'>Benowo</option>
                                             <option value='Bubutan'>Bubutan</option>
                                             <option value='Bulak'>Bulak</option>
@@ -424,7 +433,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                         },
                         success: function(result) {
                             if (result == 2) {
-                                alert("Username sudah tersedia")
+                                alert("Username sudah tersedia");
                             }
                             if (result == 1) {
                                 window.location.href = "upload_berkas.php";
