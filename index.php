@@ -46,6 +46,7 @@ $stmt = $conn->query($query)->fetchAll();
   <?php include "template/header.php"; ?>
 
   <main id="main">
+          
     <!-- ======= News Section ======= -->
   <div id="news" class="news">
     <div id="about" class="news">
