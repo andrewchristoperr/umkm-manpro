@@ -183,36 +183,46 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                 <h3 class="text-center">Register Your UMKM</h3>
                             </div>
 
-                            <form class="row d-flex justify-content-center php-email-form" method="POST" action="upload_berkas.php" id="form-register">
+                            <form class="row d-flex justify-content-center php-email-form" method="POST" action="#" id="form-register">
                                 <div class="col-md-5">
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Username</label>
                                         <?php if (isset($_SESSION['username'])) {
                                                 echo "<input class='form-control' type='text' id='username' name='username' required value='$username'>";
                                                 } else {
-                                                    echo "<input class='form-control' type='text' id='username' name='username' required value=''>";;
-                                                }?>
-                                        <!-- <input class='form-control' type='text' id='username' name='username' required value=''> -->
+                                                    echo "<input class='form-control' type='text' id='username' name='username' required value=''>";
+                                                }
+                                        ?>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Nama UMKM</label>
-                                        <!-- <label for="" style="font-size: 25px; color: red;" class="form-label mt-0">*</label> -->
-
-                                        <!-- <input class="form-control" type="text" id="nama_umkm" name="nama_umkm" required value=""> -->
-                                        <input class='form-control' type='text' id='nama_umkm' name='nama_umkm' required value=''>
+                                        <?php if (isset($_SESSION['nama_umkm'])) {
+                                                echo "<input class='form-control' type='text' id='nama_umkm' name='nama_umkm' required value='$nama_umkm'>";
+                                                } else {
+                                                    echo "<input class='form-control' type='text' id='nama_umkm' name='nama_umkm' required value=''>";
+                                                }
+                                        ?>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Nomor Telp / WA</label>
-                                        <!-- <label for="" style="font-size: 25px; color: red;" class="form-label">*</label> -->
-                                        <input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value=''>
+                                        <?php if (isset($_SESSION['notelp_umkm'])) {
+                                                echo "<input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value='$notelp_umkm'>";
+                                                } else {
+                                                    echo "<input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value=''>";
+                                                }
+                                        ?>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Alamat</label>
-                                        <!-- <label for="" style="font-size: 25px; color: red;" class="form-label">*</label> -->
-                                        <input class="form-control" type="text" id="alamat_umkm" name="alamat_umkm" required>
+                                        <?php if (isset($_SESSION['alamat_umkm'])) {
+                                                echo "<input class='form-control' type='text' id='alamat_umkm' name='alamat_umkm' required value='$alamat_umkm'>";
+                                                } else {
+                                                    echo "<input class='form-control' type='text' id='alamat_umkm' name='alamat_umkm' required value=''>";
+                                                }
+                                        ?>
                                     </div>
 
                                     <div class="mb-4">
@@ -225,13 +235,47 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                                 echo "<option value='Asemrowo' selected>Asemrowo</option>";
                                                 } else {
                                                     echo "<option value='Asemrowo'>Asemrowo</option>";;
-                                                }?>
-                                            <option value='Benowo'>Benowo</option>
-                                            <option value='Bubutan'>Bubutan</option>
-                                            <option value='Bulak'>Bulak</option>
-                                            <option value='Dukuh pakis'>Dukuh Pakis</option>
-                                            <option value='Gayungan'>Gayungan</option>
-                                            <option value='Genteng'>Genteng</option>
+                                                }
+                                            ?>
+                                            <?php if ($_SESSION['kecamatan'] == "Benowo") {
+                                                echo "<option value='Benowo' selected>Benowo</option>";
+                                                } else {
+                                                    echo "<option value='Benowo'>Benowo</option>";;
+                                                }
+                                            ?>
+                                            <?php if ($_SESSION['kecamatan'] == "Bubutan") {
+                                                echo "<option value='Bubutan' selected>Bubutan</option>";
+                                                } else {
+                                                    echo "<option value='Bubutan'>Bubutan</option>";;
+                                                }
+                                            ?>
+                                            <?php if ($_SESSION['kecamatan'] == "Bulak") {
+                                                echo "<option value='Bulak' selected>Bulak</option>";
+                                                } else {
+                                                    echo "<option value='Bulak'>Bulak</option>";;
+                                                }
+                                            ?>
+                                            <?php if ($_SESSION['kecamatan'] == "Dukuh Pakis") {
+                                                echo "<option value='Dukuh Pakis' selected>Dukuh Pakis</option>";
+                                                } else {
+                                                    echo "<option value='Dukuh Pakis'>Dukuh Pakis</option>";;
+                                                }
+                                            ?>
+                                            <?php if ($_SESSION['kecamatan'] == "Gayungan") {
+                                                echo "<option value='Gayungan' selected>Gayungan</option>";
+                                                } else {
+                                                    echo "<option value='Gayungan'>Gayungan</option>";;
+                                                }
+                                            ?>
+                                            <?php if ($_SESSION['kecamatan'] == "Genteng") {
+                                                echo "<option value='Genteng' selected>Genteng</option>";
+                                                } else {
+                                                    echo "<option value='Genteng'>Genteng</option>";;
+                                                }
+                                            ?>
+
+                                            
+                                            
                                             <option value='Gubeng'>Gubeng</option>
                                             <option value='Gunung anyar'>Gunung Anyar</option>
                                             <option value='Jambangan'>Jambangan</option>
@@ -424,7 +468,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                         },
                         success: function(result) {
                             if (result == 2) {
-                                alert("Username sudah tersedia")
+                                alert("Username sudah tersedia");
                             }
                             if (result == 1) {
                                 window.location.href = "upload_berkas.php";
