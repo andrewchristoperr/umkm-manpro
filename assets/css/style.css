@@ -702,7 +702,7 @@ section {
   padding: 30px 30px 30px 0;
 }
 
-.about .content h3 {
+h3 {
   font-weight: 700;
   font-size: 34px;
   color: #2f4d5a;
@@ -931,11 +931,6 @@ section {
   margin-bottom: 30px;
 }
 
-.portfolio #portfolio-flters li:hover,
-.portfolio #portfolio-flters li.filter-active {
-  color: #fff;
-}
-
 .portfolio #portfolio-flters {
   padding: 0;
   margin: 0 auto 35px auto;
@@ -959,6 +954,10 @@ section {
   transition: all 0.3s ease-in-out;
 }
 
+.portfolio #portfolio-flters li:hover,
+.portfolio #portfolio-flters li.filter-active {
+  color: #67b0d1;
+}
 
 .portfolio #portfolio-flters li:last-child {
   margin-right: 0;
@@ -1551,8 +1550,9 @@ section {
   #footer .footer-top .footer-info {
     margin: -20px 0 30px 0;
   }
+}
 
-  /* Insert your own CSS here... */
+/* Insert your own CSS here... */
 
 .custom-carousel {
   border-radius: 20px;
@@ -1632,6 +1632,4 @@ section {
   height: 15vw;
   object-fit: cover;
   border-radius: 10px;
-}
-
 }
