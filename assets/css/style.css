@@ -1550,4 +1550,79 @@ section {
   #footer .footer-top .footer-info {
     margin: -20px 0 30px 0;
   }
+
+  /* Insert your own CSS here... */
+
+.custom-carousel {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.carousel-text-container {
+  background: rgba(55, 142, 181, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-text {
+    padding: 30px 100px;
+}
+
+.carousel-text-title,
+.carousel-text-description,
+.carousel-text-date {
+  color: #fff;
+  text-align: justify;
+}
+
+.carousel-text-title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.carousel-text-date {
+  font-size: 12px;
+}
+
+.carousel-control-prev {
+    left: 15px;
+}
+
+.carousel-control-next {
+    right: 15px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgb(224, 211, 89);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    height: 20px;
+}
+
+.content-container {
+  padding-top: 100px;
+}
+
+.carousel-indicators {
+  position: absolute !important;
+  bottom: 10px;
+  left: -110px;
+  right: auto;
+  width: auto;
+}
+
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+}
 }

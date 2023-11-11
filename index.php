@@ -41,6 +41,7 @@
   <?php include "template/header.php"; ?>
 
   <main id="main">
+    
     <!-- ======= About Section ======= -->
     <div id="about" class="about">
       <div class="container">
