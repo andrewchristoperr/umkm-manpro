@@ -190,8 +190,6 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                         <?php if (isset($_SESSION['username'])) {
                                                 echo "<input class='form-control' type='text' id='username' name='username' required value='$username'>";
                                                 } else {
-                                                    echo "<input class='form-control' type='text' id='username' name='username' required value=''>";;
-                                        <!-- <input class='form-control' type='text' id='username' name='username' required value=''> -->
                                                     echo "<input class='form-control' type='text' id='username' name='username' required value=''>";
                                                 }
                                         ?>
