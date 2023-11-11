@@ -39,6 +39,108 @@ $stmt = $conn->query($query)->fetchAll();
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 
+  <style>
+    .portfolio-filters {
+      padding: 0;
+      margin: 0 auto 35px auto;
+      list-style: none;
+      text-align: center;
+      background: #ecf5f9;
+      border-radius: 50px;
+      padding: 2px 15px;
+    }
+
+    .portfolio-filters li {
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 15px 8px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #2f4d5a;
+      margin-bottom: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .portfolio-filters li:hover,
+    .portfolio-filters li:active {
+      color: #67b0d1;
+    }
+
+    .card img {
+      width: auto;
+      height: 100%;
+    }
+
+    /* Dropdown Button */
+    .dropbtn {
+      background-color: #67b0d1;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover,
+    .dropbtn:focus {
+      background-color: #67b0d1;
+    }
+
+    /* The search field */
+    #myInput {
+      box-sizing: border-box;
+      background-image: url('searchicon.png');
+      background-position: 14px 12px;
+      background-repeat: no-repeat;
+      font-size: 16px;
+      padding: 14px 20px 12px 45px;
+      border: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* The search field when it gets focus/clicked on */
+    #myInput:focus {
+      outline: 3px solid #ddd;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f6f6f6;
+      min-width: 230px;
+      border: 1px solid #ddd;
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+      background-color: #f1f1f1
+    }
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+      display: block;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -660,6 +762,26 @@ $stmt = $conn->query($query)->fetchAll();
       e.preventDefault();
       formToReset.reset();
     });
+
+    // $(document).ready(function() {
+    //   $('#apply-filters').on('click', function() {
+    //     var categories = $('#dropdown-categories').val();
+    //     if (categories != '' && categories != null) {
+    //       $.ajax({
+    //         url: 'forms/filter.php',
+    //         method: 'POST',
+    //         data: {
+    //           categories: categories
+    //         },
+    //         success: function(result) {
+    //           document.getElementById('list-umkmm').innerHTML = result;
+    //         }
+    //       })
+    //     } else {
+
+    //     }
+    //   })
+    // })
   </script>
 
 </body>
