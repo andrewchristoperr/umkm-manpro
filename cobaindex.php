@@ -39,6 +39,108 @@ $stmt = $conn->query($query)->fetchAll();
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 
+  <style>
+    .portfolio-filters {
+      padding: 0;
+      margin: 0 auto 35px auto;
+      list-style: none;
+      text-align: center;
+      background: #ecf5f9;
+      border-radius: 50px;
+      padding: 2px 15px;
+    }
+
+    .portfolio-filters li {
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 15px 8px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #2f4d5a;
+      margin-bottom: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .portfolio-filters li:hover,
+    .portfolio-filters li:active {
+      color: #67b0d1;
+    }
+
+    .card img {
+      width: auto;
+      height: 100%;
+    }
+
+    /* Dropdown Button */
+    .dropbtn {
+      background-color: #67b0d1;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover,
+    .dropbtn:focus {
+      background-color: #67b0d1;
+    }
+
+    /* The search field */
+    #myInput {
+      box-sizing: border-box;
+      background-image: url('searchicon.png');
+      background-position: 14px 12px;
+      background-repeat: no-repeat;
+      font-size: 16px;
+      padding: 14px 20px 12px 45px;
+      border: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* The search field when it gets focus/clicked on */
+    #myInput:focus {
+      outline: 3px solid #ddd;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f6f6f6;
+      min-width: 230px;
+      border: 1px solid #ddd;
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+      background-color: #f1f1f1
+    }
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+      display: block;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -46,82 +148,6 @@ $stmt = $conn->query($query)->fetchAll();
   <?php include "template/header.php"; ?>
 
   <main id="main">
-    <!-- ======= News Section ======= -->
-  <div id="news" class="news">
-    <div id="about" class="news">
-      <div class="container">
-        <div class="section-title" data-aos="fade-in" data-aos-delay="100"></div>
-        <h3>Berita</h3>
-        <div id="carouselExampleIndicators" class="carousel slide custom-carousel" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
-                <div class="row">
-                  <div class="col-md-6 p-0 carousel-text-container">
-                    <div class="carousel-text">
-                      <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
-                      <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
-                      <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
-                <div class="row">
-                  <div class="col-md-6 p-0 carousel-text-container">
-                    <div class="carousel-text">
-                      <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
-                      <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
-                      <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
-                <div class="row">
-                  <div class="col-md-6 p-0 carousel-text-container">
-                    <div class="carousel-text">
-                      <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
-                      <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
-                      <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End News Section -->
-
     <!-- ======= About Section ======= -->
     <div id="about" class="about">
       <div class="container">
@@ -736,6 +762,26 @@ $stmt = $conn->query($query)->fetchAll();
       e.preventDefault();
       formToReset.reset();
     });
+
+    // $(document).ready(function() {
+    //   $('#apply-filters').on('click', function() {
+    //     var categories = $('#dropdown-categories').val();
+    //     if (categories != '' && categories != null) {
+    //       $.ajax({
+    //         url: 'forms/filter.php',
+    //         method: 'POST',
+    //         data: {
+    //           categories: categories
+    //         },
+    //         success: function(result) {
+    //           document.getElementById('list-umkmm').innerHTML = result;
+    //         }
+    //       })
+    //     } else {
+
+    //     }
+    //   })
+    // })
   </script>
 
 </body>
