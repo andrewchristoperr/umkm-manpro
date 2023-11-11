@@ -288,20 +288,6 @@ $stmt = $conn->query($query)->fetchAll();
 
         </div>
 
-        <!-- <div class="row" data-aos="fade-in">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="" class="portfolio-filters">
-              <li class="filters-umkm" id="all">All</li>
-              <li class="filters-umkm" id="makanan dan minuman">Makanan dan Minuman</li>
-              <li class="filters-umkm" id="fashion dan pakaian">Fashion</li>
-              <li class="filters-umkm" id="kerajinan tangan">Kerajinan Tangan</li>
-              <li class="filters-umkm" id="pertanian dan peternakan">Pertanian dan Peternakan</li>
-              <li class="filters-umkm" id="jasa">Jasa</li>
-              <li class="filters-umkm" id="otomotif">Otomotif</li>
-            </ul>
-          </div>
-        </div> -->
-
         <div class="row" id="list-umkm" data-aos="fade-up">
           <?php
           if ($stmt == null) :
