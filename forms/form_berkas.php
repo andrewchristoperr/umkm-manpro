@@ -3,10 +3,10 @@ require '../connect.php';
 
 session_start();
 
-$_SESSION['formulir'] = file_get_contents($_POST['formulir']);
-$_SESSION['surat_pengantar'] = file_get_contents($_POST['surat_pengantar']);
-$_SESSION['ktp'] = file_get_contents($_POST['ktp']);
-$_SESSION['npwp'] = file_get_contents($_POST['npwp']);
+$_SESSION['formulir'] = $_POST['formulir'];
+$_SESSION['surat_pengantar'] = $_POST['surat_pengantar'];
+$_SESSION['ktp'] = $_POST['ktp'];
+$_SESSION['npwp'] = $_POST['npwp'];
 
 $username = $_SESSION['username'];
 $nama_umkm = $_SESSION['nama_umkm'];
