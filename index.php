@@ -50,7 +50,7 @@ session_destroy();
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style1.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- JQuery -->
@@ -291,11 +291,12 @@ session_destroy();
             foreach ($stmt as $row) :
             ?>
               <div class="col-lg-3 col-md-4 mb-5">
-                <div class="card h-100">
+                <div class="card h-100 card-umkm">
                   <img class="card-img-top" src="image.php?id=<?php echo $row['id'] ?>" alt="Card image cap" style="padding: 10px;">
                   <div class="card-body">
                     <p class="card-text list_umkm"><?php echo $row['nama_umkm']; ?></p>
                     <p class="card-text">Kategori: <?php echo $row['kategori_umkm']; ?></p>
+                    <p hidden class="id_umkm"><?php echo $row['id'] ?></p>
                   </div>
                 </div>
               </div>
@@ -736,6 +737,15 @@ session_destroy();
       })
 
     })
+  </script>
+
+  <script>
+    // $(document).ready(function() {
+    $('card-umkm').on('click', function() {
+      var id_umkm = $('id_umkm').val();
+      window.location.href('portfolio-details.php');
+    });
+    // });
   </script>
 </body>
 

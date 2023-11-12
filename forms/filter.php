@@ -24,11 +24,12 @@ if ($stmt == null) {
     foreach ($stmt as $row) {
         $output .= '
                 <div class="col-lg-3 col-md-4 mb-5">
-                  <div class="card h-100">
+                  <div class="card h-100 card-umkm">
                     <img class="card-img-top" src="image.php?id=' .$row["id"]. ' " alt="Card image cap" style="padding: 10px;">
                     <div class="card-body">
                       <p class="card-text list_umkm">' .$row["nama_umkm"]. '</p>
                       <p class="card-text">Kategori: ' .$row["kategori_umkm"]. '</p>
+                      <p hidden class="id_umkm">' .$row["id"]. '</p>
                     </div>
                   </div>
                 </div>
