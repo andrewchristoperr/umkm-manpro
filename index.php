@@ -283,23 +283,25 @@ if (isset($_SESSION['kategori'])) {
             <p>Belum ada data</p>
             <?php
           endif;
-          if ($stmt != null) :
-        
-            foreach ($stmt as $row) :
+          if (!isset($_SESSION['kategori']) || $_SESSION['kategori'] == null ) :
+            if ($stmt != null) :
+
+              foreach ($stmt as $row) :
             ?>
-              <div class="col-lg-3 col-md-4 mb-5">
-                <div class="card h-100" id="card-umkm" style="border-radius: 20px;">
-                  <img class="card-img-top" src="image.php?id=<?php echo $row['id'] ?>" alt="Card image cap" style="padding: 10px; border-radius: 25px;">
-                  <div class="card-body">
-                    <p class="card-text list_umkm"><?php echo $row['nama_umkm']; ?></p>
-                    <p class="card-text">Kategori: <?php echo $row['kategori_umkm']; ?></p>
-                    <p hidden id="id_umkm" class="id_umkm"><?php echo $row['id'] ?></p>
-                    <!-- <button style="float: left;" class="btn btn-primary button_details" id="">Details</button> -->
+                <div class="col-lg-3 col-md-4 mb-5">
+                  <div class="card h-100" id="card-umkm" style="border-radius: 20px;">
+                    <img class="card-img-top" src="image.php?id=<?php echo $row['id'] ?>" alt="Card image cap" style="padding: 10px; border-radius: 25px;">
+                    <div class="card-body">
+                      <p class="card-text list_umkm"><?php echo $row['nama_umkm']; ?></p>
+                      <p class="card-text">Kategori: <?php echo $row['kategori_umkm']; ?></p>
+                      <p hidden id="id_umkm" class="id_umkm"><?php echo $row['id'] ?></p>
+                      <!-- <button style="float: left;" class="btn btn-primary button_details" id="">Details</button> -->
+                    </div>
                   </div>
                 </div>
-              </div>
           <?php
-            endforeach;
+              endforeach;
+            endif;
           endif;
           ?>
         </div>
