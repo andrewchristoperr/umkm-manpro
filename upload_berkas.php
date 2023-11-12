@@ -342,11 +342,14 @@ require "connect.php";
                   title: 'Success',
                   text: 'Submit Success!'
                 })
+                alert('Register berhasil!');
               }
+
             }
           })
-        } else {
-          alert('Mohon lengkapi data');
+        } 
+        else {
+          alert('Mohon lengkapi data!');
         }
       })
     })

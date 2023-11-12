@@ -94,9 +94,13 @@ if (isset($_SESSION['deskripsi_umkm'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         #footer {
             position: relative;
@@ -155,6 +159,15 @@ if (isset($_SESSION['deskripsi_umkm'])) {
             margin-top: 0px;
             padding-top: 0px;
         }
+
+        #validation-txt{
+            color: red;
+            font-size: 17px;
+        }
+
+        #validation-txt-username{
+            font-size: 17px;
+        }
     </style>
 
 </head>
@@ -197,16 +210,27 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                 <h3 class="text-center">Register Your UMKM</h3>
                             </div>
 
-                            <form class="row d-flex justify-content-center php-email-form uk-form" method="POST" id="form-register">
+                            <form class="row d-flex justify-content-center php-email-form uk-form needs-validation" method="POST" id="form-register" novalidate>
                                 <div class="col-md-5">
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Username</label>
+
                                         <?php if (isset($_SESSION['username'])) {
-                                            echo "<input class='form-control' type='text' id='username' name='username' required value='$username'>";
+                                            echo '<div class="input-group has-validation">
+                                                    <input class="form-control" type="email" id="username" name="username" required value="' . $username . '">
+                                                </div>
+                                                <div id="validation-txt-username">
+                                                </div>';
                                         } else {
-                                            echo "<input class='form-control' type='text' id='username' name='username' required value=''>";
+                                            echo '<div class="input-group has-validation">
+                                                    <input class="form-control" type="email" id="username" name="username" required value="">
+                                                </div>
+                                                <div id="validation-txt-username">
+                                                </div>';
                                         }
                                         ?>
+
+                                        
                                     </div>
 
                                     <div class="mb-4">
@@ -226,14 +250,14 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                                     <input class="form-control" type="password" id="password" name="password" required value="' . $password . '" onkeyup="validate()">
                                                     <span class="input-group-text" id="showhide" onClick="viewPassword()">Show</span>
                                                 </div>
-                                                <div id="validation-txt">
+                                                    <div id="validation-txt">
                                                 </div>';
                                         } else {
                                             echo '<div class="input-group has-validation">
-                                                    <input class="form-control" type="password" id="password" name="password" required value="' . $password . '" onkeyup="validate()">
+                                                    <input class="form-control" type="password" id="password" name="password" required value="" onkeyup="validate()">
                                                     <span class="input-group-text" id="showhide" onClick="viewPassword()">Show</span>
                                                 </div>
-                                                <div id="validation-txt">
+                                                    <div id="validation-txt">
                                                 </div>';
                                         }
                                         ?>
@@ -349,9 +373,9 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Foto UMKM</label>
                                         <?php if (isset($_SESSION['foto_umkm'])) {
-                                            echo "<input class='form-control' type='text' id='foto_umkm' name='foto_umkm' required value='$alamat_umkm'>";
+                                            echo "<input class='form-control' type='file' id='foto_umkm' name='foto_umkm' required value='$foto_umkm'>";
                                         } else {
-                                            echo "<input class='form-control' type='text' id='foto_umkm' name='foto_umkm' required value=''>";
+                                            echo "<input class='form-control' type='file' id='foto_umkm' name='foto_umkm' required value=''>";
                                         }
                                         ?>
                                     </div>
@@ -360,7 +384,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                         <label for="" class="form-label mb-3">Kategori UMKM</label>
                                         <!-- <label for="" style="font-size: 25px; color: red;" class="form-label">*</label> -->
                                         <?php ?>
-                                        <select class="form-select" aria-label="Default select example" name="kategori_umkm" id="kategori_umkm">
+                                        <select class="form-select" aria-label="Default select example" name="kategori_umkm" id="kategori_umkm" required>
                                             <option value="" disabled selected hidden>Pilih Kategori</option>
                                             <option value="makanan dan minuman">Makanan dan Minuman</option>
                                             <option value="fashion dan pakaian">Fashion dan Pakaian</option>
@@ -374,9 +398,9 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                     <div class="mb-4">
                                         <label class="form-label mb-3">Deskripsi UMKM (optional)</label>
                                         <?php if (isset($_SESSION['deskripsi_umkm'])) {
-                                            echo "<input class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' required value='$alamat_umkm'>";
+                                            echo "<textarea class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' required value='$deskripsi_umkm'></textarea>";
                                         } else {
-                                            echo "<input class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' required value=''>";
+                                            echo "<textarea class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' required value=''></textarea>";
                                         }
                                         ?>
                                     </div>
@@ -490,6 +514,33 @@ if (isset($_SESSION['deskripsi_umkm'])) {
     <script src="assets/js/main.js"></script>
 
     <script>
+        $(document).ready(function(){
+            $('#username').keyup(function(){
+                var username = $('#username').val();
+
+                if(username != ''){
+                    $.ajax({
+                        url: 'forms/usernamecheck.php',
+                        method: 'POST',
+                        data: {
+                            username: username,
+                        },
+                        success: function(result) {
+                            if (result == 2) {
+                                $("#validation-txt-username").text("Username telah tersedia!");
+                                $("#validation-txt-username").css("color", "red");
+                            }
+                            if (result == 1) {
+                                $("#validation-txt-username").text("Username bisa digunakan");
+                                $("#validation-txt-username").css("color", "green");
+                                // history.replaceState({},"upload_berkas.php");
+                            }
+                        }
+                    })
+                }
+            })
+        })
+
         function validate() {
             var validationField = document.getElementById('validation-txt');
             var password = document.getElementById('password');
@@ -561,16 +612,14 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                             deskripsi_umkm: deskripsi_umkm
                         },
                         success: function(result) {
-                            if (result == 2) {
-                                alert("Username sudah tersedia");
-                            }
                             if (result == 1) {
                                 window.location.href = "upload_berkas.php";
                                 // history.replaceState({},"upload_berkas.php");
                             }
                         }
                     })
-                } else {
+                } 
+                else {
                     alert("Mohon lengkapi data");
                 }
             })

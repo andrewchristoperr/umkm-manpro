@@ -30,3 +30,5 @@ $insert = $conn->query($insert);
 
 $result = 1;
 echo $result;
+
+session_destroy();
