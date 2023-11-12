@@ -1,33 +1,39 @@
 <?php
 require "connect.php";
-
 session_start();
-$kategori_umkm = $_SESSION['kategori'];
-if ($kategori_umkm == null || $kategori_umkm == '' || $kategori_umkm == 'All') {
+// if (isset($_POST['kategori'])) {
+//   $kategori_umkm = $POST['kategori'];
+//   $result = 1;
+//   echo $result;
+// }
+
+
+// $query = "SELECT all FROM umkmm";
+// $stmt = $conn->query($query)->fetchAll();
+
+// $query = "SELECT * FROM umkmm";
+// $stmt = $conn->query($query)->fetchAll();
+
+
+
+if (isset($_SESSION['kategori'])) {
+  if ($_SESSION['kategori'] != 'All') {
+    $kategori_umkm = $_SESSION['kategori'];
+    $query = "SELECT * FROM umkmm WHERE kategori_umkm = '$kategori_umkm'";
+    $stmt = $conn->query($query)->fetchAll();
+  } else {
+    $query = "SELECT * FROM umkmm";
+    $stmt = $conn->query($query)->fetchAll();
+  }
+} else {
   $query = "SELECT * FROM umkmm";
   $stmt = $conn->query($query)->fetchAll();
-} else {
-$query = "SELECT * FROM umkmm";
-$stmt = $conn->query($query)->fetchAll();
 }
 
+
 session_destroy();
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -267,8 +273,8 @@ session_destroy();
           </div>
 
           <div class="col-sm col-md-3 mb-4">
-            <select class="form-select" aria-label="Default select example" id="dropdown-categories">
-              <option value="All" selected>All Categories</option>
+            <select class="form-select" aria-label="Default select example" id="dropdown-kategori">
+              <option value="All">All Categories</option>
               <option value="Makanan dan Minuman">Makanan dan Minuman</option>
               <option value="Fashion dan Pakaian">Fashion dan Pakaian</option>
               <option value="Kerajinan Tangan">Kerajinan Tangan</option>
@@ -279,7 +285,7 @@ session_destroy();
           </div>
 
           <div class="col-sm col-md-2 mb-4">
-            <button class="btn btn-primary" type="submit" id="apply-filters">Apply filters</button>
+            <button class="btn btn-primary" type="button" id="apply-filters">Apply filters</button>
           </div>
 
         </div>
@@ -701,26 +707,6 @@ session_destroy();
       formToReset.reset();
     });
 
-    $(document).ready(function() {
-      $('#apply-filters').on('click', function() {
-        var kategori = $('#dropdown-categories').val();
-
-        if (kategori != null && kategori != "") {
-          $.ajax({
-            url: 'forms/filter.php',
-            method: 'POST',
-            data: {
-              kategori: kategori
-            },
-            success: function(result) {
-              window.location.reload();
-              alert(result);
-            }
-          })
-        }
-      })
-    })
-
     function search_umkm() {
       var input, filter, cards, card, i, txtValue;
       input = document.getElementById("search_bar");
@@ -741,6 +727,27 @@ session_destroy();
     }
   </script>
 
+  <script>
+    $(document).ready(function() {
+      $('#apply-filters').on('click', function() {
+        var kategori = $('#dropdown-kategori').val();
+        event.preventDefault();
+        if (kategori != null && kategori != "") {
+          $.ajax({
+            url: 'forms/filter.php',
+            method: 'POST',
+            data: {
+              kategori: kategori
+            },
+            success: function(result) {
+              window.location.reload();
+            }
+          })
+        }
+      })
+
+    })
+  </script>
 </body>
 
 </html>
