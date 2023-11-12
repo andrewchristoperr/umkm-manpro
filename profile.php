@@ -23,12 +23,16 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="assets/css/style1.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Sweet Alert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 
   <style>
     .scrollable-container {
@@ -391,7 +395,7 @@
 
           <div class="col-lg-2">
 
-            <button class="btn btn-filter dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               End Year
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -438,9 +442,7 @@
             <a href="laporPendapatan.php" class="btn btn-primary px-4 py-3">Lapor Pendapatan</a>
           </div>
           <div class="d-grid col-4">
-            <button type="button" class="btn btn-primary px-4 py-3" data-toggle="modal" href="#help">
-              Ajukan Bantuan
-            </button>
+            <a href="bantuan.php" class="btn btn-primary px-4 py-3">Ajukan Bantuan</a>
           </div>
           <div class="d-grid col-4">
             <a href="" class="btn btn-primary px-4 py-3">Settings</a>
