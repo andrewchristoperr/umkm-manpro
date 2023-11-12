@@ -637,24 +637,6 @@ if (isset($_SESSION['kategori'])) {
 
   <script>
     $(document).ready(function() {
-      // $('.button_details').on('click', function() {
-      //   // event.preventDefault();
-      //   var id_umkm = $('.id_umkm').val();
-      //   // location.href = 'portfolio-details.php';
-      //   if (id_umkm != null) {
-      //     $.ajax({
-      //       url: 'forms/port_details.php',
-      //       method: 'POST',
-      //       data: {
-      //         id_umkm: id_umkm
-      //       },
-      //       success: function(result) {
-      //         alert(result);
-      //       }
-      //     })
-      //   }
-      // });
-
       let card_umkm = document.querySelectorAll('#card-umkm');
       card_umkm.forEach((elm) => {
         elm.addEventListener("click", (e) => {
