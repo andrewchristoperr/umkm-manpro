@@ -1,8 +1,33 @@
 <?php
 require "connect.php";
+
+session_start();
+$kategori_umkm = $_SESSION['kategori'];
+if ($kategori_umkm == null || $kategori_umkm == '' || $kategori_umkm == 'All') {
+  $query = "SELECT * FROM umkmm";
+  $stmt = $conn->query($query)->fetchAll();
+} else {
 $query = "SELECT * FROM umkmm";
 $stmt = $conn->query($query)->fetchAll();
+}
+
+session_destroy();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -236,20 +261,20 @@ $stmt = $conn->query($query)->fetchAll();
             in iste officiis commodi quidem hic quas.</p>
         </div>
 
-        <div class="row mb-4 d-flex justify-content-center">
+        <div class="row mb-4 d-flex justify-content-center" data-aos="fade-in" data-aos-delay="100">
           <div class="col-sm col-md-7 mb-4">
             <input type="text" class="form-control" placeholder="Search UMKM" onkeyup="search_umkm()" id="search_bar">
           </div>
 
           <div class="col-sm col-md-3 mb-4">
             <select class="form-select" aria-label="Default select example" id="dropdown-categories">
-              <option value="all" selected>All Categories</option>
-              <option value="makanan dan minuman">Makanan dan Minuman</option>
-              <option value="fashion dan pakaian">Fashion dan Pakaian</option>
-              <option value="kerajinan tangan">Kerajinan Tangan</option>
-              <option value="pertanian dan peternakan">Pertanian dan Peternakan</option>
-              <option value="jasa">Jasa</option>
-              <option value="otomotif">Otomotif</option>
+              <option value="All" selected>All Categories</option>
+              <option value="Makanan dan Minuman">Makanan dan Minuman</option>
+              <option value="Fashion dan Pakaian">Fashion dan Pakaian</option>
+              <option value="Kerajinan Tangan">Kerajinan Tangan</option>
+              <option value="Pertanian dan Peternakan">Pertanian dan Peternakan</option>
+              <option value="Jasa">Jasa</option>
+              <option value="Otomotif">Otomotif</option>
             </select>
           </div>
 
@@ -267,6 +292,7 @@ $stmt = $conn->query($query)->fetchAll();
             <?php
           endif;
           if ($stmt != null) :
+
             foreach ($stmt as $row) :
             ?>
               <div class="col-lg-3 col-md-4 mb-5">
@@ -675,27 +701,44 @@ $stmt = $conn->query($query)->fetchAll();
       formToReset.reset();
     });
 
+    $(document).ready(function() {
+      $('#apply-filters').on('click', function() {
+        var kategori = $('#dropdown-categories').val();
 
-
-        function search_umkm() {
-            var input, filter, cards, card, i, txtValue;
-            input = document.getElementById("search_bar");
-            filter = input.value.toUpperCase();
-            cards = document.getElementById("list-umkm").getElementsByClassName("col-lg-3");
-
-            for (i = 0; i < cards.length; i++) {
-                card = cards[i];
-                txtValue = card.textContent || card.innerText;
-
-                // If the card contains the search term, display it; otherwise, hide it
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    card.style.display = "";
-                } else {
-                    card.style.display = "none";
-                }
+        if (kategori != null && kategori != "") {
+          $.ajax({
+            url: 'forms/filter.php',
+            method: 'POST',
+            data: {
+              kategori: kategori
+            },
+            success: function(result) {
+              window.location.reload();
+              alert(result);
             }
+          })
         }
+      })
+    })
 
+    function search_umkm() {
+      var input, filter, cards, card, i, txtValue;
+      input = document.getElementById("search_bar");
+      filter = input.value.toUpperCase();
+      cards = document.getElementById("list-umkm").getElementsByClassName("col-lg-3");
+
+      for (i = 0; i < cards.length; i++) {
+        card = cards[i];
+        txtValue = card.textContent || card.innerText;
+
+        // If the card contains the search term, display it; otherwise, hide it
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
+      }
+    }
   </script>
 
 </body>
