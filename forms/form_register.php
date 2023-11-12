@@ -4,6 +4,8 @@ require '../connect.php';
 session_start();
 
 $_SESSION['username'] = $_POST['username'];
+$_SESSION['email'] = $_POST['email'];
+$_SESSION['password'] = $_POST['password'];
 $_SESSION['nama_umkm'] = $_POST['nama_umkm'];
 $_SESSION['notelp_umkm'] = $_POST['notelp_umkm'];
 $_SESSION['alamat_umkm'] = $_POST['alamat_umkm'];

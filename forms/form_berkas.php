@@ -9,6 +9,8 @@ $_SESSION['ktp'] = $_POST['ktp'];
 $_SESSION['npwp'] = $_POST['npwp'];
 
 $username = $_SESSION['username'];
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
 $nama_umkm = $_SESSION['nama_umkm'];
 $notelp_umkm = $_SESSION['notelp_umkm'];
 $alamat_umkm = $_SESSION['alamat_umkm'];
@@ -22,8 +24,8 @@ $ktp = $_SESSION['ktp'];
 $npwp = $_SESSION['npwp'];
 
 
-$insert = "INSERT INTO umkmm (username, nama_umkm, notelp_umkm, alamat_umkm, kecamatan, foto_umkm, kategori_umkm, deskripsi_umkm, formulir, surat_pengantar, ktp, npwp) 
-          VALUES ('$username', '$nama_umkm', '$notelp_umkm', '$alamat_umkm', '$kecamatan', '$foto_umkm', '$kategori_umkm', '$deskripsi_umkm', '$formulir', '$surat_pengantar', '$ktp', '$npwp')";
+$insert = "INSERT INTO umkmm (username, email, password, nama_umkm, notelp_umkm, alamat_umkm, kecamatan, foto_umkm, kategori_umkm, deskripsi_umkm, formulir, surat_pengantar, ktp, npwp) 
+          VALUES ('$username', '$email', '$password', '$nama_umkm', '$notelp_umkm', '$alamat_umkm', '$kecamatan', '$foto_umkm', '$kategori_umkm', '$deskripsi_umkm', '$formulir', '$surat_pengantar', '$ktp', '$npwp')";
 $insert = $conn->query($insert);
 
 $result = 1;
