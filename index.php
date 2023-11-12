@@ -1,18 +1,7 @@
 <?php
 require "connect.php";
 session_start();
-// if (isset($_POST['kategori'])) {
-//   $kategori_umkm = $POST['kategori'];
-//   $result = 1;
-//   echo $result;
-// }
 
-
-// $query = "SELECT all FROM umkmm";
-// $stmt = $conn->query($query)->fetchAll();
-
-// $query = "SELECT * FROM umkmm";
-// $stmt = $conn->query($query)->fetchAll();
 
 
 
@@ -740,7 +729,7 @@ session_destroy();
               kategori: kategori
             },
             success: function(result) {
-              window.location.reload();
+              document.getElementById('list-umkm').innerHTML = result;
             }
           })
         }
