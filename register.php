@@ -160,12 +160,12 @@ if (isset($_SESSION['deskripsi_umkm'])) {
             padding-top: 0px;
         }
 
-        #validation-txt{
+        #validation-txt {
             color: red;
             font-size: 17px;
         }
 
-        #validation-txt-username{
+        #validation-txt-username {
             font-size: 17px;
         }
     </style>
@@ -230,7 +230,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                         }
                                         ?>
 
-                                        
+
                                     </div>
 
                                     <div class="mb-4">
@@ -398,9 +398,9 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                     <div class="mb-4">
                                         <label class="form-label mb-3">Deskripsi UMKM (optional)</label>
                                         <?php if (isset($_SESSION['deskripsi_umkm'])) {
-                                            echo "<textarea class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' required value='$deskripsi_umkm'></textarea>";
+                                            echo "<textarea class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' value='$deskripsi_umkm'></textarea>";
                                         } else {
-                                            echo "<textarea class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' required value=''></textarea>";
+                                            echo "<textarea class='form-control' type='text' id='deskripsi_umkm' name='deskripsi_umkm' value=''></textarea>";
                                         }
                                         ?>
                                     </div>
@@ -514,11 +514,11 @@ if (isset($_SESSION['deskripsi_umkm'])) {
     <script src="assets/js/main.js"></script>
 
     <script>
-        $(document).ready(function(){
-            $('#username').keyup(function(){
+        $(document).ready(function() {
+            $('#username').keyup(function() {
                 var username = $('#username').val();
 
-                if(username != ''){
+                if (username != '') {
                     $.ajax({
                         url: 'forms/usernamecheck.php',
                         method: 'POST',
@@ -620,7 +620,13 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                     })
                 } 
                 else {
-                    alert("Mohon lengkapi data");
+                    alert("Mohon Lengkapi Data!");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Mohon Lengkapi Data!'
+                    });
+
                 }
             })
         })
