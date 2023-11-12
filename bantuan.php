@@ -93,6 +93,10 @@
             position: relative;
             padding-top: 100px;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -109,32 +113,55 @@
                     <div class="content d-flex align-items-stretch" data-aos="fade">
                         <div class="container">
                             <div class="row mb-5 d-flex justify-content-center mt-2">
-                                <h3 class="text-center">Lapor Pendapatan</h3>
+                                <h3 class="text-center">Pengajuan Bantuan</h3>
                             </div>
                             <form class="row d-flex justify-content-center" action="#" method="post">
                                 <div class="col-md-10">
                                     <div class="mb-4">
-                                        <label for="formFile" class="form-label">Bulan</label>
-                                        <input class="form-control" type="month" id="bulan_lapor" name="bulan_lapor" required>
+                                        <label for="formFile" class="form-label">Tujuan Permintaan Bantuan</label>
+                                        <input class="form-control" type="text" id="tujuanBantuan" name="tujuanBantuan" required>
                                     </div>
 
                                     <div class="mb-4">
-                                        <label for="formFile" class="form-label">Pendapatan</label>
+                                        <label for="formFile" class="form-label">Dokumen Pendukung</label>
                                         <input class="form-control" type="text" id="pendapatan" name="pendapatan" required>
                                     </div>
 
                                     <div class="mb-4">
-                                        <label for="formFile" class="form-label">Pengeluaran</label>
-                                        <input class="form-control" type="text" id="pengeluaran" name="pengeluaran" required>
-                                    </div>
+                                        <label for="formFile" class="form-label">Kebutuhan</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="tendaCheckbox">
+                                            <label class="form-check-label" for="tendaCheckbox">Tenda</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="gerobakCheckbox">
+                                            <label class="form-check-label" for="gerobakCheckbox">Gerobak</label>
+                                        </div>
 
-                                    <div class="mb-5">
-                                        <label for="formFile" class="form-label">Omzet</label>
-                                        <input class="form-control" type="text" id="omzet" name="omzet" required>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="spandukCheckbox">
+                                            <label class="form-check-label" for="spandukCheckbox">Spanduk</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="danaCheckbox" onchange="toggleInput()">
+                                            <label class="form-check-label" for="danaCheckbox">Dana</label>
+                                        </div>
+                                        <!-- Input Dana -->
+                                        <div id="danaInput" class="form-group mt-2 mb-2 hidden">
+                                            <input class="form-control" type="text" id="danaAmount" name="danaAmount" placeholder="Masukkan Nominal">
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="lainnyaCheckbox" onchange="toggleInput()">
+                                            <label class="form-check-label" for="lainnyaCheckbox">Lainnya</label>
+                                        </div>
+                                        <!-- Input Lainnya -->
+                                        <div id="lainnyaInput" class="form-group mt-2 mb-2 hidden">
+                                            <input class="form-control" type="text" id="lainnya" name="lainnya" placeholder="Masukkan Kebutuhan Lainnya">
+                                        </div>
                                     </div>
 
                                     <div class="d-grid mx-auto">
-                                        <button class="button" type="submit" id="submit" name="submit">Submit</button>
+                                        <button class="button" type="submit" id="submit" name="submit">Ajukan Bantuan</button>
                                     </div>
                                 </div>
 
@@ -168,74 +195,25 @@
     <script src="assets/js/main.js"></script>
 
     <script>
-        // var pendapatan = document.getElementById('pendapatan');
-        // pendapatan.addEventListener('keyup', function(e) {
-        //     pendapatan.value = formatRupiah(this.value, 'Rp. ');
-        // });
-  
-        // var pengeluaran = document.getElementById('pengeluaran');
-        // pengeluaran.addEventListener('keyup', function(e) {
-        //   pengeluaran.value = formatRupiah(this.value, 'Rp. ');
-        // });
-  
-        // var omzet = document.getElementById('omzet');
-        // omzet.addEventListener('keyup', function(e) {
-        //   omzet.value = formatRupiah(this.value, 'Rp. ');
-        // });
-        
-        // /* Fungsi Format ke Rupiah */
-        // function formatRupiah(angka, prefix)
-        // {
-        //     var number_string = angka.replace(/[^,\d]/g, '').toString(),
-        //         split    = number_string.split(','),
-        //         sisa     = split[0].length % 3,
-        //         rupiah     = split[0].substr(0, sisa),
-        //         ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
-                
-        //     if (ribuan) {
-        //         separator = sisa ? '.' : '';
-        //         rupiah += separator + ribuan.join('.');
-        //     }
-            
-        //     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-        //     return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-        // }
+        function toggleInput() {
+            var danaCheckbox = document.getElementById('danaCheckbox');
+            var danaInput = document.getElementById('danaInput');
+            var lainnyaCheckbox = document.getElementById('lainnyaCheckbox');
+            var lainnyaInput = document.getElementById('lainnyaInput');
 
-        $(document).ready(function() {
-            $('#submit').on('click', function() {
-                var bulan_lapor = $('#bulan_lapor').val();
-                var pendapatan = $('#pendapatan').val();
-                var pengeluaran = $('#pengeluaran').val();
-                var omzet = $('#omzet').val();
-                alert(pendapatan)
+            if (danaCheckbox.checked) {
+                danaInput.classList.remove('hidden');
+            } else {
+                danaInput.classList.add('hidden');
+            }
 
-                if (bulan_lapor != '' && pendapatan != '' && pengeluaran != '' && omzet != '') {
-                    $.ajax({
-                        url: 'forms/form_lapor.php',
-                        method: 'POST',
-                        data: {
-                            bulan_lapor: bulan_lapor,
-                            pendapatan: pendapatan,
-                            pengeluaran: pengeluaran,
-                            omzet: omzet,
-                        },
-
-                        success: function(result) {
-                            if (result == 1) {
-                                Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: 'Submit Success!'
-                                })
-                            }
-                        }
-                    })
-                } else {
-                    alert('Mohon lengkapi data');
-                }
-            })
-        })
-      </script>
+            if (lainnyaCheckbox.checked) {
+                lainnyaInput.classList.remove('hidden');
+            } else {
+                lainnyaInput.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 
 </html>

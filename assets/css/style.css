@@ -1627,9 +1627,22 @@ h3 {
   object-fit: cover;
 }
 
-.card-img-top {
-  width: 100%;
-  height: 15vw;
-  object-fit: cover;
-  border-radius: 10px;
+
+@media (min-width: 567px) {
+  .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
 }

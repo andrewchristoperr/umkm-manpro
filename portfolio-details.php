@@ -1,3 +1,16 @@
+<?php
+require "connect.php";
+session_start();
+
+if (isset($_SESSION['id_umkm'])) {
+  $id_umkm = $_SESSION['id_umkm'];
+  $query = "SELECT * FROM umkmm WHERE id = '$id_umkm'";
+  $stmt = $conn->query($query);
+  $data = $stmt->fetch();
+  // echo $_SESSION['id_umkm'];
+}
+// echo $_SESSION['id_umkm'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,31 +51,7 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between position-relative">
-
-      <div class="logo">
-        <h1 class="text-light"><a href="index.html"><span>UMKMANJALITA</span></a></h1>
-      </div>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto" href="index.html">Home</a></li>
-          <li><a class="nav-link scrollto" href="#">Favourite</a></li>
-          <li><a class="nav-link scrollto" href="profile.html">Account</a></li>
-          <li><div class="box">
-            <div class="container-4">
-              <input type="search" id="search" placeholder="Search..." />
-              <button class="icon"><i class="fa fa-search"></i></button>
-            </div>
-          </div></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
+  <?php include "template/header.php" ?>
 
   <main id="main">
 
@@ -92,15 +81,15 @@
               <div class="swiper-wrapper align-items-center">
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" alt="">
+                  <img src="image.php?id=<?php echo $data['id'] ?>" alt="" style="object-fit:; width: 90%;">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-2.jpg" alt="">
+                  <img src="image.php?id=<?php echo $data['id'] ?>" alt="" style="object-fit:; width: 90%;">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
+                  <img src="image.php?id=<?php echo $data['id'] ?>" alt="" style="object-fit:; width: 90%;">
                 </div>
 
               </div>
@@ -112,18 +101,18 @@
         <div class="row d-flex justify-content-center">
           <div class="col-md-10">
             <div class="portfolio-info">
-              <h3>Pandan Wangi</h3>
+              <h3><?php echo $data['nama_umkm'] ?></h3>
               <ul>
-                <li><strong>Kategori</strong>: Fashion Wanita</li>
-                <li><strong>Rating</strong>: 5.4</li>
-                <li><strong>Alamat</strong>: Jl. Arif Rahman Hakim 1</li>
+                <li><strong>Kategori</strong>: <?php echo $data['kategori_umkm'] ?> </li>
+                <!-- <li><strong>Rating</strong>: 5.4</li> -->
+                <li><strong>Alamat</strong>: <?php echo $data['alamat_umkm'] ?></li>
                 <li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">0812345678</a></li>
               </ul>
             </div>
             <div class="portfolio-description">
               <h2>Sekilas tentang UMKM Pandan Wangi</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                <?php echo $data['deskripsi_umkm'] ?>
               </p>
             </div>
           </div>
@@ -151,8 +140,8 @@
               </p>
               <div class="social-links mt-3">
                 <a href="https://twitter.com/info_surabaya?spm=a2o4j.home.sns.d_twr.579953e0jUysxl" target="_blank" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="https://www.facebook.com/kecamatangayungan?spm=a2o4j.home.sns.d_fbk.579953e0jUysxl" target="_blank"" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="https://www.instagram.com/kecamatan.tandes/?spm=a2o4j.home.sns.d_ins.579953e0jUysxl" target="_blank"" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://www.facebook.com/kecamatangayungan?spm=a2o4j.home.sns.d_fbk.579953e0jUysxl" target="_blank"" class=" facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="https://www.instagram.com/kecamatan.tandes/?spm=a2o4j.home.sns.d_ins.579953e0jUysxl" target="_blank"" class=" instagram"><i class="bx bxl-instagram"></i></a>
                 <a href="#" class="google-plus"><i class="bx bxl-whatsapp"></i></a>
               </div>
             </div>
@@ -186,7 +175,6 @@
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
-
           </div>
 
         </div>

@@ -1,7 +1,24 @@
 <?php
 require "connect.php";
-$query = "SELECT * FROM umkmm";
-$stmt = $conn->query($query)->fetchAll();
+session_start();
+
+if (isset($_SESSION['kategori'])) {
+  if ($_SESSION['kategori'] != 'All') {
+    $kategori_umkm = $_SESSION['kategori'];
+    $query = "SELECT * FROM umkmm WHERE kategori_umkm = '$kategori_umkm'";
+    $stmt = $conn->query($query)->fetchAll();
+  } else {
+    $query = "SELECT * FROM umkmm";
+    $stmt = $conn->query($query)->fetchAll();
+  }
+} else {
+  $query = "SELECT * FROM umkmm";
+  $stmt = $conn->query($query)->fetchAll();
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,82 +63,82 @@ $stmt = $conn->query($query)->fetchAll();
   <?php include "template/header.php"; ?>
 
   <main id="main">
-          
+
     <!-- ======= News Section ======= -->
-  <div id="news" class="news">
-    <div id="about" class="news">
-      <div class="container">
-        <div class="section-title" data-aos="fade-in" data-aos-delay="100"></div>
-        <h3>Berita</h3>
-        <div id="carouselExampleIndicators" class="carousel slide custom-carousel" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div id="news" class="news">
+      <div id="about" class="news">
+        <div class="container">
+          <div class="section-title" data-aos="fade-in" data-aos-delay="100"></div>
+          <h3>Berita</h3>
+          <div id="carouselExampleIndicators" class="carousel slide custom-carousel" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
+                  <div class="row">
+                    <div class="col-md-6 p-0 carousel-text-container">
+                      <div class="carousel-text">
+                        <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
+                        <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
+                        <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6 p-0">
+                      <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
+                  <div class="row">
+                    <div class="col-md-6 p-0 carousel-text-container">
+                      <div class="carousel-text">
+                        <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
+                        <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
+                        <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6 p-0">
+                      <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
+                  <div class="row">
+                    <div class="col-md-6 p-0 carousel-text-container">
+                      <div class="carousel-text">
+                        <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
+                        <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
+                        <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6 p-0">
+                      <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
-                <div class="row">
-                  <div class="col-md-6 p-0 carousel-text-container">
-                    <div class="carousel-text">
-                      <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
-                      <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
-                      <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
-                <div class="row">
-                  <div class="col-md-6 p-0 carousel-text-container">
-                    <div class="carousel-text">
-                      <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
-                      <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
-                      <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="carousel-item">
-              <a href="https://www.surabaya.go.id/id/berita/65135/pemkot-surabaya-targetkan-62-ri" target="_blank">
-                <div class="row">
-                  <div class="col-md-6 p-0 carousel-text-container">
-                    <div class="carousel-text">
-                      <p class="carousel-text-title">WALI KOTA ERI CAHYADI BERI REWARD</p>
-                      <p class="carousel-text-description">Wali Kota Surabaya Eri Cahyadi memberikan reward kepada 10 UMKM yang telah lolos verifikasi dan mendapatkan bantuan dari Pemkot Surabaya. Reward berupa uang tunai sebesar Rp 5 juta diberikan langsung oleh Wali Kota Eri Cahyadi di Balai Kota Surabaya, Senin (27/9/2021).</p>
-                      <p class="carousel-text-date">Sabtu, 28 Oktober 2023</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <img src="./assets/img/berita/berita-1.jpg" class="w-100" alt="...">
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
       </div>
     </div>
-  </div>
-  <!-- End News Section -->
+    <!-- End News Section -->
 
     <!-- ======= About Section ======= -->
     <div id="about" class="about">
@@ -229,7 +246,6 @@ $stmt = $conn->query($query)->fetchAll();
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
       <div class="container">
-
         <div class="row section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Daftar UMKM</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
@@ -237,208 +253,58 @@ $stmt = $conn->query($query)->fetchAll();
             in iste officiis commodi quidem hic quas.</p>
         </div>
 
-        <div class="row mb-4 d-flex justify-content-center">
-          <div class="col-md-5 mb-2 col-sm-9">
-            <input type="text" class="form-control" placeholder="Search UMKM">
-            <!-- <div class="col-md-2 col-sm-2" >
-                <button class="btn" style="background-color: #67b0d1; color:white;">Search</button>
-              </div> -->
+        <div class="row mb-4 d-flex justify-content-center" data-aos="fade-in" data-aos-delay="100">
+          <div class="col-sm col-md-7 mb-4">
+            <input type="text" class="form-control" placeholder="Search UMKM" onkeyup="search_umkm()" id="search_bar">
           </div>
 
-          <div class="col-md-2 col-sm-2">
-            <select class="form-select" aria-label="Default select example" id="dropdown-categories">
-              <option value="all" selected>All Categories</option>
-              <option value="makanan dan minuman">Makanan dan Minuman</option>
-              <option value="fashion dan pakaian">Fashion dan Pakaian</option>
-              <option value="kerajinan tangan">Kerajinan Tangan</option>
-              <option value="pertanian dan peternakan">Pertanian dan Peternakan</option>
-              <option value="jasa">Jasa</option>
-              <option value="otomotif">Otomotif</option>
+          <div class="col-sm col-md-3 mb-4">
+            <select class="form-select" aria-label="Default select example" id="dropdown-kategori">
+              <option value="All">All Categories</option>
+              <option value="Makanan dan Minuman">Makanan dan Minuman</option>
+              <option value="Fashion dan Pakaian">Fashion dan Pakaian</option>
+              <option value="Kerajinan Tangan">Kerajinan Tangan</option>
+              <option value="Pertanian dan Peternakan">Pertanian dan Peternakan</option>
+              <option value="Jasa">Jasa</option>
+              <option value="Otomotif">Otomotif</option>
             </select>
           </div>
 
-          <div class="col-md-2">
-            <button class="btn btn-primary" type="submit" id="apply-filters">Apply filters</button>
+          <div class="col-sm col-md-2 mb-4">
+            <button class="btn btn-primary" type="button" id="apply-filters">Apply filters</button>
           </div>
 
         </div>
-
-        <!-- <div class="row" data-aos="fade-in">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="" class="portfolio-filters">
-              <li class="filters-umkm" id="all">All</li>
-              <li class="filters-umkm" id="makanan dan minuman">Makanan dan Minuman</li>
-              <li class="filters-umkm" id="fashion dan pakaian">Fashion</li>
-              <li class="filters-umkm" id="kerajinan tangan">Kerajinan Tangan</li>
-              <li class="filters-umkm" id="pertanian dan peternakan">Pertanian dan Peternakan</li>
-              <li class="filters-umkm" id="jasa">Jasa</li>
-              <li class="filters-umkm" id="otomotif">Otomotif</li>
-            </ul>
-          </div>
-        </div> -->
 
         <div class="row" id="list-umkm" data-aos="fade-up">
           <?php
           if ($stmt == null) :
-
           ?>
             <p>Belum ada data</p>
             <?php
           endif;
-          if ($stmt != null) :
-            foreach ($stmt as $row) :
+          if (!isset($_SESSION['kategori']) || $_SESSION['kategori'] == null ) :
+            if ($stmt != null) :
+
+              foreach ($stmt as $row) :
             ?>
-              <div class="col-lg-3 col-md-4 mb-5">
-                <div class="card h-100">
-                  <img class="card-img-top" src="image.php?id=<?php echo $row['id'] ?>" alt="Card image cap" style="padding: 10px;">
-                  <div class="card-body">
-                    <p class="card-text"><?php echo $row['nama_umkm']; ?></p>
+                <div class="col-lg-3 col-md-4 mb-5">
+                  <div class="card h-100" id="card-umkm" style="border-radius: 20px;">
+                    <img class="card-img-top" src="image.php?id=<?php echo $row['id'] ?>" alt="Card image cap" style="padding: 10px; border-radius: 25px;">
+                    <div class="card-body">
+                      <p class="card-text list_umkm"><?php echo $row['nama_umkm']; ?></p>
+                      <p class="card-text">Kategori: <?php echo $row['kategori_umkm']; ?></p>
+                      <p hidden id="id_umkm" class="id_umkm"><?php echo $row['id'] ?></p>
+                      <!-- <button style="float: left;" class="btn btn-primary button_details" id="">Details</button> -->
+                    </div>
                   </div>
                 </div>
-              </div>
           <?php
-            endforeach;
+              endforeach;
+            endif;
           endif;
           ?>
-          <!-- <div class="col-lg-3 col-md-4 mb-5">
-            <div class="card h-100">
-              <img class="card-img-top" src="assets/img/umkm/umkm1.jpg" alt="Card image cap" style="padding: 10px;">
-
-              <div class="card-body">
-                <p class="card-text">Nama UMKM</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mb-5">
-            <div class="card h-100">
-              <img class="card-img-top" src="assets/img/umkm/umkm2.jpg" alt="Card image cap" style="padding: 10px;">
-              <div class="card-body">
-                <p class="card-text">Nama UMKM</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 mb-5">
-            <div class="card h-100">
-              <img class="card-img-top" src="assets/img/umkm/umkm3.jpg" alt="Card image cap" style="padding: 10px;">
-              <div class="card-body">
-                <p class="card-text">Nama UMKM</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 mb-5">
-            <div class="card h-100">
-              <img class="card-img-top" src="assets/img/umkm/umkm2.jpg" alt="Card image cap" style="padding: 10px;">
-
-              <div class="card-body">
-                <p class="card-text">Nama UMKM</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 mb-5"> -->
-          <!-- <div class="card h-100">
-            <img class="card-img-top" src="assets/img/umkm/umkm3.jpg" alt="Card image cap" style="padding: 10px;">
-
-            <div class="card-body">
-              <p class="card-text">Nama UMKM</p>
-            </div>
-          </div> -->
         </div>
-
-
-        <!-- 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div> -->
-
       </div>
 
       </div>
@@ -533,7 +399,8 @@ $stmt = $conn->query($query)->fetchAll();
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section>
+    <!-- End Testimonials Section -->
 
     <!-- ======= Team Section ======= -->
     <!-- <section id="team" class="team">
@@ -680,18 +547,6 @@ $stmt = $conn->query($query)->fetchAll();
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
   <script>
     $(document).ready(function() {
       $('#submit').on('click', function() {
@@ -737,8 +592,101 @@ $stmt = $conn->query($query)->fetchAll();
       e.preventDefault();
       formToReset.reset();
     });
+
+    function search_umkm() {
+      var input, filter, cards, card, i, txtValue;
+      input = document.getElementById("search_bar");
+      filter = input.value.toUpperCase();
+      cards = document.getElementById("list-umkm").getElementsByClassName("col-lg-3");
+
+      for (i = 0; i < cards.length; i++) {
+        card = cards[i];
+        txtValue = card.textContent || card.innerText;
+
+        // If the card contains the search term, display it; otherwise, hide it
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
+      }
+    }
   </script>
 
+  <script>
+    $(document).ready(function() {
+      $('#apply-filters').on('click', function() {
+        var kategori = $('#dropdown-kategori').val();
+        event.preventDefault();
+        if (kategori != null && kategori != "") {
+          $.ajax({
+            url: 'forms/filter.php',
+            method: 'POST',
+            data: {
+              kategori: kategori
+            },
+            success: function(result) {
+              document.getElementById('list-umkm').innerHTML = result;
+              <?php session_destroy(); ?>;
+            }
+          })
+        }
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      // $('.button_details').on('click', function() {
+      //   // event.preventDefault();
+      //   var id_umkm = $('.id_umkm').val();
+      //   // location.href = 'portfolio-details.php';
+      //   if (id_umkm != null) {
+      //     $.ajax({
+      //       url: 'forms/port_details.php',
+      //       method: 'POST',
+      //       data: {
+      //         id_umkm: id_umkm
+      //       },
+      //       success: function(result) {
+      //         alert(result);
+      //       }
+      //     })
+      //   }
+      // });
+
+      let card_umkm = document.querySelectorAll('#card-umkm');
+      card_umkm.forEach((elm) => {
+        elm.addEventListener("click", (e) => {
+          let id_umkm = e.currentTarget.querySelector('#id_umkm').innerHTML;
+          if (id_umkm != null) {
+            $.ajax({
+              url: 'forms/port_details.php',
+              method: 'POST',
+              data: {
+                id_umkm: id_umkm
+              },
+              success: function(result) {
+                // alert(result);
+                location.href = 'portfolio-details.php';
+              }
+            })
+          }
+        })
+      })
+    });
+  </script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>
