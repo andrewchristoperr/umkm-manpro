@@ -224,7 +224,7 @@
             <h3>
             </h3>
             <ul>
-              <li><strong>Kategori</strong>: Fashion Wanita</li>
+              <li><strong>Kategori</strong>: Kerajinan Tangan</li>
               <li><strong>Alamat</strong>: Jl. Arif Rahman Hakim 1</li>
               <li><strong>Kecamatan</strong>: Wonocolo</li>
               <li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">0812345678</a></li>
@@ -237,7 +237,7 @@
             <h2>Deskripsi</h2>
           </div>
           <div class="umkm-desc" id="umkm-desc">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero laudantium rerum, modi quae necessitatibus similique dolor! Perferendis id harum nisi tempore autem nostrum, neque delectus obcaecati consectetur temporibus distinctio eligendi?</p>
+            <p style="text-align: justify;">UMKM Pandan Wangi adalah sebuah usaha kecil menengah yang berfokus pada kategori kerajinan tangan dengan spesialisasi dalam produk-produk berbahan dasar pandan. Kami membuat berbagai macam barang seni dan kerajinan, mulai dari anyaman pandan tradisional hingga kreasi modern yang memadukan teknik tradisional dengan desain kontemporer. Produk unggulan kami meliputi tas tangan, keranjang, dan dekorasi rumah dari pandan yang memberikan sentuhan eksotis dan alami. Pandan Wangi menonjolkan keunikan setiap karya kami melalui penggunaan warna-warna cerah dan pola anyaman yang rumit. Dengan memadukan keahlian tradisional dengan inovasi desain, kami tidak hanya menciptakan produk berkualitas tinggi tetapi juga berperan dalam melestarikan warisan budaya lokal serta memberikan kontribusi positif terhadap perkembangan ekonomi lokal.</p>
           </div>
         </div>
         
