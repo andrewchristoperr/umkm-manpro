@@ -248,9 +248,7 @@ if (isset($_SESSION['kategori'])) {
       <div class="container">
         <div class="row section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Daftar UMKM</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-            consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
-            in iste officiis commodi quidem hic quas.</p>
+          <p>Berbagai UMKM di Kecamatan</p>
         </div>
 
         <div class="row mb-4 d-flex justify-content-center" data-aos="fade-in" data-aos-delay="100">
