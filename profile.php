@@ -25,7 +25,7 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style1.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- JQuery -->
@@ -127,7 +127,7 @@
     .btn-edit {
       background-color: transparent;
       border: 3px solid #67b0d1;
-      color: #67b0d1; 
+      color: #67b0d1;
     }
 
     .btn-edit:hover {
@@ -141,7 +141,7 @@
       margin-bottom: 20px;
       box-shadow: 0px 0 30px rgba(47, 77, 90, 0.08);
     }
-    
+
     .umkm-info h3 {
       font-size: 22px;
       font-weight: 700;
@@ -149,41 +149,46 @@
       padding-bottom: 20px;
       border-bottom: 1px solid #eee;
     }
+
     .umkm-info ul {
       list-style: none;
       padding: 0;
       font-size: 15px;
     }
 
-    #chartPendapatan, #chartPengeluaran, #chartOmzet, #chartProduk {
+    #chartPendapatan,
+    #chartPengeluaran,
+    #chartOmzet,
+    #chartProduk {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       padding: 20px;
       border-radius: 10px;
     }
 
     canvas {
-        font-family: "Raleway", sans-serif;
+      font-family: "Raleway", sans-serif;
     }
 
     .edit-icon {
       font-size: 20px;
       margin-top: 3px;
     }
-  
+
     i {
       padding: 5px;
     }
 
-    .btn-filter, .btn-filterYear {
+    .btn-filter,
+    .btn-filterYear {
       background-color: #67b0d1;
       color: #eee;
     }
 
-    .btn-filter:hover, .btn-filterYear:hover {
+    .btn-filter:hover,
+    .btn-filterYear:hover {
       background-color: #67b0d1;
       color: #2f4d5a;
     }
-
   </style>
 </head>
 
@@ -193,7 +198,7 @@
 
 
   <main id="main">
-  
+
     <section id="akun">
       <div class="container">
         <div class="row">
@@ -231,7 +236,7 @@
             </ul>
           </div>
         </div>
-        
+
         <div class="row mt-5 px-3">
           <div class="section-title" data-aos="fade-in" data-aos-delay="100">
             <h2>Deskripsi</h2>
@@ -240,254 +245,251 @@
             <p style="text-align: justify;">UMKM Pandan Wangi adalah sebuah usaha kecil menengah yang berfokus pada kategori kerajinan tangan dengan spesialisasi dalam produk-produk berbahan dasar pandan. Kami membuat berbagai macam barang seni dan kerajinan, mulai dari anyaman pandan tradisional hingga kreasi modern yang memadukan teknik tradisional dengan desain kontemporer. Produk unggulan kami meliputi tas tangan, keranjang, dan dekorasi rumah dari pandan yang memberikan sentuhan eksotis dan alami. Pandan Wangi menonjolkan keunikan setiap karya kami melalui penggunaan warna-warna cerah dan pola anyaman yang rumit. Dengan memadukan keahlian tradisional dengan inovasi desain, kami tidak hanya menciptakan produk berkualitas tinggi tetapi juga berperan dalam melestarikan warisan budaya lokal serta memberikan kontribusi positif terhadap perkembangan ekonomi lokal.</p>
           </div>
         </div>
-        
+
       </div>
     </section>
 
     <!-- ======= Portfolio Section ======= -->
-      <div class="container">
+    <div class="container">
 
-        <div class="row px-3">
-          <div class="col-lg-4">
+      <div class="row px-3">
+        <div class="col-lg-4">
 
-          </div>
-          <div class="col-lg-4 justify-content-center">
-            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-              <h2>Produk</h2>
-            </div>
-          </div>
-          <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end">
-            <a href="#add" data-toggle="modal" class="btn btn-edit align-self-center align-self-lg-start">Tambah Produk</a>
+        </div>
+        <div class="col-lg-4 justify-content-center">
+          <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+            <h2>Produk</h2>
           </div>
         </div>
-        
+        <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end">
+          <a href="#add" data-toggle="modal" class="btn btn-edit align-self-center align-self-lg-start">Tambah Produk</a>
+        </div>
+      </div>
 
-        <div class="row portfolio" data-aos="fade-up">
-          
-          <div class="container">
-            <div class="scrollable-container">
 
-              <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-                <div class="card card-block">
-                  <div class="portfolio-wrap">
-                    <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-links">
-                      <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                        class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                      <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-  
-              <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-                <div class="card card-block">
-                  <div class="portfolio-wrap">
-                    <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-links">
-                      <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                        class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                      <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div class="row portfolio" data-aos="fade-up">
 
-              <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-                <div class="card card-block">
-                  <div class="portfolio-wrap">
-                    <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-links">
-                      <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                        class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                      <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
-                    </div>
+        <div class="container">
+          <div class="scrollable-container">
+
+            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
+              <div class="card card-block">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <div class="portfolio-links">
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
                   </div>
                 </div>
               </div>
-  
-              <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-                <div class="card card-block">
-                  <div class="portfolio-wrap">
-                    <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-links">
-                      <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                      <a href="#" data-toggle="modal" data-target="#editModal" title="Edit Produk"><i class="bx bx-pencil edit-icon"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-  
             </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
+              <div class="card card-block">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <div class="portfolio-links">
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
+              <div class="card card-block">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <div class="portfolio-links">
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
+              <div class="card card-block">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <div class="portfolio-links">
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#editModal" title="Edit Produk"><i class="bx bx-pencil edit-icon"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-          
         </div>
 
       </div>
-      <!--End Portfolio Section -->
 
-      <!-- Modal Edit Produk -->
-      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editProduct" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content rounded-0">
-            <div class="modal-body p-4 px-5">
-              
-              <div class="main-content text-center">
-                  
-                  <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true"><span class="icon-close2"></span></span>
-                  </a>
+    </div>
+    <!--End Portfolio Section -->
 
-                  <form action="#">
-                    
-                    <label for="">Edit Nama Produk</label>
-                    <div class="form-group mb-4">
-                      <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
-                    </div>
+    <!-- Modal Edit Produk -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editProduct" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0">
+          <div class="modal-body p-4 px-5">
 
-                    <div class="d-flex">
-                      <div class="mx-auto">
-                      <a href="#" class="btn btn-primary">Edit Produk</a>
-                      </div>
-                    </div>
-                  </form>
-                
-              </div>
+            <div class="main-content text-center">
+
+              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><span class="icon-close2"></span></span>
+              </a>
+
+              <form action="#">
+
+                <label for="">Edit Nama Produk</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
+                </div>
+
+                <div class="d-flex">
+                  <div class="mx-auto">
+                    <a href="#" class="btn btn-primary">Edit Produk</a>
+                  </div>
+                </div>
+              </form>
 
             </div>
+
           </div>
         </div>
-      </div> 
-      <!-- End Modal Edit Produk -->
+      </div>
+    </div>
+    <!-- End Modal Edit Produk -->
 
 
-      <!-- Laporan -->
-      <div class="container mt-5">
-        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Laporan Pendapatan</h2>
+    <!-- Laporan -->
+    <div class="container mt-5">
+      <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+        <h2>Laporan Pendapatan</h2>
+      </div>
+
+      <div class="row px-3 align-items-center">
+        <div class="col-lg-7">
+          <div class="btn-group rounded-pill" role="group" aria-label="Filter buttons">
+            <button type="button" class="btn btn-filter" data-filter="all">All</button>
+            <button type="button" class="btn btn-filter" data-filter="omzet">Omzet</button>
+            <button type="button" class="btn btn-filter" data-filter="pendapatan">Pendapatan</button>
+            <button type="button" class="btn btn-filter" data-filter="pengeluaran">Pengeluaran</button>
+            <button type="button" class="btn btn-filter" data-filter="penjualan">Penjualan</button>
+          </div>
         </div>
 
-        <div class="row px-3 align-items-center">
-          <div class="col-lg-7">
-            <div class="btn-group rounded-pill" role="group" aria-label="Filter buttons">
-              <button type="button" class="btn btn-filter" data-filter="all">All</button>
-              <button type="button" class="btn btn-filter" data-filter="omzet">Omzet</button>
-              <button type="button" class="btn btn-filter" data-filter="pendapatan">Pendapatan</button>
-              <button type="button" class="btn btn-filter" data-filter="pengeluaran">Pengeluaran</button>
-              <button type="button" class="btn btn-filter" data-filter="penjualan">Penjualan</button>
-            </div>
+        <div class="col-lg-2">
+
+          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Start Year
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">2022</a>
+            <a class="dropdown-item" href="#">2023</a>
           </div>
+        </div>
 
-          <div class="col-lg-2">
-          
-            <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Start Year
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">2022</a>
-              <a class="dropdown-item" href="#">2023</a>
-            </div>
-          </div>
+        <div class="col-lg-1">
+          <hr class="my-1" style="width: 20px; margin:auto;">
+        </div>
 
-          <div class="col-lg-1">
-            <hr class="my-1" style="width: 20px; margin:auto;">
-          </div>
+        <div class="col-lg-2">
 
-          <div class="col-lg-2">
-
-            <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              End Year
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">2022</a>
-              <a class="dropdown-item" href="#">2023</a>
-            </div>
-
+          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            End Year
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">2022</a>
+            <a class="dropdown-item" href="#">2023</a>
           </div>
 
         </div>
 
-        <div class="row mt-4 px-3">
-          <div class="col-lg-6 mx-auto grafik-pendapatan">
-            <!-- <h3 class="text-center">Total Pendapatan Tahun 2023</h3> -->
-            <canvas id="chartPendapatan"></canvas>
-          </div>
-          <!-- <div class="col-lg-1">
+      </div>
+
+      <div class="row mt-4 px-3">
+        <div class="col-lg-6 mx-auto grafik-pendapatan">
+          <!-- <h3 class="text-center">Total Pendapatan Tahun 2023</h3> -->
+          <canvas id="chartPendapatan"></canvas>
+        </div>
+        <!-- <div class="col-lg-1">
 
           </div> -->
-          <div class="col-lg-6 mx-auto grafik-pengeluaran">
-            <!-- <h3 class="text-center">Total Pengeluaran Tahun 2023</h3> -->
-            <canvas id="chartPengeluaran"></canvas>
-          </div>
-        </div>
-
-        <div class="row mt-3 px-3">
-          <div class="col-lg-6 mx-auto grafik-omzet">
-            <!-- <h3 class="text-center">Total Omzet Tahun 2023</h3> -->
-            <canvas id="chartOmzet"></canvas>
-          </div>
-          
-          <div class="col-lg-6 mx-auto grafik-penjualan">
-            <!-- <h3 class="text-center">Penjualan Produk</h3> -->
-            <canvas id="chartProduk" ></canvas>
-          </div>
+        <div class="col-lg-6 mx-auto grafik-pengeluaran">
+          <!-- <h3 class="text-center">Total Pengeluaran Tahun 2023</h3> -->
+          <canvas id="chartPengeluaran"></canvas>
         </div>
       </div>
-      <!-- End Laporan -->
 
-      <!-- Tombol Lapor, Ajukan Bantuan, Settings -->
-      <div class="container mt-4">
-        <div class="row px-3 ">
-          <div class="d-grid col-4">
-            <a href="laporPendapatan.php" class="btn btn-primary px-4 py-3">Lapor Pendapatan</a>
-          </div>
-          <div class="d-grid col-4">
-            <a href="bantuan.php" class="btn btn-primary px-4 py-3">Ajukan Bantuan</a>
-          </div>
-          <div class="d-grid col-4">
-            <a href="" class="btn btn-primary px-4 py-3">Settings</a>
-          </div>
+      <div class="row mt-3 px-3">
+        <div class="col-lg-6 mx-auto grafik-omzet">
+          <!-- <h3 class="text-center">Total Omzet Tahun 2023</h3> -->
+          <canvas id="chartOmzet"></canvas>
+        </div>
+
+        <div class="col-lg-6 mx-auto grafik-penjualan">
+          <!-- <h3 class="text-center">Penjualan Produk</h3> -->
+          <canvas id="chartProduk"></canvas>
         </div>
       </div>
-      <!-- End of Tombol Lapor, Ajukan Bantuan, Settings -->
+    </div>
+    <!-- End Laporan -->
+
+    <!-- Tombol Lapor, Ajukan Bantuan, Settings -->
+    <div class="container mt-4">
+      <div class="row px-3 ">
+        <div class="d-grid col-4">
+          <a href="laporPendapatan.php" class="btn btn-primary px-4 py-3">Lapor Pendapatan</a>
+        </div>
+        <div class="d-grid col-4">
+          <a href="bantuan.php" class="btn btn-primary px-4 py-3">Ajukan Bantuan</a>
+        </div>
+        <div class="d-grid col-4">
+          <a href="" class="btn btn-primary px-4 py-3">Settings</a>
+        </div>
+      </div>
+    </div>
+    <!-- End of Tombol Lapor, Ajukan Bantuan, Settings -->
 
     <!-- Modal Tambah Produk -->
     <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addProduct" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
           <div class="modal-body p-4 px-5">
-            
+
             <div class="main-content text-center">
-                
-                <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><span class="icon-close2"></span></span>
-                </a>
 
-                <form action="#">
-                  
-                  <label for="">Nama Produk</label>
-                  <div class="form-group mb-4">
-                    <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
-                  </div>
+              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><span class="icon-close2"></span></span>
+              </a>
 
-                  <label for="">Upload Foto Produk</label>
-                  <div class="form-group mb-4">
-                    <input class="form-control" type="file" id="formulir" name="formulir" required>
-                  </div>
+              <form action="#">
 
-                  <div class="d-flex">
-                    <div class="mx-auto">
+                <label for="">Nama Produk</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
+                </div>
+
+                <label for="">Upload Foto Produk</label>
+                <div class="form-group mb-4">
+                  <input class="form-control" type="file" id="formulir" name="formulir" required>
+                </div>
+
+                <div class="d-flex">
+                  <div class="mx-auto">
                     <a href="#" class="btn btn-primary">Tambah Produk</a>
-                    </div>
                   </div>
-                </form>
-              
+                </div>
+              </form>
+
             </div>
 
           </div>
         </div>
       </div>
-    </div> 
+    </div>
     <!-- End Modal Tambah Produk -->
 
     <!-- Modal Edit Produk -->
@@ -495,33 +497,33 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
           <div class="modal-body p-4 px-5">
-            
+
             <div class="main-content text-center">
-                
-                <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><span class="icon-close2"></span></span>
-                </a>
 
-                <form action="#">
-                  
-                  <label for="">Edit Nama Produk</label>
-                  <div class="form-group mb-4">
-                    <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
-                  </div>
+              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><span class="icon-close2"></span></span>
+              </a>
 
-                  <div class="d-flex">
-                    <div class="mx-auto">
+              <form action="#">
+
+                <label for="">Edit Nama Produk</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
+                </div>
+
+                <div class="d-flex">
+                  <div class="mx-auto">
                     <a href="#" class="btn btn-primary">Edit Produk</a>
-                    </div>
                   </div>
-                </form>
-              
+                </div>
+              </form>
+
             </div>
 
           </div>
         </div>
       </div>
-    </div> 
+    </div>
     <!-- End Modal Edit Produk -->
 
   </main><!-- End #main -->
@@ -546,164 +548,189 @@
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>  
+  <script src="js/main.js"></script>
 
   <!-- Chart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-      <script>
+  <script>
+    const xValues = ["Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15, 10];
 
-        const xValues = ["Januari","Febuari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-        const yValues = [7,8,8,9,9,9,10,11,14,14,15,10];
-
-        new Chart("chartPendapatan", {
-          type: "line",
-          data: {
-            labels: xValues,
-            datasets: [{
-              fill: false,
-              lineTension: 0,
-              backgroundColor: "rgba(0,0,255,1.0)",
-              borderColor: "rgba(0,0,255,0.1)",
-              data: yValues
-            }]
-          },
-          options: {
-            legend: {display: false},
-            scales: {
-              yAxes: [{ticks: {min: 6, max:16}}],
-            },
-            title: {
-              display: true,
-              text: "Total Pendapatan Tahun 2023",
-              fontColor: 'grey',
-              fontSize: 28,
-              font: {
-                    // family: "Raleway",
-                    // weight: 'bold',
-                }
+    new Chart("chartPendapatan", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(0,0,255,1.0)",
+          borderColor: "rgba(0,0,255,0.1)",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 6,
+              max: 16
             }
+          }],
+        },
+        title: {
+          display: true,
+          text: "Total Pendapatan Tahun 2023",
+          fontColor: 'grey',
+          fontSize: 28,
+          font: {
+            // family: "Raleway",
+            // weight: 'bold',
           }
-        });
+        }
+      }
+    });
 
-        const xValues2 = ["Januari","Febuari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-        const yValues2 = [8,9,14,9,9,10,7,8,10,11,14,15];
+    const xValues2 = ["Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const yValues2 = [8, 9, 14, 9, 9, 10, 7, 8, 10, 11, 14, 15];
 
-        new Chart("chartPengeluaran", {
-          type: "line",
-          data: {
-            labels: xValues2,
-            datasets: [{
-              fill: false,
-              lineTension: 0,
-              backgroundColor: "rgba(178,34,33,1.0)",
-              borderColor: "rgba(178,34,33,0.1)",
-              data: yValues2
-            }]
-          },
-          options: {
-            legend: {display: false},
-            scales: {
-              yAxes: [{ticks: {min: 6, max:16}}],
-            },
-            title: {
-              display: true,
-              text: "Total Pengeluaran Tahun 2023",
-              fontColor: 'grey',
-              fontSize: 28,
-              font: {
-                    // family: "Raleway",
-                    // weight: 'bold',
-                }
+    new Chart("chartPengeluaran", {
+      type: "line",
+      data: {
+        labels: xValues2,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(178,34,33,1.0)",
+          borderColor: "rgba(178,34,33,0.1)",
+          data: yValues2
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 6,
+              max: 16
             }
+          }],
+        },
+        title: {
+          display: true,
+          text: "Total Pengeluaran Tahun 2023",
+          fontColor: 'grey',
+          fontSize: 28,
+          font: {
+            // family: "Raleway",
+            // weight: 'bold',
           }
-        });
+        }
+      }
+    });
 
-        const xValues3 = ["Januari","Febuari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-        const yValues3 = [10,12,11,9,10,14,13,11,14,14,15,12];
+    const xValues3 = ["Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const yValues3 = [10, 12, 11, 9, 10, 14, 13, 11, 14, 14, 15, 12];
 
-        new Chart("chartOmzet", {
-          type: "line",
-          data: {
-            labels: xValues3,
-            datasets: [{
-              fill: false,
-              lineTension: 0,
-              backgroundColor: "rgba(138, 43, 226,1.0)",
-              borderColor: "rgba(138, 43, 226,0.1)",
-              data: yValues3
-            }]
-          },
-          options: {
-            legend: {display: false},
-            scales: {
-              yAxes: [{ticks: {min: 6, max:16}}],
-            },
-            title: {
-              display: true,
-              text: "Total Omzet Tahun 2023",
-              fontColor: 'grey',
-              fontSize: 28,
-              font: {
-                    // family: "Raleway",
-                    // weight: 'bold',
-                }
+    new Chart("chartOmzet", {
+      type: "line",
+      data: {
+        labels: xValues3,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(138, 43, 226,1.0)",
+          borderColor: "rgba(138, 43, 226,0.1)",
+          data: yValues3
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 6,
+              max: 16
             }
+          }],
+        },
+        title: {
+          display: true,
+          text: "Total Omzet Tahun 2023",
+          fontColor: 'grey',
+          fontSize: 28,
+          font: {
+            // family: "Raleway",
+            // weight: 'bold',
           }
-        });
+        }
+      }
+    });
 
-        const xValues4 = ["Buku", "Tas", "Baju", "Pensil", "Jepit"];
-        const yValues4 = [55, 49, 44, 24, 15];
-        const barColors = [
-          "#b91d47",
-          "#00aba9",
-          "#2b5797",
-          "#e8c3b9",
-          "#1e7145"
-        ];
+    const xValues4 = ["Buku", "Tas", "Baju", "Pensil", "Jepit"];
+    const yValues4 = [55, 49, 44, 24, 15];
+    const barColors = [
+      "#b91d47",
+      "#00aba9",
+      "#2b5797",
+      "#e8c3b9",
+      "#1e7145"
+    ];
 
-        new Chart("chartProduk", {
-          type: "pie",
-          data: {
-            labels: xValues4,
-            datasets: [{
-              backgroundColor: barColors,
-              data: yValues4
-            }]
-          },
-          options: {
-            title: {
-              display: true,
-              text: "Top 5 Penjualan Produk Tahun 2023",
-              fontColor: 'grey',
-              fontSize: 28,
-              font: {
-                    // family: "Raleway",
-                    // weight: 'bold',
-                }
-            }
+    new Chart("chartProduk", {
+      type: "pie",
+      data: {
+        labels: xValues4,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues4
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Top 5 Penjualan Produk Tahun 2023",
+          fontColor: 'grey',
+          fontSize: 28,
+          font: {
+            // family: "Raleway",
+            // weight: 'bold',
           }
-        });
+        }
+      }
+    });
 
-        $(document).ready(function () {
+    $(document).ready(function() {
+      $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
+
+      $('.btn-filter').click(function() {
+        $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
+        $('canvas').css({
+          'width': '',
+          'height': ''
+        });
+        var filter = $(this).data('filter');
+
+        if (filter !== 'all') {
+          $('.grafik-' + filter).show();
+          $('.grafik-' + filter + ' canvas').css({
+            'width': '800px',
+            'height': '400px'
+          }); // Adjust the width and height as needed
+        } else {
           $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
-
-          $('.btn-filter').click(function () {
-            $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
-            $('canvas').css({'width': '', 'height': ''});
-            var filter = $(this).data('filter');
-
-            if (filter !== 'all') {
-              $('.grafik-' + filter).show();
-              $('.grafik-' + filter + ' canvas').css({'width': '800px', 'height': '400px'}); // Adjust the width and height as needed
-            } else {
-              $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
-            }
-          });
-        });
-        
-      </script>
+        }
+      });
+    });
+  </script>
 
 </body>
 
