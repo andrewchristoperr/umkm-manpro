@@ -83,9 +83,9 @@ require "connect.php";
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- JQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Sweet Alert -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+  <!-- Sweet Alert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 
   <style>
     #footer {
@@ -304,53 +304,60 @@ require "connect.php";
       </div>
     </div>
   </footer>End Footer -->
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+        <!-- Vendor JS Files -->
+        <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+        <script src="assets/vendor/aos/aos.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#submit').on('click', function() {
-        var formulir = $('#formulir').val();
-        var surat_pengantar = $('#surat_pengantar').val();
-        var ktp = $('#ktp').val();
-        var npwp = $('#npwp').val();
+        <!-- Template Main JS File -->
+        <script src="assets/js/main.js"></script>
+        <script>
+          $(document).ready(function() {
+            $('#submit').on('click', function() {
+              var formulir = $('#formulir').val();
+              var surat_pengantar = $('#surat_pengantar').val();
+              var ktp = $('#ktp').val();
+              var npwp = $('#npwp').val();
 
-        if (formulir != '' && surat_pengantar != '' && ktp != '' && npwp != '') {
-          $.ajax({
-            url: 'forms/form_berkas.php',
-            method: 'POST',
-            data: {
-              formulir: formulir,
-              surat_pengantar: surat_pengantar,
-              ktp: ktp,
-              npwp: npwp,
-            },
-            success: function(result) {
-              if (result == 1) {
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Success',
-                  text: 'Submit Success!'
+              if (formulir != '' && surat_pengantar != '' && ktp != '' && npwp != '') {
+                $.ajax({
+                  url: 'forms/form_berkas.php',
+                  method: 'POST',
+                  data: {
+                    formulir: formulir,
+                    surat_pengantar: surat_pengantar,
+                    ktp: ktp,
+                    npwp: npwp,
+                  },
+                  success: function(result) {
+                    if (result == 1) {
+                      alert('Register berhasil!');
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Submit Success!'
+                      });
+                    }
+
+                  }
                 })
+              } 
+              else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Mohon Lengkapi Data!'
+                });
               }
-            }
+            })
           })
-        } else {
-          alert('Mohon lengkapi data');
-        }
-      })
-    })
-  </script>
+        </script>
 </body>
 
 

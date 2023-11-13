@@ -14,15 +14,16 @@ $_SESSION['foto_umkm'] = $_POST['foto_umkm'];
 $_SESSION['kategori_umkm'] = $_POST['kategori_umkm'];
 $_SESSION['deskripsi_umkm'] = $_POST['deskripsi_umkm'];
 
-$username = $_SESSION['username'];
-$select = "SELECT username FROM umkmm WHERE username = '$username'";
-$select = $conn->query($select);
-if($select->rowCount() > 0)
-{
-    $result = 2;
-}
-else{
-    $result = 1; 
-}
+// $username = $_SESSION['username'];
+// $select = "SELECT username FROM umkmm WHERE username = '$username'";
+// $select = $conn->query($select);
+// if($select->rowCount() > 0)
+// {
+//     $result = 2;
+// }
+// else{
+//     $result = 1; 
+// }
 
+$result = 1;
 echo $result;
