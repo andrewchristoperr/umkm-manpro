@@ -164,16 +164,14 @@ if (isset($_SESSION['kategori'])) {
       <div class="container">
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Syarat dan Ketentuan</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Duis aute irure dolor in reprehenderit.</p>
         </div>
 
         <div class="row justify-content-center">
           <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Data Diri</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <h4 class="title"><a href="">Data UMKM</a></h4>
+              <p class="description">Masukkan data UMKM seperti nama, alamat, bidang UMKM, dan lokasi kecamatan</p>
             </div>
           </div>
 
@@ -181,7 +179,7 @@ if (isset($_SESSION['kategori'])) {
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="bx bx-file"></i></div>
               <h4 class="title"><a href="">Berkas</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              <p class="description">Lengkapi data dengan Formulir IUPP, Surat Pengantar RT/RW,KTP Pemilik UMKM, NPWP</p>
             </div>
           </div>
 
@@ -189,7 +187,7 @@ if (isset($_SESSION['kategori'])) {
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
               <div class="icon"><i class="bx bx-tachometer"></i></div>
               <h4 class="title"><a href="">Verifikasi</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              <p class="description">Setelah menyelesaikan pengunggahan berkas, cek secara berkala status verifikasi UMKM Anda</p>
             </div>
           </div>
 
@@ -309,14 +307,12 @@ if (isset($_SESSION['kategori'])) {
     </section><!--End Portfolio Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials section-bg">
+    <!-- <section id="testimonials" class="testimonials section-bg">
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Testimonials</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-            consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
-            in iste officiis commodi quidem hic quas.</p>
+          <p>Berikut berbagai testimoni dari para pelanggan UMKM 🎉</p>
         </div>
 
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -334,8 +330,9 @@ if (isset($_SESSION['kategori'])) {
                 <h3>Saul Goodman</h3>
                 <h4>Ceo &amp; Founder</h4>
               </div>
-            </div><!-- End testimonial item -->
-
+            </div>
+            End testimonial item -->
+<!-- 
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
@@ -348,8 +345,8 @@ if (isset($_SESSION['kategori'])) {
                 <h3>Sara Wilsson</h3>
                 <h4>Designer</h4>
               </div>
-            </div><!-- End testimonial item -->
-
+            </div>End testimonial item -->
+<!-- 
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
@@ -362,9 +359,9 @@ if (isset($_SESSION['kategori'])) {
                 <h3>Jena Karlis</h3>
                 <h4>Store Owner</h4>
               </div>
-            </div><!-- End testimonial item -->
+            </div>End testimonial item -->
 
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -376,9 +373,9 @@ if (isset($_SESSION['kategori'])) {
                 <h3>Matt Brandon</h3>
                 <h4>Freelancer</h4>
               </div>
-            </div><!-- End testimonial item -->
+            </div>End testimonial item -->
 
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -390,14 +387,14 @@ if (isset($_SESSION['kategori'])) {
                 <h3>John Larson</h3>
                 <h4>Entrepreneur</h4>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
           </div>
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
-    </section>
+    </section> -->
     <!-- End Testimonials Section -->
 
     <!-- ======= Team Section ======= -->
@@ -469,10 +466,7 @@ if (isset($_SESSION['kategori'])) {
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Contact</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-            consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
-            in iste officiis commodi quidem hic quas.</p>
+          <h2>Kontak</h2>
         </div>
 
         <div class="row">
