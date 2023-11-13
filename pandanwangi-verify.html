@@ -86,10 +86,58 @@
 
                 <div class="mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up">
-                        <div class="icon"><img src="assets/img/umkm/pandan wangi.jpg" style="float:center; width: 100%"></div>
-                        <h4 class="title"><a href="">Pandan Wangi</a></h4>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
-                            excepturi</p>
+                        <div class="icon"><img src="assets/img/umkm/umkm1.jpg" style="float:center; width: 100%">
+                        </div>
+                        <p class="description">Nama UMKM</p>
+                        <h4 class="title"><a>Pandan Wangi</a></h4>
+                        <p class="description">Nomor Telepon UMKM</p>
+                        <h4 class="title"><a>081234567890</a></h4>
+                        <p class="description">Alamat UMKM</p>
+                        <h4 class="title"><a>Jl. Siwalankerto No. 161A</a></h4>
+                        <p class="description">Kecamatan</p>
+                        <h4 class="title"><a>Wonocolo</a></h4>
+                        <p class="description">Kategori UMKM</p>
+                        <h4 class="title"><a>Fashion</a></h4>
+                        <p class="description">Deskripsi</p>
+                        <h4 class="title"><a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut
+                                labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit.</a></h4>
+
+                        <!-- <div class="container">
+                            <br>
+                            <div class="row">
+                                <ol class="breadcrumb" style="box-shadow: 2px 2px 8px #888888;">
+                                    <p>
+                                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;Dokumen Detail</h4>
+                                    </p>
+                                </ol>
+                            </div>
+                            <?php
+                                    $koneksi = mysqli_connect("localhost","root","","umkm_permits_licensing");
+                        
+                                    $id_dokumen = $_GET['id'];
+                                    $data = mysqli_query($koneksi, "SELECT ktp FROM umkmm WHERE id='$id'");
+                                            
+                                    while ($b = mysqli_fetch_array($data)){
+                                        ?>
+                            <object data="./documents/<?php echo $b['file']?>" width="100%" height="1000px"
+                                style="border: 1px solid; box-shadow: 2px 2px 8px #000000;"></object>
+
+                            <?php
+                                        }
+                                        ?> -->
+                        </div>
+
+                        <div id="accept" class="accept">
+                            <div class="row frosted m-5 align-items-center">
+                                <div class="justify-content-center align-items-center">
+                                    <a class="p-lg-5" href="documents/Smart_Thinking_Skills.pdf"><button id="acceptBtn">Formulir</button></a>
+                                    <a class="p-lg-5" href="documents/Smart_Thinking_Skills.pdf"><button id="acceptBtn">Surat Pengantar</button></a>
+                                    <a class="p-lg-5" href="documents/Smart_Thinking_Skills.pdf"><button id="acceptBtn">KTP</button></a>
+                                    <a class="p-lg-5" href="documents/Smart_Thinking_Skills.pdf"><button id="acceptBtn">NPWP</button></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
