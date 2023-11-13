@@ -1647,3 +1647,48 @@ h3 {
 
 
 }
+
+#accept button {
+  font-size: 1.25em;
+  box-shadow: 5px 5px 5px #333;
+  border: 0;
+}
+
+/* Modifikasi Button */
+
+#acceptBtn {
+  width: 9em;
+  height: 2.25em;
+  border-radius: 30pt;
+  font-size: 15px;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: .5s ease;
+}
+
+#acceptBtn::before {
+  content: '';
+  width: 0;
+  height: 2.25em;
+  border-radius: 30pt;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #67b0d1 0%, #fff 100%);
+  color: #fff;
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+}
+
+#acceptBtn:hover::before {
+  width: 9em;
+
+}
+
+#acceptBtn:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
