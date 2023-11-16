@@ -23,7 +23,6 @@ $surat_pengantar = $_SESSION['surat_pengantar'];
 $ktp = $_SESSION['ktp'];
 $npwp = $_SESSION['npwp'];
 
-
 $insert = "INSERT INTO umkmm (username, email, password, nama_umkm, notelp_umkm, alamat_umkm, kecamatan, foto_umkm, kategori_umkm, deskripsi_umkm, formulir, surat_pengantar, ktp, npwp) 
           VALUES ('$username', '$email', '$password', '$nama_umkm', '$notelp_umkm', '$alamat_umkm', '$kecamatan', '$foto_umkm', '$kategori_umkm', '$deskripsi_umkm', '$formulir', '$surat_pengantar', '$ktp', '$npwp')";
 $insert = $conn->query($insert);
@@ -32,3 +31,5 @@ $result = 1;
 echo $result;
 
 session_destroy();
+
+?>

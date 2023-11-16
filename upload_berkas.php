@@ -1,55 +1,6 @@
 <?php
 session_start();
 require "connect.php";
-// $username = $_SESSION['username'];
-// $nama_umkm = $_SESSION['nama_umkm'];
-// $notelp_umkm = $_SESSION['notelp_umkm'];
-// $alamat_umkm = $_SESSION['alamat_umkm'];
-// $kecamatan = $_SESSION['kecamatan'];
-// $foto_umkm = $_SESSION['foto_umkm'];
-// $kategori_umkm = $_SESSION['kategori_umkm'];
-// $deskripsi_umkm = $_SESSION['deskripsi_umkm'];
-
-// if (isset($_POST['submit'])) {
-//     if (isset($_POST['formulir'])) {
-//         $formulir = $_POST['formulir'];
-//         if (isset($_POST['surat_pengantar'])) {
-//             $surat_pengantar = $_POST['surat_pengantar'];
-//             if (isset($_POST['ktp'])) {
-//                 $ktp = $_POST['ktp'];
-//                 if (isset($_POST['npwp'])) {
-//                     $npwp = $_POST['npwp'];
-//                     $query = "INSERT INTO umkm (owner_user_id, nama_umkm, notelp_umkm, alamat_umkm, kecamatan, foto_umkm, kategori_umkm, deskripsi_produk, formulir, surat_pengantar, ktp, npwp) VALUES ('$username', '$nama_umkm', '$notelp_umkm', '$alamat_umkm', '$kecamatan', '$foto_umkm', '$kategori_umkm', '$deskripsi_umkm', '$formulir', '$surat_pengantar', '$ktp', '$npwp')";
-//                     $result = $conn->query($query);
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// if (isset($_SESSION['formulir'])) {
-//   $formulir = $_SESSION['formulir'];
-// } else {
-//   $formulir = '';
-// }
-
-// if (isset($_SESSION['nama_umkm'])) {
-//   $nama_umkm = $_SESSION['nama_umkm'];
-// } else {
-//   $nama_umkm = '';
-// }
-
-// if (isset($_SESSION['surat_pengantar'])) {
-//   $surat_pengantar = $_SESSION['surat_pengantar'];
-// } else {
-//   $surat_pengantar = '';
-// }
-
-// if (isset($_SESSION['ktp'])) {
-//   $ktp = $_SESSION['ktp'];
-// } else {
-//   $alamat_umkm = '';
-// }
 ?>
 
 <!DOCTYPE html>
@@ -320,6 +271,7 @@ require "connect.php";
         <script>
           $(document).ready(function() {
             $('#submit').on('click', function() {
+              // event.preventDefault();
               var formulir = $('#formulir').val();
               var surat_pengantar = $('#surat_pengantar').val();
               var ktp = $('#ktp').val();
@@ -337,12 +289,14 @@ require "connect.php";
                   },
                   success: function(result) {
                     if (result == 1) {
-                      alert('Register berhasil!');
+                      // alert('Register berhasil!');
                       Swal.fire({
                         icon: 'success',
                         title: 'Success',
                         text: 'Submit Success!'
                       });
+                      
+                      window.location.href = "index.php";
                     }
 
                   }

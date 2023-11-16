@@ -488,7 +488,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
 
         $(document).ready(function() {
             $('#next').on('click', function() {
-                // event.preventDefault();
+                event.preventDefault();
                 var username = $('#username').val();
                 var email = $('#email').val();
                 var password = $('#password').val();
@@ -525,10 +525,11 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                     })
                 } 
                 else {
-                    alert("Mohon Lengkapi Data!");
+                    // alert("Mohon Lengkapi Data!");
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
+                        timer: 10000,
                         text: 'Mohon Lengkapi Data!'
                     });
 

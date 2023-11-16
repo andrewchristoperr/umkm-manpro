@@ -27,3 +27,5 @@ $_SESSION['deskripsi_umkm'] = $_POST['deskripsi_umkm'];
 
 $result = 1;
 echo $result;
+
+?>
