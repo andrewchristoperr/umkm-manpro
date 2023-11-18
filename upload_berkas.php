@@ -101,33 +101,7 @@ require "connect.php";
 </head>
 
 <body>
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between position-relative">
-
-      <div class="logo">
-        <h1 class="text-light"><a href="index.html"><span>UMKMANJALITA</span></a></h1>
-      </div>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto" href="index.html">Home</a></li>
-          <li><a class="nav-link scrollto" href="#">Favourite</a></li>
-          <li><a class="nav-link scrollto" href="profile.html">Account</a></li>
-          <li>
-            <div class="box">
-              <div class="container-4">
-                <input type="search" id="search" placeholder="Search..." />
-                <button class="icon"><i class="fa fa-search"></i></button>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
-
+  <?php include 'template/header.php' ?>
   <main id="main">
     <!-- ======= About Section ======= -->
     <section id="about" class="pasar d-flex justify-content-center">
@@ -270,8 +244,54 @@ require "connect.php";
         <script src="assets/js/main.js"></script>
         <script>
           $(document).ready(function() {
+            // $('#submit').on('click', function() {
+            //   event.preventDefault();
+
+            //   var formulir = $('#formulir').val();
+            //   var surat_pengantar = $('#surat_pengantar').val();
+            //   var ktp = $('#ktp').val();
+            //   var npwp = $('#npwp').val();
+
+            //   let formData = new FormData();
+            //   formData.append('formulir', $('#formulir').prop('files')[0]);
+            //   formData.append('surat_pengantar', $('#surat_pengantar').prop('files')[0]);
+            //   formData.append('ktp', $('#ktp').prop('files')[0]);
+            //   formData.append('npwp', $('#npwp').prop('files')[0]);
+
+            //   if (formulir != '' && surat_pengantar != '' && ktp != '' && npwp != '') {
+            //     $.ajax({
+            //       url: 'forms/form_berkas.php',
+            //       method: 'POST',
+            //       data: formData,
+            //       success: function(result) {
+            //         res = JSON.parse(resut);
+            //         if (res.status = 'success') {
+            //           Swal.fire({
+            //             icon: 'success',
+            //             title: 'Success',
+            //             text: res.msg
+            //           });
+            //           window.location.href = "index.php";
+            //         } else {
+            //           Swal.fire({
+            //             icon: 'error',
+            //             title: 'Error',
+            //             text: 'Error!'
+            //           });
+            //         }
+            //       }
+            //     })
+            //   } else {
+            //     Swal.fire({
+            //       icon: 'error',
+            //       title: 'Error',
+            //       text: 'Mohon Lengkapi Data!'
+            //     });
+            //   }
+            // })
             $('#submit').on('click', function() {
-              // event.preventDefault();
+              event.preventDefault();
+
               var formulir = $('#formulir').val();
               var surat_pengantar = $('#surat_pengantar').val();
               var ktp = $('#ktp').val();
@@ -282,27 +302,30 @@ require "connect.php";
                   url: 'forms/form_berkas.php',
                   method: 'POST',
                   data: {
-                    formulir: formulir,
-                    surat_pengantar: surat_pengantar,
-                    ktp: ktp,
-                    npwp: npwp,
+                      formulir: formulir,
+                      surat_pengantar: surat_pengantar,
+                      ktp: ktp,
+                      npwp: npwp
                   },
                   success: function(result) {
-                    if (result == 1) {
-                      // alert('Register berhasil!');
+                    res = JSON.parse(result);
+                    if (res.status = 'success') {
                       Swal.fire({
                         icon: 'success',
                         title: 'Success',
-                        text: 'Submit Success!'
+                        text: res.msg
                       });
-                      
                       window.location.href = "index.php";
+                    } else {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Error!'
+                      });
                     }
-
                   }
                 })
-              } 
-              else {
+              } else {
                 Swal.fire({
                   icon: 'error',
                   title: 'Error',

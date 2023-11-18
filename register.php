@@ -42,7 +42,8 @@ if (isset($_SESSION['kecamatan'])) {
     $kecamatan = '';
 }
 
-if (isset($_SESSION['foto_umkm'])) {
+if (isset($_SESSION['nama_foto_umkm'])) {
+    // $foto_umkm = $_SESSION['nama_foto_umkm'];
     $foto_umkm = $_SESSION['foto_umkm'];
 } else {
     $foto_umkm = '';
@@ -90,17 +91,12 @@ if (isset($_SESSION['deskripsi_umkm'])) {
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         #footer {
             position: relative;
@@ -173,7 +169,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
 </head>
 
 <body>
-<?php include "template/header.php"; ?>
+    <?php include "template/header.php"; ?>
 
     <main id="main">
         <!-- ======= About Section ======= -->
@@ -193,13 +189,13 @@ if (isset($_SESSION['deskripsi_umkm'])) {
 
                                         <?php if (isset($_SESSION['username'])) {
                                             echo '<div class="input-group has-validation">
-                                                    <input class="form-control" type="email" id="username" name="username" required value="' . $username . '">
+                                                    <input class="form-control" type="text" id="username" name="username" required value="' . $username . '">
                                                 </div>
                                                 <div id="validation-txt-username">
                                                 </div>';
                                         } else {
                                             echo '<div class="input-group has-validation">
-                                                    <input class="form-control" type="email" id="username" name="username" required value="">
+                                                    <input class="form-control" type="text" id="username" name="username" required value="">
                                                 </div>
                                                 <div id="validation-txt-username">
                                                 </div>';
@@ -252,9 +248,9 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Nomor Telp / WA</label>
                                         <?php if (isset($_SESSION['notelp_umkm'])) {
-                                            echo "<input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value='$notelp_umkm'>";
+                                            echo "<input class='form-control' type='tel' id='notelp_umkm' name='notelp_umkm' required value='$notelp_umkm'>";
                                         } else {
-                                            echo "<input class='form-control' type='text' id='notelp_umkm' name='notelp_umkm' required value=''>";
+                                            echo "<input class='form-control' type='tel' id='notelp_umkm' name='notelp_umkm' required value=''>";
                                         }
                                         ?>
                                     </div>
@@ -348,12 +344,14 @@ if (isset($_SESSION['deskripsi_umkm'])) {
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Foto UMKM</label>
+
                                         <?php if (isset($_SESSION['foto_umkm'])) {
                                             echo "<input class='form-control' type='file' id='foto_umkm' name='foto_umkm' required value='$foto_umkm'>";
                                         } else {
-                                            echo "<input class='form-control' type='file' id='foto_umkm' name='foto_umkm' required value=''>";
+                                            echo "<input class='form-control' type='file' id='foto_umkm' name='foto_umkm' required>";
                                         }
                                         ?>
+
                                     </div>
 
                                     <div class="mb-4">
@@ -489,8 +487,8 @@ if (isset($_SESSION['deskripsi_umkm'])) {
         $(document).ready(function() {
             $('#next').on('click', function() {
                 event.preventDefault();
-                let foto_umkm = new FormData();
-                foto_umkm.append('foto_umkm',$('#foto_umkm').prop('files')[0])
+                // let foto_umkm = new FormData();
+                // foto_umkm.append('foto_umkm', $('#foto_umkm').prop('files')[0]);
                 var username = $('#username').val();
                 var email = $('#email').val();
                 var password = $('#password').val();
@@ -514,19 +512,11 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                             notelp_umkm: notelp_umkm,
                             alamat_umkm: alamat_umkm,
                             kecamatan: kecamatan,
-                            foto_umkm: foto_umkm,
                             kategori_umkm: kategori_umkm,
                             deskripsi_umkm: deskripsi_umkm
                         },
-                        success: function(result) {
-                            if (result == 1) {
-                                window.location.href = "upload_berkas.php";
-                                // history.replaceState({},"upload_berkas.php");
-                            }
-                        }
                     })
-                } 
-                else {
+                } else {
                     // alert("Mohon Lengkapi Data!");
                     Swal.fire({
                         icon: 'error',
@@ -538,6 +528,41 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                 }
             })
         })
+
+        $(document).ready(function() {
+            $('#next').on('click', function() {
+                event.preventDefault();
+                let foto_umkm = new FormData();
+                foto_umkm.append('foto_umkm', $('#foto_umkm').prop('files')[0]);
+
+                if (foto_umkm != null) {
+                    $.ajax({
+                        url: 'forms/form_register_foto.php',
+                        method: 'POST',
+                        cache: false,
+                        contentType: false,
+                        data: foto_umkm,
+                        processData: false,
+                        success: function(result) {
+                            res = JSON.parse(result);
+                            // alert(res.status);
+                            if (res.status = 'success') {
+                                window.location.href = "upload_berkas.php";
+                                // history.replaceState({},"upload_berkas.php");
+                            }
+                        }
+                    })
+                } else {
+                    // alert("Mohon Lengkapi Data!");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        timer: 10000,
+                        text: 'Mohon Lengkapi Data!'
+                    });
+                }
+            });
+        });
     </script>
 
 </body>

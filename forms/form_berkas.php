@@ -3,6 +3,11 @@ require '../connect.php';
 
 session_start();
 
+// $_SESSION['formulir'] = addslashes(file_get_contents($_FILES['formulir']['tmp_name']));
+// $_SESSION['surat_pengantar'] =addslashes(file_get_contents( $_FILES['surat_pengantar']['tmp_name']));
+// $_SESSION['ktp'] = addslashes(file_get_contents($_FILES['ktp']['tmp_name']));
+// $_SESSION['npwp'] = addslashes(file_get_contents($_FILES['npwp']['tmp_name'])); 
+
 $_SESSION['formulir'] = $_POST['formulir'];
 $_SESSION['surat_pengantar'] = $_POST['surat_pengantar'];
 $_SESSION['ktp'] = $_POST['ktp'];
@@ -14,7 +19,7 @@ $password = $_SESSION['password'];
 $nama_umkm = $_SESSION['nama_umkm'];
 $notelp_umkm = $_SESSION['notelp_umkm'];
 $alamat_umkm = $_SESSION['alamat_umkm'];
-$kecamatan = $_SESSION['kecamatam'];
+$kecamatan = $_SESSION['kecamatan'];
 $foto_umkm = $_SESSION['foto_umkm'];
 $kategori_umkm = $_SESSION['kategori_umkm'];
 $deskripsi_umkm = $_SESSION['deskripsi_umkm'];
@@ -27,9 +32,7 @@ $insert = "INSERT INTO umkmm (username, email, password, nama_umkm, notelp_umkm,
           VALUES ('$username', '$email', '$password', '$nama_umkm', '$notelp_umkm', '$alamat_umkm', '$kecamatan', '$foto_umkm', '$kategori_umkm', '$deskripsi_umkm', '$formulir', '$surat_pengantar', '$ktp', '$npwp')";
 $insert = $conn->query($insert);
 
-$result = 1;
-echo $result;
-
+echo json_encode(['status' => 'success', 'msg' => 'Berhasil Submit!']);
 session_destroy();
 
 ?>
