@@ -489,6 +489,8 @@ if (isset($_SESSION['deskripsi_umkm'])) {
         $(document).ready(function() {
             $('#next').on('click', function() {
                 event.preventDefault();
+                let foto_umkm = new FormData();
+                foto_umkm.append('foto_umkm',$('#foto_umkm').prop('files')[0])
                 var username = $('#username').val();
                 var email = $('#email').val();
                 var password = $('#password').val();
@@ -496,7 +498,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                 var notelp_umkm = $('#notelp_umkm').val();
                 var alamat_umkm = $('#alamat_umkm').val();
                 var kecamatan = $('#kecamatan').val();
-                var foto_umkm = $('#foto_umkm').val();
+                // var foto_umkm = $('#foto_umkm').val();
                 var kategori_umkm = $('#kategori_umkm').val();
                 var deskripsi_umkm = $('#deskripsi_umkm').val();
 
