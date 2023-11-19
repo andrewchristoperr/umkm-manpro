@@ -212,7 +212,7 @@
 
           <div class="col-lg-4 col-nama d-flex align-items-center">
             <h3 class="profil-nama">
-              Hi, Budi!
+              Pandan Wangi
             </h3>
           </div>
 

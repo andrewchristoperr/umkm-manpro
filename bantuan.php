@@ -118,8 +118,8 @@
                             <form class="row d-flex justify-content-center" action="#" method="post">
                                 <div class="col-md-10">
                                     <div class="mb-4">
-                                        <label for="formFile" class="form-label">Tujuan Permintaan Bantuan</label>
-                                        <input class="form-control" type="text" id="tujuanBantuan" name="tujuanBantuan" required>
+                                        <label for="formFile" class="form-label">Alasan Permintaan Bantuan</label>
+                                        <input class="form-control" type="text" id="tujuanBantuan" name="tujuanBantuan" required >
                                     </div>
 
                                     <div class="mb-4">
