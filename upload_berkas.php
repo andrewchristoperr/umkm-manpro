@@ -336,7 +336,4 @@ require "connect.php";
           })
         </script>
 </body>
-
-
-
 </html>

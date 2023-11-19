@@ -14,9 +14,7 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -27,176 +25,174 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <<<<<<< HEAD <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
-    =======
-    <link href="assets/css/style.css" rel="stylesheet">
-    >>>>>>> f64c8d2cdf56b4f741f301b2a213f6184288c6f1
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
 
-    <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Sweet Alert -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+  <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
 
-    <style>
-      .scrollable-container {
-        display: flex;
-        overflow-x: auto;
-        white-space: nowrap;
-        scrollbar-width: thin;
-        scrollbar-color: #333 #eee;
-      }
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-      .scrollable-container::-webkit-scrollbar {
-        width: 6px;
-      }
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Sweet Alert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 
-      .scrollable-container::-webkit-scrollbar-thumb {
-        background-color: #263f49;
-      }
+  <style>
+    .scrollable-container {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+      scrollbar-color: #333 #eee;
+    }
 
-      .scrollable-container::-webkit-scrollbar-track {
-        background-color: #eee;
-      }
+    .scrollable-container::-webkit-scrollbar {
+      width: 6px;
+    }
 
-      .profil-img {
-        max-width: 100%;
-        max-height: 100%;
-        border-radius: 50%;
-      }
+    .scrollable-container::-webkit-scrollbar-thumb {
+      background-color: #263f49;
+    }
 
-      .col-nama h3 {
-        justify-content: center;
-      }
+    .scrollable-container::-webkit-scrollbar-track {
+      background-color: #eee;
+    }
 
-      .profil-nama {
-        display: flex;
-        align-items: center;
-        height: 120px;
-        font-size: 30px;
-      }
+    .profil-img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 50%;
+    }
 
-      .btn {
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        display: inline-block;
-        background: #67b0d1;
-        border-color: #67b0d1;
-        color: #fff;
-        border-radius: 50px;
-        text-decoration: none;
-      }
+    .col-nama h3 {
+      justify-content: center;
+    }
 
-      .text-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        justify-content: center;
-        padding: 20px;
-      }
+    .profil-nama {
+      display: flex;
+      align-items: center;
+      height: 120px;
+      font-size: 30px;
+    }
 
-      .card {
-        width: 400px;
-        height: 270px;
-        max-width: 100%;
-      }
+    .btn {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      display: inline-block;
+      background: #67b0d1;
+      border-color: #67b0d1;
+      color: #fff;
+      border-radius: 50px;
+      text-decoration: none;
+    }
 
-      .card-addnew {
-        background-color: #fff;
-        justify-content: center;
-        color: #333;
-      }
+    .text-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      justify-content: center;
+      padding: 20px;
+    }
 
-      .card-addnew:hover {
-        background-color: #67b0d1;
-        color: #eee;
-      }
+    .card {
+      width: 400px;
+      height: 270px;
+      max-width: 100%;
+    }
 
-      #footer {
-        position: relative;
-      }
+    .card-addnew {
+      background-color: #fff;
+      justify-content: center;
+      color: #333;
+    }
 
-      #main {
-        margin-bottom: 100px;
-      }
+    .card-addnew:hover {
+      background-color: #67b0d1;
+      color: #eee;
+    }
 
-      .col-edit {
-        align-items: center;
-      }
+    #footer {
+      position: relative;
+    }
 
-      .btn-edit {
-        background-color: transparent;
-        border: 3px solid #67b0d1;
-        color: #67b0d1;
-      }
+    #main {
+      margin-bottom: 100px;
+    }
 
-      .btn-edit:hover {
-        background-color: #67b0d1;
-        color: #eee;
-      }
+    .col-edit {
+      align-items: center;
+    }
 
-      .umkm-info {
-        padding: 30px;
-        padding-bottom: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0px 0 30px rgba(47, 77, 90, 0.08);
-      }
+    .btn-edit {
+      background-color: transparent;
+      border: 3px solid #67b0d1;
+      color: #67b0d1;
+    }
 
-      .umkm-info h3 {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #eee;
-      }
+    .btn-edit:hover {
+      background-color: #67b0d1;
+      color: #eee;
+    }
 
-      .umkm-info ul {
-        list-style: none;
-        padding: 0;
-        font-size: 15px;
-      }
+    .umkm-info {
+      padding: 30px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0px 0 30px rgba(47, 77, 90, 0.08);
+    }
 
-      #chartPendapatan,
-      #chartPengeluaran,
-      #chartOmzet,
-      #chartProduk {
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        border-radius: 10px;
-      }
+    .umkm-info h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
 
-      canvas {
-        font-family: "Raleway", sans-serif;
-      }
+    .umkm-info ul {
+      list-style: none;
+      padding: 0;
+      font-size: 15px;
+    }
 
-      .edit-icon {
-        font-size: 20px;
-        margin-top: 3px;
-      }
+    #chartPendapatan,
+    #chartPengeluaran,
+    #chartOmzet,
+    #chartProduk {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-      i {
-        padding: 5px;
-      }
+    canvas {
+      font-family: "Raleway", sans-serif;
+    }
 
-      .btn-filter,
-      .btn-filterYear {
-        background-color: #67b0d1;
-        color: #eee;
-      }
+    .edit-icon {
+      font-size: 20px;
+      margin-top: 3px;
+    }
 
-      .btn-filter:hover,
-      .btn-filterYear:hover {
-        background-color: #67b0d1;
-        color: #2f4d5a;
-      }
-    </style>
+    i {
+      padding: 5px;
+    }
+
+    .btn-filter,
+    .btn-filterYear {
+      background-color: #67b0d1;
+      color: #eee;
+    }
+
+    .btn-filter:hover,
+    .btn-filterYear:hover {
+      background-color: #67b0d1;
+      color: #2f4d5a;
+    }
+  </style>
 </head>
 
 <body>
@@ -239,8 +235,7 @@
               <li><strong>Kategori</strong>: Kerajinan Tangan</li>
               <li><strong>Alamat</strong>: Jl. Arif Rahman Hakim 1</li>
               <li><strong>Kecamatan</strong>: Wonocolo</li>
-              <li><strong>Nomor WhatsApp</strong>: <a
-                  href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">0812345678</a></li>
+              <li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">0812345678</a></li>
             </ul>
           </div>
         </div>
@@ -294,8 +289,7 @@
                 <div class="portfolio-wrap">
                   <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                      class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
                   </div>
                 </div>
@@ -307,8 +301,7 @@
                 <div class="portfolio-wrap">
                   <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                      class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
                   </div>
                 </div>
@@ -320,8 +313,7 @@
                 <div class="portfolio-wrap">
                   <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                      class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
                   </div>
                 </div>
@@ -333,10 +325,8 @@
                 <div class="portfolio-wrap">
                   <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                      class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                    <a href="#" data-toggle="modal" data-target="#editModal" title="Edit Produk"><i
-                        class="bx bx-pencil edit-icon"></i></a>
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#editModal" title="Edit Produk"><i class="bx bx-pencil edit-icon"></i></a>
                   </div>
                 </div>
               </div>
@@ -404,8 +394,7 @@
 
         <div class="col-lg-2">
 
-          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Start Year
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -420,8 +409,7 @@
 
         <div class="col-lg-2">
 
-          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             End Year
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -556,8 +544,7 @@
   <?php include "template/footer.php"; ?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -733,10 +720,10 @@
       }
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
 
-      $('.btn-filter').click(function () {
+      $('.btn-filter').click(function() {
         $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
         $('canvas').css({
           'width': '',
