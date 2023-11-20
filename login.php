@@ -1,24 +1,40 @@
 <?php
-require "connect.php";
+
+require 'connect.php';
 session_start();
+
+if (isset($_SESSION['login']))
+    header('location: profile.php');
+
+
 if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    if ($_POST['username'] != '' && $_POST['password'] != '') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-    $msg = "";
-    $check_admin = "SELECT * FROM umkmm WHERE username = ?";
-    $check_admin = $conn->prepare($check_admin);
-    $check_admin->execute([$username]);
-    $fetch_admin = $check_admin->fetch();
-
-
-    if ($fetch_admin->rowCount() == 1) {
-        $_SESSION['username'] = $fetch_admin['username'];
-        header('location: profile.php');
-    } else if ($fetch_admin->rowCount() ==0 ) {
-        $msg = "Username / pass salah";
+        $sql = "SELECT id, password FROM admin WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+        if ($stmt->rowCount() == 0) {
+            $_SESSION['error'] = 'Akun belum terdaftar!';
+        } 
+        // else if (!password_verify($password, $user['password'])) {
+        //     $_SESSION['error'] = 'Password Salah!';
+        // } 
+        else if($password != $user['password']) {
+            $_SESSION['error'] = 'Password Salah!';
+        }
+        else {
+            $_SESSION['success'] = 'Login Berhasil!';
+            $_SESSION['login'] = $user['id'];
+            header('location: profile.php');
+        }
+    } else {
+        $_SESSION['error'] = 'Fill up login form first';
     }
 }
+// header('location: profile.php');
 
 ?>
 <!DOCTYPE html>
@@ -29,62 +45,86 @@ if (isset($_POST['login'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="sweetalert2.all.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+    <style>
+        .login-form {
+            max-width: 500px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+
+        .login-form .title {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 25px;
+
+        }
+
+        .login-form .content {
+            padding: 15px;
+        }
+    </style>
 </head>
-<style>
-    .login-form {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        max-width: 600px;
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .login-title {
-        padding: 10px;
-        text-align: center;
-    }
-
-    .content {
-        padding: 15px;
-        margin: 10px;
-    }
-</style>
 
 <body>
     <div class="login-form">
-        <div class="login-title bg-dark text-white">
-            <h2>WELCOME!</h2>
-        </div>
-        <div class="content">
-            <?= isset($msg) ? '<div class="alert alert-danger">' . $msg . '</div>' : ' ' ?>
 
-            <form method="POST">
+        <div class="title bg-dark text-white">
+            WELCOME!
+        </div>
+
+        <div class="content">
+
+            <?php
+            if (isset($_SESSION['error'])) {
+                echo "
+                        <div class='alert alert-danger text-center'>
+                            <i class='fas fa-exclamation-triangle'></i> " . $_SESSION['error'] . "
+                        </div>
+                    ";
+
+                //unset error
+                unset($_SESSION['error']);
+            }
+
+            if (isset($_SESSION['success'])) {
+                echo "
+                        <div class='alert alert-success text-center'>
+                            <i class='fas fa-check-circle'></i> " . $_SESSION['success'] . "
+                        </div>
+                    ";
+
+                //unset success
+                unset($_SESSION['success']);
+            }
+            ?>
+
+            <form method="post">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="username">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username">
                 </div>
+
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
                 </div>
+
                 <div class="d-grid gap-2">
                     <button class="btn btn-dark" name="login">Login</button>
                 </div>
             </form>
+
         </div>
-
     </div>
-
 </body>
 
 </html>

@@ -60,7 +60,13 @@ if (isset($_SESSION['kategori'])) {
 
 <body>
 
-  <?php include "template/header.php"; ?>
+  <?php
+  if (isset($_SESSION['login'])) {
+    include "template/header_profile.php";
+  } else {
+    include "template/header.php";
+  }
+  ?>
 
   <main id="main">
 
