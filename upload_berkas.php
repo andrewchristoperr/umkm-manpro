@@ -302,10 +302,10 @@ require "connect.php";
                   url: 'forms/form_berkas.php',
                   method: 'POST',
                   data: {
-                      formulir: formulir,
-                      surat_pengantar: surat_pengantar,
-                      ktp: ktp,
-                      npwp: npwp
+                    formulir: formulir,
+                    surat_pengantar: surat_pengantar,
+                    ktp: ktp,
+                    npwp: npwp
                   },
                   success: function(result) {
                     res = JSON.parse(result);
@@ -313,9 +313,12 @@ require "connect.php";
                       Swal.fire({
                         icon: 'success',
                         title: 'Success',
-                        text: res.msg
+                        text: res.msg,
+                        // timer: 3000
+                      }).then(function() {
+                        window.location = "index.php";
                       });
-                      window.location.href = "index.php";
+                      // window.location.href = "index.php";
                     } else {
                       Swal.fire({
                         icon: 'error',
@@ -336,4 +339,5 @@ require "connect.php";
           })
         </script>
 </body>
+
 </html>

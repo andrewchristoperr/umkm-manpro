@@ -279,11 +279,29 @@ if (isset($_SESSION['kategori'])) {
             <p>Belum ada data</p>
             <?php
           endif;
-          if (!isset($_SESSION['kategori']) || $_SESSION['kategori'] == null) :
+          if (!isset($_SESSION['kategori']) || $_SESSION['kategori'] == null) {
             if ($stmt != null) :
-
               foreach ($stmt as $row) :
             ?>
+                <div class="col-lg-3 col-md-4 mb-5">
+                  <div class="card h-100" id="card-umkm" style="border-radius: 20px;">
+
+                    <img class="card-img-top" src="image.php?id=<?php echo $row['id'] ?>" alt="Card image cap" style="padding: 10px; border-radius: 25px;">
+                    <div class="card-body">
+                      <p class="card-text list_umkm"><?php echo $row['nama_umkm']; ?></p>
+                      <p class="card-text">Kategori: <?php echo $row['kategori_umkm']; ?></p>
+                      <p hidden id="id_umkm" class="id_umkm"><?php echo $row['id'] ?></p>
+                      <!-- <button style="float: left;" class="btn btn-primary button_details" id="">Details</button> -->
+                    </div>
+                  </div>
+                </div>
+              <?php
+              endforeach;
+            endif;
+          } else {
+            if ($stmt != null) :
+              foreach ($stmt as $row) :
+              ?>
                 <div class="col-lg-3 col-md-4 mb-5">
                   <div class="card h-100" id="card-umkm" style="border-radius: 20px;">
 
@@ -299,7 +317,8 @@ if (isset($_SESSION['kategori'])) {
           <?php
               endforeach;
             endif;
-          endif;
+          }
+
           ?>
         </div>
       </div>
@@ -541,44 +560,44 @@ if (isset($_SESSION['kategori'])) {
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script>
-    $(document).ready(function() {
-      $('#submit').on('click', function() {
-        var name = $('#name').val();
-        var email = $('#email').val();
-        var subject = $('#subject').val();
-        var message = $('#message').val();
+    // $(document).ready(function() {
+    //   $('#submit').on('click', function() {
+    //     var name = $('#name').val();
+    //     var email = $('#email').val();
+    //     var subject = $('#subject').val();
+    //     var message = $('#message').val();
 
-        if (name != '' && email != '' && subject != '' && message != '') {
-          $.ajax({
-            url: 'forms/contact.php',
-            method: 'POST',
-            data: {
-              name: name,
-              email: email,
-              subject: subject,
-              message: message
-            },
-            success: function(result) {
-              if (result == 1) {
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Success',
-                  text: 'Message Sent!'
-                })
-              } else if (result == 0) {
-                Swal.fire({
-                  icon: 'warning',
-                  title: 'Invalid Email',
-                  text: 'Please input a valid email!'
-                })
-              }
-            }
-          })
-        } else {
+    //     if (name != '' && email != '' && subject != '' && message != '') {
+    //       $.ajax({
+    //         url: 'forms/contact.php',
+    //         method: 'POST',
+    //         data: {
+    //           name: name,
+    //           email: email,
+    //           subject: subject,
+    //           message: message
+    //         },
+    //         success: function(result) {
+    //           if (result == 1) {
+    //             Swal.fire({
+    //               icon: 'success',
+    //               title: 'Success',
+    //               text: 'Message Sent!'
+    //             })
+    //           } else if (result == 0) {
+    //             Swal.fire({
+    //               icon: 'warning',
+    //               title: 'Invalid Email',
+    //               text: 'Please input a valid email!'
+    //             })
+    //           }
+    //         }
+    //       })
+    //     } else {
 
-        }
-      })
-    })
+    //     }
+    //   })
+    // })
 
     const formToReset = document.getElementById('form-contact');
     formToReset.addEventListener('submit', (e) => {
@@ -605,12 +624,57 @@ if (isset($_SESSION['kategori'])) {
       }
     }
   </script>
-
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="script.js"></script>
   <script>
+    // $(document).ready(function() {
+    //   function renderCards(category) {
+    //     $.ajax({
+    //       url: 'get_cards.php',
+    //       method: 'POST',
+    //       data: {
+    //         category: category
+    //       },
+    //       dataType: 'json',
+    //       success: function(data) {
+    //         $('#list-umkm').empty();
+    //         data.forEach(function(card) {
+    //           const cardHtml = `<div class="card">
+    //                                     <h3>${card.nama_umkm}</h3>
+    //                                     <p>Category: ${card.kategori_umkm}</p>
+    //                                  </div>`;
+    //           // const cardHtml = `
+    //           //   <div class="col-lg-3 col-md-4 mb-5">
+    //           //     <div class="card h-100" id="card-umkm">
+    //           //       <img class="card-img-top" src="image.php?id=${card.id}" alt="Card image cap" style="padding: 10px; border-radius: 15px;">
+    //           //       <div class="card-body">
+    //           //         <p class="card-text list_umkm">${card.nama_umkm}</p>
+    //           //         <p class="card-text">${card.kategori_umkm}</p>
+    //           //         <p hidden id="id_umkm">${card.id}</p>
+    //           //       </div>
+    //           //     </div>
+    //           //   </div>
+    //           //   `;
+    //           $('#list-umkm').append(cardHtml);
+
+    //         });
+    //       },
+    //       error: function(error) {
+    //         console.error('Error fetching cards:', error);
+    //       }
+    //     });
+    //   }
+    //   renderCards('All');
+
+    //   $('#dropdown-kategori').on('change', function() {
+    //     const selectedCategory = $(this).val();
+    //     renderCards(selectedCategory);
+    //   });
+    // });
+
     $(document).ready(function() {
       $('#apply-filters').on('click', function() {
         var kategori = $('#dropdown-kategori').val();
-        event.preventDefault();
         if (kategori != null && kategori != "") {
           $.ajax({
             url: 'forms/filter.php',
@@ -619,37 +683,35 @@ if (isset($_SESSION['kategori'])) {
               kategori: kategori
             },
             success: function(result) {
+              $('#list-umkm').empty();
               document.getElementById('list-umkm').innerHTML = result;
-              <?php session_destroy(); ?>;
+              <?php session_destroy() ?>
+              window.location.reload();
+              // $('#list-umkm').load(" #list-umkm");
             }
           })
         }
       });
     });
-  </script>
 
-  <script>
-    $(document).ready(function() {
-      let card_umkm = document.querySelectorAll('#card-umkm');
-      card_umkm.forEach((elm) => {
-        elm.addEventListener("click", (e) => {
-          let id_umkm = e.currentTarget.querySelector('#id_umkm').innerHTML;
-          if (id_umkm != null) {
-            $.ajax({
-              url: 'forms/port_details.php',
-              method: 'POST',
-              data: {
-                id_umkm: id_umkm
-              },
-              success: function(result) {
-                // alert(result);
-                location.href = 'portfolio-details.php';
-              }
-            })
-          }
-        })
+    let card_umkm = document.querySelectorAll('#card-umkm');
+    card_umkm.forEach((elm) => {
+      elm.addEventListener("click", (e) => {
+        let id_umkm = e.currentTarget.querySelector('#id_umkm').innerHTML;
+        if (id_umkm != null) {
+          $.ajax({
+            url: 'forms/port_details.php',
+            method: 'POST',
+            data: {
+              id_umkm: id_umkm
+            },
+            success: function(result) {
+              location.href = 'portfolio-details.php';
+            }
+          })
+        }
       })
-    });
+    })
   </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>

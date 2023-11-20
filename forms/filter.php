@@ -40,7 +40,7 @@ if ($stmt == null) {
 
 echo $output;
 ?>
-<script>
+<!-- <script>
     $(document).ready(function() {
       $('.button_details').on('click', function() {
         // event.preventDefault();
@@ -60,4 +60,4 @@ echo $output;
         }
       });
     });
-  </script>
+  </script> -->

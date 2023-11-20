@@ -10,7 +10,7 @@
         <ul>
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <li><a class="nav-link scrollto" href="profile.php">Profile</a></li>
-          
+          <li><a class="nav-link scrollto" href="login.php">Login</a></li>
           <li>
             <div class="box">
               <div class="container-4">

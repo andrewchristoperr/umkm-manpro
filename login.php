@@ -6,15 +6,15 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
     $msg = "";
-    $check_admin = "SELECT * FROM user_admin WHERE username = ?";
+    $check_admin = "SELECT * FROM umkmm WHERE username = ?";
     $check_admin = $conn->prepare($check_admin);
     $check_admin->execute([$username]);
     $fetch_admin = $check_admin->fetch();
 
 
     if ($fetch_admin->rowCount() == 1) {
-        $_SESSION['nama'] = $fetch_admin['nama_admin'];
-        header('location: index_admin.php');
+        $_SESSION['username'] = $fetch_admin['username'];
+        header('location: profile.php');
     } else if ($fetch_admin->rowCount() ==0 ) {
         $msg = "Username / pass salah";
     }
