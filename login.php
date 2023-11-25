@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = "SELECT id, password FROM admin WHERE username = ?";
+        $sql = "SELECT id, password FROM umkmm WHERE username = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$username]);
         $user = $stmt->fetch();
