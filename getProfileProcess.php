@@ -14,10 +14,10 @@ $row = $search->fetch();
 if ($row) {
     $data = array(
         'nama_umkm' => $row['nama_umkm'],
-        'kategori_umkm' => $row['kategori_umkm'],
+        'notelp_umkm' => $row['notelp_umkm'],
         'alamat_umkm' => $row['alamat_umkm'],
         'kecamatan' => $row['kecamatan'],
-        'notelp_umkm' => $row['notelp_umkm'],
+        'kategori_umkm' => $row['kategori_umkm'],
         'deskripsi' => $row['deskripsi_umkm'],
     );
 

@@ -1,3 +1,14 @@
+<?php 
+  session_start();
+  
+  if(!isset($_SESSION['username'])){
+    header('location: login.php');
+    exit;
+  }
+
+  // $username = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -211,8 +222,8 @@
           </div>
 
           <div class="col-lg-4 col-nama d-flex align-items-center">
-            <h3 class="profil-nama">
-              Pandan Wangi
+            <h3 class="profil-nama" id="profil-nama">
+              
             </h3>
           </div>
 
@@ -229,14 +240,12 @@
             <h2>Detail</h2>
           </div>
           <div class="umkm-info" id="umkm-info">
-            <h3>
-            </h3>
-            <ul>
+            <!-- <ul>
               <li><strong>Kategori</strong>: Kerajinan Tangan</li>
               <li><strong>Alamat</strong>: Jl. Arif Rahman Hakim 1</li>
               <li><strong>Kecamatan</strong>: Wonocolo</li>
               <li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">0812345678</a></li>
-            </ul>
+            </ul> -->
           </div>
         </div>
 
@@ -245,7 +254,7 @@
             <h2>Deskripsi</h2>
           </div>
           <div class="umkm-desc" id="umkm-desc">
-            <p style="text-align: justify;">UMKM Pandan Wangi adalah sebuah usaha kecil menengah yang berfokus pada
+            <!-- <p style="text-align: justify;">UMKM Pandan Wangi adalah sebuah usaha kecil menengah yang berfokus pada
               kategori kerajinan tangan dengan spesialisasi dalam produk-produk berbahan dasar pandan. Kami membuat
               berbagai macam barang seni dan kerajinan, mulai dari anyaman pandan tradisional hingga kreasi modern yang
               memadukan teknik tradisional dengan desain kontemporer. Produk unggulan kami meliputi tas tangan,
@@ -253,7 +262,7 @@
               menonjolkan keunikan setiap karya kami melalui penggunaan warna-warna cerah dan pola anyaman yang rumit.
               Dengan memadukan keahlian tradisional dengan inovasi desain, kami tidak hanya menciptakan produk
               berkualitas tinggi tetapi juga berperan dalam melestarikan warisan budaya lokal serta memberikan
-              kontribusi positif terhadap perkembangan ekonomi lokal.</p>
+              kontribusi positif terhadap perkembangan ekonomi lokal.</p> -->
           </div>
         </div>
 
@@ -721,6 +730,31 @@
     });
 
     $(document).ready(function() {
+      var username = "<?php echo $_SESSION['username']; ?>"; 
+      $.ajax({
+        url: "getProfileProcess.php",
+        type: "POST",
+        data: {
+            username: username
+        },
+        success: function(data){
+            var dataObj = JSON.parse(data);
+            var namaUMKM = dataObj.nama_umkm;
+            umkmInfo = '<ul>';
+            umkmInfo += '<li><strong>Kategori</strong>: ' + dataObj.kategori_umkm + '</li>';
+            umkmInfo += '<li><strong>Alamat</strong>: ' + dataObj.alamat_umkm + '</li>';
+            umkmInfo += '<li><strong>Kecamatan</strong>: ' + dataObj.kecamatan + '</li>';
+            umkmInfo += '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' + dataObj.notelp_umkm + '</a></li>';
+            umkmInfo += '</ul>';
+
+            var deskripsi = '<p style="text-align: justify;>' + dataObj.deskripsi + '</p>';
+            
+            document.getElementById('profil-nama').innerHTML = namaUMKM;
+            document.getElementById('umkm-info').innerHTML = umkmInfo;
+            document.getElementById('umkm-desc').innerHTML = deskripsi;
+        }
+      });
+
       $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
 
       $('.btn-filter').click(function() {
@@ -736,7 +770,7 @@
           $('.grafik-' + filter + ' canvas').css({
             'width': '800px',
             'height': '400px'
-          }); // Adjust the width and height as needed
+          });
         } else {
           $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
         }
