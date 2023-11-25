@@ -1,3 +1,14 @@
+<?php 
+  session_start();
+  
+  if(isset($_SESSION['login'])){
+    
+  } else {
+    header('location: login.php');
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,18 +130,18 @@
                                     </div>
 
                                     <div class="mb-4">
+                                        <label for="formFile" class="form-label">Omzet</label>
+                                        <input class="form-control" type="text" id="omzet" name="omzet" required>
+                                    </div>
+
+                                    <div class="mb-4">
                                         <label for="formFile" class="form-label">Pendapatan</label>
                                         <input class="form-control" type="text" id="pendapatan" name="pendapatan" required>
                                     </div>
 
-                                    <div class="mb-4">
+                                    <div class="mb-5">
                                         <label for="formFile" class="form-label">Pengeluaran</label>
                                         <input class="form-control" type="text" id="pengeluaran" name="pengeluaran" required>
-                                    </div>
-
-                                    <div class="mb-5">
-                                        <label for="formFile" class="form-label">Omzet</label>
-                                        <input class="form-control" type="text" id="omzet" name="omzet" required>
                                     </div>
 
                                     <div class="d-grid mx-auto">
@@ -203,18 +214,19 @@
 
         $(document).ready(function() {
             $('#submit').on('click', function() {
-                var bulan_lapor = $('#bulan_lapor').val();
+                
+                var id = "<?php echo $_SESSION['login']; ?>"; 
+                var date = $('#bulan_lapor').val();
                 var pendapatan = $('#pendapatan').val();
                 var pengeluaran = $('#pengeluaran').val();
                 var omzet = $('#omzet').val();
-                alert(pendapatan)
-
-                if (bulan_lapor != '' && pendapatan != '' && pengeluaran != '' && omzet != '') {
+                if (date != '' && pendapatan != '' && pengeluaran != '' && omzet != '') {
                     $.ajax({
                         url: 'forms/form_lapor.php',
                         method: 'POST',
                         data: {
-                            bulan_lapor: bulan_lapor,
+                            id: id,
+                            date: date,
                             pendapatan: pendapatan,
                             pengeluaran: pengeluaran,
                             omzet: omzet,

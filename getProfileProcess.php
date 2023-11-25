@@ -3,11 +3,11 @@ require 'connect.php';
 
 session_start();
 
-$username = $_POST['username'];
+$id = $_POST['id'];
 
-$query = "SELECT * FROM umkmm WHERE username = ?";
+$query = "SELECT * FROM umkmm WHERE id = ?";
 $search = $conn->prepare($query);
-$search->execute([$username]);
+$search->execute([$id]);
 
 $row = $search->fetch();
 
@@ -18,7 +18,7 @@ if ($row) {
         'alamat_umkm' => $row['alamat_umkm'],
         'kecamatan' => $row['kecamatan'],
         'kategori_umkm' => $row['kategori_umkm'],
-        'deskripsi' => $row['deskripsi_umkm'],
+        'deskripsi_umkm' => $row['deskripsi_umkm'],
     );
 
     echo json_encode($data);
