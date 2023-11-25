@@ -69,7 +69,6 @@ if (isset($_SESSION['kategori'])) {
   ?>
 
   <main id="main">
-
     <!-- ======= News Section ======= -->
     <div id="news" class="news">
       <div id="about" class="news">
@@ -560,6 +559,8 @@ if (isset($_SESSION['kategori'])) {
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
+
+
 
   <?php include "template/footer.php" ?>
 
