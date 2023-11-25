@@ -251,7 +251,7 @@ if (isset($_SESSION['kategori'])) {
     <section id="portfolio" class="portfolio">
       <div class="container">
         <div class="row section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Daftar UMKM</h2>
+          <h2 class="daftar-umkm">Daftar UMKM</h2>
           <p>Berbagai UMKM di Kecamatan</p>
         </div>
 
@@ -718,6 +718,13 @@ if (isset($_SESSION['kategori'])) {
         }
       })
     })
+
+    $(".scroll-umkm").click(function() {
+      $('html,body').animate({
+          scrollTop: $(".count-box").offset().top
+        },
+        'slow');
+    });
   </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
