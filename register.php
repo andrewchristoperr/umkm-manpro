@@ -42,12 +42,13 @@ if (isset($_SESSION['kecamatan'])) {
     $kecamatan = '';
 }
 
-if (isset($_SESSION['nama_foto_umkm'])) {
+if (isset($_SESSION['foto_umkm'])) {
     // $foto_umkm = $_SESSION['nama_foto_umkm'];
     $foto_umkm = $_SESSION['foto_umkm'];
 } else {
     $foto_umkm = '';
 }
+
 
 if (isset($_SESSION['kategori_umkm'])) {
     $kategori_umkm = $_SESSION['kategori_umkm'];
@@ -315,30 +316,173 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                                 echo "<option value='Genteng'>Genteng</option>";;
                                             }
                                             ?>
-                                            <option value='Gubeng'>Gubeng</option>
-                                            <option value='Gunung anyar'>Gunung Anyar</option>
-                                            <option value='Jambangan'>Jambangan</option>
-                                            <option value='Karang pilang'>Karang Pilang</option>
-                                            <option value='Kenjeran'>Kenjeran</option>
-                                            <option value='Krembangan'>Krembangan</option>
-                                            <option value='Lakarsantri'>Lakarsantri</option>
-                                            <option value='Mulyorejo'>Mulyorejo</option>
-                                            <option value='Pabean Cantian'>Pabean Cantian</option>
-                                            <option value='Pakai'>Pakai</option>
-                                            <option value='Rungkut'>Rungkut</option>
-                                            <option value='Sambikerep'>Sambikerep</option>
-                                            <option value='Sawahan'>Sawahan</option>
-                                            <option value='Semampir'>Semampir</option>
-                                            <option value='Simokerto'>Simokerto</option>
-                                            <option value='Sukolilo'>Sukolilo</option>
-                                            <option value='Sukomanunggal'>Sukomanunggal</option>
-                                            <option value='Tambaksari'>Tambaksari</option>
-                                            <option value='Tandes'>Tandes</option>
-                                            <option value='Tegalsari'>Tegalsari</option>
-                                            <option value='Tenggilis Mejoyo'>Tenggilis Mejoyo</option>
-                                            <option value='Wiyung'>Wiyung</option>
-                                            <option value='Wonocolo'>Wonocolo</option>
-                                            <option value='Wonokromo'>Wonokromo</option>
+                                            <?php if ($_SESSION['kecamatan'] == "Gubeng") {
+                                                echo "<option value='Gubeng' selected>Gubeng</option>";
+                                            } else {
+                                                echo "<option value='Gubeng'>Gubeng</option>";;
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Gunung Anyar") {
+                                                echo "<option value='Gunung Anyar' selected>Gunung Anyar</option>";
+                                            } else {
+                                                echo "<option value='Gunung Anyar'>Gunung Anyar</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Jambangan") {
+                                                echo "<option value='Jambangan' selected>Jambangan</option>";
+                                            } else {
+                                                echo "<option value='Jambangan'>Jambangan</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Karang Pilang") {
+                                                echo "<option value='Karang Pilang' selected>Karang Pilang</option>";
+                                            } else {
+                                                echo "<option value='Karang Pilang'>Karang Pilang</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Kenjeran") {
+                                                echo "<option value='Kenjeran' selected>Kenjeran</option>";
+                                            } else {
+                                                echo "<option value='Kenjeran'>Kenjeran</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Krembangan") {
+                                                echo "<option value='Krembangan' selected>Krembangan</option>";
+                                            } else {
+                                                echo "<option value='Krembangan'>Krembangan</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Lakarsantri") {
+                                                echo "<option value='Lakarsantri' selected>Lakarsantri</option>";
+                                            } else {
+                                                echo "<option value='Lakarsantri'>Lakarsantri</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Mulyorejo") {
+                                                echo "<option value='Mulyorejo' selected>Mulyorejo</option>";
+                                            } else {
+                                                echo "<option value='Mulyorejo'>Mulyorejo</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Pabean Cantian") {
+                                                echo "<option value='Pabean Cantian' selected>Pabean Cantian</option>";
+                                            } else {
+                                                echo "<option value='Pabean Cantian'>Pabean Cantian</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Pakal") {
+                                                echo "<option value='Pakal' selected>Pakal</option>";
+                                            } else {
+                                                echo "<option value='Pakal'>Pakal</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Rungkut") {
+                                                echo "<option value='Rungkut' selected>Rungkut</option>";
+                                            } else {
+                                                echo "<option value='Rungkut'>Rungkut</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Sambikerep") {
+                                                echo "<option value='Sambikerep' selected>Sambikerep</option>";
+                                            } else {
+                                                echo "<option value='Sambikerep'>Sambikerep</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Sawahan") {
+                                                echo "<option value='Sawahan' selected>Sawahan</option>";
+                                            } else {
+                                                echo "<option value='Sawahan'>Sawahan</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Semampir") {
+                                                echo "<option value='Semampir' selected>Semampir</option>";
+                                            } else {
+                                                echo "<option value='Semampir'>Semampir</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Simokerto") {
+                                                echo "<option value='Simokerto' selected>Simokerto</option>";
+                                            } else {
+                                                echo "<option value='Simokerto'>Simokerto</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Sukolilo") {
+                                                echo "<option value='Sukolilo' selected>Sukolilo</option>";
+                                            } else {
+                                                echo "<option value='Sukolilo'>Sukolilo</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Sukomanunggal") {
+                                                echo "<option value='Sukomanunggal' selected>Sukomanunggal</option>";
+                                            } else {
+                                                echo "<option value='Sukomanunggal'>Sukomanunggal</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Tambaksari") {
+                                                echo "<option value='Tambaksari' selected>Tambaksari</option>";
+                                            } else {
+                                                echo "<option value='Tambaksari'>Tambaksari</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Tandes") {
+                                                echo "<option value='Tandes' selected>Tandes</option>";
+                                            } else {
+                                                echo "<option value='Tandes'>Tandes</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Tegalsari") {
+                                                echo "<option value='Tegalsari' selected>Tegalsari</option>";
+                                            } else {
+                                                echo "<option value='Tegalsari'>Tegalsari</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Tenggilis Mejoyo") {
+                                                echo "<option value='Tenggilis Mejoyo' selected>Tenggilis Mejoyo</option>";
+                                            } else {
+                                                echo "<option value='Tenggilis Mejoyo'>Tenggilis Mejoyo</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Wiyung") {
+                                                echo "<option value='Wiyung' selected>Wiyung</option>";
+                                            } else {
+                                                echo "<option value='Wiyung'>Wiyung</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Wonocolo") {
+                                                echo "<option value='Wonocolo' selected>Wonocolo</option>";
+                                            } else {
+                                                echo "<option value='Wonocolo'>Wonocolo</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kecamatan'] == "Wonokromo") {
+                                                echo "<option value='Wonokromo' selected>Wonokromo</option>";
+                                            } else {
+                                                echo "<option value='Wonokromo'>Wonokromo</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
 
@@ -360,12 +504,47 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                         <?php ?>
                                         <select class="form-select" aria-label="Default select example" name="kategori_umkm" id="kategori_umkm" required>
                                             <option value="" disabled selected hidden>Pilih Kategori</option>
-                                            <option value="makanan dan minuman">Makanan dan Minuman</option>
-                                            <option value="fashion dan pakaian">Fashion dan Pakaian</option>
-                                            <option value="kerajinan tangan">Kerajinan Tangan</option>
-                                            <option value="pertanian dan peternakan">Pertanian dan Peternakan</option>
-                                            <option value="jasa">Jasa</option>
-                                            <option value="otomotif">Otomotif</option>
+                                            <?php if ($_SESSION['kategori_umkm'] == "makanan dan minuman") {
+                                                echo "<option value='makanan dan minuman' selected>Makanan dan Minuman</option>";
+                                            } else {
+                                                echo "<option value='makanan dan minuman'>Makanan dan Minuman</option>";;
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kategori_umkm'] == "fashion dan pakaian") {
+                                                echo "<option value='fashion dan pakaian' selected>Fashion dan Pakaian</option>";
+                                            } else {
+                                                echo "<option value='fashion dan pakaian'>Fashion dan Pakaian</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kategori_umkm'] == "kerajinan tangan") {
+                                                echo "<option value='kerajinan tangan' selected>Kerajinan Tangan</option>";
+                                            } else {
+                                                echo "<option value='kerajinan tangan'>Kerajinan Tangan</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kategori_umkm'] == "pertanian dan peternakan") {
+                                                echo "<option value='pertanian dan peternakan' selected>Pertanian dan Peternakan</option>";
+                                            } else {
+                                                echo "<option value='pertanian dan peternakan'>Pertanian dan Peternakan</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kategori_umkm'] == "jasa") {
+                                                echo "<option value='jasa' selected>Jasa</option>";
+                                            } else {
+                                                echo "<option value='jasa'>Jasa</option>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($_SESSION['kategori_umkm'] == "otomotif") {
+                                                echo "<option value='otomotif' selected>Otomotif</option>";
+                                            } else {
+                                                echo "<option value='otomotif'>Otomotif</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
 
@@ -496,7 +675,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                 var notelp_umkm = $('#notelp_umkm').val();
                 var alamat_umkm = $('#alamat_umkm').val();
                 var kecamatan = $('#kecamatan').val();
-                // var foto_umkm = $('#foto_umkm').val();
+                var foto_umkm = $('#foto_umkm').val();
                 var kategori_umkm = $('#kategori_umkm').val();
                 var deskripsi_umkm = $('#deskripsi_umkm').val();
 
@@ -512,6 +691,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                             notelp_umkm: notelp_umkm,
                             alamat_umkm: alamat_umkm,
                             kecamatan: kecamatan,
+                            foto_umkm: foto_umkm,
                             kategori_umkm: kategori_umkm,
                             deskripsi_umkm: deskripsi_umkm
                         },
