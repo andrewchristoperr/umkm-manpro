@@ -85,7 +85,7 @@ if (isset($_SESSION['kategori'])) {
     }
 
     .modal-body .row.content {
-      /* background-color: #E0F4FF; */
+      background-color: #E0F4FF;
       /* background-size: cover; */
       padding-top: 15px;
       padding-bottom: 15px;
