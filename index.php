@@ -16,9 +16,6 @@ if (isset($_SESSION['kategori'])) {
   $stmt = $conn->query($query)->fetchAll();
 }
 
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +53,54 @@ if (isset($_SESSION['kategori'])) {
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 
+  <!-- Bootstraps
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
+  <style>
+    .modal-dialog {
+      position: fixed;
+      margin: auto;
+      width: 320px;
+      height: 100%;
+      right: 0px;
+    }
+
+    .modal-content {
+      height: 100%;
+    }
+
+    li a:hover {
+      cursor: pointer;
+    }
+
+    .subheader {
+      color: grey;
+      font-size: 13px;
+    }
+
+    .notif {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .modal-body .row.content {
+      /* background-color: #E0F4FF; */
+      /* background-size: cover; */
+      padding-top: 15px;
+      padding-bottom: 15px;
+      /* border-bottom: 1px solid #808080; */
+    }
+
+    .isi-notif {
+      font-size: 12px;
+      font-weight: normal;
+      font-family: "Open Sans", sans-serif;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
 </head>
 
 <body>
@@ -68,8 +113,52 @@ if (isset($_SESSION['kategori'])) {
   }
   ?>
 
-  <main id="main">
 
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pesan</h5>
+          <button type="button" class="close btn" data-dismiss="modal" aria-label="Close" style="background-color: white; border:none;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <b class="header">Untuk Kamu</b>
+          </div>
+
+          <?php
+          $sql = "SELECT * FROM bantuan WHERE id_umkm = 1";
+          $stmt = $conn->query($sql)->fetchAll();
+          if ($stmt != null) {
+            foreach ($stmt as $row) {
+              if ($row['status'] == 1) {
+          ?>
+                <div class="row content">
+                  <span class="subheader mb-1">Konfirmasi Bantuan <?php echo $row['tanggal'] ?></span>
+                  <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
+                  <span class="isi-notif">Harap check pada section bantuan, Terimakasih</span>
+                </div>
+            <?php
+              }
+            }
+          } else {
+            ?>
+            <p>Belum ada notif</p>
+          <?php
+          }
+          ?>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Lihat Selengkapnya</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main">
     <!-- ======= News Section ======= -->
     <div id="news" class="news">
       <div id="about" class="news">
@@ -251,7 +340,7 @@ if (isset($_SESSION['kategori'])) {
     <section id="portfolio" class="portfolio">
       <div class="container">
         <div class="row section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Daftar UMKM</h2>
+          <h2 class="daftar-umkm">Daftar UMKM</h2>
           <p>Berbagai UMKM di Kecamatan</p>
         </div>
 
@@ -329,11 +418,11 @@ if (isset($_SESSION['kategori'])) {
         </div>
       </div>
 
-      </div>
-    </section><!--End Portfolio Section -->
+  </div>
+  </section><!--End Portfolio Section -->
 
-    <!-- ======= Testimonials Section ======= -->
-    <!-- <section id="testimonials" class="testimonials section-bg">
+  <!-- ======= Testimonials Section ======= -->
+  <!-- <section id="testimonials" class="testimonials section-bg">
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
@@ -358,7 +447,7 @@ if (isset($_SESSION['kategori'])) {
               </div>
             </div>
             End testimonial item -->
-    <!-- 
+  <!-- 
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
@@ -372,7 +461,7 @@ if (isset($_SESSION['kategori'])) {
                 <h4>Designer</h4>
               </div>
             </div>End testimonial item -->
-    <!-- 
+  <!-- 
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
@@ -387,7 +476,7 @@ if (isset($_SESSION['kategori'])) {
               </div>
             </div>End testimonial item -->
 
-    <!-- <div class="swiper-slide">
+  <!-- <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -401,7 +490,7 @@ if (isset($_SESSION['kategori'])) {
               </div>
             </div>End testimonial item -->
 
-    <!-- <div class="swiper-slide">
+  <!-- <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -421,10 +510,10 @@ if (isset($_SESSION['kategori'])) {
 
       </div>
     </section> -->
-    <!-- End Testimonials Section -->
+  <!-- End Testimonials Section -->
 
-    <!-- ======= Team Section ======= -->
-    <!-- <section id="team" class="team">
+  <!-- ======= Team Section ======= -->
+  <!-- <section id="team" class="team">
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
@@ -487,79 +576,81 @@ if (isset($_SESSION['kategori'])) {
       </div>
     </section>--><!--End Team Section -->
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact section-bg">
-      <div class="container" data-aos="fade-up">
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact section-bg">
+    <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Kontak</h2>
+      <div class="section-title">
+        <h2>Kontak</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="info-box mb-4">
+            <i class="bx bx-map"></i>
+            <h3>Our Address</h3>
+            <p>Jl. Siwalankerto No.121-131, Siwalankerto, Kec. Wonocolo, Surabaya, Jawa Timur 60236</p>
+          </div>
         </div>
 
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="info-box mb-4">
-              <i class="bx bx-map"></i>
-              <h3>Our Address</h3>
-              <p>Jl. Siwalankerto No.121-131, Siwalankerto, Kec. Wonocolo, Surabaya, Jawa Timur 60236</p>
-            </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="info-box  mb-4">
+            <i class="bx bx-envelope"></i>
+            <h3>Email Us</h3>
+            <p>manproti9@gmail.com</p>
           </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="info-box  mb-4">
-              <i class="bx bx-envelope"></i>
-              <h3>Email Us</h3>
-              <p>manproti9@gmail.com</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="info-box  mb-4">
-              <i class="bx bx-phone-call"></i>
-              <h3>Call Us</h3>
-              <p>+62 812 3456 789</p>
-            </div>
-          </div>
-
         </div>
 
-        <div class="row">
-
-          <div class="col-lg-6 ">
-            <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.1277129898995!2d112.73498897485095!3d-7.339551872195096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb4867925b0b%3A0xd06ae2d4f0af3f59!2sPetra%20Christian%20University!5e0!3m2!1sen!2sid!4v1697687365818!5m2!1sen!2sid" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+        <div class="col-lg-3 col-md-6">
+          <div class="info-box  mb-4">
+            <i class="bx bx-phone-call"></i>
+            <h3>Call Us</h3>
+            <p>+62 812 3456 789</p>
           </div>
-
-          <div class="col-lg-6">
-            <form action="#" class="php-email-form" id="form-contact">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class=""></div>
-                <div class=""></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit" id="submit">Send Message</button>
-              </div>
-            </form>
-          </div>
-
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+
+      <div class="row">
+
+        <div class="col-lg-6 ">
+          <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.1277129898995!2d112.73498897485095!3d-7.339551872195096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb4867925b0b%3A0xd06ae2d4f0af3f59!2sPetra%20Christian%20University!5e0!3m2!1sen!2sid!4v1697687365818!5m2!1sen!2sid" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+        </div>
+
+        <div class="col-lg-6">
+          <form action="#" class="php-email-form" id="form-contact">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class=""></div>
+              <div class=""></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit" id="submit">Send Message</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
+
+
 
   <?php include "template/footer.php" ?>
 
@@ -718,6 +809,13 @@ if (isset($_SESSION['kategori'])) {
         }
       })
     })
+
+    $(".scroll-umkm").click(function() {
+      $('html,body').animate({
+          scrollTop: $(".count-box").offset().top
+        },
+        'slow');
+    });
   </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>

@@ -1,12 +1,11 @@
 <?php 
   session_start();
   
-  if(!isset($_SESSION['username'])){
+  if(!isset($_SESSION['login'])){
     header('location: login.php');
     exit;
   }
 
-  // $username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -431,26 +430,26 @@
       </div>
 
       <div class="row mt-4 px-3">
-        <div class="col-lg-6 mx-auto grafik-pendapatan">
+        <div class="col-lg-6 mx-auto grafik-pendapatan" id="grafik-pendapatan">
           <!-- <h3 class="text-center">Total Pendapatan Tahun 2023</h3> -->
           <canvas id="chartPendapatan"></canvas>
         </div>
         <!-- <div class="col-lg-1">
 
           </div> -->
-        <div class="col-lg-6 mx-auto grafik-pengeluaran">
+        <div class="col-lg-6 mx-auto grafik-pengeluaran" id="grafik-pengeluaran">
           <!-- <h3 class="text-center">Total Pengeluaran Tahun 2023</h3> -->
           <canvas id="chartPengeluaran"></canvas>
         </div>
       </div>
 
       <div class="row mt-3 px-3">
-        <div class="col-lg-6 mx-auto grafik-omzet">
+        <div class="col-lg-6 mx-auto grafik-omzet" id="grafik-omzet">
           <!-- <h3 class="text-center">Total Omzet Tahun 2023</h3> -->
           <canvas id="chartOmzet"></canvas>
         </div>
 
-        <div class="col-lg-6 mx-auto grafik-penjualan">
+        <div class="col-lg-6 mx-auto grafik-penjualan" id="grafik-penjualan">
           <!-- <h3 class="text-center">Penjualan Produk</h3> -->
           <canvas id="chartProduk"></canvas>
         </div>
@@ -730,12 +729,12 @@
     });
 
     $(document).ready(function() {
-      var username = "<?php echo $_SESSION['username']; ?>"; 
+      var id = "<?php echo $_SESSION['login']; ?>"; 
       $.ajax({
         url: "getProfileProcess.php",
         type: "POST",
         data: {
-            username: username
+            id: id
         },
         success: function(data){
             var dataObj = JSON.parse(data);
@@ -747,7 +746,7 @@
             umkmInfo += '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' + dataObj.notelp_umkm + '</a></li>';
             umkmInfo += '</ul>';
 
-            var deskripsi = '<p style="text-align: justify;>' + dataObj.deskripsi + '</p>';
+            var deskripsi = '<p style="text-align: justify;">' + dataObj.deskripsi_umkm + '</p>';
             
             document.getElementById('profil-nama').innerHTML = namaUMKM;
             document.getElementById('umkm-info').innerHTML = umkmInfo;

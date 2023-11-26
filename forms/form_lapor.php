@@ -2,15 +2,16 @@
 require '../connect.php';
 session_start();
 
-$umkm_id = $_SESSION['id'];
-$bulan_lapor = $_POST['bulan_lapor'];
+$umkm_id = $_POST['id'];
+$date = $_POST['date'];
 $tanggalDefault = "-01";
-$tanggalLengkap = $bulan_lapor . $tanggalDefault;
+$tanggalLengkap = $date . $tanggalDefault;
+
 $pendapatan = $_POST['pendapatan'];
 $pengeluaran = $_POST['pengeluaran'];
 $omzet = $_POST['omzet'];
 
-$insert = "INSERT INTO umkm_monthly_income (income, date, umkm_id) VALUES ('$pendapatan', '$tanggalLengkap', '$umkm_id')";
+$insert = "INSERT INTO umkm_monthly_report (umkm_id, date, omzet, pendapatan, pengeluaran) VALUES ('$umkm_id', '$tanggalLengkap', '$omzet', '$pendapatan', '$pengeluaran')";
 $insert = $conn->query($insert);
 
 $result = 1;

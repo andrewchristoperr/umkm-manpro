@@ -10,7 +10,6 @@
         <ul>
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <li><a class="nav-link scrollto" href="profile.php">Profile</a></li>
-          <!-- <li><a class="nav-link scrollto" href="login.php">Login</a></li> -->
           <li><a class="nav-link scrollto" href="logout.php">Logout</a></li>
           <li>
             <div class="box">

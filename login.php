@@ -123,7 +123,9 @@ if (isset($_POST['login'])) {
                     <button class="btn btn-dark" name="login">Login</button>
                 </div>
             </form>
-
+            <div class="text-center mt-1">
+                Belum punya akun ? <a href="register.php" style="text-decoration: none;">Sign Up</a>
+            </div>
         </div>
     </div>
 </body>
