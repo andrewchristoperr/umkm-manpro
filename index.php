@@ -5,14 +5,14 @@ session_start();
 if (isset($_SESSION['kategori'])) {
   if ($_SESSION['kategori'] != 'All') {
     $kategori_umkm = $_SESSION['kategori'];
-    $query = "SELECT * FROM umkmm WHERE kategori_umkm = '$kategori_umkm'";
+    $query = "SELECT * FROM umkmm WHERE kategori_umkm = '$kategori_umkm' AND verification_status = 1";
     $stmt = $conn->query($query)->fetchAll();
   } else {
-    $query = "SELECT * FROM umkmm";
+    $query = "SELECT * FROM umkmm WHERE verification_status = 1";
     $stmt = $conn->query($query)->fetchAll();
   }
 } else {
-  $query = "SELECT * FROM umkmm";
+  $query = "SELECT * FROM umkmm WHERE verification_status = 1";
   $stmt = $conn->query($query)->fetchAll();
 }
 
