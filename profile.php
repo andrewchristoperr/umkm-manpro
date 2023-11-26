@@ -1,6 +1,5 @@
-<<<<<<< Updated upstream
 <?php 
-require "connect.php"
+require "connect.php";
   session_start();
   
   if(!isset($_SESSION['login'])){
@@ -22,16 +21,6 @@ require "connect.php"
     $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
   }
 
-=======
-<?php
-require 'connect.php';
-session_start();
-
-if (!isset($_SESSION['login'])) {
-  header('location: login.php');
-  exit();
-}
->>>>>>> Stashed changes
 ?>
 
 <!DOCTYPE html>
