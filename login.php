@@ -71,6 +71,7 @@ if (isset($_POST['login'])) {
         .login-form .content {
             padding: 15px;
         }
+                
     </style>
 </head>
 

@@ -4,12 +4,14 @@ require 'connect.php';
 session_start();
 
 $id = $_POST['id'];
+$startYear = $_POST['starYear'];
+$endYear = $_POST['endYear'];
 
-$query = "SELECT * FROM umkm_monthly_report WHERE umkm_id = ? AND YEAR(date) = YEAR(CURDATE()) ORDER BY MONTH(date)";
+$query = "SELECT * FROM umkm_monthly_report WHERE umkm_id = ? AND YEAR(date) BETWEEN ? AND ? ORDER BY date";
 $search = $conn->prepare($query);
-$search->execute([$id]);
+$search->execute([$id, $startYear, $endYear]);
 
-$row = $search->fetchAll();
+$rows = $search->fetchAll();
 
 $bulan = [];
 $pendapatan = [];
@@ -22,5 +24,15 @@ foreach ($rows as $row) {
     $pengeluaran[] = $row['pengeluaran'];
     $omzet[] = $row['omzet'];
 }
+
+$response = [
+    'bulan' => $bulan,
+    'pendapatan' => $pendapatan,
+    'pengeluaran' => $pengeluaran,
+    'omzet' => $omzet,
+];
+
+
+echo json_encode($response);
 
 ?>  
