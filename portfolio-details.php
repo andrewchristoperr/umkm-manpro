@@ -62,7 +62,7 @@ if (isset($_SESSION['id_umkm'])) {
         <div class="d-flex justify-content-between align-items-center">
           <h2 class="mt-2">UMKM Details</h2>
           <ol>
-            <li><a href=index.html>Home</a></li>
+            <li><a href=index.php>Home</a></li>
             <li>UMKM Details</li>
           </ol>
         </div>
@@ -71,13 +71,22 @@ if (isset($_SESSION['id_umkm'])) {
     </section><!-- Breadcrumbs Section -->
 
     <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details"  data-aos="fade-in" data-aos-delay="100">
+    <section id="portfolio-details" class="portfolio-details">
       <div class="container">
 
-        <div class="row gy-4 d-flex justify-content-center mb-5">
-          <div class="col-md-5">
+        <div class="row gy-4 d-flex justify-content-center mb-4">
 
-            <img src="image.php?id=<?php echo $data['id'] ?>" alt="" style="object-fit: cover; max-width: 100%; ">
+          <div class="col-md-10 d-flex justify-content-center">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="">
+                  <img src="image.php?id=<?php echo $data['id'] ?>" alt="" style="object-fit: cover; width: 100%; height: 300px;">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
           </div>
 
         </div>

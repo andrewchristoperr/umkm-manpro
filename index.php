@@ -301,7 +301,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
         <div class="row no-gutters">
 
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
+            <div class="count-box" id="count-box">
               <i class="bi bi-emoji-smile"></i>
               <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>UMKM</strong> yang sudah terdaftar</p>
