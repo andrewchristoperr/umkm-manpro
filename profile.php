@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <?php 
 require "connect.php"
   session_start();
@@ -21,6 +22,16 @@ require "connect.php"
     $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
   }
 
+=======
+<?php
+require 'connect.php';
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('location: login.php');
+  exit();
+}
+>>>>>>> Stashed changes
 ?>
 
 <!DOCTYPE html>
@@ -239,7 +250,7 @@ require "connect.php"
 
           <div class="col-lg-4 col-nama d-flex align-items-center">
             <h3 class="profil-nama" id="profil-nama">
-              
+
             </h3>
           </div>
 
@@ -747,30 +758,34 @@ require "connect.php"
     });
 
     $(document).ready(function() {
+<<<<<<< Updated upstream
 
       // Ambil & tampilin data-data profil UMKM
       var id = "<?php echo $_SESSION['login']; ?>"; 
+=======
+      var id = "<?php echo $_SESSION['login']; ?>";
+>>>>>>> Stashed changes
       $.ajax({
         url: "getProfileProcess.php",
         type: "POST",
         data: {
-            id: id
+          id: id
         },
-        success: function(data){
-            var dataObj = JSON.parse(data);
-            var namaUMKM = dataObj.nama_umkm;
-            umkmInfo = '<ul>';
-            umkmInfo += '<li><strong>Kategori</strong>: ' + dataObj.kategori_umkm + '</li>';
-            umkmInfo += '<li><strong>Alamat</strong>: ' + dataObj.alamat_umkm + '</li>';
-            umkmInfo += '<li><strong>Kecamatan</strong>: ' + dataObj.kecamatan + '</li>';
-            umkmInfo += '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' + dataObj.notelp_umkm + '</a></li>';
-            umkmInfo += '</ul>';
+        success: function(data) {
+          var dataObj = JSON.parse(data);
+          var namaUMKM = dataObj.nama_umkm;
+          umkmInfo = '<ul>';
+          umkmInfo += '<li><strong>Kategori</strong>: ' + dataObj.kategori_umkm + '</li>';
+          umkmInfo += '<li><strong>Alamat</strong>: ' + dataObj.alamat_umkm + '</li>';
+          umkmInfo += '<li><strong>Kecamatan</strong>: ' + dataObj.kecamatan + '</li>';
+          umkmInfo += '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' + dataObj.notelp_umkm + '</a></li>';
+          umkmInfo += '</ul>';
 
-            var deskripsi = '<p style="text-align: justify;">' + dataObj.deskripsi_umkm + '</p>';
-            
-            document.getElementById('profil-nama').innerHTML = namaUMKM;
-            document.getElementById('umkm-info').innerHTML = umkmInfo;
-            document.getElementById('umkm-desc').innerHTML = deskripsi;
+          var deskripsi = '<p style="text-align: justify;">' + dataObj.deskripsi_umkm + '</p>';
+
+          document.getElementById('profil-nama').innerHTML = namaUMKM;
+          document.getElementById('umkm-info').innerHTML = umkmInfo;
+          document.getElementById('umkm-desc').innerHTML = deskripsi;
         }
       });
 
