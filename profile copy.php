@@ -1,38 +1,38 @@
-<?php 
-  require 'connect.php';
-  session_start();
-  
-  if(!isset($_SESSION['login'])){
-    header('location: login.php');
-    exit;
-  }
+<?php
+require 'connect.php';
+session_start();
 
-  $id = $_SESSION['login'];
+if (!isset($_SESSION['login'])) {
+  header('location: login.php');
+  exit;
+}
 
-  $queryYears = "SELECT DISTINCT YEAR(date) AS report_year FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY report_year ASC";
-  $result = $conn->prepare($queryYears);
-  $result->execute([$id]);
-  $data = $result->fetchAll();
+$id = $_SESSION['login'];
 
-  $startYearOptions = '';
-  $endYearOptions = '';
-  foreach ($data as $year) {
-    $startYearOptions .= '<a class="dropdown-item" id="startYear" href="#">' . $year['report_year'] . '</a>';
-    $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
-  }
+$queryYears = "SELECT DISTINCT YEAR(date) AS report_year FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY report_year ASC";
+$result = $conn->prepare($queryYears);
+$result->execute([$id]);
+$data = $result->fetchAll();
 
-  $queryAllData = "SELECT date, omzet, pendapatan, pengeluaran FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY date ASC";
-  $result2 = $conn->prepare($queryAllData);
-  $result2->execute([$id]);
-  $allData = $result2->fetchAll();
+$startYearOptions = '';
+$endYearOptions = '';
+foreach ($data as $year) {
+  $startYearOptions .= '<a class="dropdown-item" id="startYear" href="#">' . $year['report_year'] . '</a>';
+  $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
+}
 
-  foreach($allData as $row){
-    $monthlyReport .='
+$queryAllData = "SELECT date, omzet, pendapatan, pengeluaran FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY date ASC";
+$result2 = $conn->prepare($queryAllData);
+$result2->execute([$id]);
+$allData = $result2->fetchAll();
+
+foreach ($allData as $row) {
+  $monthlyReport .= '
     <tr>
-        <td>'.$row['date'].'</td>
-        <td>'.$row['omzet'].'</td>
-        <td>'.$row['pendapatan'].'</td>
-        <td>'.$row['pengeluaran'].'</td>
+        <td>' . $row['date'] . '</td>
+        <td>' . $row['omzet'] . '</td>
+        <td>' . $row['pendapatan'] . '</td>
+        <td>' . $row['pengeluaran'] . '</td>
     </tr>
     ';
 }
@@ -76,7 +76,13 @@
   <!-- Sweet Alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+  <!-- Data Table -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
   <style>
     .scrollable-container {
       display: flex;
@@ -254,7 +260,7 @@
 
           <div class="col-lg-4 col-nama d-flex align-items-center">
             <h3 class="profil-nama" id="profil-nama">
-              
+
             </h3>
           </div>
 
@@ -419,13 +425,13 @@
       <div class="section-title" data-aos="fade-in" data-aos-delay="100">
         <h2>Tabel Pendapatan</h2>
       </div>
-      <table class="table table-bordered">
+      <table class="table table-striped nowrap" id="tablePendapatan" style="width:100%;">
         <thead>
           <tr>
-            <th scope="col" style="text-align: center;">Date</th>
-            <th scope="col" style="text-align: center;">Omzet</th>
-            <th scope="col" style="text-align: center;">Pendapatan</th>
-            <th scope="col" style="text-align: center;">Pengeluaran</th>
+            <th style="text-align: center;">Date</th>
+            <th  style="text-align: center;">Omzet</th>
+            <th  style="text-align: center;">Pendapatan</th>
+            <th  style="text-align: center;">Pengeluaran</th>
           </tr>
         </thead>
         <tbody>
@@ -433,7 +439,7 @@
         </tbody>
       </table>
     </div>
-    
+
     <!-- End of Tabel Pendapatan -->
 
     <!-- Laporan -->
@@ -443,7 +449,7 @@
       </div>
 
       <div class="row px-3 align-items-center">
-      <!-- Filter -->
+        <!-- Filter -->
         <div class="col-lg-6">
           <div class="btn-group rounded-pill" role="group" aria-label="Filter buttons">
             <button type="button" class="btn btn-filter" data-filter="all">All</button>
@@ -491,13 +497,13 @@
 
       <!-- Grafik -->
       <div class="laporan" id="laporan">
-        <div class="row mt-4 px-3" id = "grafik-laporan">
-          
+        <div class="row mt-4 px-3" id="grafik-laporan">
+
         </div>
       </div>
       <!-- End of Grafik -->
 
-      
+
 
       <!-- <div class="row mt-4 px-3">
         <div class="col-lg-6 mx-auto grafik-pendapatan" id="grafik-pendapatan">
@@ -646,7 +652,6 @@
   <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
   <script>
-    
     // const xValues4 = ["Buku", "Tas", "Baju", "Pensil", "Jepit"];
     // const yValues4 = [55, 49, 44, 24, 15];
     // const barColors = [
@@ -680,7 +685,7 @@
     //   }
     // });
 
-    
+
     // Grafik
     // $('[id^="chartPendapatan"]').show();
     // $('[id^="chartPengeluaran"]').show();
@@ -707,111 +712,118 @@
     //     $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
     //   }
     // });
-    function generateCanvas(xData, yData, chartId, chartTitle) {  
-        // chart = '<div class="col-lg-6 mx-auto"><canvas class="chart-canvas ' + chartId + '" id="' + chartId + '"></canvas></div>';
-        var chart = '<div class="col-lg-6 mx-auto">';
-        chart += '<canvas id="' + chartId + '"></canvas>'
-        chart += '</div>';
-        document.getElementById('grafik-laporan').innerHTML += chart
-        generateLineChart(xData, yData, chartId, chartTitle)
-      }
 
-      function generateLineChart(xData, yData, chartId, chartTitle) {
-        new Chart(chartId, {
-          type: "line",
-          data: {
-            labels: xData,
-            datasets: [{
-              fill: false,
-              lineTension: 0,
-              backgroundColor: "rgba(0,0,255,1.0)",
-              borderColor: "rgba(0,0,255,0.1)",
-              data: yData
-            }]
+    new DataTable('#tablePendapatan', {
+      scrollX: true,
+      destroy: true,
+      retrieve: true
+    });
+
+    function generateCanvas(xData, yData, chartId, chartTitle) {
+      // chart = '<div class="col-lg-6 mx-auto"><canvas class="chart-canvas ' + chartId + '" id="' + chartId + '"></canvas></div>';
+      var chart = '<div class="col-lg-6 mx-auto">';
+      chart += '<canvas id="' + chartId + '"></canvas>'
+      chart += '</div>';
+      document.getElementById('grafik-laporan').innerHTML += chart
+      generateLineChart(xData, yData, chartId, chartTitle)
+    }
+
+    function generateLineChart(xData, yData, chartId, chartTitle) {
+      new Chart(chartId, {
+        type: "line",
+        data: {
+          labels: xData,
+          datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: yData
+          }]
+        },
+        options: {
+          legend: {
+            display: false
           },
-          options: {
-            legend: {
-              display: false
-            },
-            scales: {
-              yAxes: [{
-                ticks: {
-                  min: Math.min(...yData),
-                  max: Math.max(...yData)
-                }
-              }],
-            },
-            title: {
-              display: true,
-              text: chartTitle,
-              fontColor: 'grey',
-              fontSize: 20
-            }
+          scales: {
+            yAxes: [{
+              ticks: {
+                min: Math.min(...yData),
+                max: Math.max(...yData)
+              }
+            }],
+          },
+          title: {
+            display: true,
+            text: chartTitle,
+            fontColor: 'grey',
+            fontSize: 20
           }
-        });
+        }
+      });
     }
 
     $(document).ready(function() {
-    
+
       // Ambil & tampilin data-data profil UMKM
-      var id = "<?php echo $_SESSION['login']; ?>"; 
+      var id = "<?php echo $_SESSION['login']; ?>";
       $.ajax({
         url: "getProfileProcess.php",
         type: "POST",
         data: {
-            id: id
+          id: id
         },
-        success: function(data){
-            var dataObj = JSON.parse(data);
-            var namaUMKM = dataObj.nama_umkm;
-            umkmInfo = '<ul>';
-            umkmInfo += '<li><strong>Kategori</strong>: ' + dataObj.kategori_umkm + '</li>';
-            umkmInfo += '<li><strong>Alamat</strong>: ' + dataObj.alamat_umkm + '</li>';
-            umkmInfo += '<li><strong>Kecamatan</strong>: ' + dataObj.kecamatan + '</li>';
-            umkmInfo += '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' + dataObj.notelp_umkm + '</a></li>';
-            umkmInfo += '</ul>';
+        success: function(data) {
+          var dataObj = JSON.parse(data);
+          var namaUMKM = dataObj.nama_umkm;
+          umkmInfo = '<ul>';
+          umkmInfo += '<li><strong>Kategori</strong>: ' + dataObj.kategori_umkm + '</li>';
+          umkmInfo += '<li><strong>Alamat</strong>: ' + dataObj.alamat_umkm + '</li>';
+          umkmInfo += '<li><strong>Kecamatan</strong>: ' + dataObj.kecamatan + '</li>';
+          umkmInfo += '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' + dataObj.notelp_umkm + '</a></li>';
+          umkmInfo += '</ul>';
 
-            var deskripsi = '<p style="text-align: justify;">' + dataObj.deskripsi_umkm + '</p>';
-            
-            document.getElementById('profil-nama').innerHTML = namaUMKM;
-            document.getElementById('umkm-info').innerHTML = umkmInfo;
-            document.getElementById('umkm-desc').innerHTML = deskripsi;
+          var deskripsi = '<p style="text-align: justify;">' + dataObj.deskripsi_umkm + '</p>';
+
+          document.getElementById('profil-nama').innerHTML = namaUMKM;
+          document.getElementById('umkm-info').innerHTML = umkmInfo;
+          document.getElementById('umkm-desc').innerHTML = deskripsi;
         }
       });
 
 
       // Dropdown Filter Year
-    var selectedStartYear = ''
-    var selectedEndYear = ''
-    $('.startYearDropdown .dropdown-item').on('click', function(e) {
-      e.preventDefault()
-      selectedStartYear = $(this).text();
-      $('#startYearFilter').text(selectedStartYear);
-    });
+      var selectedStartYear = ''
+      var selectedEndYear = ''
+      $('.startYearDropdown .dropdown-item').on('click', function(e) {
+        e.preventDefault()
+        selectedStartYear = $(this).text();
+        $('#startYearFilter').text(selectedStartYear);
+      });
 
-    $('.endYearDropdown .dropdown-item').on('click', function(e) {
-      e.preventDefault()
-      selectedEndYear = $(this).text();
-      $('#endYearFilter').text(selectedEndYear);
-    });
+      $('.endYearDropdown .dropdown-item').on('click', function(e) {
+        e.preventDefault()
+        selectedEndYear = $(this).text();
+        $('#endYearFilter').text(selectedEndYear);
+      });
 
-    $('#goFilter').on('click', function() {
-      var id = "<?php echo $_SESSION['login']; ?>"; 
-      if (selectedStartYear != '' && selectedEndYear != '') {
-        startYear = parseInt(selectedStartYear, 10);
-        endYear = parseInt(selectedEndYear, 10);
-        $.ajax({
-          url: "getReportProcess.php",
-          type: "POST",
-          data: {
-            id: id,
-            startYear: startYear,
-            endYear: endYear
-          },
-          success: function(result){
+      $('#goFilter').on('click', function() {
+        var id = "<?php echo $_SESSION['login']; ?>";
+        if (selectedStartYear != '' && selectedEndYear != '') {
+          startYear = parseInt(selectedStartYear, 10);
+          endYear = parseInt(selectedEndYear, 10);
+          $.ajax({
+            url: "getReportProcess.php",
+            type: "POST",
+            data: {
+              id: id,
+              startYear: startYear,
+              endYear: endYear
+            },
+            success: function(result) {
 
-            var response = JSON.parse(result);
-            Object.keys(response.dataByYear).forEach(function (year) {
+              var response = JSON.parse(result);
+              Object.keys(response.dataByYear).forEach(function(year) {
                 var dataBulan = response.dataByYear[year].bulan;
                 var dataOmzet = response.dataByYear[year].omzet;
                 var dataPendapatan = response.dataByYear[year].pendapatan;
@@ -826,26 +838,19 @@
                 $('[id^="chartPendapatan"]').show();
                 $('[id^="chartPengeluaran"]').show();
                 $('[id^="chartOmzet"]').show();
-            });
+              });
 
 
-          }
-        });
-      } else {
-        // alert
-      }
+            }
+          });
+        } else {
+          // alert
+        }
+      });
+
+
+
     });
-      
-
-      
-  });
-
-    
-
-    
-
-    
-
   </script>
 
 </body>
