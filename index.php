@@ -85,7 +85,7 @@ if (isset($_SESSION['kategori'])) {
     }
 
     .modal-body .row.content {
-      background-color: #E0F4FF;
+      /* background-color: #E0F4FF; */
       /* background-size: cover; */
       padding-top: 15px;
       padding-bottom: 15px;
@@ -149,22 +149,10 @@ if (isset($_SESSION['kategori'])) {
           <?php
           }
           ?>
-
-          <!-- <div class="row content">
-            <span class="subheader mb-1">Konfirmasi Bantuan - 10 November</span>
-            <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
-            <span class="isi-notif">Harap check pada bagian bantuan, Terimakasih</span>
-          </div>
-          <div class="row content">
-            <span class="subheader mb-1">Konfirmasi Bantuan - 10 November</span>
-            <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
-            <span class="isi-notif">Harap check pada bagian bantuan, Terimakasih</span>
-          </div> -->
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary">Lihat Selengkapnya</button>
         </div>
       </div>
     </div>
