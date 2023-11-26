@@ -16,9 +16,6 @@ if (isset($_SESSION['kategori'])) {
   $stmt = $conn->query($query)->fetchAll();
 }
 
-$sql = "SELECT * FROM bantuan WHERE id_umkm = 1";
-$stmt = $conn->query($sql)->fetchAll();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,8 +129,8 @@ $stmt = $conn->query($sql)->fetchAll();
           </div>
 
           <?php
-
-
+          $sql = "SELECT * FROM bantuan WHERE id_umkm = 1";
+          $stmt = $conn->query($sql)->fetchAll();
           if ($stmt != null) {
             foreach ($stmt as $row) {
               if ($row['status'] == 1) {
@@ -143,12 +140,12 @@ $stmt = $conn->query($sql)->fetchAll();
                   <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
                   <span class="isi-notif">Harap check pada section bantuan, Terimakasih</span>
                 </div>
-          <?php
+            <?php
               }
             }
           } else {
-          ?>
-          <p>Belum ada notif</p>
+            ?>
+            <p>Belum ada notif</p>
           <?php
           }
           ?>
