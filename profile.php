@@ -21,6 +21,21 @@
     $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
   }
 
+  $queryAllData = "SELECT date, omzet, pendapatan, pengeluaran FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY date ASC";
+  $result2 = $conn->prepare($queryAllData);
+  $result2->execute([$id]);
+  $allData = $result2->fetchAll();
+
+  foreach($allData as $row){
+    $monthlyReport .='
+    <tr>
+        <td>'.$row['date'].'</td>
+        <td>'.$row['omzet'].'</td>
+        <td>'.$row['pendapatan'].'</td>
+        <td>'.$row['pengeluaran'].'</td>
+    </tr>
+    ';
+}
 ?>
 
 <!DOCTYPE html>
@@ -399,6 +414,27 @@
     </div>
     <!-- End Modal Edit Produk -->
 
+    <!-- Tabel Pendapatan -->
+    <div class="container mt-5">
+      <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+        <h2>Tabel Pendapatan</h2>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: center;">Date</th>
+            <th scope="col" style="text-align: center;">Omzet</th>
+            <th scope="col" style="text-align: center;">Pendapatan</th>
+            <th scope="col" style="text-align: center;">Pengeluaran</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php echo $monthlyReport; ?>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- End of Tabel Pendapatan -->
 
     <!-- Laporan -->
     <div class="container mt-5">
@@ -407,6 +443,7 @@
       </div>
 
       <div class="row px-3 align-items-center">
+      <!-- Filter -->
         <div class="col-lg-6">
           <div class="btn-group rounded-pill" role="group" aria-label="Filter buttons">
             <button type="button" class="btn btn-filter" data-filter="all">All</button>
@@ -417,6 +454,7 @@
           </div>
         </div>
 
+        <!-- Filter Start Year -->
         <div class="col-lg-2">
           <button class="btn btn-filterStartYear dropdown-toggle w-100" type="button" id="startYearFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Start Year
@@ -425,11 +463,13 @@
             <?php echo $startYearOptions; ?>
           </div>
         </div>
+        <!-- End of Filter Start Year -->
 
         <div class="col-lg-1">
           <hr class="my-1" style="width: 20px; margin:auto;">
         </div>
 
+        <!-- Filter End Year -->
         <div class="col-lg-2">
           <button class="btn btn-filterEndYear dropdown-toggle w-100" type="button" id="endYearFilter" data-toggle="dropdown" aria-expanded="false">
             End Year
@@ -438,40 +478,50 @@
             <?php echo $endYearOptions; ?>
           </div>
         </div>
+        <!-- End of Filter End Year -->
 
+        <!-- Button Go for Filter Year -->
         <div class="col-lg-1">
           <button class="btn btn-go w-100" type="button" id="goFilter" data-toggle="dropdown" aria-expanded="false">
             Go
           </button>
         </div>
-
+        <!-- End of Button Go for Filter Year -->
       </div>
 
-      <div class="row mt-4 px-3">
+      <!-- Grafik -->
+      <div class="laporan" id="laporan">
+        <div class="row mt-4 px-3" id = "grafik-laporan">
+          
+        </div>
+      </div>
+      <!-- End of Grafik -->
+
+      
+
+      <!-- <div class="row mt-4 px-3">
         <div class="col-lg-6 mx-auto grafik-pendapatan" id="grafik-pendapatan">
-          <!-- <h3 class="text-center">Total Pendapatan Tahun 2023</h3> -->
+          <h3 class="text-center">Total Pendapatan Tahun 2023</h3>
           <canvas id="chartPendapatan"></canvas>
         </div>
-        <!-- <div class="col-lg-1">
 
-          </div> -->
         <div class="col-lg-6 mx-auto grafik-pengeluaran" id="grafik-pengeluaran">
-          <!-- <h3 class="text-center">Total Pengeluaran Tahun 2023</h3> -->
+          <h3 class="text-center">Total Pengeluaran Tahun 2023</h3>
           <canvas id="chartPengeluaran"></canvas>
         </div>
       </div>
 
       <div class="row mt-3 px-3">
         <div class="col-lg-6 mx-auto grafik-omzet" id="grafik-omzet">
-          <!-- <h3 class="text-center">Total Omzet Tahun 2023</h3> -->
+          <h3 class="text-center">Total Omzet Tahun 2023</h3>
           <canvas id="chartOmzet"></canvas>
         </div>
 
         <div class="col-lg-6 mx-auto grafik-penjualan" id="grafik-penjualan">
-          <!-- <h3 class="text-center">Penjualan Produk</h3> -->
+          <h3 class="text-center">Penjualan Produk</h3>
           <canvas id="chartProduk"></canvas>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- End Laporan -->
 
@@ -591,163 +641,118 @@
   <!-- Chart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="https://cdn.canvasjs.com/ga/canvasjs.min.js"></script>
+  <script src="https://cdn.canvasjs.com/ga/canvasjs.stock.min.js"></script>
+  <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
   <script>
-    const xValues = ["Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    const yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15, 10];
+    
+    // const xValues4 = ["Buku", "Tas", "Baju", "Pensil", "Jepit"];
+    // const yValues4 = [55, 49, 44, 24, 15];
+    // const barColors = [
+    //   "#b91d47",
+    //   "#00aba9",
+    //   "#2b5797",
+    //   "#e8c3b9",
+    //   "#1e7145"
+    // ];
 
-    new Chart("chartPendapatan", {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{
-          fill: false,
-          lineTension: 0,
-          backgroundColor: "rgba(0,0,255,1.0)",
-          borderColor: "rgba(0,0,255,0.1)",
-          data: yValues
-        }]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              min: 6,
-              max: 16
+    // new Chart("chartProduk", {
+    //   type: "pie",
+    //   data: {
+    //     labels: xValues4,
+    //     datasets: [{
+    //       backgroundColor: barColors,
+    //       data: yValues4
+    //     }]
+    //   },
+    //   options: {
+    //     title: {
+    //       display: true,
+    //       text: "Top 5 Penjualan Produk Tahun 2023",
+    //       fontColor: 'grey',
+    //       fontSize: 28,
+    //       font: {
+    //         // family: "Raleway",
+    //         // weight: 'bold',
+    //       }
+    //     }
+    //   }
+    // });
+
+    
+    // Grafik
+    // $('[id^="chartPendapatan"]').show();
+    // $('[id^="chartPengeluaran"]').show();
+    // $('[id^="chartOmzet"]').show();
+    // $('[id^="chartProduk"]').show();
+
+    // $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
+
+    // $('.btn-filter').click(function() {
+    //   $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
+    //   $('canvas').css({
+    //     'width': '',
+    //     'height': ''
+    //   });
+    //   var filter = $(this).data('filter');
+
+    //   if (filter !== 'all') {
+    //     $('.grafik-' + filter).show();
+    //     $('.grafik-' + filter + ' canvas').css({
+    //       'width': '800px',
+    //       'height': '400px'
+    //     });
+    //   } else {
+    //     $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
+    //   }
+    // });
+    function generateCanvas(xData, yData, chartId, chartTitle) {  
+        // chart = '<div class="col-lg-6 mx-auto"><canvas class="chart-canvas ' + chartId + '" id="' + chartId + '"></canvas></div>';
+        var chart = '<div class="col-lg-6 mx-auto">';
+        chart += '<canvas id="' + chartId + '"></canvas>'
+        chart += '</div>';
+        document.getElementById('grafik-laporan').innerHTML += chart
+        generateLineChart(xData, yData, chartId, chartTitle)
+      }
+
+      function generateLineChart(xData, yData, chartId, chartTitle) {
+        new Chart(chartId, {
+          type: "line",
+          data: {
+            labels: xData,
+            datasets: [{
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(0,0,255,1.0)",
+              borderColor: "rgba(0,0,255,0.1)",
+              data: yData
+            }]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  min: Math.min(...yData),
+                  max: Math.max(...yData)
+                }
+              }],
+            },
+            title: {
+              display: true,
+              text: chartTitle,
+              fontColor: 'grey',
+              fontSize: 20
             }
-          }],
-        },
-        title: {
-          display: true,
-          text: "Total Pendapatan Tahun 2023",
-          fontColor: 'grey',
-          fontSize: 28,
-          font: {
-            // family: "Raleway",
-            // weight: 'bold',
           }
-        }
-      }
-    });
-
-    const xValues2 = ["Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    const yValues2 = [8, 9, 14, 9, 9, 10, 7, 8, 10, 11, 14, 15];
-
-    new Chart("chartPengeluaran", {
-      type: "line",
-      data: {
-        labels: xValues2,
-        datasets: [{
-          fill: false,
-          lineTension: 0,
-          backgroundColor: "rgba(178,34,33,1.0)",
-          borderColor: "rgba(178,34,33,0.1)",
-          data: yValues2
-        }]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              min: 6,
-              max: 16
-            }
-          }],
-        },
-        title: {
-          display: true,
-          text: "Total Pengeluaran Tahun 2023",
-          fontColor: 'grey',
-          fontSize: 28,
-          font: {
-            // family: "Raleway",
-            // weight: 'bold',
-          }
-        }
-      }
-    });
-
-    const xValues3 = ["Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    const yValues3 = [10, 12, 11, 9, 10, 14, 13, 11, 14, 14, 15, 12];
-
-    new Chart("chartOmzet", {
-      type: "line",
-      data: {
-        labels: xValues3,
-        datasets: [{
-          fill: false,
-          lineTension: 0,
-          backgroundColor: "rgba(138, 43, 226,1.0)",
-          borderColor: "rgba(138, 43, 226,0.1)",
-          data: yValues3
-        }]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              min: 6,
-              max: 16
-            }
-          }],
-        },
-        title: {
-          display: true,
-          text: "Total Omzet Tahun 2023",
-          fontColor: 'grey',
-          fontSize: 28,
-          font: {
-            // family: "Raleway",
-            // weight: 'bold',
-          }
-        }
-      }
-    });
-
-    const xValues4 = ["Buku", "Tas", "Baju", "Pensil", "Jepit"];
-    const yValues4 = [55, 49, 44, 24, 15];
-    const barColors = [
-      "#b91d47",
-      "#00aba9",
-      "#2b5797",
-      "#e8c3b9",
-      "#1e7145"
-    ];
-
-    new Chart("chartProduk", {
-      type: "pie",
-      data: {
-        labels: xValues4,
-        datasets: [{
-          backgroundColor: barColors,
-          data: yValues4
-        }]
-      },
-      options: {
-        title: {
-          display: true,
-          text: "Top 5 Penjualan Produk Tahun 2023",
-          fontColor: 'grey',
-          fontSize: 28,
-          font: {
-            // family: "Raleway",
-            // weight: 'bold',
-          }
-        }
-      }
-    });
+        });
+    }
 
     $(document).ready(function() {
-
+    
       // Ambil & tampilin data-data profil UMKM
       var id = "<?php echo $_SESSION['login']; ?>"; 
       $.ajax({
@@ -774,30 +779,8 @@
         }
       });
 
-      // Grafik
-      $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
 
-      $('.btn-filter').click(function() {
-        $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
-        $('canvas').css({
-          'width': '',
-          'height': ''
-        });
-        var filter = $(this).data('filter');
-
-        if (filter !== 'all') {
-          $('.grafik-' + filter).show();
-          $('.grafik-' + filter + ' canvas').css({
-            'width': '800px',
-            'height': '400px'
-          });
-        } else {
-          $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
-        }
-      });
-    });
-
-    // Dropdown Filter Year
+      // Dropdown Filter Year
     var selectedStartYear = ''
     var selectedEndYear = ''
     $('.startYearDropdown .dropdown-item').on('click', function(e) {
@@ -813,10 +796,10 @@
     });
 
     $('#goFilter').on('click', function() {
+      var id = "<?php echo $_SESSION['login']; ?>"; 
       if (selectedStartYear != '' && selectedEndYear != '') {
         startYear = parseInt(selectedStartYear, 10);
         endYear = parseInt(selectedEndYear, 10);
-
         $.ajax({
           url: "getReportProcess.php",
           type: "POST",
@@ -828,21 +811,23 @@
           success: function(result){
 
             var response = JSON.parse(result);
-            var bulan = response.bulan;
-            var pendapatan = response.pendapatan;
-            var pengeluaran = response.pengeluaran;
-            var omzet = response.omzet;
+            Object.keys(response.dataByYear).forEach(function (year) {
+                var dataBulan = response.dataByYear[year].bulan;
+                var dataOmzet = response.dataByYear[year].omzet;
+                var dataPendapatan = response.dataByYear[year].pendapatan;
+                var dataPengeluaran = response.dataByYear[year].pengeluaran;
 
-            var dataArray = [];
+                generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year);
+                generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year);
+                generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year);
 
-            for (var i = 0; i < bulan.length; i++) {
-                dataArray.push({
-                    'bulan': bulan[i],
-                    'pendapatan': pendapatan[i],
-                    'pengeluaran': pengeluaran[i],
-                    'omzet': omzet[i]
-                });
-            }
+                console.log("generateCanvas called for year:", year);
+
+                $('[id^="chartPendapatan"]').show();
+                $('[id^="chartPengeluaran"]').show();
+                $('[id^="chartOmzet"]').show();
+            });
+
 
           }
         });
@@ -850,6 +835,16 @@
         // alert
       }
     });
+      
+
+      
+  });
+
+    
+
+    
+
+    
 
   </script>
 

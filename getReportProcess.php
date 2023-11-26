@@ -4,7 +4,7 @@ require 'connect.php';
 session_start();
 
 $id = $_POST['id'];
-$startYear = $_POST['starYear'];
+$startYear = $_POST['startYear'];
 $endYear = $_POST['endYear'];
 
 $query = "SELECT * FROM umkm_monthly_report WHERE umkm_id = ? AND YEAR(date) BETWEEN ? AND ? ORDER BY date";
@@ -13,26 +13,53 @@ $search->execute([$id, $startYear, $endYear]);
 
 $rows = $search->fetchAll();
 
-$bulan = [];
-$pendapatan = [];
-$pengeluaran = [];
-$omzet = [];
+// $bulan = [];
+// $pendapatan = [];
+// $pengeluaran = [];
+// $omzet = [];
+
+// foreach ($rows as $row) {
+//     $bulan[] = date('F', strtotime($row['date']));
+//     $pendapatan[] = $row['pendapatan'];
+//     $pengeluaran[] = $row['pengeluaran'];
+//     $omzet[] = $row['omzet'];
+// }
+
+// $response = [
+//     'bulan' => $bulan,
+//     'pendapatan' => $pendapatan,
+//     'pengeluaran' => $pengeluaran,
+//     'omzet' => $omzet,
+// ];
+
+$dataByYear = [];
 
 foreach ($rows as $row) {
-    $bulan[] = date('F', strtotime($row['date']));
-    $pendapatan[] = $row['pendapatan'];
-    $pengeluaran[] = $row['pengeluaran'];
-    $omzet[] = $row['omzet'];
+    $year = date('Y', strtotime($row['date']));
+
+    // Inisialisasi array untuk tahun tertentu jika belum ada
+    if (!isset($dataByYear[$year])) {
+        $dataByYear[$year] = [
+            'bulan' => [],
+            'pendapatan' => [],
+            'pengeluaran' => [],
+            'omzet' => [],
+        ];
+    }
+
+    // Tambahkan data ke array sesuai dengan tahun
+    $dataByYear[$year]['bulan'][] = date('F', strtotime($row['date']));
+    $dataByYear[$year]['pendapatan'][] = $row['pendapatan'];
+    $dataByYear[$year]['pengeluaran'][] = $row['pengeluaran'];
+    $dataByYear[$year]['omzet'][] = $row['omzet'];
 }
 
 $response = [
-    'bulan' => $bulan,
-    'pendapatan' => $pendapatan,
-    'pengeluaran' => $pengeluaran,
-    'omzet' => $omzet,
+    'dataByYear' => $dataByYear,
 ];
 
 
 echo json_encode($response);
+
 
 ?>  
