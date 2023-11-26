@@ -1,5 +1,5 @@
 <?php 
-require "connect"
+require "connect.php"
   session_start();
   
   if(!isset($_SESSION['login'])){
