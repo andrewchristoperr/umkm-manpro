@@ -1,9 +1,24 @@
 <?php 
+  require 'connect.php';
   session_start();
   
   if(!isset($_SESSION['login'])){
     header('location: login.php');
     exit;
+  }
+
+  $id = $_SESSION['login'];
+
+  $queryYears = "SELECT DISTINCT YEAR(date) AS report_year FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY report_year ASC";
+  $result = $conn->prepare($queryYears);
+  $result->execute([$id]);
+  $data = $result->fetchAll();
+
+  $startYearOptions = '';
+  $endYearOptions = '';
+  foreach ($data as $year) {
+    $startYearOptions .= '<a class="dropdown-item" id="startYear" href="#">' . $year['report_year'] . '</a>';
+    $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
   }
 
 ?>
@@ -192,13 +207,15 @@
     }
 
     .btn-filter,
-    .btn-filterYear {
+    .btn-filterStartYear,
+    .btn-filterEndYear {
       background-color: #67b0d1;
       color: #eee;
     }
 
     .btn-filter:hover,
-    .btn-filterYear:hover {
+    .btn-filterStartYear:hover,
+    .btn-filterEndYear:hover {
       background-color: #67b0d1;
       color: #2f4d5a;
     }
@@ -390,7 +407,7 @@
       </div>
 
       <div class="row px-3 align-items-center">
-        <div class="col-lg-7">
+        <div class="col-lg-6">
           <div class="btn-group rounded-pill" role="group" aria-label="Filter buttons">
             <button type="button" class="btn btn-filter" data-filter="all">All</button>
             <button type="button" class="btn btn-filter" data-filter="omzet">Omzet</button>
@@ -401,13 +418,11 @@
         </div>
 
         <div class="col-lg-2">
-
-          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-filterStartYear dropdown-toggle w-100" type="button" id="startYearFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Start Year
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">2022</a>
-            <a class="dropdown-item" href="#">2023</a>
+          <div class="dropdown-menu startYearDropdown" aria-labelledby="startYearFilter">
+            <?php echo $startYearOptions; ?>
           </div>
         </div>
 
@@ -416,15 +431,18 @@
         </div>
 
         <div class="col-lg-2">
-
-          <button class="btn btn-filterYear dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-filterEndYear dropdown-toggle w-100" type="button" id="endYearFilter" data-toggle="dropdown" aria-expanded="false">
             End Year
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">2022</a>
-            <a class="dropdown-item" href="#">2023</a>
+          <div class="dropdown-menu endYearDropdown" aria-labelledby="endYearFilter">
+            <?php echo $endYearOptions; ?>
           </div>
+        </div>
 
+        <div class="col-lg-1">
+          <button class="btn btn-go w-100" type="button" id="goFilter" data-toggle="dropdown" aria-expanded="false">
+            Go
+          </button>
         </div>
 
       </div>
@@ -729,6 +747,8 @@
     });
 
     $(document).ready(function() {
+
+      // Ambil & tampilin data-data profil UMKM
       var id = "<?php echo $_SESSION['login']; ?>"; 
       $.ajax({
         url: "getProfileProcess.php",
@@ -754,6 +774,7 @@
         }
       });
 
+      // Grafik
       $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
 
       $('.btn-filter').click(function() {
@@ -775,6 +796,61 @@
         }
       });
     });
+
+    // Dropdown Filter Year
+    var selectedStartYear = ''
+    var selectedEndYear = ''
+    $('.startYearDropdown .dropdown-item').on('click', function(e) {
+      e.preventDefault()
+      selectedStartYear = $(this).text();
+      $('#startYearFilter').text(selectedStartYear);
+    });
+
+    $('.endYearDropdown .dropdown-item').on('click', function(e) {
+      e.preventDefault()
+      selectedEndYear = $(this).text();
+      $('#endYearFilter').text(selectedEndYear);
+    });
+
+    $('#goFilter').on('click', function() {
+      if (selectedStartYear != '' && selectedEndYear != '') {
+        startYear = parseInt(selectedStartYear, 10);
+        endYear = parseInt(selectedEndYear, 10);
+
+        $.ajax({
+          url: "getReportProcess.php",
+          type: "POST",
+          data: {
+            id: id,
+            startYear: startYear,
+            endYear: endYear
+          },
+          success: function(result){
+
+            var response = JSON.parse(result);
+            var bulan = response.bulan;
+            var pendapatan = response.pendapatan;
+            var pengeluaran = response.pengeluaran;
+            var omzet = response.omzet;
+
+            var dataArray = [];
+
+            for (var i = 0; i < bulan.length; i++) {
+                dataArray.push({
+                    'bulan': bulan[i],
+                    'pendapatan': pendapatan[i],
+                    'pengeluaran': pengeluaran[i],
+                    'omzet': omzet[i]
+                });
+            }
+
+          }
+        });
+      } else {
+        // alert
+      }
+    });
+
   </script>
 
 </body>
