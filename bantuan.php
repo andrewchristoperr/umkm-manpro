@@ -1,49 +1,47 @@
 <?php
+require 'connect.php';
+session_start();
 
-    require 'connect.php';
-    session_start();
+// send bantuan to database
+if (isset($_POST['ajukanBantuan'])) {
+    // echo "<script> alert('no') </script>";
+    // $id = $_SESSION['login'];
+    // $alasan_pengajuan = $_POST['alasan_pengajuan'];
+    // $dokumen_pendukung = $_POST['dokumen_pendukung'];
+    // $nominal = $_POST['nominal'];
+    // $rincian_dana = $_POST['rincian_dana'];
+    // $tenda = $_POST['tenda'];
+    // $gerobak = $_POST['gerobak'];
+    // $spanduk = $_POST['spanduk'];
+    // $lainnya = $_POST['lainnya'];
+    // $keterangan = $_POST['keterangan'];
 
-    // send bantuan to database
-    if (isset($_POST['ajukanBantuan'])) {
-        // $id = $_SESSION['login'];
-        $alasan_pengajuan = $_POST['alasan_pengajuan'];
-        $dokumen_pendukung = $_POST['dokumen_pendukung'];
-        $nominal = $_POST['nominal'];
-        $rincian_dana = $_POST['rincian_dana'];
-        $tenda = $_POST['tenda'];
-        $gerobak = $_POST['gerobak'];
-        $spanduk = $_POST['spanduk'];
-        $lainnya = $_POST['lainnya'];
-        $keterangan = $_POST['keterangan'];
+    // $sql = "INSERT INTO bantuan (alasan, dokumen_pendukung, keterangan) VALUES (?,?,?)";
+    // $query = $conn->prepare($sql);
+    // $query->execute([$alasan_pengajuan, $dokumen_pendukung, $keterangan]);
 
-        $sql = "INSERT INTO bantuan (alasan, dokumen_pendukung, keterangan) VALUES (?,?,?)";
-        $query = $conn->prepare($sql);
-        $query->execute([$alasan_pengajuan, $dokumen_pendukung,$keterangan]);
+    // if ($query->rowCount() == 0) {
+    //     $_SESSION['error'] = 'Pengajuan Bantuan Gagal!';
+    // } else {
+    //     $_SESSION['success'] = 'Pengajuan Bantuan Berhasil!';
+    //     // header('location: profile.php');
+    // }
+    // $stmt = $conn->query($query);
 
-        if ($query->rowCount() == 0) {
-            $_SESSION['error'] = 'Pengajuan Bantuan Gagal!';
-        } else {
-            $_SESSION['success'] = 'Pengajuan Bantuan Berhasil!';
-            // header('location: profile.php');
-        }
-        // $stmt = $conn->query($query);
-
-        // $sql = "INSERT INTO bantuan (alasan, dokumen_pendukung, keterangan) VALUES (?,?,?,?,?,?,?,?,?)";
-        // $bindParam = [$alasan_pengajuan, $dokumen_pendukung,$keterangan];
-        // $query = $conn->prepare("");
-        // $query->execute($bindParam);
-        // $bantuan = $query->fetch();
-        // if ($query->rowCount() == 0) {
-        //     $_SESSION['error'] = 'Pengajuan Bantuan Gagal!';
-        // } else {
-        //     $_SESSION['success'] = 'Pengajuan Bantuan Berhasil!';
-        //     // header('location: profile.php');
-        // }
-    } 
-
-    
+    // $sql = "INSERT INTO bantuan (alasan, dokumen_pendukung, keterangan) VALUES (?,?,?,?,?,?,?,?,?)";
+    // $bindParam = [$alasan_pengajuan, $dokumen_pendukung,$keterangan];
+    // $query = $conn->prepare("");
+    // $query->execute($bindParam);
+    // $bantuan = $query->fetch();
+    // if ($query->rowCount() == 0) {
+    //     $_SESSION['error'] = 'Pengajuan Bantuan Gagal!';
+    // } else {
+    //     $_SESSION['success'] = 'Pengajuan Bantuan Berhasil!';
+    //     // header('location: profile.php');
+    // }
 
 
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,9 +60,7 @@
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -79,9 +75,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
@@ -182,10 +176,10 @@
                             </div>
                             <form class="row d-flex justify-content-center" action="#" method="post">
                                 <div class="col-md-10">
-                                    
+
                                     <div class="mb-4">
                                         <label for="formFile" class="required">Alasan Pengajuan Bantuan</label>
-                                        <textarea class="form-control"  name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
+                                        <textarea class="form-control" name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
                                         <span class="explanation" italic>Contoh: Saya mengajukan bantuan ini untuk ...
                                             Selama mengoperasikan usaha terdapat kendala ... Dalam rangka bazzar 17
                                             Agustus di kecamatan X, saya ingin memperbaiki ...</span>
@@ -194,8 +188,7 @@
 
                                     <div class="mb-4">
                                         <label for="formFile" class="required">Dokumen Pendukung</label>
-                                        <input class="form-control" type="file" id="dokumen_pendukung" name="dokumen_pendukung"
-                                            required>
+                                        <input class="form-control" type="file" id="dokumen_pendukung" name="dokumen_pendukung" required>
                                         <span class="explanation" italic>Contoh: Foto Tempat Usaha, Foto Produk,Surat Keterangan Lainnya</span>
 
                                     </div>
@@ -204,15 +197,13 @@
                                         <label for="formFile" class="required">Bantuan yang Dibutuhkan</label>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="dana" id="danaCheckbox"
-                                                onchange="toggleInput()">
+                                            <input class="form-check-input" type="checkbox" value="dana" id="danaCheckbox" onchange="toggleInput()">
                                             <label class="form-check-label" for="danaCheckbox">Dana</label>
                                         </div>
                                         <div id="danaInput" class="form-group mt-2 mb-2 hidden">
                                             <!-- nominal yang Dibutuhkan -->
                                             <label for="formFile" class="required">Nominal yang Dibutuhkan</label>
-                                            <input class="form-control" type="number" id="nominal" name="nominal"
-                                                pattern="^\Rp\d{1,3}(,\d{3})*(\.\d+)?Rp" required placeholder Rp 1000.000>
+                                            <input class="form-control" type="number" id="nominal" name="nominal" pattern="^\Rp\d{1,3}(,\d{3})*(\.\d+)?Rp" required placeholder Rp 1000.000>
 
                                             <label for="formFile" class="required">Rincian Rencana Penggunaan
                                                 Dana</label>
@@ -226,33 +217,30 @@
                                             <label class="form-check-label" for="tendaCheckbox">Tenda</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="Gerobak"
-                                                id="gerobakCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="Gerobak" id="gerobakCheckbox">
                                             <label class="form-check-label" for="gerobakCheckbox">Gerobak</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="Spanduk"
-                                                id="spandukCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="Spanduk" id="spandukCheckbox">
                                             <label class="form-check-label" for="spandukCheckbox">Spanduk</label>
                                         </div>
 
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="lainnyaCheckbox" onchange="toggleInput()">
+                                            <input class="form-check-input" type="checkbox" value="" id="lainnyaCheckbox" onchange="toggleInput()">
                                             <label class="form-check-label" for="lainnyaCheckbox">Lainnya</label>
                                         </div>
                                         <!-- Input Lainnya -->
                                         <div id="lainnyaInput" class="form-group mt-2 mb-2 hidden">
-                                        <label for="formFile" class="form">Kebutuhan Lainnya</label>
+                                            <label for="formFile" class="form">Kebutuhan Lainnya</label>
                                             <input class="form-control" type="text" id="lainnya" name="lainnya">
                                         </div>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form">Keterangan Tambahan</label>
-                                        <textarea class="form-control"  name="keterangan" id="keterangan"></textarea>
+                                        <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
                                         <span class="explanation" italic>Contoh: Spanduk yang saya butuhkan 1 meter x 100 cm sebagai petunjuk tempat UMKM saya berada</span>
 
                                     </div>
@@ -271,7 +259,7 @@
         </section>
 
         <!-- Modal Section -->
-                <!--  -->
+        <!--  -->
 
         <!-- <div class="modal-dialog modal-dialog-scrollable" id="exampleModal">
             <div class="modal-content">
@@ -304,8 +292,7 @@
     <?php include "template/footer.php"; ?>
     <!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -339,23 +326,21 @@
             }
         }
 
-        $("#submit_bantuan").click(function(){
+        // $("#submit_bantuan").click(function() {
 
-            // take data from input above
-            var alasan_pengajuan = $
+        //     // take data from input above
+        //     var alasan_pengajuan = $
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: 'Bantuan berhasil diajukan',
-                showConfirmButton: false,
-                timer: 1500
-            })
-            
-        
-        })
+        //     Swal.fire({
+        //         icon: 'success',
+        //         title: 'Berhasil',
+        //         text: 'Bantuan berhasil diajukan',
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     })
 
-        
+
+        // })
 
         // buat format rupiah saat input 
         function Rp(input, blur) {
@@ -368,6 +353,7 @@
                 });
             input.value = formatted;
         }
+
     </script>
 </body>
 
