@@ -1,4 +1,5 @@
 <?php 
+require "connect"
   session_start();
   
   if(!isset($_SESSION['login'])){
