@@ -1,3 +1,51 @@
+<?php
+
+    require 'connect.php';
+    session_start();
+
+    // send bantuan to database
+    if (isset($_POST['ajukanBantuan'])) {
+        // $id = $_SESSION['login'];
+        $alasan_pengajuan = $_POST['alasan_pengajuan'];
+        $dokumen_pendukung = $_POST['dokumen_pendukung'];
+        $nominal = $_POST['nominal'];
+        $rincian_dana = $_POST['rincian_dana'];
+        $tenda = $_POST['tenda'];
+        $gerobak = $_POST['gerobak'];
+        $spanduk = $_POST['spanduk'];
+        $lainnya = $_POST['lainnya'];
+        $keterangan = $_POST['keterangan'];
+
+        $sql = "INSERT INTO bantuan (alasan, dokumen_pendukung, keterangan) VALUES (?,?,?)";
+        $query = $conn->prepare($sql);
+        $query->execute([$alasan_pengajuan, $dokumen_pendukung,$keterangan]);
+
+        if ($query->rowCount() == 0) {
+            $_SESSION['error'] = 'Pengajuan Bantuan Gagal!';
+        } else {
+            $_SESSION['success'] = 'Pengajuan Bantuan Berhasil!';
+            // header('location: profile.php');
+        }
+        // $stmt = $conn->query($query);
+
+        // $sql = "INSERT INTO bantuan (alasan, dokumen_pendukung, keterangan) VALUES (?,?,?,?,?,?,?,?,?)";
+        // $bindParam = [$alasan_pengajuan, $dokumen_pendukung,$keterangan];
+        // $query = $conn->prepare("");
+        // $query->execute($bindParam);
+        // $bantuan = $query->fetch();
+        // if ($query->rowCount() == 0) {
+        //     $_SESSION['error'] = 'Pengajuan Bantuan Gagal!';
+        // } else {
+        //     $_SESSION['success'] = 'Pengajuan Bantuan Berhasil!';
+        //     // header('location: profile.php');
+        // }
+    } 
+
+    
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,9 +182,10 @@
                             </div>
                             <form class="row d-flex justify-content-center" action="#" method="post">
                                 <div class="col-md-10">
+                                    
                                     <div class="mb-4">
                                         <label for="formFile" class="required">Alasan Pengajuan Bantuan</label>
-                                        <textarea class="form-control" aria-label="alasan_pengajuan"></textarea>
+                                        <textarea class="form-control"  name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
                                         <span class="explanation" italic>Contoh: Saya mengajukan bantuan ini untuk ...
                                             Selama mengoperasikan usaha terdapat kendala ... Dalam rangka bazzar 17
                                             Agustus di kecamatan X, saya ingin memperbaiki ...</span>
@@ -145,10 +194,9 @@
 
                                     <div class="mb-4">
                                         <label for="formFile" class="required">Dokumen Pendukung</label>
-                                        <input class="form-control" type="text" id="pendapatan" name="pendapatan"
+                                        <input class="form-control" type="file" id="dokumen_pendukung" name="dokumen_pendukung"
                                             required>
-                                        <span class="explanation" italic>Contoh: Foto Tempat Usaha, Foto Produk,
-                                            Proposal Pengajuan, Surat Keterangan Lainnya</span>
+                                        <span class="explanation" italic>Contoh: Foto Tempat Usaha, Foto Produk,Surat Keterangan Lainnya</span>
 
                                     </div>
 
@@ -156,35 +204,35 @@
                                         <label for="formFile" class="required">Bantuan yang Dibutuhkan</label>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="danaCheckbox"
+                                            <input class="form-check-input" type="checkbox" value="dana" id="danaCheckbox"
                                                 onchange="toggleInput()">
                                             <label class="form-check-label" for="danaCheckbox">Dana</label>
                                         </div>
                                         <div id="danaInput" class="form-group mt-2 mb-2 hidden">
                                             <!-- nominal yang Dibutuhkan -->
                                             <label for="formFile" class="required">Nominal yang Dibutuhkan</label>
-                                            <input class="form-control" type="number" id="Rp" name="nominal"
+                                            <input class="form-control" type="number" id="nominal" name="nominal"
                                                 pattern="^\Rp\d{1,3}(,\d{3})*(\.\d+)?Rp" required placeholder Rp 1000.000>
 
                                             <label for="formFile" class="required">Rincian Rencana Penggunaan
                                                 Dana</label>
-                                            <textarea class="form-control" aria-label="rincian_dana"></textarea>
+                                            <textarea class="form-control" id="rincian_dana" name="rincian_dana"></textarea>
                                             <span class="explanation" italic>Contoh: 1. Membeli bahan baku sebanyak ...
                                                 kg seharga Rp ... </span>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="tendaCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="Tenda" id="tendaCheckbox">
                                             <label class="form-check-label" for="tendaCheckbox">Tenda</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
+                                            <input class="form-check-input" type="checkbox" value="Gerobak"
                                                 id="gerobakCheckbox">
                                             <label class="form-check-label" for="gerobakCheckbox">Gerobak</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
+                                            <input class="form-check-input" type="checkbox" value="Spanduk"
                                                 id="spandukCheckbox">
                                             <label class="form-check-label" for="spandukCheckbox">Spanduk</label>
                                         </div>
@@ -202,8 +250,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="mb-4">
+                                        <label for="formFile" class="form">Keterangan Tambahan</label>
+                                        <textarea class="form-control"  name="keterangan" id="keterangan"></textarea>
+                                        <span class="explanation" italic>Contoh: Spanduk yang saya butuhkan 1 meter x 100 cm sebagai petunjuk tempat UMKM saya berada</span>
+
+                                    </div>
+
                                     <div class="d-grid mx-auto">
-                                        <button class="button" type="submit" id="submit" name="submit">Ajukan
+                                        <button class="button" type="submit" id="submit_bantuan" name="ajukanBantuan">Ajukan
                                             Bantuan</button>
                                     </div>
                                 </div>
@@ -214,6 +269,32 @@
                 </div>
             </div>
         </section>
+
+        <!-- Modal Section -->
+                <!--  -->
+
+        <!-- <div class="modal-dialog modal-dialog-scrollable" id="exampleModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pengajuan Bantuan
+
+                    </h5>
+                    <button type="button"
+                        class="close" data-dismiss="modal">
+                        <span> x </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal_body"></p>
+                    <button type="button" class="btn btn-warning btn-sm" 
+                            data-toggle="modal"
+                            data-target="#exampleModal">
+                    </button>
+                </div>
+
+            </div>
+
+        </div> -->
 
 
 
@@ -258,6 +339,25 @@
             }
         }
 
+        $("#submit_bantuan").click(function(){
+
+            // take data from input above
+            var alasan_pengajuan = $
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Bantuan berhasil diajukan',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
+        
+        })
+
+        
+
+        // buat format rupiah saat input 
         function Rp(input, blur) {
             var p = input.value.replace(/[^\d]/g, ""),
                 locale = 'id-ID',
