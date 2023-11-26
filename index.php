@@ -16,8 +16,8 @@ if (isset($_SESSION['kategori'])) {
   $stmt = $conn->query($query)->fetchAll();
 }
 
-
-
+$sql = "SELECT * FROM bantuan WHERE id_umkm = 1";
+$stmt = $conn->query($sql)->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -81,6 +81,25 @@ if (isset($_SESSION['kategori'])) {
       color: grey;
       font-size: 13px;
     }
+
+    .notif {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .modal-body .row.content {
+      background-color: #E0F4FF;
+      /* background-size: cover; */
+      padding-top: 15px;
+      padding-bottom: 15px;
+      /* border-bottom: 1px solid #808080; */
+    }
+
+    .isi-notif {
+      font-size: 12px;
+      font-weight: normal;
+      font-family: "Open Sans", sans-serif;
+    }
   </style>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -108,14 +127,42 @@ if (isset($_SESSION['kategori'])) {
           </button>
         </div>
         <div class="modal-body">
-
           <div class="row mb-3">
             <b class="header">Untuk Kamu</b>
           </div>
 
-          <div class="row">
-            <span class="subheader">Konfirmasi Bantuan - 10 November</span>
+          <?php
+
+
+          if ($stmt != null) {
+            foreach ($stmt as $row) {
+              if ($row['status'] == 1) {
+          ?>
+                <div class="row content">
+                  <span class="subheader mb-1">Konfirmasi Bantuan <?php echo $row['tanggal'] ?></span>
+                  <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
+                  <span class="isi-notif">Harap check pada section bantuan, Terimakasih</span>
+                </div>
+          <?php
+              }
+            }
+          } else {
+          ?>
+          <p>Belum ada notif</p>
+          <?php
+          }
+          ?>
+
+          <!-- <div class="row content">
+            <span class="subheader mb-1">Konfirmasi Bantuan - 10 November</span>
+            <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
+            <span class="isi-notif">Harap check pada bagian bantuan, Terimakasih</span>
           </div>
+          <div class="row content">
+            <span class="subheader mb-1">Konfirmasi Bantuan - 10 November</span>
+            <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
+            <span class="isi-notif">Harap check pada bagian bantuan, Terimakasih</span>
+          </div> -->
 
         </div>
         <div class="modal-footer">
