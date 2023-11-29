@@ -16,10 +16,14 @@ $data = $result->fetchAll();
 
 $startYearOptions = '';
 $endYearOptions = '';
+$years = [];
 foreach ($data as $year) {
   $startYearOptions .= '<a class="dropdown-item" id="startYear" href="#">' . $year['report_year'] . '</a>';
   $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
+  $years[] = $year['report_year'];
 }
+$minYears = min($years);
+$maxYears = max($years);
 
 $queryAllData = "SELECT date, omzet, pendapatan, pengeluaran FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY date ASC";
 $result2 = $conn->prepare($queryAllData);
@@ -29,10 +33,10 @@ $monthlyReport = '';
 foreach ($allData as $row) {
   $monthlyReport .= '
     <tr>
-        <td>' . $row['date'] . '</td>
-        <td>' . $row['omzet'] . '</td>
-        <td>' . $row['pendapatan'] . '</td>
-        <td>' . $row['pengeluaran'] . '</td>
+        <td>' . date('F Y', strtotime($row['date'])) . '</td>
+        <td>' . 'Rp ' . number_format($row['omzet'], 0, ',', '.') . '</td>
+        <td>' . 'Rp ' . number_format($row['pendapatan'], 0, ',', '.') . '</td>
+        <td>' . 'Rp ' . number_format($row['pengeluaran'], 0, ',', '.') . '</td>
     </tr>
     ';
 }
@@ -234,6 +238,25 @@ foreach ($allData as $row) {
       background-color: #67b0d1;
       color: #2f4d5a;
     }
+
+    .tabelPendapatan {
+      border-radius: 5px; /* Sesuaikan nilai dengan keinginan Anda */
+      overflow: hidden;   /* Pastikan overflow diatur ke hidden agar sudut yang membulat dapat terlihat */
+    }
+
+    .table-centered {
+      display: table;
+      margin: 0 auto;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .center-contents {
+      text-align: center;
+    }
+
   </style>
 </head>
 
@@ -419,19 +442,21 @@ foreach ($allData as $row) {
       <div class="section-title" data-aos="fade-in" data-aos-delay="100">
         <h2>Tabel Pendapatan</h2>
       </div>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col" style="text-align: center;">Date</th>
-            <th scope="col" style="text-align: center;">Omzet</th>
-            <th scope="col" style="text-align: center;">Pendapatan</th>
-            <th scope="col" style="text-align: center;">Pengeluaran</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php echo $monthlyReport; ?>
-        </tbody>
-      </table>
+      <div class="table-responsive rounded-table">
+        <table class="table table-bordered table-striped table-centered tabelPendapatan">
+          <thead>
+            <tr>
+              <th scope="col" class="center-contents">Date</th>
+              <th scope="col" class="center-contents">Omzet</th>
+              <th scope="col" class="center-contents">Pendapatan</th>
+              <th scope="col" class="center-contents">Pengeluaran</th>
+            </tr>
+          </thead>
+          <tbody class="center-contents">
+            <?php echo $monthlyReport; ?>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- End of Tabel Pendapatan -->
@@ -447,10 +472,10 @@ foreach ($allData as $row) {
         <div class="col-lg-6">
           <div class="btn-group rounded-pill" role="group" aria-label="Filter buttons">
             <button type="button" class="btn btn-filter" data-filter="all">All</button>
-            <button type="button" class="btn btn-filter" data-filter="omzet">Omzet</button>
-            <button type="button" class="btn btn-filter" data-filter="pendapatan">Pendapatan</button>
-            <button type="button" class="btn btn-filter" data-filter="pengeluaran">Pengeluaran</button>
-            <button type="button" class="btn btn-filter" data-filter="penjualan">Penjualan</button>
+            <button type="button" class="btn btn-filter" data-filter="Omzet">Omzet</button>
+            <button type="button" class="btn btn-filter" data-filter="Pendapatan">Pendapatan</button>
+            <button type="button" class="btn btn-filter" data-filter="Pengeluaran">Pengeluaran</button>
+            <button type="button" class="btn btn-filter" data-filter="Penjualan">Penjualan</button>
           </div>
         </div>
 
@@ -557,7 +582,17 @@ foreach ($allData as $row) {
 
                 <label for="">Nama Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
+                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk" required>
+                </div>
+
+                <label for="">Deskripsi Produk</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" style="height: 60px;" placeholder="" required>
+                </div>
+
+                <label for="">Harga Produk</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" style="height: 60px;" placeholder="Rp 35.000" required>
                 </div>
 
                 <label for="">Upload Foto Produk</label>
@@ -642,76 +677,15 @@ foreach ($allData as $row) {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <script src="https://cdn.canvasjs.com/ga/canvasjs.min.js"></script>
-  <script src="https://cdn.canvasjs.com/ga/canvasjs.stock.min.js"></script>
-  <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+  <!-- <script src="https://cdn.canvasjs.com/ga/canvasjs.stock.min.js"></script> -->
+  <!-- <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script> -->
 
   <script>
-    // const xValues4 = ["Buku", "Tas", "Baju", "Pensil", "Jepit"];
-    // const yValues4 = [55, 49, 44, 24, 15];
-    // const barColors = [
-    //   "#b91d47",
-    //   "#00aba9",
-    //   "#2b5797",
-    //   "#e8c3b9",
-    //   "#1e7145"
-    // ];
-
-    // new Chart("chartProduk", {
-    //   type: "pie",
-    //   data: {
-    //     labels: xValues4,
-    //     datasets: [{
-    //       backgroundColor: barColors,
-    //       data: yValues4
-    //     }]
-    //   },
-    //   options: {
-    //     title: {
-    //       display: true,
-    //       text: "Top 5 Penjualan Produk Tahun 2023",
-    //       fontColor: 'grey',
-    //       fontSize: 28,
-    //       font: {
-    //         // family: "Raleway",
-    //         // weight: 'bold',
-    //       }
-    //     }
-    //   }
-    // });
-
-
-    // Grafik
-    // $('[id^="chartPendapatan"]').show();
-    // $('[id^="chartPengeluaran"]').show();
-    // $('[id^="chartOmzet"]').show();
-    // $('[id^="chartProduk"]').show();
-
-    // $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
-
-    // $('.btn-filter').click(function() {
-    //   $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
-    //   $('canvas').css({
-    //     'width': '',
-    //     'height': ''
-    //   });
-    //   var filter = $(this).data('filter');
-
-    //   if (filter !== 'all') {
-    //     $('.grafik-' + filter).show();
-    //     $('.grafik-' + filter + ' canvas').css({
-    //       'width': '800px',
-    //       'height': '400px'
-    //     });
-    //   } else {
-    //     $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
-    //   }
-    // });
+    
     function generateCanvas(xData, yData, chartId, chartTitle) {
-      // chart = '<div class="col-lg-6 mx-auto"><canvas class="chart-canvas ' + chartId + '" id="' + chartId + '"></canvas></div>';
       var chart = '<div class="col-lg-6 mx-auto">';
       chart += '<canvas id="' + chartId + '"></canvas>'
       chart += '</div>';
-      // document.getElementById('grafik-laporan').innerHTML += chart
       var grafik_laporan = $('#grafik-laporan');
       grafik_laporan.append(chart);
       generateLineChart(xData, yData, chartId, chartTitle)
@@ -742,6 +716,58 @@ foreach ($allData as $row) {
               }
             }],
           },
+          title: {
+            display: true,
+            text: chartTitle,
+            fontColor: 'grey',
+            fontSize: 20
+          }
+        }
+      });
+    }
+
+    // new Chart("chartProduk", {
+    //   type: "pie",
+    //   data: {
+    //     labels: xValues4,
+    //     datasets: [{
+    //       backgroundColor: barColors,
+    //       data: yValues4
+    //     }]
+    //   },
+    //   options: {
+    //     title: {
+    //       display: true,
+    //       text: "Top 5 Penjualan Produk Tahun 2023",
+    //       fontColor: 'grey',
+    //       fontSize: 28,
+    //       font: {
+    //         // family: "Raleway",
+    //         // weight: 'bold',
+    //       }
+    //     }
+    //   }
+    // });
+
+    function generatePieChart(xData, yData, chartId, chartTitle) {
+      const barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+      ];
+
+      new Chart(chartId, {
+        type: "pie",
+        data: {
+          labels: xData,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yData
+          }]
+        },
+        options: {
           title: {
             display: true,
             text: chartTitle,
@@ -796,48 +822,100 @@ foreach ($allData as $row) {
         $('#endYearFilter').text(selectedEndYear);
       });
 
+      $('.btn-filter').on('click', function() {
+        startYear = parseInt(selectedStartYear, 10);
+        endYear = parseInt(selectedEndYear, 10);
+        $('[id^="chartPendapatan"]').hide();
+        $('[id^="chartPengeluaran"]').hide();
+        $('[id^="chartOmzet"]').hide();
+        // $('[id^="chartProduk"]').hide();
+
+        $('canvas').css({
+          'width': '',
+          'height': ''
+        });
+        var filter = $(this).data('filter');
+        console.log(filter)
+        if (filter !== 'all') {
+          $('[id^="chart' + filter + '"]').show();
+          $('[id^="chart' + filter + '"] canvas').css({
+              'width': '800px',
+              'height': '400px'
+          });
+        } else {
+          $('[id^="chartPendapatan"]').show();
+          $('[id^="chartPengeluaran"]').show();
+          $('[id^="chartOmzet"]').show();
+          // $('[id^="chartProduk"]').show();
+        }
+      });
+
+      // $('.btn-filter').click(function() {
+      //   $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
+      //   $('canvas').css({
+      //     'width': '',
+      //     'height': ''
+      //   });
+      //   var filter = $(this).data('filter');
+
+      //   if (filter !== 'all') {
+      //     $('.grafik-' + filter).show();
+      //     $('.grafik-' + filter + ' canvas').css({
+      //       'width': '800px',
+      //       'height': '400px'
+      //     });
+      //   } else {
+      //     $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
+      //   }
+      // });
+
       $('#goFilter').on('click', function() {
-        var grafik_laporan = $('#grafik-laporan');
-        grafik_laporan.empty();
-        var id = "<?php echo $_SESSION['login']; ?>";
         if (selectedStartYear != '' && selectedEndYear != '') {
           startYear = parseInt(selectedStartYear, 10);
           endYear = parseInt(selectedEndYear, 10);
-          $.ajax({
-            url: "getReportProcess.php",
-            type: "POST",
-            data: {
-              id: id,
-              startYear: startYear,
-              endYear: endYear
-            },
-            success: function(result) {
+          $('[id^="chartPendapatan"]').hide();
+          $('[id^="chartPengeluaran"]').hide();
+          $('[id^="chartOmzet"]').hide();
+          // $('[id^="chartProduk"]').hide();
 
-              var response = JSON.parse(result);
-              Object.keys(response.dataByYear).forEach(function(year) {
-                var dataBulan = response.dataByYear[year].bulan;
-                var dataOmzet = response.dataByYear[year].omzet;
-                var dataPendapatan = response.dataByYear[year].pendapatan;
-                var dataPengeluaran = response.dataByYear[year].pengeluaran;
-
-                generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year);
-                generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year);
-                generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year);
-
-                console.log("generateCanvas called for year:", year);
-
-                $('[id^="chartPendapatan"]').show();
-                $('[id^="chartPengeluaran"]').show();
-                $('[id^="chartOmzet"]').show();
-              });
-
-
-            }
-          });
+          $('[id^="chartPendapatan"][id*="' + startYear + '"][id*="' + endYear + '"]').show();
+          $('[id^="chartPengeluaran"][id*="' + startYear + '"][id*="' + endYear + '"]').show();
+          $('[id^="chartOmzet"][id*="' + startYear + '"][id*="' + endYear + '"]').show();
+          // $('[id^="chartProduk"][id*="' + startYear + '"][id*="' + endYear + '"]').show();
         } else {
           // alert
         }
       });
+
+      var minYears = <?php echo $minYears; ?>;
+      var maxYears = <?php echo $maxYears; ?>;
+      var grafik_laporan = $('#grafik-laporan');
+      grafik_laporan.empty();
+
+      $.ajax({
+        url: "getReportProcess.php",
+        type: "POST",
+        data: {
+          id: id,
+          startYear: minYears,
+          endYear: maxYears
+        },
+        success: function(result) {
+
+          var response = JSON.parse(result);
+          Object.keys(response.dataByYear).forEach(function(year) {
+            var dataBulan = response.dataByYear[year].bulan;
+            var dataOmzet = response.dataByYear[year].omzet;
+            var dataPendapatan = response.dataByYear[year].pendapatan;
+            var dataPengeluaran = response.dataByYear[year].pengeluaran;
+
+            generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year);
+            generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year);
+            generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year);
+          });
+        }
+      });
+      
 
 
 
