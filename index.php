@@ -236,27 +236,8 @@ $stmt2 = $conn->query($sql)->fetchAll();
     </div>
     <!-- End News Section -->
 
-    <!-- ======= About Section ======= -->
-    <div id="about" class="about">
-      <div class="container">
-        <div class="row no-gutters">
-          <div class="content col-xl-6 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="content">
-              <h3>Pencatatan dan Pelaporan UMKM</h3>
-              <p>
-                Daftarkan UMKM Anda sekarang juga !
-              </p>
-              <a href="register.php" class="about-btn">Register UMKM<i class="bx bx-chevron-right"></i></a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div><!-- End About Section -->
-
-    <!-- ======= Register Section ======= -->
-    <section id="register" class="register">
+        <!-- ======= Syarat & Ketentuan Section ======= -->
+        <section id="register" class="register">
       <div class="container">
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Syarat dan Ketentuan</h2>
@@ -293,6 +274,27 @@ $stmt2 = $conn->query($sql)->fetchAll();
 
       </div>
     </section><!-- End Register Section -->
+
+    <!-- ======= About Section ======= -->
+    <div id="about" class="about">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="content col-xl-6 d-flex align-items-stretch" data-aos="fade-up">
+            <div class="content">
+              <h3>Pencatatan dan Pelaporan UMKM</h3>
+              <p>
+                Daftarkan UMKM Anda sekarang juga !
+              </p>
+              <a href="register.php" class="about-btn">Register UMKM<i class="bx bx-chevron-right"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div><!-- End About Section -->
+
+
 
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts  section-bg" data-aos="fade-in" data-aos-delay="100">
