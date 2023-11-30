@@ -40,6 +40,9 @@ foreach ($allData as $row) {
     </tr>
     ';
 }
+
+$sql = "SELECT * FROM bantuan WHERE id_umkm = $id AND status = 1";
+$stmt2 = $conn->query($sql)->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -82,6 +85,46 @@ foreach ($allData as $row) {
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 
   <style>
+    .modal-dialog {
+      position: fixed;
+      margin: auto;
+      width: 320px;
+      height: 100%;
+      right: 0px;
+    }
+
+    .modal-content {
+      height: 100%;
+    }
+
+    li a:hover {
+      cursor: pointer;
+    }
+
+    .subheader {
+      color: grey;
+      font-size: 13px;
+    }
+
+    .notif {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .modal-body .row.content {
+      background-color: #E0F4FF;
+      /* background-size: cover; */
+      padding-top: 15px;
+      padding-bottom: 15px;
+      /* border-bottom: 1px solid #808080; */
+    }
+
+    .isi-notif {
+      font-size: 12px;
+      font-weight: normal;
+      font-family: "Open Sans", sans-serif;
+    }
+
     .scrollable-container {
       display: flex;
       overflow-x: auto;
@@ -240,8 +283,10 @@ foreach ($allData as $row) {
     }
 
     .tabelPendapatan {
-      border-radius: 5px; /* Sesuaikan nilai dengan keinginan Anda */
-      overflow: hidden;   /* Pastikan overflow diatur ke hidden agar sudut yang membulat dapat terlihat */
+      border-radius: 5px;
+      /* Sesuaikan nilai dengan keinginan Anda */
+      overflow: hidden;
+      /* Pastikan overflow diatur ke hidden agar sudut yang membulat dapat terlihat */
     }
 
     .table-centered {
@@ -256,7 +301,6 @@ foreach ($allData as $row) {
     .center-contents {
       text-align: center;
     }
-
   </style>
 </head>
 
@@ -266,7 +310,49 @@ foreach ($allData as $row) {
 
 
   <main id="main">
+    <!-- Modal Pesan -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pesan</h5>
+            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close" style="background-color: white; border:none;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-3">
+              <b class="header">Untuk Kamu</b>
+            </div>
 
+            <?php
+            if ($stmt2 != null) {
+              foreach ($stmt2 as $row2) {
+                if ($row2['status'] == 1) {
+            ?>
+                  <div class="row content">
+                    <span class="subheader mb-1">Konfirmasi Bantuan <?php echo $row2['tanggal'] ?></span>
+                    <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
+                    <span class="isi-notif">Harap check pada section bantuan, Terimakasih</span>
+                  </div>
+              <?php
+                }
+              }
+            } else {
+              ?>
+              <p>Belum ada notif</p>
+            <?php
+            }
+            ?>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Lihat Selengkapnya</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal Pesan -->
     <section id="akun">
       <div class="container">
         <div class="row">
@@ -681,7 +767,6 @@ foreach ($allData as $row) {
   <!-- <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script> -->
 
   <script>
-    
     function generateCanvas(xData, yData, chartId, chartTitle) {
       var chart = '<div class="col-lg-6 mx-auto">';
       chart += '<canvas id="' + chartId + '"></canvas>'
@@ -839,8 +924,8 @@ foreach ($allData as $row) {
         if (filter !== 'all') {
           $('[id^="chart' + filter + '"]').show();
           $('[id^="chart' + filter + '"] canvas').css({
-              'width': '800px',
-              'height': '400px'
+            'width': '800px',
+            'height': '400px'
           });
         } else {
           $('[id^="chartPendapatan"]').show();
@@ -915,7 +1000,7 @@ foreach ($allData as $row) {
           });
         }
       });
-      
+
 
 
 

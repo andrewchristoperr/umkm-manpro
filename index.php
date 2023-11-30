@@ -16,9 +16,6 @@ if (isset($_SESSION['kategori'])) {
   $stmt = $conn->query($query)->fetchAll();
 }
 
-
-$sql = "SELECT * FROM bantuan WHERE id_umkm = 1";
-$stmt2 = $conn->query($sql)->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,45 +58,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
   <style>
-    .modal-dialog {
-      position: fixed;
-      margin: auto;
-      width: 320px;
-      height: 100%;
-      right: 0px;
-    }
-
-    .modal-content {
-      height: 100%;
-    }
-
-    li a:hover {
-      cursor: pointer;
-    }
-
-    .subheader {
-      color: grey;
-      font-size: 13px;
-    }
-
-    .notif {
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .modal-body .row.content {
-      background-color: #E0F4FF;
-      /* background-size: cover; */
-      padding-top: 15px;
-      padding-bottom: 15px;
-      /* border-bottom: 1px solid #808080; */
-    }
-
-    .isi-notif {
-      font-size: 12px;
-      font-weight: normal;
-      font-family: "Open Sans", sans-serif;
-    }
+    
   </style>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -116,48 +75,6 @@ $stmt2 = $conn->query($sql)->fetchAll();
   }
   ?>
 
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Pesan</h5>
-          <button type="button" class="close btn" data-dismiss="modal" aria-label="Close" style="background-color: white; border:none;">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row mb-3">
-            <b class="header">Untuk Kamu</b>
-          </div>
-
-          <?php
-          if ($stmt2 != null) {
-            foreach ($stmt2 as $row2) {
-              if ($row2['status'] == 1) {
-          ?>
-                <div class="row content">
-                  <span class="subheader mb-1">Konfirmasi Bantuan <?php echo $row2['tanggal'] ?></span>
-                  <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
-                  <span class="isi-notif">Harap check pada section bantuan, Terimakasih</span>
-                </div>
-            <?php
-              }
-            }
-          } else {
-            ?>
-            <p>Belum ada notif</p>
-          <?php
-          }
-          ?>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Lihat Selengkapnya</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div id="main">
     <!-- ======= News Section ======= -->
