@@ -11,7 +11,6 @@
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <li><a class="scroll-umkm" href="index.php#count-box">Daftar UMKM</a></li>
           <li><a class="nav-link scrollto" href="profile.php">Profile</a></li>
-          <li><a class="nav-link scrollto" data-toggle="modal" data-target="#exampleModal">Pesan</a></li>
           <li><a class="nav-link scrollto" href="login.php">Login</a></li>
 
           <li>

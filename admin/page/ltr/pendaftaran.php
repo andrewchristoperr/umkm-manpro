@@ -1,7 +1,7 @@
 <?php
 require "../../../connect.php";
 
-$sql = "SELECT * FROM umkmm WHERE verification_status = 0";
+$sql = "SELECT * FROM umkmm WHERE verification_status = 2";
 $stmt = $conn->query($sql)->fetchAll();
 
 ?>
@@ -42,6 +42,17 @@ $stmt = $conn->query($sql)->fetchAll();
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <!-- JQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+        .page-wrapper {
+            background: #f2f4f5;
+            position: relative;
+            transition: 0.2s ease-in;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -167,16 +178,28 @@ $stmt = $conn->query($sql)->fetchAll();
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="umkm.php" aria-expanded="false">
                                 <i class="mdi mdi-folder-multiple"></i>
-                                <span class="hide-menu">Daftar UMKM</span>
+                                <span class="hide-menu">List UMKM</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="umkm_tolak.php" aria-expanded="false">
+                                <i class="mdi mdi-folder-multiple"></i>
+                                <span class="hide-menu">List UMKM yang tertolak</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="bantuan.php" aria-expanded="false">
-                                <i class="mdi mdi-archive"></i>
+                                <i class="mdi mdi-folder-multiple"></i>
                                 <span class="hide-menu">Bantuan</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../../logout.php" aria-expanded="false">
+                                <i class="mdi mdi-archive"></i>
+                                <span class="hide-menu">Logout</span>
+                            </a>
+                        </li>
+                        <!-- <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account.html" aria-expanded="false">
                                 <i class="mdi mdi-account"></i>
                                 <span class="hide-menu">Akun</span>
@@ -187,7 +210,7 @@ $stmt = $conn->query($sql)->fetchAll();
                                 <i class="mdi mdi-file"></i>
                                 <span class="hide-menu">Blank</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -236,14 +259,14 @@ $stmt = $conn->query($sql)->fetchAll();
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body">
+                            <!-- <div class="card-body">
                                 <h4 class="card-title">Tabel Pendaftaran</h4>
                                 <h6 class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                                     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
+                            </div> -->
                             <div class="table-responsive" style="padding: 10px;">
                                 <table class="table table-hover nowrap" id="tablePendaftaran" style="width: 100%;">
-                                    <thead id="thead-tablePendaftaran">
+                                    <thead id="thead-tablePendaftaran" class="nowrap" style="width: 100%;">
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Tanggal Pendaftaran</th>
@@ -252,7 +275,11 @@ $stmt = $conn->query($sql)->fetchAll();
                                             <th scope="col">Alamat</th>
                                             <th scope="col">Kecamatan</th>
                                             <th scope="col">Kategori</th>
-                                            <th scope="col">Foto UMKM</th>
+                                            <th scope="col">Deskripsi UMKM</th>
+                                            <th scope="col">Formulir</th>
+                                            <th scope="col">Surat Pengantar</th>
+                                            <th scope="col">KTP</th>
+                                            <th scope="col">NPWP</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -260,21 +287,26 @@ $stmt = $conn->query($sql)->fetchAll();
                                         <?php
                                         if ($stmt != null) {
                                             foreach ($stmt as $data) {
+                                                echo '<tr>
+                                                        <td>' . $data['id'] . '</td>
+                                                        <td>' . $data['tanggal_pendaftaran'] . '</td>
+                                                        <td>' . $data['nama_umkm'] . '</td>
+                                                        <td>' . $data['notelp_umkm'] . '</td>
+                                                        <td>' . $data['alamat_umkm'] . '</td>
+                                                        <td>' . $data['kecamatan'] . '</td>
+                                                        <td>' . $data['kategori_umkm'] . '</td>
+                                                        <td>' . $data['deskripsi_umkm'] . '</td>
+                                                        <td>' . $data['formulir'] . '</td>
+                                                        <td>' . $data['surat_pengantar'] . '</td>
+                                                        <td>' . $data['ktp'] . '</td>
+                                                        <td>' . $data['npwp'] . '</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-outline-success" onclick = "terima(' . $data['id'] . ')">Terima</button>
+                                                            <button type="button" class="btn btn-outline-danger" onclick = "tolak(' . $data['id'] . ')">Tolak</button>
+                                                        </td>
+                                                        </tr>';
                                         ?>
-                                                <tr>
-                                                    <td><?php echo $data['id'] ?></td>
-                                                    <td><?php echo $data['tanggal_pendaftaran'] ?></td>
-                                                    <td><?php echo $data['nama_umkm'] ?></td>
-                                                    <td><?php echo $data['notelp_umkm'] ?></td>
-                                                    <td><?php echo $data['alamat_umkm'] ?></td>
-                                                    <td><?php echo $data['kecamatan'] ?></td>
-                                                    <td><?php echo $data['kategori_umkm'] ?></td>
-                                                    <td><img style="height: 90px; width: 150px;" src="../../../image.php?id=<?php echo $data['id'] ?>"></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-success">Terima</button>
-                                                        <button type="button" class="btn btn-outline-danger">Tolak</button>
-                                                    </td>
-                                                </tr>
+
 
                                         <?php
                                             }
@@ -336,9 +368,35 @@ $stmt = $conn->query($sql)->fetchAll();
     <script>
         let table = new DataTable('#tablePendaftaran', {
             paging: true,
-
+            scrollX: true
 
         });
+
+        function tolak(id) {
+            $.ajax({
+                url: 'api/prosesTolakVerifikasi.php',
+                method: "POST",
+                data: {
+                    id: id
+                },
+                success: function(result) {
+                    document.getElementById('tbody-tablePendaftaran').innerHTML = result;
+                }
+            })
+        }
+
+        function terima(id) {
+            $.ajax({
+                url: api / 'prosesVerifikasi.php',
+                method: "POST",
+                data: {
+                    id: id
+                },
+                success: function(result) {
+                    document.getElementById('tbody-tablePendaftaran').innerHTML = result;
+                }
+            })
+        }
     </script>
 </body>
 

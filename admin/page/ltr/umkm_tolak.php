@@ -225,7 +225,7 @@ $stmt = $conn->query($sql)->fetchAll();
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Daftar UMKM yang telah terverifikasi</h4>
+                        <h4 class="page-title">Daftar UMKM yang tertolak</h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -260,45 +260,7 @@ $stmt = $conn->query($sql)->fetchAll();
                                     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div> -->
                             <div class="table-responsive" style="padding: 10px;">
-                                <table class="table table-hover nowrap" id="tablePendaftaran" style="width: 100%;">
-                                    <thead id="thead-tablePendaftaran">
-                                        <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Tanggal Pendaftaran</th>
-                                            <th scope="col">Nama UMKM</th>
-                                            <th scope="col">No telp</th>
-                                            <th scope="col">Alamat</th>
-                                            <th scope="col">Kecamatan</th>
-                                            <th scope="col">Kategori</th>
-                                            <th scope="col">Foto UMKM</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody-tablePendaftaran">
-                                        <?php
-                                        if ($stmt != null) {
-                                            $no = 1;
-                                            foreach ($stmt as $data) {
-                                        ?>
-                                                <tr>
-                                                    <td><?php echo $no ?></td>
-                                                    <?php $no++ ?>
-                                                    <td><?php echo $data['tanggal_pendaftaran'] ?></td>
-                                                    <td><?php echo $data['nama_umkm'] ?></td>
-                                                    <td><?php echo $data['notelp_umkm'] ?></td>
-                                                    <td><?php echo $data['alamat_umkm'] ?></td>
-                                                    <td><?php echo $data['kecamatan'] ?></td>
-                                                    <td><?php echo $data['kategori_umkm'] ?></td>
-                                                    <td><img style="height: 90px; width: 150px;" src="../../../image.php?id=<?php echo $data['id'] ?>"></td>
-
-                                                </tr>
-
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                
                             </div>
                         </div>
                     </div>
