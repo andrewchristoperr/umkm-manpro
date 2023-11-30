@@ -72,7 +72,7 @@ $stmt = $conn->query($sql)->fetchAll();
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
-                        <a href="pendaftaran.php" class="logo">
+                        <a href="pendaftaran.html" class="logo">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                             </b>
@@ -152,168 +152,177 @@ $stmt = $conn->query($sql)->fetchAll();
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin5">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pendaftaran.php" aria-expanded="false">
+        <div class="row">
+            <div class="col-sm">
+                <aside class="left-sidebar" data-sidebarbg="skin5">
+                    <!-- Sidebar scroll-->
+                    <div class="scroll-sidebar">
+                        <!-- Sidebar navigation-->
+                        <nav class="sidebar-nav">
+                            <ul id="sidebarnav">
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pendaftaran.php" aria-expanded="false">
+                                        <i class="mdi mdi-folder-multiple"></i>
+                                        <span class="hide-menu">Pendaftaran</span>
+                                    </a>
+                                </li>
+                                <!-- <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pendapatan.php"
+                                aria-expanded="false">
                                 <i class="mdi mdi-folder-multiple"></i>
-                                <span class="hide-menu">Pendaftaran</span>
+                                <span class="hide-menu">Pendapatan</span>
                             </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="umkm.php" aria-expanded="false">
-                                <i class="mdi mdi-folder-multiple"></i>
-                                <span class="hide-menu">Daftar UMKM</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="bantuan.php" aria-expanded="false">
-                                <i class="mdi mdi-archive"></i>
-                                <span class="hide-menu">Bantuan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account.html" aria-expanded="false">
-                                <i class="mdi mdi-account"></i>
-                                <span class="hide-menu">Akun</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.html" aria-expanded="false">
-                                <i class="mdi mdi-file"></i>
-                                <span class="hide-menu">Blank</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title">Verifikasi Pendaftaran UMKM</h4>
+                        </li> -->
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="bantuan.html" aria-expanded="false">
+                                        <i class="mdi mdi-archive"></i>
+                                        <span class="hide-menu">Bantuan</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account.html" aria-expanded="false">
+                                        <i class="mdi mdi-account"></i>
+                                        <span class="hide-menu">Akun</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.html" aria-expanded="false">
+                                        <i class="mdi mdi-file"></i>
+                                        <span class="hide-menu">Blank</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- End Sidebar navigation -->
                     </div>
-                    <div class="col-7 align-self-center">
-                        <div class="d-flex align-items-center justify-content-end">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="#">Kecamatan</a>
-                                    </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Pendaftaran</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
+                    <!-- End Sidebar scroll-->
+                </aside>
+                <!-- ============================================================== -->
+                <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Tabel Pendaftaran</h4>
-                                <h6 class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
-                            <div class="table-responsive" style="padding: 10px;">
-                                <table class="table table-hover nowrap" id="tablePendaftaran" style="width: 100%;">
-                                    <thead id="thead-tablePendaftaran">
-                                        <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Tanggal Pendaftaran</th>
-                                            <th scope="col">Nama UMKM</th>
-                                            <th scope="col">No telp</th>
-                                            <th scope="col">Alamat</th>
-                                            <th scope="col">Kecamatan</th>
-                                            <th scope="col">Kategori</th>
-                                            <th scope="col">Foto UMKM</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody-tablePendaftaran">
-                                        <?php
-                                        if ($stmt != null) {
-                                            foreach ($stmt as $data) {
-                                        ?>
-                                                <tr>
-                                                    <td><?php echo $data['id'] ?></td>
-                                                    <td><?php echo $data['tanggal_pendaftaran'] ?></td>
-                                                    <td><?php echo $data['nama_umkm'] ?></td>
-                                                    <td><?php echo $data['notelp_umkm'] ?></td>
-                                                    <td><?php echo $data['alamat_umkm'] ?></td>
-                                                    <td><?php echo $data['kecamatan'] ?></td>
-                                                    <td><?php echo $data['kategori_umkm'] ?></td>
-                                                    <td><img style="height: 90px; width: 150px;" src="../../../image.php?id=<?php echo $data['id'] ?>"></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-success">Terima</button>
-                                                        <button type="button" class="btn btn-outline-danger">Tolak</button>
-                                                    </td>
-                                                </tr>
 
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+            <div class="col">
+                <!-- Page wrapper  -->
+                <!-- ============================================================== -->
+                <div class="page-wrapper">
+                    <!-- ============================================================== -->
+                    <!-- Bread crumb and right sidebar toggle -->
+                    <!-- ============================================================== -->
+                    <div class="page-breadcrumb">
+                        <div class="row">
+                            <div class="col-5 align-self-center">
+                                <h4 class="page-title">Verifikasi Pendaftaran UMKM</h4>
+                            </div>
+                            <div class="col-7 align-self-center">
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="#">Kecamatan</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Pendaftaran</li>
+                                        </ol>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- ============================================================== -->
+                    <!-- End Bread crumb and right sidebar toggle -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Container fluid  -->
+                    <!-- ============================================================== -->
+                    <div class="container-fluid">
+                        <!-- ============================================================== -->
+                        <!-- Start Page Content -->
+                        <!-- ============================================================== -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Tabel Pendaftaran</h4>
+                                        <h6 class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </div>
+                                    <div class="table-responsive" style="padding: 10px;">
+                                        <table class="table table-hover nowrap" id="tablePendaftaran" style="width: 100%;">
+                                            <thead id="thead-tablePendaftaran">
+                                                <tr>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Tanggal Pendaftaran</th>
+                                                    <th scope="col">Nama UMKM</th>
+                                                    <th scope="col">No telp</th>
+                                                    <th scope="col">Alamat</th>
+                                                    <th scope="col">Kecamatan</th>
+                                                    <th scope="col">Kategori</th>
+                                                    <th scope="col">Foto UMKM</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody-tablePendaftaran">
+                                                <?php
+                                                if ($stmt != null) {
+                                                    foreach ($stmt as $data) {
+                                                ?>
+                                                        <tr>
+                                                            <td><?php echo $data['id'] ?></td>
+                                                            <td><?php echo $data['tanggal_pendaftaran'] ?></td>
+                                                            <td><?php echo $data['nama_umkm'] ?></td>
+                                                            <td><?php echo $data['notelp_umkm'] ?></td>
+                                                            <td><?php echo $data['alamat_umkm'] ?></td>
+                                                            <td><?php echo $data['kecamatan'] ?></td>
+                                                            <td><?php echo $data['kategori_umkm'] ?></td>
+                                                            <td><img style="height: 90px; width: 150px;" src="../../../image.php?id=<?php echo $data['id'] ?>"></td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-outline-success">Terima</button>
+                                                                <button type="button" class="btn btn-outline-danger">Tolak</button>
+                                                            </td>
+                                                        </tr>
+
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- End PAge Content -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Right sidebar -->
+                        <!-- ============================================================== -->
+                        <!-- .right-sidebar -->
+                        <!-- ============================================================== -->
+                        <!-- End Right sidebar -->
+                        <!-- ============================================================== -->
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Container fluid  -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- footer -->
+                    <!-- ============================================================== -->
+                    <footer class="footer text-center">
+                        Semua Hak Dilindungi oleh Kecamatan. Dirancang dan Dikembangkan oleh
+                        <a href="">Kecamatan</a>.
+                    </footer>
+                    <!-- ============================================================== -->
+                    <!-- End footer -->
+                    <!-- ============================================================== -->
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
+                <!-- End Page wrapper  -->
                 <!-- ============================================================== -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                Semua Hak Dilindungi oleh Kecamatan. Dirancang dan Dikembangkan oleh
-                <a href="">Kecamatan</a>.
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -336,7 +345,7 @@ $stmt = $conn->query($sql)->fetchAll();
     <script>
         let table = new DataTable('#tablePendaftaran', {
             paging: true,
-
+            scrollX: true,
 
         });
     </script>

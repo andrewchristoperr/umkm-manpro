@@ -1,11 +1,3 @@
-<?php
-require "../../../connect.php";
-
-$sql = "SELECT * FROM umkmm WHERE verification_status = 0";
-$stmt = $conn->query($sql)->fetchAll();
-
-?>
-
 <!DOCTYPE html>
 <html dir="page" lang="en">
 
@@ -28,20 +20,7 @@ $stmt = $conn->query($sql)->fetchAll();
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
-
 <![endif]-->
-    <!-- Bootstraps
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 </head>
 
 <body>
@@ -72,7 +51,7 @@ $stmt = $conn->query($sql)->fetchAll();
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
-                        <a href="pendaftaran.php" class="logo">
+                        <a href="pendaftaran.html" class="logo">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                             </b>
@@ -207,7 +186,7 @@ $stmt = $conn->query($sql)->fetchAll();
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Verifikasi Pendaftaran UMKM</h4>
+                        <h4 class="page-title">Verifikasi Bantuan UMKM</h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -216,7 +195,7 @@ $stmt = $conn->query($sql)->fetchAll();
                                     <li class="breadcrumb-item">
                                         <a href="#">Kecamatan</a>
                                     </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Pendaftaran</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bantuan</li>
                                 </ol>
                             </nav>
                         </div>
@@ -237,49 +216,57 @@ $stmt = $conn->query($sql)->fetchAll();
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Tabel Pendaftaran</h4>
-                                <h6 class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                <h4 class="card-title">Tabel Bantuan</h4>
+                                <h6 class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
-                            <div class="table-responsive" style="padding: 10px;">
-                                <table class="table table-hover nowrap" id="tablePendaftaran" style="width: 100%;">
-                                    <thead id="thead-tablePendaftaran">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
                                         <tr>
                                             <th scope="col">No.</th>
-                                            <th scope="col">Tanggal Pendaftaran</th>
                                             <th scope="col">Nama UMKM</th>
-                                            <th scope="col">No telp</th>
-                                            <th scope="col">Alamat</th>
-                                            <th scope="col">Kecamatan</th>
-                                            <th scope="col">Kategori</th>
-                                            <th scope="col">Foto UMKM</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Tanggal Pengajuan</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tbody-tablePendaftaran">
-                                        <?php
-                                        if ($stmt != null) {
-                                            foreach ($stmt as $data) {
-                                        ?>
-                                                <tr>
-                                                    <td><?php echo $data['id'] ?></td>
-                                                    <td><?php echo $data['tanggal_pendaftaran'] ?></td>
-                                                    <td><?php echo $data['nama_umkm'] ?></td>
-                                                    <td><?php echo $data['notelp_umkm'] ?></td>
-                                                    <td><?php echo $data['alamat_umkm'] ?></td>
-                                                    <td><?php echo $data['kecamatan'] ?></td>
-                                                    <td><?php echo $data['kategori_umkm'] ?></td>
-                                                    <td><img style="height: 90px; width: 150px;" src="../../../image.php?id=<?php echo $data['id'] ?>"></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-success">Terima</button>
-                                                        <button type="button" class="btn btn-outline-danger">Tolak</button>
-                                                    </td>
-                                                </tr>
-
-                                        <?php
-                                            }
-                                        }
-                                        ?>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Pandan Wangi</td>
+                                            <td>06/09/2019</td>
+                                            <td>
+                                                <a href="detail-bantuan.html" class="btn btn-outline-info">Rincian</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-success">Terima</button>
+                                                <button type="button" class="btn btn-outline-danger">Tolak</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Pandan Wangi</td>
+                                            <td>06/09/2019</td>
+                                            <td>
+                                                <a href="detail-bantuan.html" class="btn btn-outline-info">Rincian</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-success">Terima</button>
+                                                <button type="button" class="btn btn-outline-danger">Tolak</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Pandan Wangi</td>
+                                            <td>06/09/2019</td>
+                                            <td>
+                                                <a href="detail-bantuan.html" class="btn btn-outline-info">Rincian</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-success">Terima</button>
+                                                <button type="button" class="btn btn-outline-danger">Tolak</button>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -332,14 +319,6 @@ $stmt = $conn->query($sql)->fetchAll();
     <script src="../../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../../dist/js/custom.min.js"></script>
-
-    <script>
-        let table = new DataTable('#tablePendaftaran', {
-            paging: true,
-
-
-        });
-    </script>
 </body>
 
 </html>
