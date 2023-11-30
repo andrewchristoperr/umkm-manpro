@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2023 at 03:05 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 30, 2023 at 04:04 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,7 @@ CREATE TABLE `bantuan` (
   `kebutuhan_spanduk` tinyint(4) DEFAULT NULL,
   `kebutuhan_lainnya_ket` text DEFAULT NULL,
   `keterangan` text DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0
+  `status` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -48,9 +48,9 @@ CREATE TABLE `bantuan` (
 --
 
 INSERT INTO `bantuan` (`id`, `id_umkm`, `tanggal`, `alasan`, `dokumen_pendukung`, `kebutuhan_dana_nominal`, `kebutuhan_dana_rincian`, `kebutuhan_tenda`, `kebutuhan_gerobak`, `kebutuhan_spanduk`, `kebutuhan_lainnya_ket`, `keterangan`, `status`) VALUES
-(1, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 1),
-(2, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 1),
-(3, 2, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 0),
+(1, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 2),
+(2, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 2),
+(3, 2, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 2),
 (4, 2, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 1),
 (5, 1, '2023-11-26', 'sakdkalad', 0x433a5c66616b65706174685c6265726974612d312e6a7067, 0, '', 0, 0, 0, '', 'mamama', 0),
 (6, 1, '2023-11-26', 'asdnaka', 0x433a5c66616b65706174685c6265726974612d312e6a7067, 0, '', 0, 0, 0, '', 'sss', 0),
