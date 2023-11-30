@@ -523,10 +523,57 @@ $stmt2 = $conn->query($sql)->fetchAll();
     </div>
     <!-- End Modal Edit Produk -->
 
-    <!-- Tabel Pendapatan -->
+
+    <!-- Tabel Bantuan -->
     <div class="container mt-5">
       <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-        <h2>Tabel Pendapatan</h2>
+        <h2>Pengajuan Bantuan</h2>
+      </div>
+        <table id="tableBantuan" class="table table-striped nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Alasan</th>
+                    <th>Kebutuhan</th>
+                    <th>Keterangan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sql = "SELECT * FROM bantuan";
+                $stmt = $conn->query($sql)->fetchAll();
+                $no = 1;
+                foreach ($stmt as $row) {
+                ?>
+                    <tr>
+                        <td><?php echo $no ?></td>
+                        <?php $no++ ?>
+                        <td><?php echo $row['tanggal'] ?></td>
+                        <td><?php echo $row['alasan'] ?></td>
+                        <td><?php echo $row['kebutuhan_dana_nominal'] ?></td>
+                        <td><?php echo $row['keterangan'] ?></td>
+                        <td><?php if ($row['status'] == 1) {
+                                echo 'Sudah Disetujui';
+                            } else {
+                                echo 'Belum Disetujui';
+                            }
+
+                            ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <!-- End of Tabel Bantuan -->
+
+    <!-- Tabel Laporan Keuangan -->
+    <div class="container mt-5">
+      <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+        <h2>Laporan Keuangan</h2>
       </div>
       <div class="table-responsive rounded-table">
         <table class="table table-bordered table-striped table-centered tabelPendapatan">
@@ -545,12 +592,12 @@ $stmt2 = $conn->query($sql)->fetchAll();
       </div>
     </div>
 
-    <!-- End of Tabel Pendapatan -->
+    <!-- End of Tabel Laporan Keuangan -->
 
-    <!-- Laporan -->
+    <!-- Grafik Laporan Keuangan -->
     <div class="container mt-5">
       <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-        <h2>Laporan Pendapatan</h2>
+        <h2>Grafik Laporan Keuangan</h2>
       </div>
 
       <div class="row px-3 align-items-center">
@@ -606,7 +653,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
 
         </div>
       </div>
-      <!-- End of Grafik -->
+      <!-- End of Grafik Laporan Keuangan -->
 
 
 
@@ -767,6 +814,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
   <!-- <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script> -->
 
   <script>
+    
     function generateCanvas(xData, yData, chartId, chartTitle) {
       var chart = '<div class="col-lg-6 mx-auto">';
       chart += '<canvas id="' + chartId + '"></canvas>'
