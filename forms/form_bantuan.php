@@ -5,7 +5,7 @@
 
     // send bantuan to database
 
-
+        $id = $_SESSION['login'];
         $alasan_pengajuan = $_POST['alasan_pengajuan'];
         $dokumen_pendukung = $_POST['dokumen_pendukung'];
         $nominal = $_POST['nominal'];
@@ -18,7 +18,7 @@
 
         $sql = "INSERT INTO bantuan (id_umkm,alasan, dokumen_pendukung, kebutuhan_dana_nominal, kebutuhan_dana_rincian, kebutuhan_tenda, kebutuhan_gerobak, kebutuhan_spanduk, kebutuhan_lainnya_ket,keterangan) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $query = $conn->prepare($sql);
-        $query->execute([1, $alasan_pengajuan, $dokumen_pendukung, $nominal, $rincian_dana, $tenda, $gerobak, $spanduk, $lainnya, $keterangan]);
+        $query->execute([$id, $alasan_pengajuan, $dokumen_pendukung, $nominal, $rincian_dana, $tenda, $gerobak, $spanduk, $lainnya, $keterangan]);
 
         echo json_encode(['status' => 'success', 'msg' => 'Berhasil Submit!']);
         // $stmt = $conn->query($query);
