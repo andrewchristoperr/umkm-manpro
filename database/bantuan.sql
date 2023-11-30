@@ -47,7 +47,18 @@ CREATE TABLE `bantuan` (
 --
 -- Indexes for dumped tables
 --
-
+INSERT INTO `bantuan` (`id`, `id_umkm`, `tanggal`, `alasan`, `dokumen_pendukung`, `kebutuhan_dana_nominal`, `kebutuhan_dana_rincian`, `kebutuhan_tenda`, `kebutuhan_gerobak`, `kebutuhan_spanduk`, `kebutuhan_lainnya_ket`, `keterangan`, `status`) VALUES
+(1, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 1),
+(2, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 1),
+(3, 2, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 0),
+(1, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 2),
+(2, 1, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 2),
+(3, 2, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 2),
+(4, 2, '2023-11-26', '', '', 0, '', 0, NULL, NULL, '', '', 1),
+(5, 1, '2023-11-26', 'sakdkalad', 0x433a5c66616b65706174685c6265726974612d312e6a7067, 0, '', 0, 0, 0, '', 'mamama', 0),
+(6, 1, '2023-11-26', 'asdnaka', 0x433a5c66616b65706174685c6265726974612d312e6a7067, 0, '', 0, 0, 0, '', 'sss', 0),
+(7, 1, '2023-11-26', 'skskks', 0x433a5c66616b65706174685c6265726974612d312e6a7067, 0, '', 1, 0, 1, '', '', 0),
+(8, 1, '2023-11-26', 'adakkas', 0x433a5c66616b65706174685c6265726974612d312e6a7067, 24998, 'untuk makan makan', 0, 0, 0, 'tidur', '', 0);
 --
 -- Indexes for table `bantuan`
 --
