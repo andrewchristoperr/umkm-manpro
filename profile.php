@@ -122,7 +122,7 @@ $terjualByYearJSON = json_encode($terjualByYear);
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
   <style>
-    .modal-dialog {
+    .modal-pesan {
       position: fixed;
       margin: auto;
       width: 320px;
@@ -329,7 +329,7 @@ $terjualByYearJSON = json_encode($terjualByYear);
   <main id="main">
     <!-- Modal Pesan -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-pesan" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Pesan</h5>
@@ -525,54 +525,6 @@ $terjualByYearJSON = json_encode($terjualByYear);
     </div>
     <!-- End Modal Edit Produk -->
 
-
-    <!-- Tabel Bantuan -->
-    <div class="container mt-5">
-      <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-        <h2>Pengajuan Bantuan</h2>
-      </div>
-        <table id="tableBantuan" class="table table-striped nowrap" style="width:100%">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Alasan</th>
-                    <th>Kebutuhan</th>
-                    <th>Keterangan</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $sql = "SELECT * FROM bantuan";
-                $stmt = $conn->query($sql)->fetchAll();
-                $no = 1;
-                foreach ($stmt as $row) {
-                ?>
-                    <tr>
-                        <td><?php echo $no ?></td>
-                        <?php $no++ ?>
-                        
-                        <td><?php echo $row['tanggal'] ?></td>
-                        <td><?php echo $row['alasan'] ?></td>
-                        <td><?php echo $row['kebutuhan_dana_nominal'] ?></td>
-                        <td><?php echo $row['keterangan'] ?></td>
-                        <td><?php if ($row['status'] == 1) {
-                                echo 'Sudah Disetujui';
-                            } else {
-                                echo 'Belum Disetujui';
-                            }
-
-                            ?></td>
-                    </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-    <!-- End of Tabel Bantuan -->
-
     <!-- Tabel Laporan Keuangan -->
     <div class="container mt-5">
       <div class="section-title" data-aos="fade-in" data-aos-delay="100">
@@ -658,6 +610,53 @@ $terjualByYearJSON = json_encode($terjualByYear);
       </div>
       <!-- End of Grafik Laporan Keuangan -->
 
+      <!-- Tabel Bantuan -->
+    <div class="container mt-5">
+      <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+        <h2>Pengajuan Bantuan</h2>
+      </div>
+        <table id="tableBantuan" class="table table-striped nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Alasan</th>
+                    <th>Kebutuhan</th>
+                    <th>Keterangan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sql = "SELECT * FROM bantuan";
+                $stmt = $conn->query($sql)->fetchAll();
+                $no = 1;
+                foreach ($stmt as $row) {
+                ?>
+                    <tr>
+                        <td><?php echo $no ?></td>
+                        <?php $no++ ?>
+                        
+                        <td><?php echo $row['tanggal'] ?></td>
+                        <td><?php echo $row['alasan'] ?></td>
+                        <td><?php echo $row['kebutuhan_dana_nominal'] ?></td>
+                        <td><?php echo $row['keterangan'] ?></td>
+                        <td><?php if ($row['status'] == 1) {
+                                echo 'Sudah Disetujui';
+                            } else {
+                                echo 'Belum Disetujui';
+                            }
+
+                            ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <!-- End of Tabel Bantuan -->
+
 
 
       <!-- <div class="row mt-4 px-3">
@@ -718,27 +717,27 @@ $terjualByYearJSON = json_encode($terjualByYear);
 
                 <label for="">Nama Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk" required>
+                  <input type="text" class="form-control text-center" id="namaProduk" placeholder="Masukkan Nama Produk" required>
                 </div>
 
                 <label for="">Deskripsi Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" style="height: 60px;" placeholder="" required>
+                  <input type="text" class="form-control text-center" id="descProduk" style="height: 60px;" placeholder="" required>
                 </div>
 
                 <label for="">Harga Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" style="height: 60px;" placeholder="Rp 35.000" required>
+                  <input type="text" class="form-control text-center" id="hargaProduk" style="height: 60px;"  placeholder="Rp 35.000" required>
                 </div>
 
                 <label for="">Upload Foto Produk</label>
                 <div class="form-group mb-4">
-                  <input class="form-control" type="file" id="formulir" name="formulir" required>
+                  <input class="form-control" type="file" id="fotoProduk" name="fotoProduk" required>
                 </div>
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <a href="#" class="btn btn-primary">Tambah Produk</a>
+                    <a href="#" class="btn btn-primary" id="tambahProdukBtn">Tambah Produk</a>
                   </div>
                 </div>
               </form>
@@ -751,39 +750,7 @@ $terjualByYearJSON = json_encode($terjualByYear);
     </div>
     <!-- End Modal Tambah Produk -->
 
-    <!-- Modal Edit Produk -->
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="editProduct" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content rounded-0">
-          <div class="modal-body p-4 px-5">
 
-            <div class="main-content text-center">
-
-              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"><span class="icon-close2"></span></span>
-              </a>
-
-              <form action="#">
-
-                <label for="">Edit Nama Produk</label>
-                <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
-                </div>
-
-                <div class="d-flex">
-                  <div class="mx-auto">
-                    <a href="#" class="btn btn-primary">Edit Produk</a>
-                  </div>
-                </div>
-              </form>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Modal Edit Produk -->
 
   </main><!-- End #main -->
 
@@ -878,29 +845,6 @@ $terjualByYearJSON = json_encode($terjualByYear);
         }
       });
     }
-
-    // new Chart("chartProduk", {
-    //   type: "pie",
-    //   data: {
-    //     labels: xValues4,
-    //     datasets: [{
-    //       backgroundColor: barColors,
-    //       data: yValues4
-    //     }]
-    //   },
-    //   options: {
-    //     title: {
-    //       display: true,
-    //       text: "Top 5 Penjualan Produk Tahun 2023",
-    //       fontColor: 'grey',
-    //       fontSize: 28,
-    //       font: {
-    //         // family: "Raleway",
-    //         // weight: 'bold',
-    //       }
-    //     }
-    //   }
-    // });
 
     function generatePieChart(xData, yData, chartId, chartTitle) {
       const barColors = [
@@ -1074,9 +1018,31 @@ $terjualByYearJSON = json_encode($terjualByYear);
       var productsByYear = <?php echo $productsByYearJSON; ?>;
       var terjualByYear = <?php echo $terjualByYearJSON; ?>;
       for (year = minYears; year <= maxYears; year++) {
-        console.log(productsByYear[year]);
         generateCanvas(productsByYear[year], terjualByYear[year], "chartPenjualan" + year, "Penjualan Produk " + year, 0)
       }
+
+      $('#tambahProdukBtn').on('click', function() {
+        var namaProduk = $('#namaProduk').val();
+        var deskripsiProduk = $('#descProduk').val();
+        var hargaProduk = $('#hargaProduk').val();
+        var fotoProduk = $('#fotoProduk').val();
+        $.ajax({
+          url: "forms/add_new_product.php",
+          type: "POST",
+          data: {
+            namaProduk: namaProduk,
+            deskripsiProduk: deskripsiProduk,
+            hargaProduk: hargaProduk,
+            fotoProduk: fotoProduk
+          },
+          success: function(result) {
+            if (result == 1) {
+
+            }
+          }
+        });
+
+      });
       
       
 

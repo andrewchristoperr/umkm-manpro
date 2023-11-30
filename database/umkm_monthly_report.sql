@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2023 at 03:09 PM
+-- Generation Time: Nov 30, 2023 at 07:19 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -50,7 +50,12 @@ INSERT INTO `umkm_monthly_report` (`id`, `umkm_id`, `date`, `omzet`, `pendapatan
 (7, 5, '2023-06-01', 1400000, 245000000, 2100000),
 (8, 5, '2023-07-01', 22000000, 18000000, 11000000),
 (9, 5, '2023-08-01', 18000000, 15000000, 9000000),
-(10, 5, '2022-06-01', 100000, 200000000, 1100000);
+(10, 5, '2022-06-01', 100000, 200000000, 1100000),
+(11, 5, '2022-05-01', 5500000, 6550000, 404000),
+(12, 5, '2022-01-01', 6500000, 8450000, 4200000),
+(13, 5, '2022-02-01', 7850000, 9400000, 5320000),
+(14, 5, '2022-03-01', 4300000, 4500000, 3900000),
+(15, 5, '2023-04-01', 3420000, 4000000, 3850000);
 
 --
 -- Indexes for dumped tables
@@ -70,7 +75,7 @@ ALTER TABLE `umkm_monthly_report`
 -- AUTO_INCREMENT for table `umkm_monthly_report`
 --
 ALTER TABLE `umkm_monthly_report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
