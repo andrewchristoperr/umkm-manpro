@@ -13,27 +13,32 @@ $stmt->execute();
 $query2 = "SELECT * FROM bantuan WHERE status = 2";
 $stmt2 = $conn->query($query2)->fetchAll();
 $no = 0;
-foreach ($stmt2 as $row) {
+foreach ($stmt2 as $data) {
 
-    $id = $row['id_umkm'];
+    $id = $data['id_umkm'];
     $nama_umkm = "SELECT nama_umkm FROM umkmm WHERE id = $id";
     $nama_umkm = $conn->query($nama_umkm)->fetch();
 
     $no++;
     $output .= '
-        <tr>
-            <td>' . $no . '</td>
-            <td>' . $row['tanggal'] . '</td>
-            <td>' . $nama_umkm['nama_umkm'] . '</td>
-            <td>' . $row['alasan'] . '</td>
-            <td>' . $row['dokumen_pendukung'] . '</td>
-            <td>' . $row['kebutuhan'] . '</td>
-            <td>' . $row['keterangan'] . '</td>
-            <td>
-            <button class="btn btn-outline-success" onclick="terimaBantuan(' . $row['id'] . ')">Terima</button>
-            <button class="btn btn-outline-danger" onclick="tolakBantuan(' . $row['id'] . ')">Tolak</button>
-            </td>
-        </tr>
+    <tr>
+    <td>' . $no . '</td>
+    <td>' . $data['tanggal'] . '</td>
+    <td>' . $nama_umkm['nama_umkm'] . '</td>
+    <td>' . $data['alasan'] . '</td>
+    <td>' . $data['dokumen_pendukung'] . '</td>
+    <td>' . $data['kebutuhan_dana_nominal'] . '</td>
+    <td>' . $data['kebutuhan_dana_rincian'] . '</td>
+    <td>' . $data['kebutuhan_tenda'] . '</td>
+    <td>' . $data['kebutuhan_gerobak'] . '</td>
+    <td>' . $data['kebutuhan_spanduk'] . '</td>
+    <td>' . $data['kebutuhan_lainnya_ket'] . '</td>
+    <td>' . $data['keterangan'] . '</td>
+    <td>
+    <button class="btn btn-outline-success" onclick="terimaBantuan(' . $data['id'] . ')">Terima</button>
+    <button class="btn btn-outline-danger" onclick="tolakBantuan(' . $data['id'] . ')">Tolak</button>
+    </td>
+</tr>
         ';
 }
 echo $output;

@@ -387,7 +387,7 @@ $stmt = $conn->query($sql)->fetchAll();
 
         function terima(id) {
             $.ajax({
-                url: api / 'prosesVerifikasi.php',
+                url: 'api/prosesVerifikasi.php',
                 method: "POST",
                 data: {
                     id: id
