@@ -18,17 +18,20 @@ if (isset($_POST['login'])) {
         $user = $stmt->fetch();
         if ($stmt->rowCount() == 0) {
             $_SESSION['error'] = 'Akun belum terdaftar!';
-        } 
+        }
         // else if (!password_verify($password, $user['password'])) {
         //     $_SESSION['error'] = 'Password Salah!';
         // } 
-        else if($password != $user['password']) {
+        else if ($password != $user['password']) {
             $_SESSION['error'] = 'Password Salah!';
-        }
-        else {
+        } else {
             $_SESSION['success'] = 'Login Berhasil!';
             $_SESSION['login'] = $user['id'];
-            header('location: profile.php');
+            if ($_SESSION['login'] == '6') {
+                header('location: admin/page/ltr/pendaftaran.php');
+            } else {
+                header('location: profile.php');
+            }
         }
     } else {
         $_SESSION['error'] = 'Fill up login form first';
@@ -71,7 +74,6 @@ if (isset($_POST['login'])) {
         .login-form .content {
             padding: 15px;
         }
-                
     </style>
 </head>
 
