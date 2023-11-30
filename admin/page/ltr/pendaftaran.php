@@ -1,3 +1,11 @@
+<?php
+require "../../../connect.php";
+
+$sql = "SELECT * FROM umkmm";
+$stmt = $conn->query($sql)->fetchAll();
+
+?>
+
 <!DOCTYPE html>
 <html dir="page" lang="en">
 
@@ -6,10 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords"
-        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Nice lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Nice admin lite design, Nice admin lite dashboard bootstrap 5 dashboard template">
-    <meta name="description"
-        content="Nice Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Nice lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Nice admin lite design, Nice admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description" content="Nice Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <title>Admin Kecamatan</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/niceadmin-lite/" />
@@ -22,7 +28,17 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
 <![endif]-->
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 </head>
 
 <body>
@@ -38,8 +54,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full"
-        data-boxed-layout="full">
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -71,7 +86,7 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    
+
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -141,29 +156,32 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pendaftaran.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pendaftaran.php" aria-expanded="false">
                                 <i class="mdi mdi-folder-multiple"></i>
                                 <span class="hide-menu">Pendaftaran</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="bantuan.html"
+                        <!-- <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pendapatan.php"
                                 aria-expanded="false">
+                                <i class="mdi mdi-folder-multiple"></i>
+                                <span class="hide-menu">Pendapatan</span>
+                            </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="bantuan.html" aria-expanded="false">
                                 <i class="mdi mdi-archive"></i>
                                 <span class="hide-menu">Bantuan</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account.html" aria-expanded="false">
                                 <i class="mdi mdi-account"></i>
                                 <span class="hide-menu">Akun</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.html" aria-expanded="false">
                                 <i class="mdi mdi-file"></i>
                                 <span class="hide-menu">Blank</span>
                             </a>
@@ -218,56 +236,48 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Tabel Pendaftaran</h4>
-                                <h6 class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                <h6 class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
+                            <div class="table-responsive" style="padding: 10px;">
+                                <table class="table table-hover nowrap" id="tablePendapatan" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th scope="col">No.</th>
-                                            <th scope="col">Nama UMKM</th>
                                             <th scope="col">Tanggal Pendaftaran</th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Nama UMKM</th>
+                                            <th scope="col">No telp</th>
+                                            <th scope="col">Alamat</th>
+                                            <th scope="col">Kecamatan</th>
+                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Foto UMKM</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Pandan Wangi</td>
-                                            <td>06/09/2019</td>
-                                            <td>
-                                                <a href="detail-pendaftaran.html" class="btn btn-outline-info">Rincian</a>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-success">Terima</button>
-                                                <button type="button" class="btn btn-outline-danger">Tolak</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Pandan Wangi</td>
-                                            <td>06/09/2019</td>
-                                            <td>
-                                                <a href="detail-pendaftaran.html" class="btn btn-outline-info">Rincian</a>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-success">Terima</button>
-                                                <button type="button" class="btn btn-outline-danger">Tolak</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Pandan Wangi</td>
-                                            <td>06/09/2019</td>
-                                            <td>
-                                                <a href="detail-pendaftaran.html" class="btn btn-outline-info">Rincian</a>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-success">Terima</button>
-                                                <button type="button" class="btn btn-outline-danger">Tolak</button>
-                                            </td>
-                                        </tr>
+                                    <tbody id="tbody-tablePendapatan">
+                                        <?php
+                                        if ($stmt != null) {
+                                            foreach ($stmt as $data) {
+                                        ?>
+                                                <tr>
+                                                    <td><?php echo $data['id'] ?></td>
+                                                    <td><?php echo $data['tanggal_pendaftaran'] ?></td>
+                                                    <td><?php echo $data['nama_umkm'] ?></td>
+                                                    <td><?php echo $data['notelp_umkm'] ?></td>
+                                                    <td><?php echo $data['alamat_umkm'] ?></td>
+                                                    <td><?php echo $data['kecamatan'] ?></td>
+                                                    <td><?php echo $data['kategori_umkm'] ?></td>
+                                                    <td><img style="height: 90px; width: 150px;" src="../../../image.php?id=<?php echo $data['id']?>"></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-outline-success">Terima</button>
+                                                        <button type="button" class="btn btn-outline-danger">Tolak</button>
+                                                    </td>
+                                                </tr>
+
+                                        <?php
+                                            }
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -320,6 +330,15 @@
     <script src="../../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../../dist/js/custom.min.js"></script>
+
+    <script>
+        let table = new DataTable('#tablePendapatan', {
+            paging: true,
+            // scrollX: true
+
+        });
+
+    </script>
 </body>
 
 </html>
