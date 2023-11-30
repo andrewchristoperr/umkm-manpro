@@ -43,6 +43,32 @@ foreach ($allData as $row) {
 
 $sql = "SELECT * FROM bantuan WHERE id_umkm = $id AND status = 1";
 $stmt2 = $conn->query($sql)->fetchAll();
+
+
+$sql2 = "SELECT * FROM umkm_products WHERE umkm_id = $id";
+$stmt3 = $conn->query($sql2)->fetchAll();
+
+$productsByYear = [];
+$terjualByYear = [];
+
+// Loop untuk setiap tahun dari $minYears hingga $maxYears
+for ($year = $minYears; $year <= $maxYears; $year++) {
+    $productsByYear[$year] = [];
+    $terjualByYear[$year] = [];
+    
+    // Loop untuk setiap produk pada tahun tertentu
+    foreach ($stmt3 as $products) {
+        // Cek apakah produk tersebut dijual pada tahun yang sedang diiterasi
+        if ($products['tahun'] == $year) {
+            $productsByYear[$year][] = $products['name'];
+            $terjualByYear[$year][] = $products['jumlah_terjual'];
+        }
+    }
+}
+
+$productsByYearJSON = json_encode($productsByYear);
+$terjualByYearJSON = json_encode($terjualByYear);
+
 ?>
 
 <!DOCTYPE html>
@@ -78,11 +104,22 @@ $stmt2 = $conn->query($sql)->fetchAll();
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <!-- JQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- Sweet Alert -->
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+  <!-- Bootstraps -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Sweet Alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+    <!-- Data Table -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
   <style>
     .modal-dialog {
@@ -113,10 +150,8 @@ $stmt2 = $conn->query($sql)->fetchAll();
 
     .modal-body .row.content {
       background-color: #E0F4FF;
-      /* background-size: cover; */
       padding-top: 15px;
       padding-bottom: 15px;
-      /* border-bottom: 1px solid #808080; */
     }
 
     .isi-notif {
@@ -246,13 +281,14 @@ $stmt2 = $conn->query($sql)->fetchAll();
       font-size: 15px;
     }
 
-    #chartPendapatan,
-    #chartPengeluaran,
-    #chartOmzet,
-    #chartProduk {
+    [id*="chartPendapatan"],
+    [id*="chartPengeluaran"],
+    [id*="chartOmzet"],
+    [id*="chartPenjualan"] {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      padding: 20px;
+      padding: 10px;
       border-radius: 10px;
+      margin-top: 20px;
     }
 
     canvas {
@@ -282,25 +318,6 @@ $stmt2 = $conn->query($sql)->fetchAll();
       color: #2f4d5a;
     }
 
-    .tabelPendapatan {
-      border-radius: 5px;
-      /* Sesuaikan nilai dengan keinginan Anda */
-      overflow: hidden;
-      /* Pastikan overflow diatur ke hidden agar sudut yang membulat dapat terlihat */
-    }
-
-    .table-centered {
-      display: table;
-      margin: 0 auto;
-    }
-
-    .table-responsive {
-      overflow-x: auto;
-    }
-
-    .center-contents {
-      text-align: center;
-    }
   </style>
 </head>
 
@@ -380,12 +397,6 @@ $stmt2 = $conn->query($sql)->fetchAll();
             <h2>Detail</h2>
           </div>
           <div class="umkm-info" id="umkm-info">
-            <!-- <ul>
-              <li><strong>Kategori</strong>: Kerajinan Tangan</li>
-              <li><strong>Alamat</strong>: Jl. Arif Rahman Hakim 1</li>
-              <li><strong>Kecamatan</strong>: Wonocolo</li>
-              <li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">0812345678</a></li>
-            </ul> -->
           </div>
         </div>
 
@@ -394,15 +405,6 @@ $stmt2 = $conn->query($sql)->fetchAll();
             <h2>Deskripsi</h2>
           </div>
           <div class="umkm-desc" id="umkm-desc">
-            <!-- <p style="text-align: justify;">UMKM Pandan Wangi adalah sebuah usaha kecil menengah yang berfokus pada
-              kategori kerajinan tangan dengan spesialisasi dalam produk-produk berbahan dasar pandan. Kami membuat
-              berbagai macam barang seni dan kerajinan, mulai dari anyaman pandan tradisional hingga kreasi modern yang
-              memadukan teknik tradisional dengan desain kontemporer. Produk unggulan kami meliputi tas tangan,
-              keranjang, dan dekorasi rumah dari pandan yang memberikan sentuhan eksotis dan alami. Pandan Wangi
-              menonjolkan keunikan setiap karya kami melalui penggunaan warna-warna cerah dan pola anyaman yang rumit.
-              Dengan memadukan keahlian tradisional dengan inovasi desain, kami tidak hanya menciptakan produk
-              berkualitas tinggi tetapi juga berperan dalam melestarikan warisan budaya lokal serta memberikan
-              kontribusi positif terhadap perkembangan ekonomi lokal.</p> -->
           </div>
         </div>
 
@@ -436,7 +438,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
             <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
               <div class="card card-block">
                 <div class="portfolio-wrap">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <img src="assets/img/produk/produk4.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
                     <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
@@ -448,7 +450,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
             <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
               <div class="card card-block">
                 <div class="portfolio-wrap">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <img src="assets/img/produk/produk8.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
                     <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
@@ -460,7 +462,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
             <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
               <div class="card card-block">
                 <div class="portfolio-wrap">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <img src="assets/img/produk/produk6.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
                     <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
@@ -472,7 +474,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
             <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
               <div class="card card-block">
                 <div class="portfolio-wrap">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                  <img src="assets/img/produk/produk3.jpg" class="img-fluid" alt="">
                   <div class="portfolio-links">
                     <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
                     <a href="#" data-toggle="modal" data-target="#editModal" title="Edit Produk"><i class="bx bx-pencil edit-icon"></i></a>
@@ -550,6 +552,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
                     <tr>
                         <td><?php echo $no ?></td>
                         <?php $no++ ?>
+                        
                         <td><?php echo $row['tanggal'] ?></td>
                         <td><?php echo $row['alasan'] ?></td>
                         <td><?php echo $row['kebutuhan_dana_nominal'] ?></td>
@@ -576,7 +579,7 @@ $stmt2 = $conn->query($sql)->fetchAll();
         <h2>Laporan Keuangan</h2>
       </div>
       <div class="table-responsive rounded-table">
-        <table class="table table-bordered table-striped table-centered tabelPendapatan">
+      <table id="tablePendapatan" class="table table-striped nowrap" style="width:100%">
           <thead>
             <tr>
               <th scope="col" class="center-contents">Date</th>
@@ -814,14 +817,31 @@ $stmt2 = $conn->query($sql)->fetchAll();
   <!-- <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script> -->
 
   <script>
+    new DataTable('#tableBantuan', {
+        scrollX: true,
+        destroy: true,
+        retrieve: true
+    });
+
+    new DataTable('#tablePendapatan', {
+        scrollX: true,
+        destroy: true,
+        retrieve: true
+    });
     
-    function generateCanvas(xData, yData, chartId, chartTitle) {
+    function generateCanvas(xData, yData, chartId, chartTitle, type) {
       var chart = '<div class="col-lg-6 mx-auto">';
       chart += '<canvas id="' + chartId + '"></canvas>'
       chart += '</div>';
       var grafik_laporan = $('#grafik-laporan');
       grafik_laporan.append(chart);
-      generateLineChart(xData, yData, chartId, chartTitle)
+
+      if (type==1){
+        generateLineChart(xData, yData, chartId, chartTitle)
+      }else {
+        generatePieChart(xData,yData,chartId,chartTitle)
+      }
+      
     }
 
     function generateLineChart(xData, yData, chartId, chartTitle) {
@@ -1042,15 +1062,23 @@ $stmt2 = $conn->query($sql)->fetchAll();
             var dataPendapatan = response.dataByYear[year].pendapatan;
             var dataPengeluaran = response.dataByYear[year].pengeluaran;
 
-            generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year);
-            generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year);
-            generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year);
+            generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year, 1);
+            generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year, 1);
+            generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year, 1);
           });
         }
       });
 
+      
 
-
+      var productsByYear = <?php echo $productsByYearJSON; ?>;
+      var terjualByYear = <?php echo $terjualByYearJSON; ?>;
+      for (year = minYears; year <= maxYears; year++) {
+        console.log(productsByYear[year]);
+        generateCanvas(productsByYear[year], terjualByYear[year], "chartPenjualan" + year, "Penjualan Produk " + year, 0)
+      }
+      
+      
 
     });
   </script>
