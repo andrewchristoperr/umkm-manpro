@@ -315,7 +315,12 @@ $stmt = $conn->query($sql)->fetchAll();
                                             <th scope="col">Nama UMKM</th>
                                             <th scope="col">Alasan</th>
                                             <th scope="col">Dokumen Pendukung</th>
-                                            <th scope="col">Kebutuhan</th>
+                                            <th scope="col">Kebutuhan Dana</th>
+                                            <th scope="col">Kebutuhan Rincian</th>
+                                            <th scope="col">Kebutuhan Tenda</th>
+                                            <th scope="col">Kebutuhan Gerobak</th>
+                                            <th scope="col">Kebutuhan Spanduk</th>
+                                            <th scope="col">Kebutuhan Lainnya</th>
                                             <th scope="col">Keterangan</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -336,7 +341,12 @@ $stmt = $conn->query($sql)->fetchAll();
                                                     <td>' . $nama_umkm['nama_umkm'] . '</td>
                                                     <td>' . $data['alasan'] . '</td>
                                                     <td>' . $data['dokumen_pendukung'] . '</td>
-                                                    <td>' . $data['kebutuhan'] . '</td>
+                                                    <td>' . $data['kebutuhan_dana_nominal'] . '</td>
+                                                    <td>' . $data['kebutuhan_dana_rincian'] . '</td>
+                                                    <td>' . $data['kebutuhan_tenda'] . '</td>
+                                                    <td>' . $data['kebutuhan_gerobak'] . '</td>
+                                                    <td>' . $data['kebutuhan_spanduk'] . '</td>
+                                                    <td>' . $data['kebutuhan_lainnya_ket'] . '</td>
                                                     <td>' . $data['keterangan'] . '</td>
                                                     <td>
                                                     <button class="btn btn-outline-success" onclick="terimaBantuan(' . $data['id'] . ')">Terima</button>
