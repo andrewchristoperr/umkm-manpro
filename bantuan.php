@@ -332,7 +332,7 @@ if (isset($_POST['ajukanBantuan'])) {
 
             if (alasan_pengajuan != "" && dokumen_pendukung != "") {
                 $.ajax({
-                    url: 'forms/form_bantuan copy.php',
+                    url: 'forms/form_bantuan.php',
                     method: 'POST',
                     data: form_bantuan,
                     contentType: false,
