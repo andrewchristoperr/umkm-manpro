@@ -31,7 +31,7 @@ if (isset($_POST['login'])) {
             if ($_SESSION['login'] == '6') {
                 header('location: admin/page/ltr/pendaftaran.php');
             } else {
-                header('location: profile copy.php');
+                header('location: profile.php');
             }
         }
     } else {
