@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 } else {
@@ -42,12 +42,12 @@ if (isset($_SESSION['kecamatan'])) {
     $kecamatan = '';
 }
 
-if (isset($_SESSION['foto_umkm'])) {
-    // $foto_umkm = $_SESSION['nama_foto_umkm'];
-    $foto_umkm = $_SESSION['foto_umkm'];
-} else {
-    $foto_umkm = '';
-}
+// if (isset($_SESSION['foto_umkm'])) {
+//     // $foto_umkm = $_SESSION['nama_foto_umkm'];
+//     $foto_umkm = $_SESSION['foto_umkm'];
+// } else {
+//     $foto_umkm = '';
+// }
 
 
 if (isset($_SESSION['kategori_umkm'])) {
@@ -488,14 +488,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
 
                                     <div class="mb-4">
                                         <label for="formFile" class="form-label mb-3">Foto UMKM</label>
-
-                                        <?php if (isset($_SESSION['foto_umkm'])) {
-                                            echo "<input class='form-control' type='file' id='foto_umkm' name='foto_umkm' required value='$foto_umkm'>";
-                                        } else {
-                                            echo "<input class='form-control' type='file' id='foto_umkm' name='foto_umkm' required>";
-                                        }
-                                        ?>
-
+                                        <input class="form-control" type="file" id="foto_umkm" name="foto_umkm" required>
                                     </div>
 
                                     <div class="mb-4">
@@ -558,21 +551,46 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                         ?>
                                     </div>
 
+
                                 </div>
 
-                                <div class="row mt-5">
-                                    <div class="col-md-10">
-                                        <button type="submit" class="next" id="next" value="Next" name="next">Next</button>
+                                <div class="row mb-5 d-flex justify-content-center mt-1">
+                                    <h3 class="text-center">Upload Berkas</h3>
+                                </div>
+
+                                <div class="col-md-10">
+                                    <div class="mb-4">
+                                        <label for="formFile" class="form-label">Formulir Permohonan UMKM</label>
+                                        <input class="form-control" type="file" id="formulir" name="formulir" required>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="formFile" class="form-label">Surat Pengantar</label>
+                                        <input class="form-control" type="file" id="surat_pengantar" name="surat_pengantar" required>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="formFile" class="form-label">KTP</label>
+                                        <input class="form-control" type="file" id="ktp" name="ktp" required>
+                                    </div>
+
+                                    <div class="mb-5">
+                                        <label for="formFile" class="form-label">NPWP</label>
+                                        <input class="form-control" type="file" id="npwp" name="npwp" required>
+                                    </div>
+
+                                    <div class="row mt-7">
+                                        <div class="col-md-10 d-grid">
+                                            <button type="submit" class="next" id="submit" value="Next" name="next">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
-
-
-
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+
         </section>
 
 
@@ -666,10 +684,10 @@ if (isset($_SESSION['deskripsi_umkm'])) {
         }
 
         $(document).ready(function() {
-            $('#next').on('click', function() {
+            $('#submit').on('click', function() {
                 event.preventDefault();
-                // let foto_umkm = new FormData();
-                // foto_umkm.append('foto_umkm', $('#foto_umkm').prop('files')[0]);
+                var form_register = new FormData();
+
                 var username = $('#username').val();
                 var email = $('#email').val();
                 var password = $('#password').val();
@@ -677,26 +695,67 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                 var notelp_umkm = $('#notelp_umkm').val();
                 var alamat_umkm = $('#alamat_umkm').val();
                 var kecamatan = $('#kecamatan').val();
-                var foto_umkm = $('#foto_umkm').val();
+                var foto_umkm = $('#foto_umkm')[0].files;
                 var kategori_umkm = $('#kategori_umkm').val();
                 var deskripsi_umkm = $('#deskripsi_umkm').val();
+                var formulir = $('#formulir')[0].files;
+                var surat_pengantar = $('#surat_pengantar')[0].files;
+                var ktp = $('#ktp')[0].files;
+                var npwp = $('#npwp')[0].files;
 
-                if (username != '' && email != '' && password != '' && nama_umkm != '' && notelp_umkm != '' && alamat_umkm != '' && kecamatan != '' && foto_umkm != '' && kategori_umkm != '') {
+                form_register.append('username', username);
+                form_register.append('email', email);
+                form_register.append('password', password);
+                form_register.append('nama_umkm', nama_umkm);
+                form_register.append('notelp_umkm', notelp_umkm);
+                form_register.append('alamat_umkm', alamat_umkm);
+                form_register.append('kecamatan', kecamatan);
+                form_register.append('foto_umkm', foto_umkm[0]);
+                form_register.append('kategori_umkm', kategori_umkm);
+                form_register.append('deskripsi_umkm', deskripsi_umkm);
+                form_register.append('formulir', formulir[0]);
+                form_register.append('surat_pengantar', surat_pengantar[0]);
+                form_register.append('ktp', ktp[0]);
+                form_register.append('npwp', npwp[0]);
+
+
+                if (username != '' && email != '' && password != '' && nama_umkm != '' && notelp_umkm != '' && alamat_umkm != '' && kecamatan != '' && foto_umkm != '' && kategori_umkm != '' && formulir != '' && surat_pengantar != '' && ktp != '' && npwp != '') {
                     $.ajax({
-                        url: 'forms/form_register.php',
+                        url: 'forms/registerrr.php',
                         method: 'POST',
-                        data: {
-                            username: username,
-                            email: email,
-                            password: password,
-                            nama_umkm: nama_umkm,
-                            notelp_umkm: notelp_umkm,
-                            alamat_umkm: alamat_umkm,
-                            kecamatan: kecamatan,
-                            foto_umkm: foto_umkm,
-                            kategori_umkm: kategori_umkm,
-                            deskripsi_umkm: deskripsi_umkm
-                        },
+                        data: form_register,
+                        contentType: false,
+                        processData: false,
+                        success: function(result) {
+                            alert(result);
+                            console.log(result);
+                            if (result == 2) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Username sudah terdaftar!'
+                                });
+                            } else {
+                                res = JSON.parse(result);
+                                if (res.status = 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text: res.msg,
+                                        // timer: 3000
+                                    }).then(function() {
+                                        window.location = "index.php";
+                                    });
+                                    // window.location.href = "index.php";
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'Error!'
+                                    });
+                                }
+                            }
+                        }
                     })
                 } else {
                     // alert("Mohon Lengkapi Data!");
