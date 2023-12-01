@@ -41,6 +41,8 @@ foreach ($allData as $row) {
     ';
 }
 
+
+
 $sql = "SELECT * FROM bantuan WHERE id_umkm = $id AND status = 1";
 $stmt2 = $conn->query($sql)->fetchAll();
 
@@ -388,7 +390,7 @@ $terjualByYearJSON = json_encode($terjualByYear);
 
           </div>
           <div class="col-lg-4 col-edit content d-flex justify-content-center justify-content-lg-end">
-            <a href="editProfile.php" class="btn btn-edit">Edit Profil</a>
+            <a href="#editProfile"data-toggle="modal" class="btn btn-edit">Edit Profil</a>
           </div>
         </div>
 
@@ -546,7 +548,6 @@ $terjualByYearJSON = json_encode($terjualByYear);
         </table>
       </div>
     </div>
-
     <!-- End of Tabel Laporan Keuangan -->
 
     <!-- Grafik Laporan Keuangan -->
@@ -609,8 +610,10 @@ $terjualByYearJSON = json_encode($terjualByYear);
         </div>
       </div>
       <!-- End of Grafik Laporan Keuangan -->
+    </div>
+    <!-- End Laporan -->
 
-      <!-- Tabel Bantuan -->
+    <!-- Tabel Bantuan -->
     <div class="container mt-5">
       <div class="section-title" data-aos="fade-in" data-aos-delay="100">
         <h2>Pengajuan Bantuan</h2>
@@ -656,34 +659,6 @@ $terjualByYearJSON = json_encode($terjualByYear);
         </table>
     </div>
     <!-- End of Tabel Bantuan -->
-
-
-
-      <!-- <div class="row mt-4 px-3">
-        <div class="col-lg-6 mx-auto grafik-pendapatan" id="grafik-pendapatan">
-          <h3 class="text-center">Total Pendapatan Tahun 2023</h3>
-          <canvas id="chartPendapatan"></canvas>
-        </div>
-
-        <div class="col-lg-6 mx-auto grafik-pengeluaran" id="grafik-pengeluaran">
-          <h3 class="text-center">Total Pengeluaran Tahun 2023</h3>
-          <canvas id="chartPengeluaran"></canvas>
-        </div>
-      </div>
-
-      <div class="row mt-3 px-3">
-        <div class="col-lg-6 mx-auto grafik-omzet" id="grafik-omzet">
-          <h3 class="text-center">Total Omzet Tahun 2023</h3>
-          <canvas id="chartOmzet"></canvas>
-        </div>
-
-        <div class="col-lg-6 mx-auto grafik-penjualan" id="grafik-penjualan">
-          <h3 class="text-center">Penjualan Produk</h3>
-          <canvas id="chartProduk"></canvas>
-        </div>
-      </div> -->
-    </div>
-    <!-- End Laporan -->
 
     <!-- Tombol Lapor, Ajukan Bantuan, Settings -->
     <div class="container mt-4">
@@ -748,9 +723,63 @@ $terjualByYearJSON = json_encode($terjualByYear);
         </div>
       </div>
     </div>
-    <!-- End Modal Tambah Produk -->
+    <!-- End of Modal Tambah Produk -->
+    
+    <!-- Modal Edit Profile -->
+    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfile" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0">
+          <div class="modal-body p-4 px-5">
 
+            <div class="main-content text-center">
 
+              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><span class="icon-close2"></span></span>
+              </a>
+
+              <form action="#">
+
+                <label for="">Nama UMKM</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="namaUMKM" required>
+                </div>
+
+                <label for="">Kategori UMKM</label>
+                <div class="form-group mb-4">
+                  <select class="form-select" id="kategoriUMKM" aria-label="Floating label select example" style="text-align: center;">
+                  </select>
+                </div>
+
+                <label for="">Alamat</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="alamatUMKM" required>
+                </div>
+
+                <label for="">Kecamatan</label>
+                <div class="form-group mb-4">
+                  <select class="form-select" id="kecamatanUMKM" aria-label="Floating label select example" style="text-align: center;">
+                  </select>
+                </div>
+
+                <label for="">Nomor WhatsApp</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="noWhatsApp" required>
+                </div>
+
+                <div class="d-flex">
+                  <div class="mx-auto">
+                    <a href="#" class="btn btn-primary" id="tambahProdukBtn">Edit</a>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Modal Edit Profile -->
 
   </main><!-- End #main -->
 
@@ -900,6 +929,12 @@ $terjualByYearJSON = json_encode($terjualByYear);
           document.getElementById('profil-nama').innerHTML = namaUMKM;
           document.getElementById('umkm-info').innerHTML = umkmInfo;
           document.getElementById('umkm-desc').innerHTML = deskripsi;
+
+          document.getElementById('namaUMKM').value = namaUMKM;
+          document.getElementById('kategoriUMKM').innerHTML = '<option selected>' + dataObj.kategori_umkm + '</option>';
+          document.getElementById('alamatUMKM').value = dataObj.alamat_umkm;
+          document.getElementById('kecamatanUMKM').innerHTML = '<option selected>' + dataObj.kecamatan + '</option>';
+          document.getElementById('noWhatsApp').value = dataObj.notelp_umkm;
         }
       });
 
