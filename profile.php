@@ -2,9 +2,19 @@
 require 'connect.php';
 session_start();
 
+
 if (!isset($_SESSION['login'])) {
   header('location: login.php');
   exit;
+} else {
+  $sql = "SELECT * FROM umkmm WHERE id = $_SESSION[login]";
+  $stmt = $conn->query($sql)->fetch();
+  if ($stmt != null) {
+    if ($stmt['verification_status'] == 2) {
+      header('location: profile_waiting.php');
+      exit;
+    }
+  }
 }
 
 $id = $_SESSION['login'];
