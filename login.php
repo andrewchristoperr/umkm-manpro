@@ -12,11 +12,11 @@ if (isset($_POST['login'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = "SELECT id, password FROM umkmm WHERE username = ?";
+        $sql = "SELECT * FROM umkmm WHERE username = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$username]);
         $user = $stmt->fetch();
-        if ($stmt->rowCount() == 0) {
+        if ($stmt->rowCount() == 0 || $user['verification_status'] == 0) {
             $_SESSION['error'] = 'Akun belum terdaftar!';
         }
         // else if (!password_verify($password, $user['password'])) {
@@ -24,13 +24,14 @@ if (isset($_POST['login'])) {
         // } 
         else if ($password != $user['password']) {
             $_SESSION['error'] = 'Password Salah!';
-        } else {
+        } 
+        else {
             $_SESSION['success'] = 'Login Berhasil!';
             $_SESSION['login'] = $user['id'];
             if ($_SESSION['login'] == '6') {
                 header('location: admin/page/ltr/pendaftaran.php');
             } else {
-                header('location: profile.php');
+                header('location: profile copy.php');
             }
         }
     } else {
