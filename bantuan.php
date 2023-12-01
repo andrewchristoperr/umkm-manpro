@@ -4,7 +4,6 @@ session_start();
 
 // send bantuan to database
 if (isset($_POST['ajukanBantuan'])) {
-    
 }
 ?>
 <!DOCTYPE html>
@@ -160,8 +159,7 @@ if (isset($_POST['ajukanBantuan'])) {
                                         <label for="formFile" class="required">Bantuan yang Dibutuhkan</label>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="dana"
-                                                id="danaCheckbox" onchange="toggleInput()">
+                                            <input class="form-check-input" type="checkbox" value="dana" id="danaCheckbox" onchange="toggleInput()">
                                             <label class="form-check-label" for="danaCheckbox">Dana</label>
                                         </div>
                                         <div id="danaInput" class="form-group mt-2 mb-2 hidden">
@@ -171,15 +169,13 @@ if (isset($_POST['ajukanBantuan'])) {
 
                                             <label for="formFile" class="required">Rincian Rencana Penggunaan
                                                 Dana</label>
-                                            <textarea class="form-control" id="rincian_dana"
-                                                name="rincian_dana"></textarea>
+                                            <textarea class="form-control" id="rincian_dana" name="rincian_dana"></textarea>
                                             <span class="explanation" italic>Contoh: 1. Membeli bahan baku sebanyak ...
                                                 kg seharga Rp ... </span>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="Tenda"
-                                                id="tendaCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="Tenda" id="tendaCheckbox">
                                             <label class="form-check-label" for="tendaCheckbox">Tenda</label>
                                         </div>
                                         <div class="form-check">
@@ -212,8 +208,7 @@ if (isset($_POST['ajukanBantuan'])) {
                                     </div>
 
                                     <div class="d-grid mx-auto">
-                                        <button class="button" type="submit" id="submit_bantuan" name="submit_bantuan"
-                                            data-toggle="modal" data-target="summarize_bantuan">Ajukan
+                                        <button class="button" type="submit" id="submit_bantuan" name="submit_bantuan" data-toggle="modal" data-target="summarize_bantuan">Ajukan
                                             Bantuan</button>
                                     </div>
                                 </div>
@@ -240,8 +235,7 @@ if (isset($_POST['ajukanBantuan'])) {
                 </div>
                 <div class="modal-body">
                     <p id="modal_body"></p>
-                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                        data-target="#exampleModal">
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">
                     </button>
                 </div>
 
@@ -291,16 +285,20 @@ if (isset($_POST['ajukanBantuan'])) {
             }
         }
 
-        $("#submit_bantuan").click(function () {
+        $("#submit_bantuan").click(function() {
             event.preventDefault();
+
+            var form_bantuan = new FormData();
+
             var alasan_pengajuan = $("#alasan_pengajuan").val();
-            var dokumen_pendukung = $("#dokumen_pendukung").val();
+            var dokumen_pendukung = $("#dokumen_pendukung")[0].files;
             var keterangan = $("#keterangan").val();
 
             // if danaCheckbox is checked then get the value of nominal and rincian_dana
             var danaCheckbox = document.getElementById('danaCheckbox');
             var nominal = "";
             var rincian_dana = "";
+
             if (danaCheckbox.checked) {
                 nominal = $("#nominal").val();
                 rincian_dana = $("#rincian_dana").val();
@@ -313,7 +311,7 @@ if (isset($_POST['ajukanBantuan'])) {
 
             // if spandukCheckbox is checked then get the value of spanduk
             var spandukCheckbox = document.getElementById('spandukCheckbox');
-        
+
 
             // if lainnyaCheckbox is checked then get the value of lainnya
             var lainnyaCheckbox = document.getElementById('lainnyaCheckbox');
@@ -322,23 +320,24 @@ if (isset($_POST['ajukanBantuan'])) {
                 lainnya = $("#lainnya").val();
             }
 
+            form_bantuan.append('alasan_pengajuan', alasan_pengajuan);
+            form_bantuan.append('dokumen_pendukung', dokumen_pendukung[0]);
+            form_bantuan.append('keterangan', keterangan);
+            form_bantuan.append('nominal', nominal);
+            form_bantuan.append('rincian_dana', rincian_dana);
+            form_bantuan.append('tenda', tendaCheckbox.checked ? 1 : 0);
+            form_bantuan.append('gerobak', gerobakCheckbox.checked ? 1 : 0);
+            form_bantuan.append('spanduk', spandukCheckbox.checked ? 1 : 0);
+            form_bantuan.append('lainnya', lainnya);
+
             if (alasan_pengajuan != "" && dokumen_pendukung != "") {
-            
                 $.ajax({
-                    url: 'forms/form_bantuan.php',
+                    url: 'forms/form_bantuan copy.php',
                     method: 'POST',
-                    data: {
-                        alasan_pengajuan: alasan_pengajuan,
-                        dokumen_pendukung: dokumen_pendukung,
-                        nominal: nominal,
-                        rincian_dana: rincian_dana,
-                        tenda: tendaCheckbox.checked ? 1 : 0,
-                        gerobak: gerobakCheckbox.checked ? 1 : 0,
-                        spanduk: spandukCheckbox.checked ? 1 : 0,
-                        lainnya: lainnya,
-                        keterangan: keterangan
-                    },
-                    success: function (result) {
+                    data: form_bantuan,
+                    contentType: false,
+                    processData: false,
+                    success: function(result) {
                         alert(result);
                         console.log(result);
                         res = JSON.parse(result);
@@ -348,8 +347,8 @@ if (isset($_POST['ajukanBantuan'])) {
                                 title: 'Success',
                                 text: res.msg,
                                 // timer: 3000
-                            }).then(function () {
-                                window.location = "index.php";
+                            }).then(function() {
+                                window.location = "profile.php";
                             });
                             // window.location.href = "index.php";
                         } else {
@@ -369,9 +368,9 @@ if (isset($_POST['ajukanBantuan'])) {
                     text: 'Error!'
                 });
 
-                
-            }}
-        );
+
+            }
+        });
 
         // buat format rupiah saat input 
         function Rp(input, blur) {
@@ -384,7 +383,6 @@ if (isset($_POST['ajukanBantuan'])) {
                 });
             input.value = formatted;
         }
-
     </script>
 </body>
 

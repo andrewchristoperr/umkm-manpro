@@ -340,7 +340,7 @@ $stmt = $conn->query($sql)->fetchAll();
                                                     <td>' . $data['tanggal'] . '</td>
                                                     <td>' . $nama_umkm['nama_umkm'] . '</td>
                                                     <td>' . $data['alasan'] . '</td>
-                                                    <td>' . $data['dokumen_pendukung'] . '</td>
+                                                    <td> <embed type="application/pdf" src="../../../forms/'. $data['dokumen_pendukung'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
                                                     <td>' . $data['kebutuhan_dana_nominal'] . '</td>
                                                     <td>' . $data['kebutuhan_dana_rincian'] . '</td>
                                                     <td>' . $data['kebutuhan_tenda'] . '</td>
