@@ -160,7 +160,7 @@ if (isset($_SESSION['kategori'])) {
           <h2>Syarat dan Ketentuan</h2>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="scroll-register">
           <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
@@ -202,7 +202,7 @@ if (isset($_SESSION['kategori'])) {
               <p>
                 Daftarkan UMKM Anda sekarang juga !
               </p>
-              <a href="register.php" class="about-btn">Register UMKM<i class="bx bx-chevron-right"></i></a>
+              <a href="registergisel.php" class="about-btn">Register UMKM<i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
 
@@ -422,45 +422,6 @@ if (isset($_SESSION['kategori'])) {
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script>
-    // $(document).ready(function() {
-    //   $('#submit').on('click', function() {
-    //     var name = $('#name').val();
-    //     var email = $('#email').val();
-    //     var subject = $('#subject').val();
-    //     var message = $('#message').val();
-
-    //     if (name != '' && email != '' && subject != '' && message != '') {
-    //       $.ajax({
-    //         url: 'forms/contact.php',
-    //         method: 'POST',
-    //         data: {
-    //           name: name,
-    //           email: email,
-    //           subject: subject,
-    //           message: message
-    //         },
-    //         success: function(result) {
-    //           if (result == 1) {
-    //             Swal.fire({
-    //               icon: 'success',
-    //               title: 'Success',
-    //               text: 'Message Sent!'
-    //             })
-    //           } else if (result == 0) {
-    //             Swal.fire({
-    //               icon: 'warning',
-    //               title: 'Invalid Email',
-    //               text: 'Please input a valid email!'
-    //             })
-    //           }
-    //         }
-    //       })
-    //     } else {
-
-    //     }
-    //   })
-    // })
-
     const formToReset = document.getElementById('form-contact');
     formToReset.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -489,51 +450,6 @@ if (isset($_SESSION['kategori'])) {
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="script.js"></script>
   <script>
-    // $(document).ready(function() {
-    //   function renderCards(category) {
-    //     $.ajax({
-    //       url: 'get_cards.php',
-    //       method: 'POST',
-    //       data: {
-    //         category: category
-    //       },
-    //       dataType: 'json',
-    //       success: function(data) {
-    //         $('#list-umkm').empty();
-    //         data.forEach(function(card) {
-    //           const cardHtml = `<div class="card">
-    //                                     <h3>${card.nama_umkm}</h3>
-    //                                     <p>Category: ${card.kategori_umkm}</p>
-    //                                  </div>`;
-    //           // const cardHtml = `
-    //           //   <div class="col-lg-3 col-md-4 mb-5">
-    //           //     <div class="card h-100" id="card-umkm">
-    //           //       <img class="card-img-top" src="image.php?id=${card.id}" alt="Card image cap" style="padding: 10px; border-radius: 15px;">
-    //           //       <div class="card-body">
-    //           //         <p class="card-text list_umkm">${card.nama_umkm}</p>
-    //           //         <p class="card-text">${card.kategori_umkm}</p>
-    //           //         <p hidden id="id_umkm">${card.id}</p>
-    //           //       </div>
-    //           //     </div>
-    //           //   </div>
-    //           //   `;
-    //           $('#list-umkm').append(cardHtml);
-
-    //         });
-    //       },
-    //       error: function(error) {
-    //         console.error('Error fetching cards:', error);
-    //       }
-    //     });
-    //   }
-    //   renderCards('All');
-
-    //   $('#dropdown-kategori').on('change', function() {
-    //     const selectedCategory = $(this).val();
-    //     renderCards(selectedCategory);
-    //   });
-    // });
-
     $(document).ready(function() {
       $('#apply-filters').on('click', function() {
         var kategori = $('#dropdown-kategori').val();
@@ -581,6 +497,7 @@ if (isset($_SESSION['kategori'])) {
         },
         'slow');
     });
+
   </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
