@@ -7,6 +7,7 @@ $select = "SELECT username FROM umkmm WHERE username = '$username'";
 $select = $conn->query($select);
 if ($select->rowCount() > 0) {
     $result = 2;
+    echo json_encode(["status" => "2"]);
 } 
 else {
     $list_file = array($_FILES['foto_umkm'], $_FILES['formulir'], $_FILES['surat_pengantar'], $_FILES['ktp'], $_FILES['npwp']);
