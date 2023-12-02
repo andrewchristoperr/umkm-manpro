@@ -119,10 +119,10 @@ if (isset($_SESSION['deskripsi_umkm'])) {
             color: #fff;
             transition: 0.4s;
             display: block;
-            position: absolute;
+            /* position: absolute; */
             bottom: 5px;
-            right: 5px;
-            margin: 15px;
+            /* right: 5px;
+            margin: 15px; */
         }
 
         .button:hover {
@@ -579,11 +579,11 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                         <input class="form-control" type="file" id="npwp" name="npwp" required>
                                     </div>
 
-                                    <div class="row mt-7">
-                                        <div class="col-md-10 d-grid">
-                                            <button type="submit" class="next" id="submit" value="Next" name="next">Submit</button>
-                                        </div>
+
+                                    <div class="col-md-12 d-grid mb-3">
+                                        <button type="submit" class="next" id="submit" value="Next" name="next">Submit</button>
                                     </div>
+
                                 </div>
                             </form>
                         </div>
@@ -727,33 +727,29 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                         contentType: false,
                         processData: false,
                         success: function(result) {
-                            alert(result);
-                            console.log(result);
-                            if (result == 2) {
+                            res = JSON.parse(result)
+                            if (res.status == 2) {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Error',
                                     text: 'Username sudah terdaftar!'
                                 });
+                            } else if (res.status = 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.msg,
+                                    // timer: 3000
+                                }).then(function() {
+                                    window.location = "index.php";
+                                });
+                                // window.location.href = "index.php";
                             } else {
-                                res = JSON.parse(result);
-                                if (res.status = 'success') {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Success',
-                                        text: res.msg,
-                                        // timer: 3000
-                                    }).then(function() {
-                                        window.location = "index.php";
-                                    });
-                                    // window.location.href = "index.php";
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Error',
-                                        text: 'Error!'
-                                    });
-                                }
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Error!'
+                                });
                             }
                         }
                     })
