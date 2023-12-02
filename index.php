@@ -160,7 +160,7 @@ if (isset($_SESSION['kategori'])) {
           <h2>Syarat dan Ketentuan</h2>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="scroll-register">
           <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
@@ -578,6 +578,13 @@ if (isset($_SESSION['kategori'])) {
     $(".scroll-umkm").click(function() {
       $('html,body').animate({
           scrollTop: $(".count-box").offset().top
+        },
+        'slow');
+    });
+
+    $(".scroll-umkm2").click(function() {
+      $('html,body').animate({
+          scrollTop: $("#scroll-register").offset().top
         },
         'slow');
     });
