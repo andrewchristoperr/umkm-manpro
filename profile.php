@@ -2,12 +2,13 @@
 require 'connect.php';
 session_start();
 
+$id = $_SESSION['login'];
 
 if (!isset($_SESSION['login'])) {
   header('location: login.php');
   exit;
 } else {
-  $sql = "SELECT * FROM umkmm WHERE id = $_SESSION[login]";
+  $sql = "SELECT * FROM umkmm WHERE id = $id";
   $stmt = $conn->query($sql)->fetch();
   if ($stmt != null) {
     if ($stmt['verification_status'] == 2) {
@@ -17,8 +18,7 @@ if (!isset($_SESSION['login'])) {
   }
 }
 
-$id = $_SESSION['login'];
-
+// Fetch tahun yang ada di umkm_monthly_report untuk di Dropdown & Cari tahun terbesar & terkecil
 $queryYears = "SELECT DISTINCT YEAR(date) AS report_year FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY report_year ASC";
 $result = $conn->prepare($queryYears);
 $result->execute([$id]);
@@ -27,14 +27,18 @@ $data = $result->fetchAll();
 $startYearOptions = '';
 $endYearOptions = '';
 $years = [];
-foreach ($data as $year) {
-  $startYearOptions .= '<a class="dropdown-item" id="startYear" href="#">' . $year['report_year'] . '</a>';
-  $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
-  $years[] = $year['report_year'];
-}
-$minYears = min($years);
-$maxYears = max($years);
 
+if ($data) {
+  foreach ($data as $year) {
+    $startYearOptions .= '<a class="dropdown-item" id="startYear" href="#">' . $year['report_year'] . '</a>';
+    $endYearOptions .= '<a class="dropdown-item" id="endYear" href="#">' . $year['report_year'] . '</a>';
+    $years[] = $year['report_year'];
+  }
+  $minYears = min($years);
+  $maxYears = max($years);
+}
+
+// Fetch Report Keuangan
 $queryAllData = "SELECT date, omzet, pendapatan, pengeluaran FROM umkm_monthly_report WHERE umkm_id = ? ORDER BY date ASC";
 $result2 = $conn->prepare($queryAllData);
 $result2->execute([$id]);
@@ -51,35 +55,33 @@ foreach ($allData as $row) {
     ';
 }
 
-
-
+// Fetch Bantuan
 $sql = "SELECT * FROM bantuan WHERE id_umkm = $id AND status = 1";
 $stmt2 = $conn->query($sql)->fetchAll();
 
-
+// Fetch Produk
 $sql2 = "SELECT * FROM umkm_products WHERE umkm_id = $id";
 $stmt3 = $conn->query($sql2)->fetchAll();
 
 $productsByYear = [];
 $terjualByYear = [];
 
-// Loop untuk setiap tahun dari $minYears hingga $maxYears
-for ($year = $minYears; $year <= $maxYears; $year++) {
+if ($stmt3) {
+  for ($year = $minYears; $year <= $maxYears; $year++) {
     $productsByYear[$year] = [];
     $terjualByYear[$year] = [];
     
-    // Loop untuk setiap produk pada tahun tertentu
     foreach ($stmt3 as $products) {
-        // Cek apakah produk tersebut dijual pada tahun yang sedang diiterasi
         if ($products['tahun'] == $year) {
             $productsByYear[$year][] = $products['name'];
             $terjualByYear[$year][] = $products['jumlah_terjual'];
         }
     }
+  }
+  $productsByYearJSON = json_encode($productsByYear);
+  $terjualByYearJSON = json_encode($terjualByYear);
 }
 
-$productsByYearJSON = json_encode($productsByYear);
-$terjualByYearJSON = json_encode($terjualByYear);
 
 ?>
 
@@ -337,6 +339,8 @@ $terjualByYearJSON = json_encode($terjualByYear);
 
   <?php include "template/header_profile.php"; ?>
 
+  
+
 
   <main id="main">
     <!-- Modal Pesan -->
@@ -392,7 +396,7 @@ $terjualByYearJSON = json_encode($terjualByYear);
 
           <div class="col-lg-4 col-nama d-flex align-items-center">
             <h3 class="profil-nama" id="profil-nama">
-
+              <?php echo $stmt['nama_umkm']; ?>
             </h3>
           </div>
 
@@ -409,6 +413,12 @@ $terjualByYearJSON = json_encode($terjualByYear);
             <h2>Detail</h2>
           </div>
           <div class="umkm-info" id="umkm-info">
+            <ul>
+              <?php echo '<li><strong>Kategori</strong>: ' . $stmt['kategori_umkm'] . '</li>';?>
+              <?php echo '<li><strong>Alamat</strong>: ' . $stmt['alamat_umkm'] . '</li>';?>
+              <?php echo '<li><strong>Kecamatan</strong>: ' . $stmt['kecamatan'] . '</li>';?>
+              <?php echo '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' . $stmt['notelp_umkm'] . '</a></li>';?>
+            </ul>
           </div>
         </div>
 
@@ -417,12 +427,321 @@ $terjualByYearJSON = json_encode($terjualByYear);
             <h2>Deskripsi</h2>
           </div>
           <div class="umkm-desc" id="umkm-desc">
+            <?php echo '<p style="text-align: justify;">' . $stmt['deskripsi_umkm'] . '</p>';?>
           </div>
         </div>
 
       </div>
     </section>
 
+    <!-- Modal Edit Profile -->
+    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfile" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0">
+          <div class="modal-body p-4 px-5">
+
+            <div class="main-content text-center">
+
+              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><span class="icon-close2"></span></span>
+              </a>
+
+              <form action="#">
+
+                <label for="">Nama UMKM</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="namaUMKM" value="<?php echo $stmt['nama_umkm'];?>" required>
+                </div>
+
+                <label for="">Kategori UMKM</label>
+                <div class="form-group mb-4">
+                  <select class="form-select" id="kategoriUMKM" aria-label="Floating label select example" style="text-align: center;">
+                    <?php if ($stmt['kategori_umkm'] == "makanan dan minuman") {
+                        echo "<option value='makanan dan minuman' selected>Makanan dan Minuman</option>";
+                    } else {
+                        echo "<option value='makanan dan minuman'>Makanan dan Minuman</option>";;
+                    }
+                    ?>
+                    <?php
+                    if ($stmt['kategori_umkm'] == "fashion dan pakaian") {
+                        echo "<option value='fashion dan pakaian' selected>Fashion dan Pakaian</option>";
+                    } else {
+                        echo "<option value='fashion dan pakaian'>Fashion dan Pakaian</option>";
+                    }
+                    ?>
+                    <?php
+                    if ($stmt['kategori_umkm'] == "kerajinan tangan") {
+                        echo "<option value='kerajinan tangan' selected>Kerajinan Tangan</option>";
+                    } else {
+                        echo "<option value='kerajinan tangan'>Kerajinan Tangan</option>";
+                    }
+                    ?>
+                    <?php
+                    if ($stmt['kategori_umkm'] == "pertanian dan peternakan") {
+                        echo "<option value='pertanian dan peternakan' selected>Pertanian dan Peternakan</option>";
+                    } else {
+                        echo "<option value='pertanian dan peternakan'>Pertanian dan Peternakan</option>";
+                    }
+                    ?>
+                    <?php
+                    if ($stmt['kategori_umkm'] == "jasa") {
+                        echo "<option value='jasa' selected>Jasa</option>";
+                    } else {
+                        echo "<option value='jasa'>Jasa</option>";
+                    }
+                    ?>
+                    <?php
+                    if ($stmt['kategori_umkm'] == "otomotif") {
+                        echo "<option value='otomotif' selected>Otomotif</option>";
+                    } else {
+                        echo "<option value='otomotif'>Otomotif</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+
+                <label for="">Alamat</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="alamatUMKM" value="<?php echo $stmt['alamat_umkm'];?>" required>
+                </div>
+
+                <label for="">Kecamatan</label>
+                <div class="form-group mb-4">
+                  <select class="form-select" id="kecamatanUMKM" aria-label="Floating label select example" style="text-align: center;">
+                      <?php if ($stmt['kecamatan'] == "Asemrowo") {
+                          echo "<option value='Asemrowo' selected>Asemrowo</option>";
+                      } else {
+                          echo "<option value='Asemrowo'>Asemrowo</option>";;
+                      }
+                      ?>
+                      <?php if ($stmt['kecamatan'] == "Benowo") {
+                          echo "<option value='Benowo' selected>Benowo</option>";
+                      } else {
+                          echo "<option value='Benowo'>Benowo</option>";;
+                      }
+                      ?>
+                      <?php if ($stmt['kecamatan'] == "Bubutan") {
+                          echo "<option value='Bubutan' selected>Bubutan</option>";
+                      } else {
+                          echo "<option value='Bubutan'>Bubutan</option>";;
+                      }
+                      ?>
+                      <?php if ($stmt['kecamatan'] == "Bulak") {
+                          echo "<option value='Bulak' selected>Bulak</option>";
+                      } else {
+                          echo "<option value='Bulak'>Bulak</option>";;
+                      }
+                      ?>
+                      <?php if ($stmt['kecamatan'] == "Dukuh Pakis") {
+                          echo "<option value='Dukuh Pakis' selected>Dukuh Pakis</option>";
+                      } else {
+                          echo "<option value='Dukuh Pakis'>Dukuh Pakis</option>";;
+                      }
+                      ?>
+                      <?php if ($stmt['kecamatan'] == "Gayungan") {
+                          echo "<option value='Gayungan' selected>Gayungan</option>";
+                      } else {
+                          echo "<option value='Gayungan'>Gayungan</option>";;
+                      }
+                      ?>
+                      <?php if ($stmt['kecamatan'] == "Genteng") {
+                          echo "<option value='Genteng' selected>Genteng</option>";
+                      } else {
+                          echo "<option value='Genteng'>Genteng</option>";;
+                      }
+                      ?>
+                      <?php if ($stmt['kecamatan'] == "Gubeng") {
+                          echo "<option value='Gubeng' selected>Gubeng</option>";
+                      } else {
+                          echo "<option value='Gubeng'>Gubeng</option>";;
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Gunung Anyar") {
+                          echo "<option value='Gunung Anyar' selected>Gunung Anyar</option>";
+                      } else {
+                          echo "<option value='Gunung Anyar'>Gunung Anyar</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Jambangan") {
+                          echo "<option value='Jambangan' selected>Jambangan</option>";
+                      } else {
+                          echo "<option value='Jambangan'>Jambangan</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Karang Pilang") {
+                          echo "<option value='Karang Pilang' selected>Karang Pilang</option>";
+                      } else {
+                          echo "<option value='Karang Pilang'>Karang Pilang</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Kenjeran") {
+                          echo "<option value='Kenjeran' selected>Kenjeran</option>";
+                      } else {
+                          echo "<option value='Kenjeran'>Kenjeran</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Krembangan") {
+                          echo "<option value='Krembangan' selected>Krembangan</option>";
+                      } else {
+                          echo "<option value='Krembangan'>Krembangan</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Lakarsantri") {
+                          echo "<option value='Lakarsantri' selected>Lakarsantri</option>";
+                      } else {
+                          echo "<option value='Lakarsantri'>Lakarsantri</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Mulyorejo") {
+                          echo "<option value='Mulyorejo' selected>Mulyorejo</option>";
+                      } else {
+                          echo "<option value='Mulyorejo'>Mulyorejo</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Pabean Cantian") {
+                          echo "<option value='Pabean Cantian' selected>Pabean Cantian</option>";
+                      } else {
+                          echo "<option value='Pabean Cantian'>Pabean Cantian</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Pakal") {
+                          echo "<option value='Pakal' selected>Pakal</option>";
+                      } else {
+                          echo "<option value='Pakal'>Pakal</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Rungkut") {
+                          echo "<option value='Rungkut' selected>Rungkut</option>";
+                      } else {
+                          echo "<option value='Rungkut'>Rungkut</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Sambikerep") {
+                          echo "<option value='Sambikerep' selected>Sambikerep</option>";
+                      } else {
+                          echo "<option value='Sambikerep'>Sambikerep</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Sawahan") {
+                          echo "<option value='Sawahan' selected>Sawahan</option>";
+                      } else {
+                          echo "<option value='Sawahan'>Sawahan</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Semampir") {
+                          echo "<option value='Semampir' selected>Semampir</option>";
+                      } else {
+                          echo "<option value='Semampir'>Semampir</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Simokerto") {
+                          echo "<option value='Simokerto' selected>Simokerto</option>";
+                      } else {
+                          echo "<option value='Simokerto'>Simokerto</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Sukolilo") {
+                          echo "<option value='Sukolilo' selected>Sukolilo</option>";
+                      } else {
+                          echo "<option value='Sukolilo'>Sukolilo</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Sukomanunggal") {
+                          echo "<option value='Sukomanunggal' selected>Sukomanunggal</option>";
+                      } else {
+                          echo "<option value='Sukomanunggal'>Sukomanunggal</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Tambaksari") {
+                          echo "<option value='Tambaksari' selected>Tambaksari</option>";
+                      } else {
+                          echo "<option value='Tambaksari'>Tambaksari</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Tandes") {
+                          echo "<option value='Tandes' selected>Tandes</option>";
+                      } else {
+                          echo "<option value='Tandes'>Tandes</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Tegalsari") {
+                          echo "<option value='Tegalsari' selected>Tegalsari</option>";
+                      } else {
+                          echo "<option value='Tegalsari'>Tegalsari</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Tenggilis Mejoyo") {
+                          echo "<option value='Tenggilis Mejoyo' selected>Tenggilis Mejoyo</option>";
+                      } else {
+                          echo "<option value='Tenggilis Mejoyo'>Tenggilis Mejoyo</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Wiyung") {
+                          echo "<option value='Wiyung' selected>Wiyung</option>";
+                      } else {
+                          echo "<option value='Wiyung'>Wiyung</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Wonocolo") {
+                          echo "<option value='Wonocolo' selected>Wonocolo</option>";
+                      } else {
+                          echo "<option value='Wonocolo'>Wonocolo</option>";
+                      }
+                      ?>
+                      <?php
+                      if ($stmt['kecamatan'] == "Wonokromo") {
+                          echo "<option value='Wonokromo' selected>Wonokromo</option>";
+                      } else {
+                          echo "<option value='Wonokromo'>Wonokromo</option>";
+                      }
+                      ?>
+                  </select>
+                </div>
+
+                <label for="">Nomor WhatsApp</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="noWhatsApp" value="<?php echo $stmt['notelp_umkm'];?>" required>
+                </div>
+
+                <div class="d-flex">
+                  <div class="mx-auto">
+                    <button class="btn btn-primary" type="button" id="editProfileBtn">Edit</button>
+                    <!-- <a href="" class="btn btn-primary" id="editProfileBtn">Edit</a> -->
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Modal Edit Profile -->
+
+    
     <!-- ======= Portfolio Section ======= -->
     <div class="container">
 
@@ -735,62 +1054,6 @@ $terjualByYearJSON = json_encode($terjualByYear);
     </div>
     <!-- End of Modal Tambah Produk -->
     
-    <!-- Modal Edit Profile -->
-    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfile" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content rounded-0">
-          <div class="modal-body p-4 px-5">
-
-            <div class="main-content text-center">
-
-              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"><span class="icon-close2"></span></span>
-              </a>
-
-              <form action="#">
-
-                <label for="">Nama UMKM</label>
-                <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="namaUMKM" required>
-                </div>
-
-                <label for="">Kategori UMKM</label>
-                <div class="form-group mb-4">
-                  <select class="form-select" id="kategoriUMKM" aria-label="Floating label select example" style="text-align: center;">
-                  </select>
-                </div>
-
-                <label for="">Alamat</label>
-                <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="alamatUMKM" required>
-                </div>
-
-                <label for="">Kecamatan</label>
-                <div class="form-group mb-4">
-                  <select class="form-select" id="kecamatanUMKM" aria-label="Floating label select example" style="text-align: center;">
-                  </select>
-                </div>
-
-                <label for="">Nomor WhatsApp</label>
-                <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="noWhatsApp" required>
-                </div>
-
-                <div class="d-flex">
-                  <div class="mx-auto">
-                    <a href="#" class="btn btn-primary" id="tambahProdukBtn">Edit</a>
-                  </div>
-                </div>
-              </form>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End of Modal Edit Profile -->
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -915,39 +1178,6 @@ $terjualByYearJSON = json_encode($terjualByYear);
     }
 
     $(document).ready(function() {
-
-      // Ambil & tampilin data-data profil UMKM
-      var id = "<?php echo $_SESSION['login']; ?>";
-      $.ajax({
-        url: "getProfileProcess.php",
-        type: "POST",
-        data: {
-          id: id
-        },
-        success: function(data) {
-          var dataObj = JSON.parse(data);
-          var namaUMKM = dataObj.nama_umkm;
-          umkmInfo = '<ul>';
-          umkmInfo += '<li><strong>Kategori</strong>: ' + dataObj.kategori_umkm + '</li>';
-          umkmInfo += '<li><strong>Alamat</strong>: ' + dataObj.alamat_umkm + '</li>';
-          umkmInfo += '<li><strong>Kecamatan</strong>: ' + dataObj.kecamatan + '</li>';
-          umkmInfo += '<li><strong>Nomor WhatsApp</strong>: <a href="https://api.whatsapp.com/send?phone=62812345678&text=Halo%20semua!">' + dataObj.notelp_umkm + '</a></li>';
-          umkmInfo += '</ul>';
-
-          var deskripsi = '<p style="text-align: justify;">' + dataObj.deskripsi_umkm + '</p>';
-
-          document.getElementById('profil-nama').innerHTML = namaUMKM;
-          document.getElementById('umkm-info').innerHTML = umkmInfo;
-          document.getElementById('umkm-desc').innerHTML = deskripsi;
-
-          document.getElementById('namaUMKM').value = namaUMKM;
-          document.getElementById('kategoriUMKM').innerHTML = '<option selected>' + dataObj.kategori_umkm + '</option>';
-          document.getElementById('alamatUMKM').value = dataObj.alamat_umkm;
-          document.getElementById('kecamatanUMKM').innerHTML = '<option selected>' + dataObj.kecamatan + '</option>';
-          document.getElementById('noWhatsApp').value = dataObj.notelp_umkm;
-        }
-      });
-
 
       // Dropdown Filter Year
       var selectedStartYear = ''
