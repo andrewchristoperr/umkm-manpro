@@ -576,7 +576,7 @@ if (isset($_SESSION['deskripsi_umkm'])) {
 
                                     <div class="mb-5">
                                         <label for="formFile" class="form-label">NPWP</label>
-                                        <input class="form-control" type="file" id="npwp" name="npwp" required>
+                                        <input class="form-control" type="file" id="npwp" name="npwp" required/>
                                     </div>
 
 
