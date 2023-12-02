@@ -2,9 +2,21 @@
 require 'connect.php';
 session_start();
 
-// send bantuan to database
-if (isset($_POST['ajukanBantuan'])) {
+
+if (!isset($_SESSION['login'])) {
+    header('location: login.php');
+    exit;
+} else {
+    $sql = "SELECT * FROM umkmm WHERE id = $_SESSION[login]";
+    $stmt = $conn->query($sql)->fetch();
+    if ($stmt != null) {
+        if ($stmt['verification_status'] == 2) {
+            header('location: profile_waiting.php');
+            exit;
+        }
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +34,9 @@ if (isset($_POST['ajukanBantuan'])) {
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -37,7 +51,9 @@ if (isset($_POST['ajukanBantuan'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
@@ -118,6 +134,24 @@ if (isset($_POST['ajukanBantuan'])) {
             color: rgba(0, 0, 0, 0.7);
             font-style: italic;
         }
+
+        table{
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: left;
+            word-wrap: break-word;
+            max-width: 100px;
+            
+        }
     </style>
 </head>
 
@@ -141,7 +175,8 @@ if (isset($_POST['ajukanBantuan'])) {
 
                                     <div class="mb-4">
                                         <label for="formFile" class="required">Alasan Pengajuan Bantuan</label>
-                                        <textarea class="form-control" name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
+                                        <textarea class="form-control" name="alasan_pengajuan"
+                                            id="alasan_pengajuan"></textarea>
                                         <span class="explanation" italic>Contoh: Saya mengajukan bantuan ini untuk ...
                                             Selama mengoperasikan usaha terdapat kendala ... Dalam rangka bazzar 17
                                             Agustus di kecamatan X, saya ingin memperbaiki ...</span>
@@ -150,8 +185,10 @@ if (isset($_POST['ajukanBantuan'])) {
 
                                     <div class="mb-4">
                                         <label for="formFile" class="required">Dokumen Pendukung</label>
-                                        <input class="form-control" type="file" id="dokumen_pendukung" name="dokumen_pendukung" required>
-                                        <span class="explanation" italic>Contoh: Foto Tempat Usaha, Foto Produk,Surat Keterangan Lainnya</span>
+                                        <input class="form-control" type="file" id="dokumen_pendukung"
+                                            name="dokumen_pendukung" required>
+                                        <span class="explanation" italic>Contoh: Foto Tempat Usaha, Foto Produk,Surat
+                                            Keterangan Lainnya</span>
 
                                     </div>
 
@@ -159,38 +196,46 @@ if (isset($_POST['ajukanBantuan'])) {
                                         <label for="formFile" class="required">Bantuan yang Dibutuhkan</label>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="dana" id="danaCheckbox" onchange="toggleInput()">
+                                            <input class="form-check-input" type="checkbox" value="dana"
+                                                id="danaCheckbox" onchange="toggleInput()">
                                             <label class="form-check-label" for="danaCheckbox">Dana</label>
                                         </div>
                                         <div id="danaInput" class="form-group mt-2 mb-2 hidden">
                                             <!-- nominal yang Dibutuhkan -->
                                             <label for="formFile" class="required">Nominal yang Dibutuhkan</label>
-                                            <input class="form-control" type="number" id="nominal" name="nominal" pattern="^\Rp\d{1,3}(,\d{3})*(\.\d+)?Rp" required placeholder Rp 1000.000>
+                                            <input class="form-control" type="number" id="nominal" name="nominal"
+                                                pattern="^\Rp\d{1,3}(,\d{3})*(\.\d+)?Rp" required placeholder Rp
+                                                1000.000>
 
                                             <label for="formFile" class="required">Rincian Rencana Penggunaan
                                                 Dana</label>
-                                            <textarea class="form-control" id="rincian_dana" name="rincian_dana"></textarea>
+                                            <textarea class="form-control" id="rincian_dana"
+                                                name="rincian_dana"></textarea>
                                             <span class="explanation" italic>Contoh: 1. Membeli bahan baku sebanyak ...
                                                 kg seharga Rp ... </span>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="Tenda" id="tendaCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="Tenda"
+                                                id="tendaCheckbox">
                                             <label class="form-check-label" for="tendaCheckbox">Tenda</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="Gerobak" id="gerobakCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="Gerobak"
+                                                id="gerobakCheckbox">
                                             <label class="form-check-label" for="gerobakCheckbox">Gerobak</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="Spanduk" id="spandukCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="Spanduk"
+                                                id="spandukCheckbox">
                                             <label class="form-check-label" for="spandukCheckbox">Spanduk</label>
                                         </div>
 
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="lainnyaCheckbox" onchange="toggleInput()">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="lainnyaCheckbox" onchange="toggleInput()">
                                             <label class="form-check-label" for="lainnyaCheckbox">Lainnya</label>
                                         </div>
                                         <!-- Input Lainnya -->
@@ -203,12 +248,14 @@ if (isset($_POST['ajukanBantuan'])) {
                                     <div class="mb-4">
                                         <label for="formFile" class="form">Keterangan Tambahan</label>
                                         <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
-                                        <span class="explanation" italic>Contoh: Spanduk yang saya butuhkan 1 meter x 100 cm sebagai petunjuk tempat UMKM saya berada</span>
+                                        <span class="explanation" italic>Contoh: Spanduk yang saya butuhkan 1 meter x
+                                            100 cm sebagai petunjuk tempat UMKM saya berada</span>
 
                                     </div>
 
                                     <div class="d-grid mx-auto">
-                                        <button class="button" type="submit" id="submit_bantuan" name="submit_bantuan" data-toggle="modal" data-target="summarize_bantuan">Ajukan
+                                        <button class="button" type="submit" id="submit_bantuan" name="submit_bantuan"
+                                            data-toggle="modal" data-target="summarize_bantuan">Ajukan
                                             Bantuan</button>
                                     </div>
                                 </div>
@@ -235,7 +282,8 @@ if (isset($_POST['ajukanBantuan'])) {
                 </div>
                 <div class="modal-body">
                     <p id="modal_body"></p>
-                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                        data-target="#exampleModal">
                     </button>
                 </div>
 
@@ -251,7 +299,8 @@ if (isset($_POST['ajukanBantuan'])) {
     <?php include "template/footer.php"; ?>
     <!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -285,7 +334,7 @@ if (isset($_POST['ajukanBantuan'])) {
             }
         }
 
-        $("#submit_bantuan").click(function() {
+        $("#submit_bantuan").click(function () {
             event.preventDefault();
 
             var form_bantuan = new FormData();
@@ -331,36 +380,90 @@ if (isset($_POST['ajukanBantuan'])) {
             form_bantuan.append('lainnya', lainnya);
 
             if (alasan_pengajuan != "" && dokumen_pendukung != "") {
-                $.ajax({
-                    url: 'forms/form_bantuan.php',
-                    method: 'POST',
-                    data: form_bantuan,
-                    contentType: false,
-                    processData: false,
-                    success: function(result) {
-                        alert(result);
-                        console.log(result);
-                        res = JSON.parse(result);
-                        if (res.status = 'success') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: res.msg,
-                                // timer: 3000
-                            }).then(function() {
-                                window.location = "profile.php";
-                            });
-                            // window.location.href = "index.php";
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'Error!'
-                            });
-                        }
+                // give border to the table with no space between cells
+                var data = "<table style='border: 1px solid black; border-collapse: collapse;'>";
 
+                data += "<tr><td colspan='2'><b>Alasan Pengajuan Bantuan</b></td><td>" + alasan_pengajuan + "</td></tr>";
+
+                data += "<tr><td colspan='2'><b>Dokumen Pendukung</b></td><td>" + dokumen_pendukung[0].name + "</td></tr>";
+
+                data += "<tr><th colspan='3' style='text-align: center'><b>Bantuan yang Dibutuhkan</b></th>";
+
+                if (danaCheckbox.checked) {
+                    data += "<tr><th rowspan='2'><b>Dana</b></th><td colspan='2'>Rp" + nominal + ",00</td></tr><tr><td colspan='2'>" + rincian_dana + "</td></tr>";
+                }
+                var barang = "<div></div>";
+                if (tendaCheckbox.checked) {
+                    barang += "Tenda<br>";
+                }
+                if (gerobakCheckbox.checked) {
+                    barang += "Gerobak<br>";
+                }
+                if (spandukCheckbox.checked) {
+                    barang += "Spanduk<br>";
+                }
+                
+                data += "<tr><td><b>Barang</b></td><td colspan='2'>" + barang + "</td></tr>";
+
+                if (lainnyaCheckbox.checked) {
+                    data += "<tr><td><b>Lainnya</b></td><td colspan='2'>" + lainnya + "</td></tr>";
+                }
+
+                data += "<tr><td colspan='2'><b>Keterangan Tambahan</b></td><td>" + keterangan + "</td></tr>";
+
+                data += "</table>";
+
+
+                Swal.fire({
+                    // make the modal wider
+                    width: '75%',
+                    icon: 'question',
+                    title: 'Apakah data yang anda masukkan sudah benar?',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: "Batal",
+                    confirmButtonText: 'Ajukan Bantuan',
+                    html: data
+                }).then((result) => {
+                    if (result.isConfirmed){
+                        $.ajax({
+                        url: 'forms/form_bantuan.php',
+                        method: 'POST',
+                        data: form_bantuan,
+                        contentType: false,
+                        processData: false,
+
+                        success: function (result) {
+                            console.log(result);
+                            res = JSON.parse(result);
+
+                            if (res.status = 'success') {
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.msg,
+                                    // timer: 3000
+                                }).then(function () {
+                                    window.location = "profile.php";
+                                });
+                                // window.location.href = "index.php";
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Error!'
+                                });
+                            }
+
+                        }
+                    })
                     }
-                })
+                    
+                    // window.location = "profile.php";
+                });
+
             } else {
                 Swal.fire({
                     icon: 'error',
