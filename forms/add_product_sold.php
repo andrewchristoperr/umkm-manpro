@@ -11,7 +11,8 @@ $search = $conn->prepare($query);
 $search->execute([$product_name]);
 $product_id = $search->fetchColumn();
 
-$insert = "INSERT INTO umkm_products_sold (umkm_id, product_id, product_name, jumlah_terjual) VALUES ('$umkm_id', '$product_id', '$product_name', '$jumlah_terjual')";
+$insert = "INSERT INTO umkm_products_sold (umkm_id, product_id, product_name, jumlah_terjual) 
+           VALUES ('$umkm_id', '$product_id', '$product_name', '$jumlah_terjual')";
 $insert = $conn->query($insert);
 
 $result = 1;

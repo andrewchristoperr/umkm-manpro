@@ -2,7 +2,7 @@
 require '../connect.php';
 session_start();
 
-$username = $_SESSION['username'];
+$username = $_POST['username'];
 $select = "SELECT username FROM umkmm WHERE username = '$username'";
 $select = $conn->query($select);
 if ($select->rowCount() > 0) {
