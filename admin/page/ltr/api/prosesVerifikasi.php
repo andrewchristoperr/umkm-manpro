@@ -13,27 +13,26 @@ require "../../../../connect.php";
     $query2 = "SELECT * FROM umkmm WHERE verification_status = 2";
     $stmt2 = $conn->query($query2)->fetchAll();
 
-    foreach($stmt2 as $row){
-        $output.='
-        <tr>
-            <td>'.$row['id'].'</td>
-            <td>'.$row['tanggal_pendaftaran'].'</td>
-            <td>'.$row['nama_umkm'].'</td>
-            <td>'.$row['notelp_umkm'].'</td>
-            <td>'.$row['alamat_umkm'].'</td>
-            <td>'.$row['kecamatan'].'</td>
-            <td>'.$row['kategori_umkm'].'</td>
-            <td>'.$row['deskripsi_umkm'].'</td>
-            <td>'.$row['formulir'].'</td>
-            <td>'.$row['surat_pengantar'].'</td>
-            <td>'.$row['ktp'].'</td>
-            <td>'.$row['npwp'].'</td>
-            <td>
-            <button class="btn btn-outline-success" onclick="terima('. $row['id'] .')">Terima</button>
-            <button class="btn btn-outline-danger" onclick="tolak('. $row['id'] .')">Tolak</button>
-            </td>
-        </tr>
-        ';
+    foreach($stmt2 as $data){
+        $output.=
+        '<tr>
+        <td>' . $data['id'] . '</td>
+        <td>' . $data['tanggal_pendaftaran'] . '</td>
+        <td>' . $data['nama_umkm'] . '</td>
+        <td>' . $data['notelp_umkm'] . '</td>
+        <td>' . $data['alamat_umkm'] . '</td>
+        <td>' . $data['kecamatan'] . '</td>
+        <td>' . $data['kategori_umkm'] . '</td>
+        <td>' . $data['deskripsi_umkm'] . '</td>
+        <td> <embed type="application/pdf" src="../../../forms/'. $data['formulir'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+        <td> <embed type="application/pdf" src="../../../forms/'. $data['surat_pengantar'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+        <td> <embed type="application/pdf" src="../../../forms/'. $data['ktp'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+        <td> <embed type="application/pdf" src="../../../forms/'. $data['npwp'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+        <td>
+            <button type="button" class="btn btn-outline-success" onclick = "terima(' . $data['id'] . ')">Terima</button>
+            <button type="button" class="btn btn-outline-danger" onclick = "tolak(' . $data['id'] . ')">Tolak</button>
+        </td>
+        </tr>';
     }
     echo $output;
 

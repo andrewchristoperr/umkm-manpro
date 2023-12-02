@@ -3,6 +3,12 @@
 require '../connect.php';
 session_start();
 
+$id = $_SESSION['login'];
+$sql = "SELECT username FROM umkmm WHERE id = $id";
+$user = $conn->query($sql)->fetch();
+$username = $user['username'];
+
+
 $list_file = array($_FILES['dokumen_pendukung']);
 $list_type = array("dokumen_pendukung");
 $list_file_type = array("dokumen_pendukung");
@@ -29,7 +35,7 @@ for ($i = 0; $i < sizeof($list_file); $i++) {
 
                 if (in_array($img_ex_lc, $allowed_exs)) {
                     # rename
-                    $new_img_name = $list_file_type[$i] . '.' . $img_ex_lc;
+                    $new_img_name = strtolower($user['username']) . '_' . $list_file_type[$i] . date("mjYHis") . '.' . $img_ex_lc;
 
                     # path
                     $path = "bantuan/" . $list_type[$i] . "/";
