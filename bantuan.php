@@ -439,7 +439,6 @@ if (!isset($_SESSION['login'])) {
                             res = JSON.parse(result);
 
                             if (res.status = 'success') {
-
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success',
