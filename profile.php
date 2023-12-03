@@ -1375,8 +1375,19 @@ foreach ($years as $year) {
 
       // Grafik Omzet, Pendapatan, Pengeluaran (Line Chart)
       var id = <?php echo $id; ?>;
-      var minYears = <?php echo $minYears; ?>;
-      var maxYears = <?php echo $maxYears; ?>;
+      <?php
+      if (isset($minYears)) {
+          echo "minYears = $minYears;";
+      } else {
+          echo "minYears = 0;";
+      }
+
+      if (isset($maxYears)) {
+          echo "maxYears = $maxYears;";
+      } else {
+          echo "maxYears = 0;";
+      }
+      ?>
       var grafik_laporan = $('#grafik-laporan');
       grafik_laporan.empty();
 
@@ -1531,22 +1542,13 @@ foreach ($years as $year) {
 
       // Edit Profile
       $('#editProfileBtn').on('click', function() {
-        // Data profile dari database (setelah diedit)
         var namaUMKM_edited = $('#namaUMKM').val();
         var deskripsiUMKM_edited = $('#deskripsiUMKM').val();
         var kategoriUMKM_edited = $('#kategoriUMKM').val();
         var alamatUMKM_edited = $('#alamatUMKM').val();
         var kecamatanUMKM_edited = $('#kecamatanUMKM').val();
         var noWhatsApp_edited = $('#noWhatsApp').val();
-
-        // Data profile dari database (sebelum diedit)
-        // INI KOK GAISA YA GUYS HUELPPPPPPPPPPPPPPPPPPPP // iya :')
-        var namaUMKM = <?php echo $stmt['nama_umkm']; ?>;
-        var deskripsiUMKM = <?php echo $stmt['deskripsi_umkm']; ?>;
-        var kategoriUMKM = <?php echo $stmt['kategori_umkm']; ?>;
-        var alamatUMKM = <?php echo $stmt['alamat_umkm']; ?>;
-        var kecamatanUMKM = <?php echo $stmt['kecamatan']; ?>;
-        var noWhatsApp = <?php echo $stmt['notelp_umkm']; ?>;
+        var id = <?php echo $id; ?>;
 
         $('#simpanPerubahan').on('click', function() {
           $.ajax({
