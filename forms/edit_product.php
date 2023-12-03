@@ -60,9 +60,9 @@ if (sizeof($list_file_upload) == 1) {
         move_uploaded_file($tmp_name, $list_file_path[$i]);
     }
 
-    $namaProduk = $_POST['editNama'];
-    $deskripsiProduk = $_POST['editDesc'];
-    $hargaProduk = $_POST['editHarga'];
+    $editNama = $_POST['editNama'];
+    $editDesc = $_POST['editDesc'];
+    $editHarga = $_POST['editHarga'];
     $product_id = $_POST['productId'];
 
     // $sql = "INSERT INTO umkmm (username, email, password, nama_umkm, notelp_umkm, alamat_umkm, kecamatan, foto_umkm, kategori_umkm, deskripsi_umkm, formulir, surat_pengantar, ktp, npwp) VALUES (?,?,?,?,?, ?,?,?,?,?, ?,?,?,?)";
@@ -80,7 +80,7 @@ if (sizeof($list_file_upload) == 1) {
         foto_produk = ? 
     WHERE id = ?";
     $query = $conn->prepare($sql);
-    $query->execute([$editNama, $editDesc, $editharga, $list_file_path[0], $product_id]);
+    $query->execute([$editNama, $editDesc, $editHarga, $list_file_path[0], $product_id]);
 
     $result = 1;
     echo ($result);

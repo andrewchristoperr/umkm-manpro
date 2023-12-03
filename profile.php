@@ -1615,8 +1615,6 @@ foreach ($years as $year) {
             contentType: false,
             processData: false,
             success: function(result) {
-              console.log(result);
-              alert(result);
               if (result == 1) {
                 Swal.fire({
                   icon: 'success',
