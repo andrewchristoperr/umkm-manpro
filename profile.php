@@ -8,8 +8,8 @@ if (!isset($_SESSION['login'])) {
   header('location: login.php');
   exit;
 } else {
-  $sql = "SELECT * FROM umkmm WHERE id = $id";
-  $stmt = $conn->query($sql)->fetch();
+  $sql0 = "SELECT * FROM umkmm WHERE id = $id";
+  $stmt = $conn->query($sql0)->fetch();
   if ($stmt != null) {
     if ($stmt['verification_status'] == 2) {
       header('location: profile_waiting.php');
@@ -60,26 +60,29 @@ $sql = "SELECT * FROM bantuan WHERE id_umkm = $id AND status = 1";
 $stmt2 = $conn->query($sql)->fetchAll();
 
 // Fetch Produk
-$sql2 = "SELECT * FROM umkm_products WHERE umkm_id = $id";
+$sql2 = "SELECT * FROM products WHERE umkm_id = $id";
 $stmt3 = $conn->query($sql2)->fetchAll();
+
+// Fetch Jumlah Produk Terjual untuk Grafik Penjualan (Pie Chart)
+
+$sql_years = "SELECT DISTINCT YEAR(date) as year FROM umkm_products_sold WHERE umkm_id = $id ORDER BY year ASC";
+$years = $conn->query($sql_years)->fetchAll(PDO::FETCH_COLUMN);
 
 $productsByYear = [];
 $terjualByYear = [];
 
-if ($stmt3) {
-  for ($year = $minYears; $year <= $maxYears; $year++) {
-    $productsByYear[$year] = [];
-    $terjualByYear[$year] = [];
+foreach ($years as $year) {
+    $sql_per_year = "SELECT product_name, SUM(jumlah_terjual) as total_sold 
+                    FROM umkm_products_sold 
+                    WHERE umkm_id = $id AND YEAR(date) = $year 
+                    GROUP BY product_name";
+    
+    $dataPenjualanPerTahun = $conn->query($sql_per_year)->fetchAll();
 
-    foreach ($stmt3 as $products) {
-      if ($products['tahun'] == $year) {
-        $productsByYear[$year][] = $products['name'];
-        $terjualByYear[$year][] = $products['jumlah_terjual'];
-      }
+    foreach ($dataPenjualanPerTahun as $penjualan) {
+        $productsByYear[$year][] = $penjualan['product_name'];
+        $terjualByYear[$year][] = $penjualan['total_sold'];
     }
-  }
-  $productsByYearJSON = json_encode($productsByYear);
-  $terjualByYearJSON = json_encode($terjualByYear);
 }
 
 
@@ -402,6 +405,7 @@ if ($stmt3) {
       </div>
     </div>
     <!-- End Modal Pesan -->
+
     <section id="akun">
       <div class="container">
         <div class="row">
@@ -469,13 +473,18 @@ if ($stmt3) {
                   <input type="text" class="form-control text-center" id="namaUMKM" value="<?php echo $stmt['nama_umkm']; ?>" required>
                 </div>
 
+                <label for="">Deskripsi UMKM</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="deskripsiUMKM" style="height: 60px;" value="<?php echo $stmt['deskripsi_umkm']; ?>">
+                </div>
+
                 <label for="">Kategori UMKM</label>
                 <div class="form-group mb-4">
                   <select class="form-select" id="kategoriUMKM" aria-label="Floating label select example" style="text-align: center;">
                     <?php if ($stmt['kategori_umkm'] == "makanan dan minuman") {
                       echo "<option value='makanan dan minuman' selected>Makanan dan Minuman</option>";
                     } else {
-                      echo "<option value='makanan dan minuman'>Makanan dan Minuman</option>";;
+                      echo "<option value='makanan dan minuman'>Makanan dan Minuman</option>";
                     }
                     ?>
                     <?php
@@ -527,49 +536,49 @@ if ($stmt3) {
                     <?php if ($stmt['kecamatan'] == "Asemrowo") {
                       echo "<option value='Asemrowo' selected>Asemrowo</option>";
                     } else {
-                      echo "<option value='Asemrowo'>Asemrowo</option>";;
+                      echo "<option value='Asemrowo'>Asemrowo</option>";
                     }
                     ?>
                     <?php if ($stmt['kecamatan'] == "Benowo") {
                       echo "<option value='Benowo' selected>Benowo</option>";
                     } else {
-                      echo "<option value='Benowo'>Benowo</option>";;
+                      echo "<option value='Benowo'>Benowo</option>";
                     }
                     ?>
                     <?php if ($stmt['kecamatan'] == "Bubutan") {
                       echo "<option value='Bubutan' selected>Bubutan</option>";
                     } else {
-                      echo "<option value='Bubutan'>Bubutan</option>";;
+                      echo "<option value='Bubutan'>Bubutan</option>";
                     }
                     ?>
                     <?php if ($stmt['kecamatan'] == "Bulak") {
                       echo "<option value='Bulak' selected>Bulak</option>";
                     } else {
-                      echo "<option value='Bulak'>Bulak</option>";;
+                      echo "<option value='Bulak'>Bulak</option>";
                     }
                     ?>
                     <?php if ($stmt['kecamatan'] == "Dukuh Pakis") {
                       echo "<option value='Dukuh Pakis' selected>Dukuh Pakis</option>";
                     } else {
-                      echo "<option value='Dukuh Pakis'>Dukuh Pakis</option>";;
+                      echo "<option value='Dukuh Pakis'>Dukuh Pakis</option>";
                     }
                     ?>
                     <?php if ($stmt['kecamatan'] == "Gayungan") {
                       echo "<option value='Gayungan' selected>Gayungan</option>";
                     } else {
-                      echo "<option value='Gayungan'>Gayungan</option>";;
+                      echo "<option value='Gayungan'>Gayungan</option>";
                     }
                     ?>
                     <?php if ($stmt['kecamatan'] == "Genteng") {
                       echo "<option value='Genteng' selected>Genteng</option>";
                     } else {
-                      echo "<option value='Genteng'>Genteng</option>";;
+                      echo "<option value='Genteng'>Genteng</option>";
                     }
                     ?>
                     <?php if ($stmt['kecamatan'] == "Gubeng") {
                       echo "<option value='Gubeng' selected>Gubeng</option>";
                     } else {
-                      echo "<option value='Gubeng'>Gubeng</option>";;
+                      echo "<option value='Gubeng'>Gubeng</option>";
                     }
                     ?>
                     <?php
@@ -743,8 +752,8 @@ if ($stmt3) {
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <button class="btn btn-primary" type="button" id="editProfileBtn">Edit</button>
-                    <!-- <a href="" class="btn btn-primary" id="editProfileBtn">Edit</a> -->
+                    <button class="btn btn-primary" id="editProfileBtn" data-target="#saveChanges" data-toggle="modal">Edit</button>
+                    <!-- <a href="#saveChanges" data-toggle="modal" id="editProfileBtn" class="btn btn-primary">Edit</a> -->
                   </div>
                 </div>
               </form>
@@ -756,6 +765,27 @@ if ($stmt3) {
       </div>
     </div>
     <!-- End of Modal Edit Profile -->
+
+    <!-- Modal Simpan Perubahan Edit Profile -->
+    <div class="modal fade" id="saveChanges" aria-hidden="true" aria-labelledby="saveChanges" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header border-0">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <h3 class="text-center mb-4">Simpan Perubahan?</h3>
+                  <p class="text-center">Jika anda keluar, perubahan yang dilakukan tidak akan tersimpan</p>
+              </div>
+              <div class="modal-footer justify-content-center border-0">
+                  <button class="btn btn-primary mx-3" id="simpanPerubahan" data-bs-dismiss="modal">Simpan</button>
+                  <button class="btn btn-primary mx-3" id="buangPerubahan" data-bs-dismiss="modal">Buang</button>
+                  <button class="btn btn-primary mx-3" id="batalPerubahan" data-bs-dismiss="modal">Batal</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- End of Modal Simpan Perubahan Edit Profile -->
 
 
     <!-- ======= Portfolio Section ======= -->
@@ -797,9 +827,8 @@ if ($stmt3) {
                     <div class="portfolio-wrap">
                       <img src="forms/<?= $imagePath ?>" class="img-fluid" alt="">
                       <div class="portfolio-links">
-                        <input type="hidden" id="productId" name="productId" value="<?= $data['id'] ?>">
-                        <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Delete" id="deleteProdukBtn"><i class="bx bx-x"></i></a>
-                        <a href="portfolio-details.html" title="Edit" id="editProdukBtn"><i class="bx bx-pencil edit-icon"></i></a>
+                        <a href="#deleteProduct" data-toggle="modal" title="Delete" class="deleteProdukBtn" data-product-id="<?= $data['id'] ?>"><i class="bx bx-x"></i></a>
+                        <a href="#editProduct" data-toggle="modal" title="Edit" id="editProdukBtn"><i class="bx bx-pencil edit-icon"></i></a>
                       </div>
                     </div>
                   </div>
@@ -816,7 +845,7 @@ if ($stmt3) {
     <!--End Portfolio Section -->
 
     <!-- Modal Edit Produk -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editProduct" aria-hidden="true">
+    <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProduct" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
           <div class="modal-body p-4 px-5">
@@ -826,17 +855,35 @@ if ($stmt3) {
               <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true"><span class="icon-close2"></span></span>
               </a>
+              <div class="mb-3">
+                <h3>Edit Produk</h3>
+              </div>
 
-              <form action="#">
+              <form method="POST">
 
-                <label for="">Edit Nama Produk</label>
+                <label for="">Nama Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" placeholder="Masukkan Nama Produk">
+                  <input type="text" class="form-control text-center" id="namaProduk" required>
+                </div>
+
+                <label for="">Deskripsi Produk</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="descProduk" style="height: 60px;" placeholder="" required>
+                </div>
+
+                <label for="">Harga Produk</label>
+                <div class="form-group mb-4">
+                  <input type="text" class="form-control text-center" id="hargaProduk" placeholder="" required>
+                </div>
+
+                <label for="">Upload Foto Produk</label>
+                <div class="form-group mb-4">
+                  <input class="form-control" type="file" id="fotoProduk" name="fotoProduk" required>
                 </div>
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <a href="#" class="btn btn-primary">Edit Produk</a>
+                    <a href="#" class="btn btn-primary" id="tambahProdukBtn">Edit Produk</a>
                   </div>
                 </div>
               </form>
@@ -848,6 +895,27 @@ if ($stmt3) {
       </div>
     </div>
     <!-- End Modal Edit Produk -->
+    
+    <!-- Modal Delete Produk -->
+    <div class="modal fade" id="deleteProduct" aria-hidden="true" aria-labelledby="deleteProduct" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header border-0">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <h3 class="text-center mb-4">Hapus Produk?</h3>
+                  <p class="text-center">Anda akan kehilangan data produk secara permanen. Apakah Anda yakin?</p>
+              </div>
+              <div class="modal-footer justify-content-center border-0">
+                  <button class="btn btn-primary mx-3" id="yakinDeleteBtn" data-bs-dismiss="modal">Yakin</button>
+                  <button class="btn btn-secondary mx-3" data-bs-dismiss="modal">Tidak</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- End of Modal Delete Produk -->
+
 
     <!-- Tabel Laporan Keuangan -->
     <div class="container mt-5">
@@ -1067,7 +1135,7 @@ if ($stmt3) {
                     <?php
                     if ($stmt3 != null) {
                       foreach ($stmt3 as $product) {
-                        echo '<option value="' . $product['name'] . '">' . $product['name'] . '</option>';
+                        echo '<option value="' . $product['nama_produk'] . '">' . $product['nama_produk'] . '</option>';
                       }
                     } else {
                       // Tidak ada produk
@@ -1221,6 +1289,7 @@ if ($stmt3) {
     }
 
     $(document).ready(function() {
+      
 
       // Dropdown Filter Year
       var selectedStartYear = ''
@@ -1283,6 +1352,8 @@ if ($stmt3) {
       //   }
       // });
 
+
+      // Filter Grafik All/Omzet/Pendapatan/Pengeluaran/Penjualan
       $('#goFilter').on('click', function() {
         if (selectedStartYear != '' && selectedEndYear != '') {
           startYear = parseInt(selectedStartYear, 10);
@@ -1301,6 +1372,7 @@ if ($stmt3) {
         }
       });
 
+      // Grafik Omzet, Pendapatan, Pengeluaran (Line Chart)
       var id = <?php echo $id; ?>;
       var minYears = <?php echo $minYears; ?>;
       var maxYears = <?php echo $maxYears; ?>;
@@ -1331,14 +1403,13 @@ if ($stmt3) {
         }
       });
 
+      // Grafik Penjualan (Pie Chart)
+      <?php foreach ($years as $tahun): ?>
+        generateCanvas(<?php echo json_encode($productsByYear[$tahun]); ?>, <?php echo json_encode($terjualByYear[$tahun]); ?>, "chartPenjualan<?php echo $tahun; ?>", "Penjualan Produk <?php echo $tahun; ?>", 0);
+      <?php endforeach; ?>
 
 
-      var productsByYear = <?php echo $productsByYearJSON; ?>;
-      var terjualByYear = <?php echo $terjualByYearJSON; ?>;
-      for (year = minYears; year <= maxYears; year++) {
-        generateCanvas(productsByYear[year], terjualByYear[year], "chartPenjualan" + year, "Penjualan Produk " + year, 0)
-      }
-
+      // Tambah Produk
       $('#tambahProdukBtn').on('click', function() {
         event.preventDefault();
         var form_profile = new FormData();
@@ -1390,6 +1461,7 @@ if ($stmt3) {
 
       });
 
+      // Tambah Penjualan Produk
       $('#tambahProdukTerjualBtn').on('click', function() {
         var namaProduk = $('#produkUMKM').val();
         var jumlahProdukTerjual = $('#jumlahProdukTerjual').val();
@@ -1421,7 +1493,90 @@ if ($stmt3) {
         });
       });
 
+      // Delete Produk
+      $('.deleteProdukBtn').on('click', function() {
+        var productId = $(this).data('product-id');
+        
+        $('#yakinDeleteBtn').on('click', function() {
+          $.ajax({
+            url: "forms/delete_product.php",
+            type: "POST",
+            data: {
+              id: id,
+              productId: productId
+            },
+            success: function(result) {
+              if (result == 1) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Berhasil menghapus produk!',
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal',
+                  text: 'Gagal menghapus produk!'
+                });
+              }
+            }
+          });
+        });
 
+      });
+
+      // Edit Profile
+      $('#editProfileBtn').on('click', function() {
+        // Data profile dari database (setelah diedit)
+        var namaUMKM_edited = $('#namaUMKM').val();
+        var deskripsiUMKM_edited = $('#deskripsiUMKM').val();
+        var kategoriUMKM_edited = $('#kategoriUMKM').val();
+        var alamatUMKM_edited = $('#alamatUMKM').val();
+        var kecamatanUMKM_edited = $('#kecamatanUMKM').val();
+        var noWhatsApp_edited = $('#noWhatsApp').val();
+
+        // Data profile dari database (sebelum diedit)
+        // INI KOK GAISA YA GUYS HUELPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+        var namaUMKM = <?php echo $stmt['nama_umkm']; ?>;
+        var deskripsiUMKM = <?php echo $stmt['deskripsi_umkm']; ?>;
+        var kategoriUMKM = <?php echo $stmt['kategori_umkm']; ?>;
+        var alamatUMKM = <?php echo $stmt['alamat_umkm']; ?>;
+        var kecamatanUMKM = <?php echo $stmt['kecamatan']; ?>;
+        var noWhatsApp = <?php echo $stmt['notelp_umkm']; ?>;
+
+        $('#simpanPerubahan').on('click', function() {
+          $.ajax({
+            url: "forms/edit_profile.php",
+            type: "POST",
+            data: {
+              id: id,
+              namaUMKM: namaUMKM_edited,
+              deskripsiUMKM: deskripsiUMKM_edited,
+              kategoriUMKM: kategoriUMKM_edited,
+              alamatUMKM: alamatUMKM_edited,
+              kecamatanUMKM: kecamatanUMKM_edited,
+              noWhatsApp: noWhatsApp_edited
+            },
+            success: function(result) {
+              if (result == 1) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Berhasil update profile!',
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal',
+                  text: 'Gagal update profile!'
+                });
+              }
+            }
+          });
+        });
+
+        
+      });
 
     });
   </script>

@@ -13,25 +13,6 @@ $search->execute([$id, $startYear, $endYear]);
 
 $rows = $search->fetchAll();
 
-// $bulan = [];
-// $pendapatan = [];
-// $pengeluaran = [];
-// $omzet = [];
-
-// foreach ($rows as $row) {
-//     $bulan[] = date('F', strtotime($row['date']));
-//     $pendapatan[] = $row['pendapatan'];
-//     $pengeluaran[] = $row['pengeluaran'];
-//     $omzet[] = $row['omzet'];
-// }
-
-// $response = [
-//     'bulan' => $bulan,
-//     'pendapatan' => $pendapatan,
-//     'pengeluaran' => $pengeluaran,
-//     'omzet' => $omzet,
-// ];
-
 $dataByYear = [];
 
 foreach ($rows as $row) {
