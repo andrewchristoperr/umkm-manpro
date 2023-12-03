@@ -72,17 +72,17 @@ $productsByYear = [];
 $terjualByYear = [];
 
 foreach ($years as $year) {
-    $sql_per_year = "SELECT product_name, SUM(jumlah_terjual) as total_sold 
+  $sql_per_year = "SELECT product_name, SUM(jumlah_terjual) as total_sold 
                     FROM umkm_products_sold 
                     WHERE umkm_id = $id AND YEAR(date) = $year 
                     GROUP BY product_name";
-    
-    $dataPenjualanPerTahun = $conn->query($sql_per_year)->fetchAll();
 
-    foreach ($dataPenjualanPerTahun as $penjualan) {
-        $productsByYear[$year][] = $penjualan['product_name'];
-        $terjualByYear[$year][] = $penjualan['total_sold'];
-    }
+  $dataPenjualanPerTahun = $conn->query($sql_per_year)->fetchAll();
+
+  foreach ($dataPenjualanPerTahun as $penjualan) {
+    $productsByYear[$year][] = $penjualan['product_name'];
+    $terjualByYear[$year][] = $penjualan['total_sold'];
+  }
 }
 
 
@@ -769,20 +769,19 @@ foreach ($years as $year) {
     <!-- Modal Simpan Perubahan Edit Profile -->
     <div class="modal fade" id="saveChanges" aria-hidden="true" aria-labelledby="saveChanges" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header border-0">
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                  <h3 class="text-center mb-4">Simpan Perubahan?</h3>
-                  <p class="text-center">Jika anda keluar, perubahan yang dilakukan tidak akan tersimpan</p>
-              </div>
-              <div class="modal-footer justify-content-center border-0">
-                  <button class="btn btn-primary mx-3" id="simpanPerubahan" data-bs-dismiss="modal">Simpan</button>
-                  <button class="btn btn-primary mx-3" id="buangPerubahan" data-bs-dismiss="modal">Buang</button>
-                  <button class="btn btn-primary mx-3" id="batalPerubahan" data-bs-dismiss="modal">Batal</button>
-              </div>
+        <div class="modal-content">
+          <div class="modal-header border-0" data-dismiss="modal">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <div class="modal-body">
+            <h3 class="text-center mb-4">Simpan Perubahan?</h3>
+            <p class="text-center">Jika anda keluar, perubahan yang dilakukan tidak akan tersimpan</p>
+          </div>
+          <div class="modal-footer justify-content-center border-0">
+            <button class="btn btn-primary mx-3" id="simpanPerubahan" data-bs-dismiss="modal">Simpan</button>
+            <button class="btn btn-primary mx-3" id="batalPerubahan" data-dismiss="modal">Batal</button>
+          </div>
+        </div>
       </div>
     </div>
     <!-- End of Modal Simpan Perubahan Edit Profile -->
@@ -828,7 +827,7 @@ foreach ($years as $year) {
                       <img src="forms/<?= $imagePath ?>" class="img-fluid" alt="">
                       <div class="portfolio-links">
                         <a href="#deleteProduct" data-toggle="modal" title="Delete" class="deleteProdukBtn" data-product-id="<?= $data['id'] ?>"><i class="bx bx-x"></i></a>
-                        <a href="#editProduct" data-toggle="modal" title="Edit" id="editProdukBtn"><i class="bx bx-pencil edit-icon"></i></a>
+                        <a href="#editProduct" data-toggle="modal" title="Edit" class="editProdukBtn" data-product-id-edit="<?= $data['id'] ?>"><i class="bx bx-pencil edit-icon"></i></a>
                       </div>
                     </div>
                   </div>
@@ -852,7 +851,7 @@ foreach ($years as $year) {
 
             <div class="main-content text-center">
 
-              <a href="#" class="close-btn" data-dismiss="modal" aria-label="Close">
+              <a class="close-btn" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true"><span class="icon-close2"></span></span>
               </a>
               <div class="mb-3">
@@ -863,27 +862,27 @@ foreach ($years as $year) {
 
                 <label for="">Nama Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="namaProduk" required>
+                  <input type="text" class="form-control text-center" id="editNama" required>
                 </div>
 
                 <label for="">Deskripsi Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="descProduk" style="height: 60px;" placeholder="" required>
+                  <input type="text" class="form-control text-center" id="editDesc" style="height: 60px;" placeholder="" required>
                 </div>
 
                 <label for="">Harga Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="hargaProduk" placeholder="" required>
+                  <input type="text" class="form-control text-center" id="editHarga" placeholder="" required>
                 </div>
 
                 <label for="">Upload Foto Produk</label>
                 <div class="form-group mb-4">
-                  <input class="form-control" type="file" id="fotoProduk" name="fotoProduk" required>
+                  <input class="form-control" type="file" id="editFoto" name="fotoProduk" required>
                 </div>
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <a href="#" class="btn btn-primary" id="tambahProdukBtn">Edit Produk</a>
+                    <a href="#" class="btn btn-primary" id="editSubmit">Edit Produk</a>
                   </div>
                 </div>
               </form>
@@ -895,23 +894,25 @@ foreach ($years as $year) {
       </div>
     </div>
     <!-- End Modal Edit Produk -->
-    
+
     <!-- Modal Delete Produk -->
     <div class="modal fade" id="deleteProduct" aria-hidden="true" aria-labelledby="deleteProduct" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header border-0">
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                  <h3 class="text-center mb-4">Hapus Produk?</h3>
-                  <p class="text-center">Anda akan kehilangan data produk secara permanen. Apakah Anda yakin?</p>
-              </div>
-              <div class="modal-footer justify-content-center border-0">
-                  <button class="btn btn-primary mx-3" id="yakinDeleteBtn" data-bs-dismiss="modal">Yakin</button>
-                  <button class="btn btn-secondary mx-3" data-bs-dismiss="modal">Tidak</button>
-              </div>
+        <div class="modal-content">
+          <div class="modal-header border-0" data-dismiss="modal">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <div class="modal-body">
+            <h3 class="text-center mb-4">Hapus Produk?</h3>
+            <p class="text-center">Anda akan kehilangan data produk secara permanen. Apakah Anda yakin?</p>
+          </div>
+          <div class="modal-footer justify-content-center border-0">
+            <button class="btn btn-primary mx-3" id="yakinDeleteBtn" data-bs-dismiss="modal">Yakin</button>
+            <a class="close-btn" data-dismiss="modal" aria-label="Close">
+              <button class="btn btn-secondary mx-3" data-bs-dismiss="modal">Tidak</button>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
     <!-- End of Modal Delete Produk -->
@@ -1289,7 +1290,7 @@ foreach ($years as $year) {
     }
 
     $(document).ready(function() {
-      
+
 
       // Dropdown Filter Year
       var selectedStartYear = ''
@@ -1404,7 +1405,7 @@ foreach ($years as $year) {
       });
 
       // Grafik Penjualan (Pie Chart)
-      <?php foreach ($years as $tahun): ?>
+      <?php foreach ($years as $tahun) : ?>
         generateCanvas(<?php echo json_encode($productsByYear[$tahun]); ?>, <?php echo json_encode($terjualByYear[$tahun]); ?>, "chartPenjualan<?php echo $tahun; ?>", "Penjualan Produk <?php echo $tahun; ?>", 0);
       <?php endforeach; ?>
 
@@ -1438,8 +1439,7 @@ foreach ($years as $year) {
                 Swal.fire({
                   icon: 'success',
                   title: 'Success',
-                  text: 'Produk Baru Berhasil Ditambahkan!',
-                  timer: 3000
+                  text: 'Produk Baru Berhasil Ditambahkan!'
                 }).then(function() {
                   window.location.reload();
                 });
@@ -1455,7 +1455,11 @@ foreach ($years as $year) {
             }
           });
         } else {
-          alert('Error');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error!'
+          });
         }
 
 
@@ -1496,7 +1500,7 @@ foreach ($years as $year) {
       // Delete Produk
       $('.deleteProdukBtn').on('click', function() {
         var productId = $(this).data('product-id');
-        
+
         $('#yakinDeleteBtn').on('click', function() {
           $.ajax({
             url: "forms/delete_product.php",
@@ -1536,7 +1540,7 @@ foreach ($years as $year) {
         var noWhatsApp_edited = $('#noWhatsApp').val();
 
         // Data profile dari database (sebelum diedit)
-        // INI KOK GAISA YA GUYS HUELPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+        // INI KOK GAISA YA GUYS HUELPPPPPPPPPPPPPPPPPPPP // iya :')
         var namaUMKM = <?php echo $stmt['nama_umkm']; ?>;
         var deskripsiUMKM = <?php echo $stmt['deskripsi_umkm']; ?>;
         var kategoriUMKM = <?php echo $stmt['kategori_umkm']; ?>;
@@ -1575,7 +1579,67 @@ foreach ($years as $year) {
           });
         });
 
-        
+
+      });
+
+    });
+
+    // Edit Produk
+    $('.editProdukBtn').on('click', function() {
+      var productId = $(this).data('product-id-edit');
+
+      $('#editSubmit').on('click', function() {
+        event.preventDefault();
+        var form_edit = new FormData();
+
+        var editNama = $('#editNama').val();
+        var editDesc = $('#editDesc').val();
+        var editHarga = $('#editharga').val();
+        var editFoto = $('#editFoto')[0].files;
+        var umkm_id = <?php echo $id; ?>;
+
+        form_edit.append('productId', productId);
+        form_edit.append('editNama', editNama);
+        form_edit.append('editDesc', editDesc);
+        form_edit.append('editHarga', editHarga);
+        form_edit.append('editFoto', editFoto[0]);
+        form_edit.append('umkm_id', umkm_id);
+
+        if (editNama != '' && editHarga != '' && editFoto != '') {
+          $.ajax({
+            url: "forms/edit_product.php",
+            method: "POST",
+            data: form_edit,
+            contentType: false,
+            processData: false,
+            success: function(result) {
+              console.log(result);
+              alert(result);
+              if (result == 1) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Berhasil edit produk!',
+                }).then(function() {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal',
+                  text: 'Gagal edit produk!'
+                });
+              }
+            }
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error!'
+          });
+        }
+
       });
 
     });
