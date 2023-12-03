@@ -1596,7 +1596,7 @@ foreach ($years as $year) {
 
         var editNama = $('#editNama').val();
         var editDesc = $('#editDesc').val();
-        var editHarga = $('#editharga').val();
+        var editHarga = $('#editHarga').val();
         var editFoto = $('#editFoto')[0].files;
         var umkm_id = <?php echo $id; ?>;
 
