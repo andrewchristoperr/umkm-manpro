@@ -331,6 +331,23 @@ if ($stmt3) {
       background-color: #67b0d1;
       color: #2f4d5a;
     }
+
+    .portfolio-item .card .portfolio-wrap {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+      /* Adjust the padding-bottom to set the desired aspect ratio (e.g., 75% for 4:3) */
+    }
+
+    .portfolio-item .card .portfolio-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   </style>
 </head>
 
@@ -756,7 +773,7 @@ if ($stmt3) {
 
       <div class="row px-3">
         <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
-          <a href="#addProduct" data-toggle="modal" class="btn btn-edit align-self-center align-self-lg-end">Tambah Produk</a>
+          <a href="#addProduct" data-toggle="modal" class="btn btn-edit align-self-center align-self-lg-end">Tambah Produk Baru</a>
         </div>
         <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start">
           <a href="#addProductSold" data-toggle="modal" class="btn btn-edit align-self-center align-self-lg-start">Tambah Penjualan Produk</a>
@@ -768,54 +785,27 @@ if ($stmt3) {
 
         <div class="container">
           <div class="scrollable-container">
-
-            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-              <div class="card card-block">
-                <div class="portfolio-wrap">
-                  <img src="assets/img/produk/produk4.jpg" class="img-fluid" alt="">
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
+            <?php
+            $produk = "SELECT * FROM products WHERE umkm_id = $id";
+            $result = $conn->query($produk)->fetchAll();
+            foreach ($result as $data) :
+              $imagePath = $data['foto_produk'];
+              if ($imagePath) :
+            ?>
+                <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
+                  <div class="card card-block card h-100 card-img-top">
+                    <div class="portfolio-wrap">
+                      <img src="forms/<?= $imagePath ?>" class="img-fluid" alt="">
+                      <div class="portfolio-links">
+                        <input type="hidden" id="productId" name="productId" value="<?= $data['id'] ?>">
+                        <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Delete" id="deleteProdukBtn"><i class="bx bx-x"></i></a>
+                        <a href="portfolio-details.html" title="Edit" id="editProdukBtn"><i class="bx bx-pencil edit-icon"></i></a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-              <div class="card card-block">
-                <div class="portfolio-wrap">
-                  <img src="assets/img/produk/produk8.jpg" class="img-fluid" alt="">
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-              <div class="card card-block">
-                <div class="portfolio-wrap">
-                  <img src="assets/img/produk/produk6.jpg" class="img-fluid" alt="">
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-pencil edit-icon"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
-              <div class="card card-block">
-                <div class="portfolio-wrap">
-                  <img src="assets/img/produk/produk3.jpg" class="img-fluid" alt="">
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-x"></i></a>
-                    <a href="#" data-toggle="modal" data-target="#editModal" title="Edit Produk"><i class="bx bx-pencil edit-icon"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <?php endif ?>
+            <?php endforeach ?>
 
           </div>
         </div>
