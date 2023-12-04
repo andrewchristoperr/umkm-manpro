@@ -298,10 +298,10 @@ foreach ($years as $year) {
       font-size: 15px;
     }
 
-    [id*="chartPendapatan"],
-    [id*="chartPengeluaran"],
-    [id*="chartOmzet"],
-    [id*="chartPenjualan"] {
+    [id^="chartPendapatan"],
+    [id^="chartPengeluaran"],
+    [id^="chartOmzet"],
+    [id^="chartPenjualan"] {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       padding: 10px;
       border-radius: 10px;
@@ -1198,20 +1198,23 @@ foreach ($years as $year) {
   <!-- <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script> -->
 
   <script>
+    // Tabel Bantuan
     new DataTable('#tableBantuan', {
       scrollX: true,
       destroy: true,
       retrieve: true
     });
 
+    // Tabel Laporan Keuangan (Omzet, Pendapatan, Pengeluaran)
     new DataTable('#tablePendapatan', {
       scrollX: true,
       destroy: true,
       retrieve: true
     });
 
+    // Function buat canvas grafik
     function generateCanvas(xData, yData, chartId, chartTitle, type) {
-      var chart = '<div class="col-lg-6 mx-auto">';
+      var chart = '<div class="col-lg-6 mx-auto" id="class' + chartId + '">';
       chart += '<canvas id="' + chartId + '"></canvas>'
       chart += '</div>';
       var grafik_laporan = $('#grafik-laporan');
@@ -1222,9 +1225,9 @@ foreach ($years as $year) {
       } else {
         generatePieChart(xData, yData, chartId, chartTitle)
       }
-
     }
 
+    // Function buat line chart
     function generateLineChart(xData, yData, chartId, chartTitle) {
       new Chart(chartId, {
         type: "line",
@@ -1260,6 +1263,7 @@ foreach ($years as $year) {
       });
     }
 
+    // Function buat pie chart
     function generatePieChart(xData, yData, chartId, chartTitle) {
       const barColors = [
         "#b91d47",
@@ -1290,8 +1294,6 @@ foreach ($years as $year) {
     }
 
     $(document).ready(function() {
-
-
       // Dropdown Filter Year
       var selectedStartYear = ''
       var selectedEndYear = ''
@@ -1310,10 +1312,10 @@ foreach ($years as $year) {
       $('.btn-filter').on('click', function() {
         startYear = parseInt(selectedStartYear, 10);
         endYear = parseInt(selectedEndYear, 10);
-        $('[id^="chartPendapatan"]').hide();
-        $('[id^="chartPengeluaran"]').hide();
-        $('[id^="chartOmzet"]').hide();
-        $('[id^="chartPenjualan"]').hide();
+        $('[id*="chartPendapatan"]').hide();
+        $('[id*="chartPengeluaran"]').hide();
+        $('[id*="chartOmzet"]').hide();
+        $('[id*="chartPenjualan"]').hide(); 
 
         $('canvas').css({
           'width': '',
@@ -1321,38 +1323,22 @@ foreach ($years as $year) {
         });
         var filter = $(this).data('filter');
         if (filter !== 'all') {
-          $('[id^="chart' + filter + '"]').show();
-          $('[id^="chart' + filter + '"] canvas').css({
-            'width': '800px',
-            'height': '400px'
+          $('[id*="chart' + filter + '"]').show();
+          $('[id*="chart' + filter + '"] canvas').css({
+            'width': '530px',
+            'height': '264px'
           });
         } else {
-          $('[id^="chartPendapatan"]').show();
-          $('[id^="chartPengeluaran"]').show();
-          $('[id^="chartOmzet"]').show();
-          $('[id^="chartPenjualan"]').show();
+          $('[id*="chartPendapatan"]').show();
+          $('[id*="chartPengeluaran"]').show();
+          $('[id*="chartOmzet"]').show();
+          $('[id*="chartPenjualan"]').show();
+          $('[id*="chart' + filter + '"] canvas').css({
+            'width': '530px',
+            'height': '264px'
+          });
         }
       });
-
-      // $('.btn-filter').click(function() {
-      //   $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').hide();
-      //   $('canvas').css({
-      //     'width': '',
-      //     'height': ''
-      //   });
-      //   var filter = $(this).data('filter');
-
-      //   if (filter !== 'all') {
-      //     $('.grafik-' + filter).show();
-      //     $('.grafik-' + filter + ' canvas').css({
-      //       'width': '800px',
-      //       'height': '400px'
-      //     });
-      //   } else {
-      //     $('.grafik-pendapatan, .grafik-pengeluaran, .grafik-omzet, .grafik-penjualan').show();
-      //   }
-      // });
-
 
       // Filter Grafik All/Omzet/Pendapatan/Pengeluaran/Penjualan
       $('#goFilter').on('click', function() {
@@ -1368,8 +1354,24 @@ foreach ($years as $year) {
           $('[id^="chartPengeluaran"][id*="' + startYear + '"][id*="' + endYear + '"]').show();
           $('[id^="chartOmzet"][id*="' + startYear + '"][id*="' + endYear + '"]').show();
           $('[id^="chartPenjualan"][id*="' + startYear + '"][id*="' + endYear + '"]').show();
+        } else if (selectedStartYear != '') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Pilih start year terlebih dahulu!'
+          });
+        } else if (selectedEndYear != '') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Pilih end year terlebih dahulu!'
+          });
         } else {
-          // alert
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Pilih tahun terlebih dahulu!'
+          });
         }
       });
 
