@@ -752,7 +752,7 @@ foreach ($years as $year) {
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <button class="btn btn-primary" id="editProfileBtn" data-target="#saveChanges" data-toggle="modal">Edit</button>
+                    <button class="btn btn-primary" id="editProfileBtn" data-target="#saveChanges" data-toggle="modal" data-dismiss="modal">Edit</button>
                     <!-- <a href="#saveChanges" data-toggle="modal" id="editProfileBtn" class="btn btn-primary">Edit</a> -->
                   </div>
                 </div>
@@ -827,7 +827,12 @@ foreach ($years as $year) {
                       <img src="forms/<?= $imagePath ?>" class="img-fluid" alt="">
                       <div class="portfolio-links">
                         <a href="#deleteProduct" data-toggle="modal" title="Delete" class="deleteProdukBtn" data-product-id="<?= $data['id'] ?>"><i class="bx bx-x"></i></a>
-                        <a href="#editProduct" data-toggle="modal" title="Edit" class="editProdukBtn" data-product-id-edit="<?= $data['id'] ?>"><i class="bx bx-pencil edit-icon"></i></a>
+                        <a href="#editProduct" data-toggle="modal" title="Edit" class="editProdukBtn" 
+                        data-product-id-edit="<?= $data['id'] ?>" 
+                        data-product-name="<?= $data['nama_produk'] ?>" 
+                        data-product-desc="<?= $data['deskripsi_produk'] ?>" 
+                        data-product-price="<?= $data['harga_produk'] ?>">
+                        <i class="bx bx-pencil edit-icon"></i></a>
                       </div>
                     </div>
                   </div>
@@ -862,7 +867,7 @@ foreach ($years as $year) {
 
                 <label for="">Nama Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="editNama" required>
+                  <input type="text" class="form-control text-center" id="editNama" value="" required>
                 </div>
 
                 <label for="">Deskripsi Produk</label>
@@ -900,7 +905,7 @@ foreach ($years as $year) {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header border-0" data-dismiss="modal">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <h3 class="text-center mb-4">Hapus Produk?</h3>
@@ -1088,12 +1093,12 @@ foreach ($years as $year) {
 
                 <label for="">Deskripsi Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="descProduk" style="height: 60px;" placeholder="" required>
+                  <textarea type="text" class="form-control text-center" id="descProduk" style="height: 60px;" placeholder="" required></textarea>
                 </div>
 
                 <label for="">Harga Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="hargaProduk" style="height: 60px;" placeholder="Rp 35.000" required>
+                  <input type="text" class="form-control text-center" id="hargaProduk" style="height: 60px;" placeholder="ex: Rp 35.000" required>
                 </div>
 
                 <label for="">Upload Foto Produk</label>
@@ -1315,7 +1320,7 @@ foreach ($years as $year) {
         $('[id*="chartPendapatan"]').hide();
         $('[id*="chartPengeluaran"]').hide();
         $('[id*="chartOmzet"]').hide();
-        $('[id*="chartPenjualan"]').hide(); 
+        $('[id*="chartPenjualan"]').hide();
 
         $('canvas').css({
           'width': '',
@@ -1379,15 +1384,15 @@ foreach ($years as $year) {
       var id = <?php echo $id; ?>;
       <?php
       if (isset($minYears)) {
-          echo "minYears = $minYears;";
+        echo "minYears = $minYears;";
       } else {
-          echo "minYears = 0;";
+        echo "minYears = 0;";
       }
 
       if (isset($maxYears)) {
-          echo "maxYears = $maxYears;";
+        echo "maxYears = $maxYears;";
       } else {
-          echo "maxYears = 0;";
+        echo "maxYears = 0;";
       }
       ?>
       var grafik_laporan = $('#grafik-laporan');
@@ -1448,7 +1453,13 @@ foreach ($years as $year) {
             contentType: false,
             processData: false,
             success: function(result) {
-              if (result == 1) {
+              if (result == 2) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Nama produk sudah tersedia!'
+                });
+              } else if (result == 1) {
                 Swal.fire({
                   icon: 'success',
                   title: 'Success',
@@ -1528,7 +1539,9 @@ foreach ($years as $year) {
                   icon: 'success',
                   title: 'Berhasil',
                   text: 'Berhasil menghapus produk!',
-                })
+                }).then(function() {
+                  window.location.reload();
+                });
               } else {
                 Swal.fire({
                   icon: 'error',
@@ -1591,6 +1604,13 @@ foreach ($years as $year) {
     // Edit Produk
     $('.editProdukBtn').on('click', function() {
       var productId = $(this).data('product-id-edit');
+      var productName = $(this).data('product-name');
+      var productDesc = $(this).data('product-desc');
+      var productPrice = $(this).data('product-price');
+
+      $('#editNama').val(productName);
+      $('#editDesc').val(productDesc);
+      $('#editHarga').val(productPrice);
 
       $('#editSubmit').on('click', function() {
         event.preventDefault();
@@ -1609,41 +1629,36 @@ foreach ($years as $year) {
         form_edit.append('editFoto', editFoto[0]);
         form_edit.append('umkm_id', umkm_id);
 
-        if (editNama != '' && editHarga != '' && editFoto != '') {
-          $.ajax({
-            url: "forms/edit_product.php",
-            method: "POST",
-            data: form_edit,
-            contentType: false,
-            processData: false,
-            success: function(result) {
-              if (result == 1) {
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Berhasil',
-                  text: 'Berhasil edit produk!',
-                }).then(function() {
-                  window.location.reload();
-                });
-              } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Gagal',
-                  text: 'Gagal edit produk!'
-                });
-              }
+        $.ajax({
+          url: "forms/edit_product.php",
+          method: "POST",
+          data: form_edit,
+          contentType: false,
+          processData: false,
+          success: function(result) {
+            if (result == 1) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Berhasil edit produk!',
+              }).then(function() {
+                window.location.reload();
+              });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Gagal edit produk!'
+              });
             }
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Error!'
-          });
-        }
-
+          }
+        });
       });
 
+    });
+
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
 

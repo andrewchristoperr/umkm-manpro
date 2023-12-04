@@ -28,7 +28,7 @@ for ($i = 0; $i < sizeof($list_file); $i++) {
 
                 if (in_array($img_ex_lc, $allowed_exs)) {
                     # rename
-                    $new_img_name = $_POST['umkm_id'] . '_' . strtolower($_POST['editNama']) . '_' . $list_file_type[$i] . '.' . $img_ex_lc;
+                    $new_img_name = $_POST['umkm_id'] . '_' . $_POST['productId'] . '_' . strtolower($_POST['editNama']) . '_' . $list_file_type[$i] . '.' . $img_ex_lc;
 
                     # path
                     $path = "produk/";
