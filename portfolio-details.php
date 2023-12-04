@@ -81,7 +81,7 @@ if (isset($_SESSION['id_umkm'])) {
               <div class="swiper-wrapper align-items-center">
 
                 <div class="">
-                  <img src="image.php?id=<?php echo $data['id'] ?>" alt="" style="object-fit: cover; width: 100%; height: 300px;">
+                  <img src="forms/<?php echo $data['foto_umkm'] ?> " alt="" style="object-fit: cover; width: 100%; height: 300px;">
                 </div>
 
               </div>
