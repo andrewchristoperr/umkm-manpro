@@ -14,6 +14,9 @@ if (!isset($_SESSION['login'])) {
     if ($stmt['verification_status'] == 2) {
       header('location: profile_waiting.php');
       exit;
+    }else if ($stmt['verification_status'] == 0) {
+      header('location: profile_rejected.php');
+      exit;
     }
   }
 }
