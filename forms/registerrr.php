@@ -70,7 +70,7 @@ else {
 
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $nama_umkm = $_POST['nama_umkm'];
         $notelp_umkm = $_POST['notelp_umkm'];
         $alamat_umkm = $_POST['alamat_umkm'];

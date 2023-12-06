@@ -12,9 +12,6 @@ if (!isset($_SESSION['login'])) {
         if ($stmt['verification_status'] == 1) {
             header('location: profile.php');
             exit;
-        } else if ($stmt['verification_status'] == 0) {
-            header('location: profile_rejected.php');
-            exit;
         }
     }
 }
@@ -80,9 +77,9 @@ if (!isset($_SESSION['login'])) {
         <!-- Your Content Goes Here -->
         <div class="container mt-5">
             <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">UMKM Anda Sedang Dalam Proses Verifikasi</h4>
+                <h4 class="alert-heading">UMKM Anda Ditolak</h4>
                 <p>
-                    Terima kasih atas kesabaran Anda. Verifikasi sedang berlangsung. Kami akan segera memberikan informasi lebih lanjut.
+                    Mohon maaf proses verifikasi UMKM anda ditolak. Harap mencoba lagi sesuai ketentuan yang berlaku.
                 </p>
                 <p>
                     Jika ada pertanyaan lebih lanjut bisa menghubungi : ManproTI_Kelompok9@gmail.com atau 08123229032

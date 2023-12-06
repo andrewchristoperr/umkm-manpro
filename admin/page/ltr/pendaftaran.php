@@ -296,10 +296,10 @@ $stmt = $conn->query($sql)->fetchAll();
                                                         <td>' . $data['kecamatan'] . '</td>
                                                         <td>' . $data['kategori_umkm'] . '</td>
                                                         <td>' . $data['deskripsi_umkm'] . '</td>
-                                                        <td> <embed type="application/pdf" src="../../../forms/'. $data['formulir'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
-                                                        <td> <embed type="application/pdf" src="../../../forms/'. $data['surat_pengantar'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
-                                                        <td> <embed type="application/pdf" src="../../../forms/'. $data['ktp'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
-                                                        <td> <embed type="application/pdf" src="../../../forms/'. $data['npwp'] .'" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+                                                        <td> <iframe frameborder="0" src="../../../forms/' . $data['formulir'] . '" "></iframe> </td>
+                                                        <td> <embed type="application/pdf" src="../../../forms/' . $data['surat_pengantar'] . '" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+                                                        <td> <embed type="application/pdf" src="../../../forms/' . $data['ktp'] . '" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+                                                        <td> <embed type="application/pdf" src="../../../forms/' . $data['npwp'] . '" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
                                                         <td>
                                                             <button type="button" class="btn btn-outline-success" onclick = "terima(' . $data['id'] . ')">Terima</button>
                                                             <button type="button" class="btn btn-outline-danger" onclick = "tolak(' . $data['id'] . ')">Tolak</button>
@@ -368,8 +368,8 @@ $stmt = $conn->query($sql)->fetchAll();
     <script>
         let table = new DataTable('#tablePendaftaran', {
             paging: true,
-            scrollX: true
-
+            scrollX: true,
+            lengthChange:   true,
         });
 
         function tolak(id) {
