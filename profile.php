@@ -361,6 +361,9 @@ foreach ($years as $year) {
       object-fit: cover;
     }
 
+    table{
+      width: 100%;
+    }
     th,td{
       /* text-align: center; */
       width: 16.7%;
@@ -376,6 +379,8 @@ foreach ($years as $year) {
       white-space: normal;
       /* all cell in this column will be center aligned */
       text-align: center;
+      word-wrap: break-word;
+      overflow: hidden;
 
 
     }
@@ -1277,6 +1282,11 @@ foreach ($years as $year) {
 
   <script>
     // Tabel Bantuan
+    new DataTable('#tableBantuan', {
+      scrollX: true,
+      destroy: true,
+      retrieve: true
+    });
 
     // Tabel Laporan Keuangan (Omzet, Pendapatan, Pengeluaran)
     new DataTable('#tablePendapatan', {
