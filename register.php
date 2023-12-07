@@ -504,45 +504,45 @@ if (isset($_SESSION['deskripsi_umkm'])) {
                                         <?php ?>
                                         <select class="form-select" aria-label="Default select example" name="kategori_umkm" id="kategori_umkm" required>
                                             <option value="" disabled selected hidden>Pilih Kategori</option>
-                                            <?php if ($_SESSION['kategori_umkm'] == "makanan dan minuman") {
-                                                echo "<option value='makanan dan minuman' selected>Makanan dan Minuman</option>";
+                                            <?php if ($_SESSION['kategori_umkm'] == "Makanan dan Minuman") {
+                                                echo "<option value='Makanan dan Minuman' selected>Makanan dan Minuman</option>";
                                             } else {
-                                                echo "<option value='makanan dan minuman'>Makanan dan Minuman</option>";;
+                                                echo "<option value='Makanan dan Minuman'>Makanan dan Minuman</option>";;
                                             }
                                             ?>
                                             <?php
-                                            if ($_SESSION['kategori_umkm'] == "fashion dan pakaian") {
-                                                echo "<option value='fashion dan pakaian' selected>Fashion dan Pakaian</option>";
+                                            if ($_SESSION['kategori_umkm'] == "Fashion dan pakaian") {
+                                                echo "<option value='Fashion dan Pakaian' selected>Fashion dan Pakaian</option>";
                                             } else {
-                                                echo "<option value='fashion dan pakaian'>Fashion dan Pakaian</option>";
+                                                echo "<option value='Fashion dan Pakaian'>Fashion dan Pakaian</option>";
                                             }
                                             ?>
                                             <?php
-                                            if ($_SESSION['kategori_umkm'] == "kerajinan tangan") {
-                                                echo "<option value='kerajinan tangan' selected>Kerajinan Tangan</option>";
+                                            if ($_SESSION['kategori_umkm'] == "Kerajinan tangan") {
+                                                echo "<option value='Kerajinan tangan' selected>Kerajinan tangan</option>";
                                             } else {
-                                                echo "<option value='kerajinan tangan'>Kerajinan Tangan</option>";
+                                                echo "<option value='Kerajinan tangan'>Kerajinan Tangan</option>";
                                             }
                                             ?>
                                             <?php
-                                            if ($_SESSION['kategori_umkm'] == "pertanian dan peternakan") {
-                                                echo "<option value='pertanian dan peternakan' selected>Pertanian dan Peternakan</option>";
+                                            if ($_SESSION['kategori_umkm'] == "Pertanian dan Peternakan") {
+                                                echo "<option value='Pertanian dan Peternakan' selected>Pertanian dan Peternakan</option>";
                                             } else {
-                                                echo "<option value='pertanian dan peternakan'>Pertanian dan Peternakan</option>";
+                                                echo "<option value='Pertanian dan Peternakan'>Pertanian dan Peternakan</option>";
                                             }
                                             ?>
                                             <?php
-                                            if ($_SESSION['kategori_umkm'] == "jasa") {
-                                                echo "<option value='jasa' selected>Jasa</option>";
+                                            if ($_SESSION['kategori_umkm'] == "Jasa") {
+                                                echo "<option value='Jasa' selected>Jasa</option>";
                                             } else {
-                                                echo "<option value='jasa'>Jasa</option>";
+                                                echo "<option value='Jasa'>Jasa</option>";
                                             }
                                             ?>
                                             <?php
-                                            if ($_SESSION['kategori_umkm'] == "otomotif") {
-                                                echo "<option value='otomotif' selected>Otomotif</option>";
+                                            if ($_SESSION['kategori_umkm'] == "Otomotif") {
+                                                echo "<option value='Otomotif' selected>Otomotif</option>";
                                             } else {
-                                                echo "<option value='otomotif'>Otomotif</option>";
+                                                echo "<option value='Otomotif'>Otomotif</option>";
                                             }
                                             ?>
                                         </select>
