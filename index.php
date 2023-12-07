@@ -303,10 +303,9 @@ if (isset($_SESSION['kategori'])) {
 
                     <img class="card-img-top" src="forms/<?php echo $row['foto_umkm'] ?>" alt="Card image cap" style="padding: 10px; border-radius: 25px;">
                     <div class="card-body">
-                      <p class="card-text list_umkm"><?php echo $row['nama_umkm'] ?></p>
+                      <p class="card-text list_umkm"><b><?php echo $row['nama_umkm'] ?></b></p>
                       <p class="card-text">Kategori: <?php echo $row['kategori_umkm'] ?></p>
                       <p hidden id="id_umkm" class="id_umkm"><?php echo $row['id'] ?></p>
-                      <!-- <button style="float: left;" class="btn btn-primary button_details" id="">Details</button> -->
                     </div>
                   </div>
                 </div>

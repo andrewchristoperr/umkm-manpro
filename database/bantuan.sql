@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 05:15 PM
+-- Generation Time: Dec 07, 2023 at 04:07 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,7 +32,7 @@ CREATE TABLE `bantuan` (
   `id_umkm` int(11) NOT NULL,
   `tanggal` date DEFAULT current_timestamp(),
   `alasan` varchar(255) NOT NULL,
-  `dokumen_pendukung` longblob NOT NULL,
+  `dokumen_pendukung` varchar(100) NOT NULL,
   `kebutuhan_dana_nominal` int(11) DEFAULT NULL,
   `kebutuhan_dana_rincian` text DEFAULT NULL,
   `kebutuhan_tenda` tinyint(4) DEFAULT NULL,
@@ -48,9 +48,9 @@ CREATE TABLE `bantuan` (
 --
 
 INSERT INTO `bantuan` (`id`, `id_umkm`, `tanggal`, `alasan`, `dokumen_pendukung`, `kebutuhan_dana_nominal`, `kebutuhan_dana_rincian`, `kebutuhan_tenda`, `kebutuhan_gerobak`, `kebutuhan_spanduk`, `kebutuhan_lainnya_ket`, `keterangan`, `status`) VALUES
-(9, 1, '2023-11-30', 'Butuh untuk memperbaiki gerobak jualan', 0x433a5c66616b65706174685c6d657373616765496d6167655f313730303634353131363539362e6a7067, 500000, '1. Membeli Daging Sapi  10kg  Rp 350.000\n2. Membeli Kulit Siomay  10pack Rp 50.0000\n3. Membeli Tahu Sutra  10 pack Rp 100.000', 0, 1, 0, '', '1 Gerobak bakso agar dapat berjualan', 0),
-(10, 5, '2023-12-02', 'Butuh meluaskan area bisnis umkm', 0x62616e7475616e2f646f6b756d656e5f70656e64756b756e672f646f6b756d656e5f70656e64756b756e672e6a7067, 1000000, '1. Biaya upgrade usaha Rp 1.000.000', 0, 0, 0, '', '', 2),
-(19, 5, '2023-12-02', 'Saya mengajukan bantuan untuk ABC', 0x62616e7475616e2f646f6b756d656e5f70656e64756b756e672f646f6b756d656e5f70656e64756b756e672e6a7067, 12000, '1. Membeli bahan baku ', 1, 1, 1, '', 'Butuh spanduk ukuran 1meter x 100 cm', 2);
+(33, 1, '2023-12-07', 'Saya mengajukan bantuan untuk memperbarui gerobak yang rusak', 'bantuan/dokumen_pendukung/admin1_dokumen_pendukung1272023040044.jpg', 100000, 'Membeli perlengkapan untuk berjualan', 0, 1, 0, '', 'Gerobak yang dibutuhkan adalah gerobak bakso', 2),
+(34, 1, '2023-12-07', 'Usaha saya terkena bencana hujan angin hingga roboh', 'bantuan/dokumen_pendukung/admin1_dokumen_pendukung1272023040332.jpg', 1000000, 'Untuk memperbaiki bangunan rusak ', 0, 0, 0, '', '', 2),
+(35, 1, '2023-12-07', 'Saya mengajukan bantuan karena baru terkena musibah kebakaran', 'bantuan/dokumen_pendukung/admin1_dokumen_pendukung1272023040539.jpg', 300000, 'Membeli kompor baru untuk berjualan', 0, 0, 0, '', '- ', 2);
 
 --
 -- Indexes for dumped tables
@@ -70,7 +70,7 @@ ALTER TABLE `bantuan`
 -- AUTO_INCREMENT for table `bantuan`
 --
 ALTER TABLE `bantuan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
