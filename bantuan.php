@@ -267,29 +267,7 @@ if (!isset($_SESSION['login'])) {
             </div>
         </section>
 
-        <!-- Modal Section -->
-        <!--  -->
 
-        <div class="modal-dialog modal-dialog-scrollable" id="exampleModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pengajuan Bantuan
-
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span> x </span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p id="modal_body"></p>
-                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                        data-target="#exampleModal">
-                    </button>
-                </div>
-
-            </div>
-
-        </div>
 
 
 
