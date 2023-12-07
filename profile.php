@@ -14,6 +14,9 @@ if (!isset($_SESSION['login'])) {
     if ($stmt['verification_status'] == 2) {
       header('location: profile_waiting.php');
       exit;
+    } else if ($stmt['verification_status'] == 0) {
+      header('location: profile_rejected.php');
+      exit;
     }
   }
 }
@@ -104,9 +107,7 @@ foreach ($years as $year) {
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -124,18 +125,11 @@ foreach ($years as $year) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- Bootstraps -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   <!-- JQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Sweet Alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
@@ -361,10 +355,8 @@ foreach ($years as $year) {
       object-fit: cover;
     }
 
-    table{
-      width: 100%;
-    }
-    th,td{
+    th,
+    td {
       /* text-align: center; */
       width: 16.7%;
       overflow: hidden;
@@ -379,12 +371,11 @@ foreach ($years as $year) {
       white-space: normal;
       /* all cell in this column will be center aligned */
       text-align: center;
-      word-wrap: break-word;
-      overflow: hidden;
 
 
     }
-    .no-wrap{
+
+    .no-wrap {
       white-space: nowrap;
     }
   </style>
@@ -399,14 +390,12 @@ foreach ($years as $year) {
 
   <main id="main">
     <!-- Modal Pesan -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-pesan" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Pesan</h5>
-            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
-              style="background-color: white; border:none;">
+            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close" style="background-color: white; border:none;">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -419,7 +408,7 @@ foreach ($years as $year) {
             if ($stmt2 != null) {
               foreach ($stmt2 as $row2) {
                 if ($row2['status'] == 1) {
-                  ?>
+            ?>
                   <div class="row content">
                     <span class="subheader mb-1">Konfirmasi Bantuan
                       <?php echo $row2['tanggal'] ?>
@@ -427,13 +416,13 @@ foreach ($years as $year) {
                     <span class="notif mb-1">Bantuanmu telah terkonfirmasi !</span>
                     <span class="isi-notif">Harap check pada section bantuan, Terimakasih</span>
                   </div>
-                  <?php
+              <?php
                 }
               }
             } else {
               ?>
               <p>Belum ada notif</p>
-              <?php
+            <?php
             }
             ?>
           </div>
@@ -495,8 +484,7 @@ foreach ($years as $year) {
     </section>
 
     <!-- Modal Edit Profile -->
-    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfile"
-      aria-hidden="true">
+    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfile" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
           <div class="modal-body p-4 px-5">
@@ -511,20 +499,17 @@ foreach ($years as $year) {
 
                 <label for="">Nama UMKM</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="namaUMKM"
-                    value="<?php echo $stmt['nama_umkm']; ?>" required>
+                  <input type="text" class="form-control text-center" id="namaUMKM" value="<?php echo $stmt['nama_umkm']; ?>" required>
                 </div>
 
                 <label for="">Deskripsi UMKM</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="deskripsiUMKM" style="height: 60px;"
-                    value="<?php echo $stmt['deskripsi_umkm']; ?>">
+                  <input type="text" class="form-control text-center" id="deskripsiUMKM" style="height: 60px;" value="<?php echo $stmt['deskripsi_umkm']; ?>">
                 </div>
 
                 <label for="">Kategori UMKM</label>
                 <div class="form-group mb-4">
-                  <select class="form-select" id="kategoriUMKM" aria-label="Floating label select example"
-                    style="text-align: center;">
+                  <select class="form-select" id="kategoriUMKM" aria-label="Floating label select example" style="text-align: center;">
                     <?php if ($stmt['kategori_umkm'] == "makanan dan minuman") {
                       echo "<option value='makanan dan minuman' selected>Makanan dan Minuman</option>";
                     } else {
@@ -571,14 +556,12 @@ foreach ($years as $year) {
 
                 <label for="">Alamat</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="alamatUMKM"
-                    value="<?php echo $stmt['alamat_umkm']; ?>" required>
+                  <input type="text" class="form-control text-center" id="alamatUMKM" value="<?php echo $stmt['alamat_umkm']; ?>" required>
                 </div>
 
                 <label for="">Kecamatan</label>
                 <div class="form-group mb-4">
-                  <select class="form-select" id="kecamatanUMKM" aria-label="Floating label select example"
-                    style="text-align: center;">
+                  <select class="form-select" id="kecamatanUMKM" aria-label="Floating label select example" style="text-align: center;">
                     <?php if ($stmt['kecamatan'] == "Asemrowo") {
                       echo "<option value='Asemrowo' selected>Asemrowo</option>";
                     } else {
@@ -793,14 +776,12 @@ foreach ($years as $year) {
 
                 <label for="">Nomor WhatsApp</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="noWhatsApp"
-                    value="<?php echo $stmt['notelp_umkm']; ?>" required>
+                  <input type="text" class="form-control text-center" id="noWhatsApp" value="<?php echo $stmt['notelp_umkm']; ?>" required>
                 </div>
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <button class="btn btn-primary" id="editProfileBtn" data-target="#saveChanges" data-toggle="modal"
-                      data-dismiss="modal">Edit</button>
+                    <button class="btn btn-primary" id="editProfileBtn" data-target="#saveChanges" data-toggle="modal" data-dismiss="modal">Edit</button>
                     <!-- <a href="#saveChanges" data-toggle="modal" id="editProfileBtn" class="btn btn-primary">Edit</a> -->
                   </div>
                 </div>
@@ -854,8 +835,7 @@ foreach ($years as $year) {
             Produk Baru</a>
         </div>
         <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start">
-          <a href="#addProductSold" data-toggle="modal"
-            class="btn btn-edit align-self-center align-self-lg-start">Tambah Penjualan Produk</a>
+          <a href="#addProductSold" data-toggle="modal" class="btn btn-edit align-self-center align-self-lg-start">Tambah Penjualan Produk</a>
         </div>
       </div>
 
@@ -867,21 +847,17 @@ foreach ($years as $year) {
             <?php
             $produk = "SELECT * FROM products WHERE umkm_id = $id";
             $result = $conn->query($produk)->fetchAll();
-            foreach ($result as $data):
+            foreach ($result as $data) :
               $imagePath = $data['foto_produk'];
-              if ($imagePath):
-                ?>
+              if ($imagePath) :
+            ?>
                 <div class="col-lg-4 col-md-6 col-sm-12 p-3 portfolio-item filter-app">
                   <div class="card card-block card h-100 card-img-top">
                     <div class="portfolio-wrap">
                       <img src="forms/<?= $imagePath ?>" class="img-fluid" alt="">
                       <div class="portfolio-links">
-                        <a href="#deleteProduct" data-toggle="modal" title="Delete" class="deleteProdukBtn"
-                          data-product-id="<?= $data['id'] ?>"><i class="bx bx-x"></i></a>
-                        <a href="#editProduct" data-toggle="modal" title="Edit" class="editProdukBtn"
-                          data-product-id-edit="<?= $data['id'] ?>" data-product-name="<?= $data['nama_produk'] ?>"
-                          data-product-desc="<?= $data['deskripsi_produk'] ?>"
-                          data-product-price="<?= $data['harga_produk'] ?>">
+                        <a href="#deleteProduct" data-toggle="modal" title="Delete" class="deleteProdukBtn" data-product-id="<?= $data['id'] ?>"><i class="bx bx-x"></i></a>
+                        <a href="#editProduct" data-toggle="modal" title="Edit" class="editProdukBtn" data-product-id-edit="<?= $data['id'] ?>" data-product-name="<?= $data['nama_produk'] ?>" data-product-desc="<?= $data['deskripsi_produk'] ?>" data-product-price="<?= $data['harga_produk'] ?>">
                           <i class="bx bx-pencil edit-icon"></i></a>
                       </div>
                     </div>
@@ -899,8 +875,7 @@ foreach ($years as $year) {
     <!--End Portfolio Section -->
 
     <!-- Modal Edit Produk -->
-    <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProduct"
-      aria-hidden="true">
+    <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProduct" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
           <div class="modal-body p-4 px-5">
@@ -923,8 +898,7 @@ foreach ($years as $year) {
 
                 <label for="">Deskripsi Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="editDesc" style="height: 60px;" placeholder=""
-                    required>
+                  <input type="text" class="form-control text-center" id="editDesc" style="height: 60px;" placeholder="" required>
                 </div>
 
                 <label for="">Harga Produk</label>
@@ -1018,8 +992,7 @@ foreach ($years as $year) {
 
         <!-- Filter Start Year -->
         <div class="col-lg-2">
-          <button class="btn btn-filterStartYear dropdown-toggle w-100" type="button" id="startYearFilter"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-filterStartYear dropdown-toggle w-100" type="button" id="startYearFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Start Year
           </button>
           <div class="dropdown-menu startYearDropdown" aria-labelledby="startYearFilter">
@@ -1034,8 +1007,7 @@ foreach ($years as $year) {
 
         <!-- Filter End Year -->
         <div class="col-lg-2">
-          <button class="btn btn-filterEndYear dropdown-toggle w-100" type="button" id="endYearFilter"
-            data-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-filterEndYear dropdown-toggle w-100" type="button" id="endYearFilter" data-toggle="dropdown" aria-expanded="false">
             End Year
           </button>
           <div class="dropdown-menu endYearDropdown" aria-labelledby="endYearFilter">
@@ -1085,7 +1057,7 @@ foreach ($years as $year) {
           $stmt = $conn->query($sql)->fetchAll();
           $no = 1;
           foreach ($stmt as $row) {
-            ?>
+          ?>
             <tr>
               <td>
                 <?php echo $no ?>
@@ -1120,7 +1092,7 @@ foreach ($years as $year) {
                 ?>
               </td>
             </tr>
-            <?php
+          <?php
           }
           ?>
         </tbody>
@@ -1160,20 +1132,17 @@ foreach ($years as $year) {
 
                 <label for="">Nama Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="namaProduk" placeholder="Masukkan Nama Produk"
-                    required>
+                  <input type="text" class="form-control text-center" id="namaProduk" placeholder="Masukkan Nama Produk" required>
                 </div>
 
                 <label for="">Deskripsi Produk</label>
                 <div class="form-group mb-4">
-                  <textarea type="text" class="form-control text-center" id="descProduk" style="height: 60px;"
-                    placeholder="" required></textarea>
+                  <textarea type="text" class="form-control text-center" id="descProduk" style="height: 60px;" placeholder="" required></textarea>
                 </div>
 
                 <label for="">Harga Produk</label>
                 <div class="form-group mb-4">
-                  <input type="text" class="form-control text-center" id="hargaProduk" style="height: 60px;"
-                    placeholder="ex: Rp 35.000" required>
+                  <input type="text" class="form-control text-center" id="hargaProduk" style="height: 60px;" placeholder="ex: Rp 35.000" required>
                 </div>
 
                 <label for="">Upload Foto Produk</label>
@@ -1197,8 +1166,7 @@ foreach ($years as $year) {
     <!-- End of Modal Tambah Produk -->
 
     <!-- Modal Penjualan Produk -->
-    <div class="modal fade" id="addProductSold" tabindex="-1" role="dialog" aria-labelledby="addProductSold"
-      aria-hidden="true">
+    <div class="modal fade" id="addProductSold" tabindex="-1" role="dialog" aria-labelledby="addProductSold" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
           <div class="modal-body p-4 px-5">
@@ -1213,8 +1181,7 @@ foreach ($years as $year) {
 
                 <label for="">Nama Produk</label>
                 <div class="form-group mb-4">
-                  <select class="form-select" id="produkUMKM" aria-label="Floating label select example"
-                    style="text-align: center;">
+                  <select class="form-select" id="produkUMKM" aria-label="Floating label select example" style="text-align: center;">
                     <?php
                     if ($stmt3 != null) {
                       foreach ($stmt3 as $product) {
@@ -1254,8 +1221,7 @@ foreach ($years as $year) {
   <?php include "template/footer.php"; ?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -1282,11 +1248,6 @@ foreach ($years as $year) {
 
   <script>
     // Tabel Bantuan
-    new DataTable('#tableBantuan', {
-      scrollX: true,
-      destroy: true,
-      retrieve: true
-    });
 
     // Tabel Laporan Keuangan (Omzet, Pendapatan, Pengeluaran)
     new DataTable('#tablePendapatan', {
@@ -1376,23 +1337,23 @@ foreach ($years as $year) {
       });
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       // Dropdown Filter Year
       var selectedStartYear = ''
       var selectedEndYear = ''
-      $('.startYearDropdown .dropdown-item').on('click', function (e) {
+      $('.startYearDropdown .dropdown-item').on('click', function(e) {
         e.preventDefault()
         selectedStartYear = $(this).text();
         $('#startYearFilter').text(selectedStartYear);
       });
 
-      $('.endYearDropdown .dropdown-item').on('click', function (e) {
+      $('.endYearDropdown .dropdown-item').on('click', function(e) {
         e.preventDefault()
         selectedEndYear = $(this).text();
         $('#endYearFilter').text(selectedEndYear);
       });
 
-      $('.btn-filter').on('click', function () {
+      $('.btn-filter').on('click', function() {
         startYear = parseInt(selectedStartYear, 10);
         endYear = parseInt(selectedEndYear, 10);
         $('[id*="chartPendapatan"]').hide();
@@ -1424,7 +1385,7 @@ foreach ($years as $year) {
       });
 
       // Filter Grafik All/Omzet/Pendapatan/Pengeluaran/Penjualan
-      $('#goFilter').on('click', function () {
+      $('#goFilter').on('click', function() {
         if (selectedStartYear != '' && selectedEndYear != '') {
           startYear = parseInt(selectedStartYear, 10);
           endYear = parseInt(selectedEndYear, 10);
@@ -1484,10 +1445,10 @@ foreach ($years as $year) {
           startYear: minYears,
           endYear: maxYears
         },
-        success: function (result) {
+        success: function(result) {
 
           var response = JSON.parse(result);
-          Object.keys(response.dataByYear).forEach(function (year) {
+          Object.keys(response.dataByYear).forEach(function(year) {
             var dataBulan = response.dataByYear[year].bulan;
             var dataOmzet = response.dataByYear[year].omzet;
             var dataPendapatan = response.dataByYear[year].pendapatan;
@@ -1501,13 +1462,13 @@ foreach ($years as $year) {
       });
 
       // Grafik Penjualan (Pie Chart)
-      <?php foreach ($years as $tahun): ?>
+      <?php foreach ($years as $tahun) : ?>
         generateCanvas(<?php echo json_encode($productsByYear[$tahun]); ?>, <?php echo json_encode($terjualByYear[$tahun]); ?>, "chartPenjualan<?php echo $tahun; ?>", "Penjualan Produk <?php echo $tahun; ?>", 0);
       <?php endforeach; ?>
 
 
       // Tambah Produk
-      $('#tambahProdukBtn').on('click', function () {
+      $('#tambahProdukBtn').on('click', function() {
         event.preventDefault();
         var form_profile = new FormData();
 
@@ -1530,7 +1491,7 @@ foreach ($years as $year) {
             data: form_profile,
             contentType: false,
             processData: false,
-            success: function (result) {
+            success: function(result) {
               if (result == 2) {
                 Swal.fire({
                   icon: 'error',
@@ -1542,7 +1503,7 @@ foreach ($years as $year) {
                   icon: 'success',
                   title: 'Success',
                   text: 'Produk Baru Berhasil Ditambahkan!'
-                }).then(function () {
+                }).then(function() {
                   window.location.reload();
                 });
                 // window.location.href = "index.php";
@@ -1568,7 +1529,7 @@ foreach ($years as $year) {
       });
 
       // Tambah Penjualan Produk
-      $('#tambahProdukTerjualBtn').on('click', function () {
+      $('#tambahProdukTerjualBtn').on('click', function() {
         var namaProduk = $('#produkUMKM').val();
         var jumlahProdukTerjual = $('#jumlahProdukTerjual').val();
         jumlahProdukTerjual = parseInt(jumlahProdukTerjual, 10);
@@ -1581,7 +1542,7 @@ foreach ($years as $year) {
             namaProduk: namaProduk,
             jumlahProdukTerjual: jumlahProdukTerjual
           },
-          success: function (result) {
+          success: function(result) {
             if (result == 1) {
               Swal.fire({
                 icon: 'success',
@@ -1600,10 +1561,10 @@ foreach ($years as $year) {
       });
 
       // Delete Produk
-      $('.deleteProdukBtn').on('click', function () {
+      $('.deleteProdukBtn').on('click', function() {
         var productId = $(this).data('product-id');
 
-        $('#yakinDeleteBtn').on('click', function () {
+        $('#yakinDeleteBtn').on('click', function() {
           $.ajax({
             url: "forms/delete_product.php",
             type: "POST",
@@ -1611,13 +1572,13 @@ foreach ($years as $year) {
               id: id,
               productId: productId
             },
-            success: function (result) {
+            success: function(result) {
               if (result == 1) {
                 Swal.fire({
                   icon: 'success',
                   title: 'Berhasil',
                   text: 'Berhasil menghapus produk!',
-                }).then(function () {
+                }).then(function() {
                   window.location.reload();
                 });
               } else {
@@ -1634,7 +1595,7 @@ foreach ($years as $year) {
       });
 
       // Edit Profile
-      $('#editProfileBtn').on('click', function () {
+      $('#editProfileBtn').on('click', function() {
         var namaUMKM_edited = $('#namaUMKM').val();
         var deskripsiUMKM_edited = $('#deskripsiUMKM').val();
         var kategoriUMKM_edited = $('#kategoriUMKM').val();
@@ -1643,7 +1604,7 @@ foreach ($years as $year) {
         var noWhatsApp_edited = $('#noWhatsApp').val();
         var id = <?php echo $id; ?>;
 
-        $('#simpanPerubahan').on('click', function () {
+        $('#simpanPerubahan').on('click', function() {
           $.ajax({
             url: "forms/edit_profile.php",
             type: "POST",
@@ -1656,7 +1617,7 @@ foreach ($years as $year) {
               kecamatanUMKM: kecamatanUMKM_edited,
               noWhatsApp: noWhatsApp_edited
             },
-            success: function (result) {
+            success: function(result) {
               if (result == 1) {
                 Swal.fire({
                   icon: 'success',
@@ -1680,7 +1641,7 @@ foreach ($years as $year) {
     });
 
     // Edit Produk
-    $('.editProdukBtn').on('click', function () {
+    $('.editProdukBtn').on('click', function() {
       var productId = $(this).data('product-id-edit');
       var productName = $(this).data('product-name');
       var productDesc = $(this).data('product-desc');
@@ -1690,7 +1651,7 @@ foreach ($years as $year) {
       $('#editDesc').val(productDesc);
       $('#editHarga').val(productPrice);
 
-      $('#editSubmit').on('click', function () {
+      $('#editSubmit').on('click', function() {
         event.preventDefault();
         var form_edit = new FormData();
 
@@ -1713,13 +1674,13 @@ foreach ($years as $year) {
           data: form_edit,
           contentType: false,
           processData: false,
-          success: function (result) {
+          success: function(result) {
             if (result == 1) {
               Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Berhasil edit produk!',
-              }).then(function () {
+              }).then(function() {
                 window.location.reload();
               });
             } else {
@@ -1735,26 +1696,24 @@ foreach ($years as $year) {
 
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('[data-toggle="tooltip"]').tooltip();
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('#tableBantuan').DataTable({
-        columnDefs: [
-          {
+        columnDefs: [{
             // target Apply to columns alasan, keterangan only
             targets: [2, 4],
             className: 'dt-wrap', // Add a custom class for word wrapping
           },
           {
-            targets:[0,1,3,5],
+            targets: [0, 1, 3, 5],
             className: 'no-wrap'
           }
         ]
       });
     });
-
   </script>
 
 </body>

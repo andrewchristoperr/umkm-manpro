@@ -289,8 +289,7 @@ $stmt = $conn->query($sql)->fetchAll();
                                                     <td><?php echo $data['alamat_umkm'] ?></td>
                                                     <td><?php echo $data['kecamatan'] ?></td>
                                                     <td><?php echo $data['kategori_umkm'] ?></td>
-                                                    <td><img style="height: 90px; width: 150px;" src="../../../image.php?id=<?php echo $data['id'] ?>"></td>
-
+                                                    <td><img src="../../../forms/<?php echo $data['foto_umkm'] ?>" style="width: 300px; height: 200px;"></td>
                                                 </tr>
 
                                         <?php

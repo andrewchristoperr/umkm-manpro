@@ -58,7 +58,7 @@ if (isset($_SESSION['kategori'])) {
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
   <style>
-    
+
   </style>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -70,7 +70,7 @@ if (isset($_SESSION['kategori'])) {
   <?php
   if (isset($_SESSION['login'])) {
     include "template/header_index.php";
-  } else  if (empty($_SESSION['login'])){
+  } else  if (empty($_SESSION['login'])) {
     include "template/header.php";
   }
   ?>
@@ -153,8 +153,8 @@ if (isset($_SESSION['kategori'])) {
     </div>
     <!-- End News Section -->
 
-        <!-- ======= Syarat & Ketentuan Section ======= -->
-        <section id="register" class="register">
+    <!-- ======= Syarat & Ketentuan Section ======= -->
+    <section id="register" class="register">
       <div class="container">
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
           <h2>Syarat dan Ketentuan</h2>
@@ -301,7 +301,7 @@ if (isset($_SESSION['kategori'])) {
                 <div class="col-lg-3 col-md-4 mb-5">
                   <div class="card h-100" id="card-umkm" style="border-radius: 20px;">
 
-                  <img class="card-img-top" src="forms/<?php echo $row['foto_umkm'] ?>" alt="Card image cap" style="padding: 10px; border-radius: 25px;">
+                    <img class="card-img-top" src="forms/<?php echo $row['foto_umkm'] ?>" alt="Card image cap" style="padding: 10px; border-radius: 25px;">
                     <div class="card-body">
                       <p class="card-text list_umkm"><?php echo $row['nama_umkm'] ?></p>
                       <p class="card-text">Kategori: <?php echo $row['kategori_umkm'] ?></p>
@@ -496,7 +496,52 @@ if (isset($_SESSION['kategori'])) {
         },
         'slow');
     });
+  </script>
 
+  <script>
+    $(document).ready(function() {
+      $('#submit').on('click', function() {
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var subject = $('#subject').val();
+        var message = $('#message').val();
+        if (name != '' && email != '' && subject != '' && message != '') {
+          $.ajax({
+            url: "forms/contact.php",
+            method: "POST",
+            data: {
+              name: name,
+              email: email,
+              subject: subject,
+              message: message
+            },
+            success: function(result) {
+              if (result == 1) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success',
+                  text: 'Your message has been sent. Thank you!',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                })
+              }
+            }
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please fill all the fields!',
+          })
+        }
+      });
+    });
   </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
