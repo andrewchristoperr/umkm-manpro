@@ -238,7 +238,9 @@
                                 icon: 'success',
                                 title: 'Success',
                                 text: 'Submit Success!'
-                                })
+                                }).then(function() {
+                                    window.location = "profile.php";
+                                });
                             }
                         }
                     })

@@ -440,7 +440,16 @@ foreach ($years as $year) {
         <div class="row">
 
           <div class="col-lg-2 content d-flex justify-content-center" id="profil-img">
-            <img src="assets/img/testimonials/testimonials-2.jpg" class="profil-img" alt="">
+          <?php
+            $produk = "SELECT * FROM umkmm WHERE id = $id";
+            $result = $conn->query($produk)->fetchAll();
+            foreach ($result as $data) :
+              $imagePath = $data['foto_umkm'];
+              if ($imagePath) :
+            ?>
+                <img src="forms/<?= $data['foto_umkm']?>" class="profil-img" alt="" style="height: 200px; width: 200px">
+              <?php endif ?>
+            <?php endforeach ?>
           </div>
 
           <div class="col-lg-4 col-nama d-flex align-items-center">
@@ -807,7 +816,7 @@ foreach ($years as $year) {
             <p class="text-center">Jika anda keluar, perubahan yang dilakukan tidak akan tersimpan</p>
           </div>
           <div class="modal-footer justify-content-center border-0">
-            <button class="btn btn-primary mx-3" id="simpanPerubahan" data-bs-dismiss="modal">Simpan</button>
+            <button class="btn btn-primary mx-3" id="simpanPerubahan" data-dismiss="modal">Simpan</button>
             <button class="btn btn-primary mx-3" id="batalPerubahan" data-dismiss="modal">Batal</button>
           </div>
         </div>
@@ -1152,7 +1161,7 @@ foreach ($years as $year) {
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <a href="#" class="btn btn-primary" id="tambahProdukBtn">Tambah Produk</a>
+                    <a href="#" class="btn btn-primary" id="tambahProdukBtn" data-dismiss="modal">Tambah Produk</a>
                   </div>
                 </div>
               </form>
@@ -1202,7 +1211,7 @@ foreach ($years as $year) {
 
                 <div class="d-flex">
                   <div class="mx-auto">
-                    <a href="#" class="btn btn-primary" id="tambahProdukTerjualBtn">Tambah</a>
+                    <a href="#" class="btn btn-primary" id="tambahProdukTerjualBtn" data-dismiss="modal">Tambah</a>
                   </div>
                 </div>
               </form>
@@ -1548,7 +1557,9 @@ foreach ($years as $year) {
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Berhasil menambahkan penjualan produk',
-              })
+              }).then(function() {
+                  window.location.reload();
+                });
             } else {
               Swal.fire({
                 icon: 'error',
