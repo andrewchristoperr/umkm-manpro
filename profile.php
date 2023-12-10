@@ -1316,15 +1316,20 @@ foreach ($years as $year) {
       });
     }
 
+    // Function buat generate random color pie chart
+    function generateRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
     // Function buat pie chart
     function generatePieChart(xData, yData, chartId, chartTitle) {
-      const barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-      ];
+      const numberOfDataPoints = xData.length;
+      const barColors = Array.from({ length: numberOfDataPoints }, () => generateRandomColor());
 
       new Chart(chartId, {
         type: "pie",
@@ -1345,6 +1350,7 @@ foreach ($years as $year) {
         }
       });
     }
+
 
     $(document).ready(function() {
       // Dropdown Filter Year
@@ -1457,23 +1463,44 @@ foreach ($years as $year) {
         success: function(result) {
 
           var response = JSON.parse(result);
-          Object.keys(response.dataByYear).forEach(function(year) {
-            var dataBulan = response.dataByYear[year].bulan;
-            var dataOmzet = response.dataByYear[year].omzet;
-            var dataPendapatan = response.dataByYear[year].pendapatan;
-            var dataPengeluaran = response.dataByYear[year].pengeluaran;
+          if (maxYears-minYears==0) {
+              Object.keys(response.dataByYear).forEach(function(year) {
+              var dataBulan = response.dataByYear[year].bulan;
+              var dataOmzet = response.dataByYear[year].omzet;
+              var dataPendapatan = response.dataByYear[year].pendapatan;
+              var dataPengeluaran = response.dataByYear[year].pengeluaran;
+              generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year, 1);
+              generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year, 1);
+              generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year, 1);
+            });
+          } else {
+            Object.keys(response.dataByYear).forEach(function(year) {
+              var dataBulan = response.dataByYear[year].bulan;
+              var dataOmzet = response.dataByYear[year].omzet;
+              generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year, 1);
+            });
 
-            generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year, 1);
-            generateCanvas(dataBulan, dataOmzet, "chartOmzet" + year, "Omzet " + year, 1);
-            generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year, 1);
-          });
+            Object.keys(response.dataByYear).forEach(function(year) {
+              var dataBulan = response.dataByYear[year].bulan;
+              var dataPendapatan = response.dataByYear[year].pendapatan;
+              generateCanvas(dataBulan, dataPendapatan, "chartPendapatan" + year, "Pendapatan " + year, 1);
+            });
+
+            Object.keys(response.dataByYear).forEach(function(year) {
+              var dataBulan = response.dataByYear[year].bulan;
+              var dataPengeluaran = response.dataByYear[year].pengeluaran;
+              generateCanvas(dataBulan, dataPengeluaran, "chartPengeluaran" + year, "Pengeluaran " + year, 1);
+            });
+          }
+
+          // Grafik Penjualan (Pie Chart)
+          <?php foreach ($years as $tahun) : ?>
+            generateCanvas(<?php echo json_encode($productsByYear[$tahun]); ?>, <?php echo json_encode($terjualByYear[$tahun]); ?>, "chartPenjualan<?php echo $tahun; ?>", "Penjualan Produk <?php echo $tahun; ?>", 0);
+          <?php endforeach; ?>
         }
       });
 
-      // Grafik Penjualan (Pie Chart)
-      <?php foreach ($years as $tahun) : ?>
-        generateCanvas(<?php echo json_encode($productsByYear[$tahun]); ?>, <?php echo json_encode($terjualByYear[$tahun]); ?>, "chartPenjualan<?php echo $tahun; ?>", "Penjualan Produk <?php echo $tahun; ?>", 0);
-      <?php endforeach; ?>
+      
 
 
       // Tambah Produk

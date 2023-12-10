@@ -179,39 +179,6 @@
     <script src="assets/js/main.js"></script>
 
     <script>
-        // var pendapatan = document.getElementById('pendapatan');
-        // pendapatan.addEventListener('keyup', function(e) {
-        //     pendapatan.value = formatRupiah(this.value, 'Rp. ');
-        // });
-  
-        // var pengeluaran = document.getElementById('pengeluaran');
-        // pengeluaran.addEventListener('keyup', function(e) {
-        //   pengeluaran.value = formatRupiah(this.value, 'Rp. ');
-        // });
-  
-        // var omzet = document.getElementById('omzet');
-        // omzet.addEventListener('keyup', function(e) {
-        //   omzet.value = formatRupiah(this.value, 'Rp. ');
-        // });
-        
-        // /* Fungsi Format ke Rupiah */
-        // function formatRupiah(angka, prefix)
-        // {
-        //     var number_string = angka.replace(/[^,\d]/g, '').toString(),
-        //         split    = number_string.split(','),
-        //         sisa     = split[0].length % 3,
-        //         rupiah     = split[0].substr(0, sisa),
-        //         ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
-                
-        //     if (ribuan) {
-        //         separator = sisa ? '.' : '';
-        //         rupiah += separator + ribuan.join('.');
-        //     }
-            
-        //     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-        //     return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-        // }
-
         $(document).ready(function() {
             $('#submit').on('click', function() {
                 
