@@ -285,10 +285,12 @@ $stmt = $conn->query($sql)->fetchAll();
                                     </thead>
                                     <tbody id="tbody-tablePendaftaran">
                                         <?php
+                                        $no = 0;
                                         if ($stmt != null) {
                                             foreach ($stmt as $data) {
+                                                $no++;
                                                 echo '<tr>
-                                                        <td>' . $data['id'] . '</td>
+                                                        <td>' . $no . '</td>
                                                         <td>' . $data['tanggal_pendaftaran'] . '</td>
                                                         <td>' . $data['nama_umkm'] . '</td>
                                                         <td>' . $data['notelp_umkm'] . '</td>
@@ -298,7 +300,7 @@ $stmt = $conn->query($sql)->fetchAll();
                                                         <td>' . $data['deskripsi_umkm'] . '</td>
                                                         <td> <iframe frameborder="0" src="../../../forms/' . $data['formulir'] . '" "></iframe> </td>
                                                         <td> <embed type="application/pdf" src="../../../forms/' . $data['surat_pengantar'] . '" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
-                                                        <td> <embed type="application/pdf" src="../../../forms/' . $data['ktp'] . '" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
+                                                        <td> <img src="../../../forms/' . $data['ktp'] . '" style="width: 300px; height :200px;"></img> </td>
                                                         <td> <embed type="application/pdf" src="../../../forms/' . $data['npwp'] . '" style="width: 600; heigth: 400; overflow: hidden;"></embed> </td>
                                                         <td>
                                                             <button type="button" class="btn btn-outline-success" onclick = "terima(' . $data['id'] . ')">Terima</button>
