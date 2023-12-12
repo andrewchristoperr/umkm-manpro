@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2023 at 09:47 AM
+-- Generation Time: Dec 12, 2023 at 03:35 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -37,6 +37,17 @@ CREATE TABLE `umkm_products_sold` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `umkm_products_sold`
+--
+
+INSERT INTO `umkm_products_sold` (`id`, `date`, `product_id`, `product_name`, `jumlah_terjual`, `umkm_id`) VALUES
+(17, '2023-12-07', 0, 'Sinom', 10, 1),
+(18, '2023-12-07', 0, 'Sari Dele', 12, 1),
+(19, '2023-12-07', 0, 'Kue Putu Ayu', 3, 1),
+(20, '2023-12-07', 0, 'Klepon', 6, 1),
+(21, '2023-12-07', 0, 'Sari Dele', 10, 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -54,7 +65,7 @@ ALTER TABLE `umkm_products_sold`
 -- AUTO_INCREMENT for table `umkm_products_sold`
 --
 ALTER TABLE `umkm_products_sold`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

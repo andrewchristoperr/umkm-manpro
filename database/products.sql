@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2023 at 08:14 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 7.4.30
+-- Generation Time: Dec 12, 2023 at 03:35 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,21 +41,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `nama_produk`, `deskripsi_produk`, `harga_produk`, `foto_produk`, `umkm_id`) VALUES
-(1, 'bambu', 0, 212121, '0', 5),
-(2, 'bibibi', 0, 12345, '0', 5),
-(3, 'haleluya', 0, 100000, '0', 5),
-(4, 'babi', 0, 12122, '0', 5),
-(5, 'babi', 0, 111222, '0', 5),
-(6, 'babi', 0, 111222, 'produk/5_babi_fotoProduk.png', 5),
-(7, 'andrew', 0, 30000, 'produk/5_andrew_fotoProduk.png', 5),
-(8, 'andrew', 0, 30000, 'produk/5_andrew_fotoProduk.png', 5),
-(9, 'prisil', 0, 50000, 'produk/5_prisil_fotoProduk.png', 5),
-(10, 'emly', 0, 20000, 'produk/5_emly_fotoProduk.png', 5),
-(11, 'gisel', 0, 909090909, 'produk/5_gisel_fotoProduk.png', 5),
-(12, 'gisel', 0, 909090909, 'produk/5_gisel_fotoProduk.png', 5),
-(13, 'vincent', 0, 12345, 'produk/5_vincent_fotoProduk.png', 5),
-(14, 'lalala', 0, 12345, 'produk/5_lalala_fotoProduk.png', 5),
-(15, 'cahyadfi', 0, 12345, 'produk/5_cahyadfi_fotoProduk.png', 5);
+(19, 'Sinom', 0, 15000, 'produk/1_sinom_fotoProduk.jpg', 1),
+(21, 'Kue Putu Ayu', 0, 3000, 'produk/1_kue putu ayu_fotoProduk.jpg', 1),
+(22, 'Klepon', 0, 5000, 'produk/1_klepon_fotoProduk.jpg', 1),
+(23, 'Sari Dele', 0, 9000, 'produk/1_sari dele_fotoProduk.jpg', 1);
 
 --
 -- Indexes for dumped tables
@@ -75,7 +64,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
